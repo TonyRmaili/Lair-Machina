@@ -1,0 +1,22 @@
+
+
+# doesnt reply with just the JSON - starts or ends with "ofc I can do that blabla " or "I may have missed something please let me know if.."
+# doesnt do a great job - makes wierd categories / makes stuff up / misses things
+
+####solve it####
+# use other method of generating world, not text > JSON  but more exact pipeline with limited loops - LAND/LOCATION - QUEST - NPC - ITEMS etc - and do JSON in that loop - maybe as part of each item/object
+# limit scope of generation - maybe into single dungeon crawl or more railroady adventure?
+
+# test with small scope - like single room - and see if works
+# it will hallucinate wierd things like player options and dice rolls- maybe solve with more prompting? (or worst case fine tune)
+# It seems to be able to change the JSON sort of? - maybe have separate request that changes the JSON
+#not super obvious how it will work - maybe limit actions to use Action function, and object tags? - so that the LLM then can change the exact object in the exact way
+
+#will be massive amount of data very fast -> keep it super simple?
+
+#talk
+#action
+#move
+#### > feed JSON + last message?
+
+
