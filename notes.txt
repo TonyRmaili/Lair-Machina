@@ -1,0 +1,10 @@
+
+
+1. bygg up en stor värld via prompt 
+    testa limit på output;
+    vill generara så mycket det går
+
+2. analysera texten med en ny prompt, skicka t
+
+3. kategoriera "allt" in i json fil
+
