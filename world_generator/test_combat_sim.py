@@ -56,7 +56,7 @@ player = {
 }
 
 monster = {
-    "name": "Red Dragon",
+    "name": "Troll",
     "initiative_modifier": 1,
     "hit_points": {"current": 84, "maximum": 84},
     "armor_class": 15
@@ -303,7 +303,7 @@ player = {
 }
 
 monster = {
-    "name": "Forest Troll",
+    "name": "Cave Troll",
     "initiative_modifier": 1,
     "hit_points": {"current": 84, "maximum": 84},
     "armor_class": 15,

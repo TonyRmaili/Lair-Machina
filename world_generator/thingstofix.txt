@@ -20,3 +20,37 @@
 #### > feed JSON + last message?
 
 
+
+
+
+
+### soundeffect for dice roll?
+### soundeffect for attack action?
+### display battle grid + hp?
+### attack default or attack + add flavor text (?) 
+
+
+### test whisper? too slow?
+
+### test generate img option?
+
+### fix inventory?
+
+### so far: 
+### basic attack actions loop for combat + play music and voiceover narration
+
+
+
+### make world mode?
+### telling the computer what you want and it generates it? 
+### generate monsters
+
+### time frame > new action = new time /state > update relevant JSONS + state
+### if in a city and go to sleep - change some things?
+
+###hex mode for LAND, > city > dungeon > etc
+###travel + encounters? 
+
+for quest land wise > get to city X to warn the king or find the magic Y in dungeon Z
+
+
