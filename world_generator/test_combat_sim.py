@@ -89,13 +89,14 @@ faster_audio = audio.speedup(playback_speed=1.25)
 faster_audio.export("output_fast1.wav", format="wav")
 
 import pygame
+import time
 
 # Initialize pygame mixer
 pygame.mixer.init()
 
 # Load and play background music (loop indefinitely)
 pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/The_journey(2).mp3')
-pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+pygame.mixer.music.play(1)  # -1 means the music will loop indefinitely
 
 # Load and play the .wav file
 output_file = "./output_fast1.wav"
@@ -105,6 +106,16 @@ voice_over.play()
 
 pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
 voice_over.set_volume(0.8)  # Set sound effect volume (0.0 to 1.0)
+
+
+# Get the duration of the voiceover
+voiceover_length = voice_over.get_length()
+
+# Wait for the voiceover to finish playing
+time.sleep(voiceover_length)  # Sleep for the duration of the voiceover
+
+# Stop the background music once the voiceover finishes
+pygame.mixer.music.stop()
 
 # Wait for the audio to finish playing
 while pygame.mixer.music.get_busy():
@@ -177,7 +188,8 @@ def attack(attacker, defender):
 
         # Load and play background music (loop indefinitely)
         pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/The_journey(2).mp3')
-        pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+        pygame.mixer.music.play(1)  # -1 means the music will loop indefinitely
+        # to play the music only once 
 
         # Load and play the .wav file
         output_file = "./output_fast3.wav"
@@ -187,6 +199,15 @@ def attack(attacker, defender):
 
         pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
         voice_over.set_volume(0.8)  # Set sound effect volume (0.0 to 1.0)
+
+        # Get the duration of the voiceover
+        voiceover_length = voice_over.get_length()
+
+        # Wait for the voiceover to finish playing
+        time.sleep(voiceover_length)  # Sleep for the duration of the voiceover
+
+        # Stop the background music once the voiceover finishes
+        pygame.mixer.music.stop()
 
         # Wait for the audio to finish playing
         while pygame.mixer.music.get_busy():
