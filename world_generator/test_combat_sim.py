@@ -56,7 +56,7 @@ player = {
 }
 
 monster = {
-    "name": "Forest Troll",
+    "name": "Red Dragon",
     "initiative_modifier": 1,
     "hit_points": {"current": 84, "maximum": 84},
     "armor_class": 15
@@ -64,22 +64,56 @@ monster = {
 
 
 current_location = {
-    "name": "Troll cavern",
-    "description": "A dark cavern with damp walls and a foul smell, and a large chest in the corner."
+    "name": "Cavern",
+    "description": "A dark cavern with damp walls and a foul smell."
 }
 
     # Start of combat description
 start_description = system_prompt_function(
-        "Describe the beginning of a fantasy combat encounter, DO NOT DESCRIBE ANY ATTACKS, ROLLS OR NUMBERS . example: The Ogre roars, its eyes locking onto you with predatory intent. You grip your weapon as the tension thickens. Roll for initiative as the fight begins. example: The Bugbear glares at you with a primal fury, its muscles tensing as it prepares to strike. You feel your heart race, but your grip tightens on your weapon. The air grows heavy as the battle is about to begin. Roll for initiative!",
+        "Describe the beginning of a fantasy combat encounter SHORT ANSWER, DO NOT DESCRIBE ANY ATTACKS, ROLLS OR NUMBERS . example: The Ogre roars, its eyes locking onto you with predatory intent. You grip your weapon as the tension thickens. Roll for initiative as the fight begins. example: The Bugbear glares at you with a primal fury, its muscles tensing as it prepares to strike. You feel your heart race, but your grip tightens on your weapon. The air grows heavy as the battle is about to begin. Roll for initiative!",
         f"The combat begins between {player['name']} and {monster['name']} in {current_location['name']}: {current_location['description']}."
     )
 
-# # Convert text to speech and save it to a file
-tts.tts_to_file(text=start_description, file_path="output1.wav")
+# # # Convert text to speech and save it to a file
+tts.tts_to_file(text=start_description, file_path="output2.wav")
 
+
+
+from pydub import AudioSegment
+
+# Load audio and adjust speed
+audio = AudioSegment.from_file("output2.wav")
+faster_audio = audio.speedup(playback_speed=1.25)
+
+# Export faster audio
+faster_audio.export("output_fast1.wav", format="wav")
+
+import pygame
+
+# Initialize pygame mixer
+pygame.mixer.init()
+
+# Load and play background music (loop indefinitely)
+pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/The_journey(2).mp3')
+pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+
+# Load and play the .wav file
+output_file = "./output_fast1.wav"
+voice_over = pygame.mixer.Sound(output_file)
+voice_over.play()
+
+
+pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
+voice_over.set_volume(0.8)  # Set sound effect volume (0.0 to 1.0)
+
+# Wait for the audio to finish playing
+while pygame.mixer.music.get_busy():
+    pygame.time.Clock().tick(10)
 
 # print it out
 input(start_description + "(press enter to roll initiative)")
+
+
 
 
 
@@ -118,6 +152,45 @@ def attack(attacker, defender):
         damage = roll_dice(*attacker['damage']['formula'])
         defender['hit_points']['current'] -= damage
         print(f"Hit! {attacker['name']} deals {damage} {attacker['damage']['type']} damage to {defender['name']}.")
+            # Start of combat description
+        attack_description = system_prompt_function(
+            "Describe this happening SHORT ANSWER, DO NOT DESCRIBE ANY ATTACKS, ROLLS OR NUMBERS . example: You draw your bow and aim for the dragons neck. The dragonscale are thick but the arrow manages to pierce through and the dragon roars in pain as a steam of thick blood starts to stream down. example: The Bugbear is much too slow and as you strike out with your sword you manage to cut a deep gash into its side. The Bugbear howls in pain and anger as it prepares to retaliate.",
+            f"Hit! {attacker['name']} deals {damage} {attacker['damage']['type']} damage to {defender['name']}.")
+            # # Convert text to speech and save it to a file
+        tts.tts_to_file(text=attack_description, file_path="output3.wav")
+
+
+
+        from pydub import AudioSegment
+
+        # Load audio and adjust speed
+        audio = AudioSegment.from_file("output3.wav")
+        faster_audio = audio.speedup(playback_speed=1.25)
+
+        # Export faster audio
+        faster_audio.export("output_fast3.wav", format="wav")
+
+        import pygame
+
+        # Initialize pygame mixer
+        pygame.mixer.init()
+
+        # Load and play background music (loop indefinitely)
+        pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/The_journey(2).mp3')
+        pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+
+        # Load and play the .wav file
+        output_file = "./output_fast3.wav"
+        voice_over = pygame.mixer.Sound(output_file)
+        voice_over.play()
+
+
+        pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
+        voice_over.set_volume(0.8)  # Set sound effect volume (0.0 to 1.0)
+
+        # Wait for the audio to finish playing
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
     else:
         print(f"{attacker['name']} misses!")
 

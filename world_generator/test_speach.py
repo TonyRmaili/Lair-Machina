@@ -10,11 +10,11 @@
 from pydub import AudioSegment
 
 # Load audio and adjust speed
-audio = AudioSegment.from_file("output1.wav")
+audio = AudioSegment.from_file("output2.wav")
 faster_audio = audio.speedup(playback_speed=1.25)
 
 # Export faster audio
-faster_audio.export("output_fast1.wav", format="wav")
+faster_audio.export("output_fast2.wav", format="wav")
 
 
 # from pydub import AudioSegment
@@ -41,7 +41,7 @@ pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/T
 pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
 
 # Load and play the .wav file
-output_file = "./output_fast1.wav"
+output_file = "./output_fast2.wav"
 voice_over = pygame.mixer.Sound(output_file)
 voice_over.play()
 
