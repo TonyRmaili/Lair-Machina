@@ -28,24 +28,6 @@ class GenerateWorld:
 
 
 
-    def lore(self):
-        resp = ollama.generate(
-            system=self.system,
-            model=self.model,
-            prompt=self.data['lore']
-            
-        )
-
-        context = resp['context']
-        text = resp['response']
-
-        self.save_context(context,'lore')
-        self.save_text(text=text,name='lore')
-
-
-        return resp['response']
-    
-
     def run(self):
         for key,value in self.world_data.items():
             if os.path.exists('context.json'):
