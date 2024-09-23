@@ -68,3 +68,5 @@ pip-delete-this-directory.txt
 
 # Jupyter Notebooks checkpoints
 .ipynb_checkpoints/
+
+**/notes.txt
