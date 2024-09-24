@@ -1,3 +1,9 @@
+###to do### 
+1. fix so ollama runs on the server - DONE -> WORKS (now running llama3.1 - not sure if best option, but using that for now)
+2. make the TTS thing work on server 
+
+
+
 
 
 # doesnt reply with just the JSON - starts or ends with "ofc I can do that blabla " or "I may have missed something please let me know if.."

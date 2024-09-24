@@ -1,3 +1,17 @@
+"""
+Example of workflow/pipeline/whatever where you ask the LLM to generate a text
+turn the output into speech with TTS
+(optional - speed it up with pydub - (pip install pydub))
+and play it with pygame (pip install pygame)
+
+
+---problem is the server doesnt have a sound thing (or it does and stuff gets played at gabriels (even worse)) - so it is impossible to know if it really works as is (can still check the sound files ofc)
+"""
+
+
+
+
+##################### create wav with TTS from text#################
 # from TTS.api import TTS
 
 # # Initialize the model
@@ -7,6 +21,9 @@
 # tts.tts_to_file(text="Hello, welcome to TTS!", file_path="output.wav")
 
 
+
+
+##################change speed of wav (usually the text is very slow to listen to)######################
 from pydub import AudioSegment
 
 # Load audio and adjust speed
@@ -17,28 +34,17 @@ faster_audio = audio.speedup(playback_speed=1.25)
 faster_audio.export("output_fast2.wav", format="wav")
 
 
-# from pydub import AudioSegment
 
-# # Load the audio file with pydub
-# audio = AudioSegment.from_wav("./output1.wav")
 
-# # Speed up by 1.5x (150% of the original speed)
-# new_speed = 1.1
-# faster_audio = audio._spawn(audio.raw_data, overrides={
-#      "frame_rate": int(audio.frame_rate * new_speed)
-# }).set_frame_rate(audio.frame_rate)
-
-# # Export the faster version to a new file
-# faster_audio.export("./output_fast.wav", format="wav")
-
+##################use pygame to play voice TTS clip and generated backgroundmusic (uses test from loudme.ai - look at options later)###############
 import pygame
 
 # Initialize pygame mixer
 pygame.mixer.init()
 
 # Load and play background music (loop indefinitely)
-pygame.mixer.music.load('C:/Users/harry/Documents/Lair-Machina/world_generator/The_journey(2).mp3')
-pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+pygame.mixer.music.load('./The_journey(2).mp3')
+pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely (should be while voice plays not infinite, or well should be infinite as we port the whole game to run on pygame)
 
 # Load and play the .wav file
 output_file = "./output_fast2.wav"
