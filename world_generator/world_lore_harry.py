@@ -3,6 +3,16 @@ import ollama
 import json
 
 
+"""
+testing to generate Lore/backstory
+-ideas-> save objects as JSONS (good for game mechanics)
+-save as a simple TXT-file and update it as you go
+"""
+
+
+
+
+
 
 # Function to handle LLM updates to room state --- not working as Llama3 is not great att categorizing JSON from text -- need to change approach
 
