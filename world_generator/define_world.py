@@ -66,6 +66,24 @@ data = {
 }
 
 
+room ={"system": '''
+You are tasked with generating a detailed room based on the user's description. 
+Your response must fill in the following JSON fields: description, items, properties, and dimensions. 
+Ensure the room includes at least one door and one window. Any additional elements you generate must also be in JSON format.
+
+Follow this example structure:
+{
+    "description": "",
+    "items": [],
+    "properties": {},
+    "dimensions": {}
+}
+
+Respond using JSON.
+'''}
+
+
+
 def save_to_json(data,file_name):
 
     with open(file_name, 'w') as f:
@@ -74,4 +92,6 @@ def save_to_json(data,file_name):
 
 if __name__=='__main__':
     file = 'world_blueprint.json'
-    save_to_json(data,file)
+    room_file = 'room_blueprint.json'
+
+    save_to_json(room,room_file)

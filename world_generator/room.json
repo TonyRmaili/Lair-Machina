@@ -1,0 +1,39 @@
+{
+    "description": "A cozy, dimly lit chamber with stone walls and a low ceiling.",
+    "items": [
+        {
+            "id": 1,
+            "name": "Candle",
+            "description": "A burning candle on a small wooden table",
+            "interactable": true
+        },
+        {
+            "id": 2,
+            "name": "Leather Armor",
+            "description": "A suit of worn leather armor leaning against the wall",
+            "interactable": false
+        },
+        {
+            "id": 3,
+            "name": "Mysterious Scroll",
+            "description": "A rolled-up parchment with strange symbols on it",
+            "interactable": true
+        },
+        {
+            "id": 4,
+            "name": "Small Key",
+            "description": "A small, rusty key lying on the floor",
+            "interactable": true
+        }
+    ],
+    "properties": {
+        "temperature": 20,
+        "humidity": 60,
+        "illumination": "low"
+    },
+    "dimensions": {
+        "length": 4.5,
+        "width": 3.2,
+        "height": 2.8
+    }
+}

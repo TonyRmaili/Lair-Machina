@@ -11,7 +11,6 @@ lore > pantheon > world_structure > factions > settlements > npcs > landspaces
 '''
 
 
-
 class GenerateWorld:
     def __init__(self):
         self.blue_print_path= 'world_blueprint.json'
@@ -55,6 +54,40 @@ class GenerateWorld:
             self.save_text(text=text,name=key)
         
 
+    def room(self):
+        with open('room_blueprint.json','r') as f:
+            data = json.load(f)
+        
+
+        system = data['system']
+
+        resp = ollama.generate(
+            model=self.model,
+            system=system,
+            prompt='Make a small room with fantasy rpg style. Have varius objects in the room so that the players can interact or inspect them.',
+            format='json'
+        )
+
+        resp = resp['response']
+
+        resp = self.fix_json_string(json_string=resp)
+
+        with open("room.json", "w") as file:
+            file.write(resp)
+
+    def fix_json_string(self,json_string):
+        try:
+            json_data = json.loads(json_string)
+            
+            # Optional: Pretty print or format the JSON if needed
+            formatted_json = json.dumps(json_data, indent=4)
+            
+            return formatted_json
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+            return None
+
+
     def save_context(self,context):
         file_name = 'context.json'
         with open(file_name, 'w') as json_file:
@@ -73,7 +106,8 @@ if __name__=='__main__':
     start_time = time.time()
 
 
-    world.run()
+    # world.run()
+    world.room()
 
 
     end_time = time.time()

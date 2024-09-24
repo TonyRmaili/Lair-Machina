@@ -1,0 +1,3 @@
+{
+    "system": "\nYou are tasked with generating a detailed room based on the user's description. \nYour response must fill in the following JSON fields: description, items, properties, and dimensions. \nEnsure the room includes at least one door and one window. Any additional elements you generate must also be in JSON format.\n\nFollow this example structure:\n{\n    \"description\": \"\",\n    \"items\": [],\n    \"properties\": {},\n    \"dimensions\": {}\n}\n\nRespond using JSON.\n"
+}
