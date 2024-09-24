@@ -12,3 +12,5 @@ https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-an
 
 https://github.com/ollama/ollama/blob/main/docs/api.md
 
+
+https://github.com/BassAzayda/ollama-function-calling

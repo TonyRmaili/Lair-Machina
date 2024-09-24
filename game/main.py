@@ -2,6 +2,7 @@ import ollama
 import json
 import os
 
+
 system = '''"You are the Game Master in a Dungeons and Dragons-style adventure. Your role is to guide the player through the game world using only the data provided,
 which includes lore, descriptions, items, characters, and other elements. 
 Respond only to the player's actions, revealing or updating the world based on their decisions.
