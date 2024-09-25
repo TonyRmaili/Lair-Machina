@@ -67,7 +67,7 @@ class GenerateWorld:
             prompt='Make a small room with fantasy rpg style. Have varius objects in the room so that the players can interact or inspect them.',
             format='json'
         )
-
+        
         resp = resp['response']
 
         resp = self.fix_json_string(json_string=resp)
