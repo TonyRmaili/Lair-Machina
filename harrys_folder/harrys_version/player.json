@@ -1,0 +1,59 @@
+{
+    "name": "Aric, the Ranger",
+    "class": "Ranger",
+    "level": 5,
+    "hit_points": {
+      "current": 38,
+      "maximum": 38
+    },
+    "armor_class": 16,
+    "speed": "30 ft",
+    "abilities": {
+      "strength": 14,
+      "dexterity": 18,
+      "constitution": 12,
+      "intelligence": 10,
+      "wisdom": 16,
+      "charisma": 8
+    },
+    "saving_throws": {
+      "strength": "+2",
+      "dexterity": "+4",
+      "constitution": "+1"
+    },
+    "skills": {
+      "acrobatics": "+4",
+      "perception": "+5",
+      "stealth": "+7"
+    },
+    "initiative_modifier": 4,
+    "weapons": [
+      {
+        "name": "Longbow",
+        "type": "ranged",
+        "attack_bonus": "+7",
+        "damage": {
+          "type": "piercing",
+          "formula": "1d8 + 4"
+        },
+        "range": "150/600 ft"
+      },
+      {
+        "name": "Shortsword",
+        "type": "melee",
+        "attack_bonus": "+6",
+        "damage": {
+          "type": "slashing",
+          "formula": "1d6 + 3"
+        }
+      }
+    ],
+    "spells": [
+      {
+        "name": "Hunter's Mark",
+        "level": 1,
+        "casting_time": "Bonus Action",
+        "effect": "Mark a creature to deal an extra 1d6 damage whenever you hit it with a weapon attack."
+      }
+    ]
+  }

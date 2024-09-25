@@ -1,0 +1,30 @@
+{
+    "rooms": {
+        "0.1": {
+        "name": "Living Room of the Castle Green Spire",
+        "file": "living_room_state.txt",
+        "coordinates": "0.1"
+        },
+        "0.2": {
+        "name": "Castle Kitchen",
+        "file": "kitchen_state.txt",
+        "coordinates": "0.2"
+        },
+        "1.1": {
+        "name": "Throne Room",
+        "file": "throne_room_state.txt",
+        "coordinates": "1.1"
+        },
+        "1.2": {
+        "name": "Castle Hallway",
+        "file": "hallway_state.txt",
+        "coordinates": "1.2"
+        },
+        "1.3": {
+        "name": "Castle Garden",
+        "file": "garden_state.txt",
+        "coordinates": "1.3"
+        }
+    }
+    }
+    
