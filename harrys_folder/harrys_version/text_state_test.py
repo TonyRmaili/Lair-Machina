@@ -31,6 +31,8 @@ def system_prompt_function(system_prompt, user_prompt):
 import requests
 import json
 
+import os
+
 
 def open_file(file_path):
     with open(file_path, 'r') as file:
@@ -64,8 +66,6 @@ def move_player(current_coordinates, direction, rooms):
         return current_coordinates  # No movement
    
     new_coordinates = f"{int(x)}.{int(y)}"
-    # debug
-    input(new_coordinates)
     
     if new_coordinates in rooms:
         return new_coordinates  # Valid move
@@ -90,11 +90,22 @@ def print_map(rooms, current_location):
         grid[x][y] = ' X '  # Override with player's current location
 
     # Print the grid with coordinates
-    print("Map Layout:")
+    print("Map Layout (you are at X):")
     print("    " + "   ".join(str(i) for i in range(10)))  # Print top coordinate row
     for i, row in enumerate(grid):
         print(f"{i} |" + "|".join(row))  # Print each row with left coordinate column
 
+
+def get_adjacent_moves(current_coordinates, rooms):
+    x, y = map(int, current_coordinates.split('.'))
+    directions = {
+        'up': f"{x + 1}.{y}",
+        'down': f"{x - 1}.{y}",
+        'left': f"{x}.{y - 1}",
+        'right': f"{x}.{y + 1}"
+    }
+    valid_moves = {dir: coord for dir, coord in directions.items() if coord in rooms}
+    return valid_moves
 
 
 def main():
@@ -107,51 +118,80 @@ def main():
     
     
     while True:
-        # debug
-        input(player_location)
-        
+        # setting current room from JSON with castle layout
         current_room = rooms[player_location]
+        # setting text file for current room
         room_file = current_room['file']
+        # opening it to read and get/edit content
         room_description = open_file(room_file)
         
         print(f"\nYou are in: {current_room['name']} at {player_location}")
         # print(f"Description: {room_description}")
         
-        
         # Display room intro only on entering the room or first start
         if first_entry:
             # call map print
             print_map(rooms, player_location)  # Display the map
+            
             # make description of new room for the player
             system_prompt = f"The player is in {current_room['name']} room description: {room_description}, describe the room as if you were a dungeon master based on the info you have"
             user_prompt = "Player action: I enter the room and look around, what do I see?"
             room_intro = system_prompt_function(system_prompt, user_prompt)
+            
+            input("press enter to continue")
+            # clear terminal of map
+            os.system('clear')
+            
             print(room_intro)
             first_entry = False  # Set the flag to False after the first entry
         
         
-        # Ask for player action (move or interact)
-        player_action = input("\nEnter your action (e.g., 'move up', 'flip table'): ").lower()
+        
+        # Player action menu
+        print("Choose an action:")
+        print("1. Move")
+        print("2. Interact with the environment")
+        action_choice = input("Enter your choice (1 or 2): ")
+        # clear after made choice
+        os.system('clear')
 
-        # Handle room movement
-        if player_action.startswith("move"):
-            direction = player_action.split("move ")[1].strip()
-            new_location = move_player(player_location, direction, rooms)
-            if new_location != player_location:
-                player_location = new_location  # Update location
+        if action_choice == '1':  # Movement logic
+            valid_moves = get_adjacent_moves(player_location, rooms)
+            print("Available moves:")
+            for direction, location in valid_moves.items():
+                print(f"{direction} to {rooms[location]['name']} at {location}")
+            move_choice = input("Which direction? ")
+            if move_choice in valid_moves:
+                player_location = valid_moves[move_choice]
+                print(f"Moving {move_choice} to {rooms[player_location]['name']}...\n")
+                # Handle room movement
                 first_entry = True #update so it makes a description of the new room
-            continue  # Restart loop to show new room info
+                # clear
+                os.system('clear')
+                continue  # Restart loop to show new room info
+            else:
+                print("Invalid move. Try again.")
+        elif action_choice == '2':  # Interaction logic
+            player_action = input("What do you want to do? ")
+            # Further interaction logic goes here
+            print(f"You chose to: {player_action}")
+            # update the current room description
+            system_prompt = f"Update the following room description based on the player's action, DO NOT WRITE 'here is the description:', ONLY ANSWER with the updated description of the room. room name: {current_room['name']} room description: {room_description}"
+            user_prompt = f"Player action: {player_action}"
+            modified_content = system_prompt_function(system_prompt, user_prompt)
+            
+            # Save the new room state to the associated text file
+            save_file(room_file, modified_content)
+            
+            print("\nUpdated room state:")
+            print(modified_content)
+            
+            # maybe add a separate layer that changes the text, so that it describes the action, and a separate call updates the text
+            
+        else:
+            print("Invalid choice. Please select 1 or 2.")
+
         
-        # If it's not a move, assume it's an interaction and update the current room description
-        system_prompt = f"Update the following room description based on the player's action, DO NOT WRITE here is the description, ONLY ANSWER with the updated description of the room. room name: {current_room['name']} room description: {room_description}"
-        user_prompt = f"Player action: {player_action}"
-        modified_content = system_prompt_function(system_prompt, user_prompt)
-        
-        # Save the new room state to the associated text file
-        save_file(room_file, modified_content)
-        
-        print("\nUpdated room state:")
-        print(modified_content)
 
 
 
