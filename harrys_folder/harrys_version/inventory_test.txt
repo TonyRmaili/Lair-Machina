@@ -1,3 +1,5 @@
 Your inventory now contains:
 SHIELD
 DAGGER
+VASE
+BOOKS

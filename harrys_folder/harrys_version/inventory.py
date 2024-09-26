@@ -142,6 +142,21 @@ def check_room_items(player_action, room_items):
         return item_to_take
 
 
+
+def update_room_after_take(item_to_take, room_items):
+    system_prompt = f"Update the following room description to NOT INCLUDE the item the player took, DO NOT WRITE 'here is the description:', ONLY ANSWER with the updated description of the room. room description: {room_items}"
+    user_prompt = f"Item player took: {item_to_take}"
+    modified_content = system_prompt_function(system_prompt, user_prompt)
+    
+    room_file = 'living_room_state.txt'
+    # Save the new room state to the associated text file
+    save_file(room_file, modified_content)
+    
+    print("\nUpdated room state:")
+    print(modified_content)
+
+
+
     
 
     # inventory_file = 'inventory_test.txt'
@@ -179,11 +194,15 @@ print(inventory_items)
 room_path = "living_room_state.txt"
 current_room = open_file(room_path)
 
+print(current_room)
+
 player_action = input("waht would you like to do ? - (take stuff)")
 # add to inventory - needs to have similar LLM check if item is in the room
 print(current_room)
 item_to_add=check_room_items(player_action, current_room)
-add_to_inventory(item_to_add)
+if item_to_add:
+    add_to_inventory(item_to_add)
+    # also needs to be removed from room
+    update_room_after_take(item_to_add, current_room)
 
-# also needs to be removed from room
 
