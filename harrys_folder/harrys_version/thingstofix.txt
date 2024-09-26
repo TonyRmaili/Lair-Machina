@@ -7,16 +7,15 @@ fix so ollama runs on the server - DONE -> WORKS (now running llama3.1 - not sur
 # doesnt do a great job - makes wierd categories / makes stuff up / misses things
 
 
-###need to fix###
-make the TTS thing work on server --- NEED TO FIX - works as in it is isntalled and can generate speech, but playing sound in pygame is not possible from the server- need to decide what to do, (my goal would be to run as local as possible)
+WORKS-
+make the TTS thing work on server - works as in it is isntalled and can generate speech, but playing sound in pygame, now also possible from the server with noMachine
 
+
+>> fix move thing - make it so move is separate action/option -> gives options for all adjacent rooms (work on locks, multi floors etc later)
 
 
 ###to do### 
 
-
-
->> fix move thing - make it so move is separate action/option -> gives options for all adjacent rooms (work on locks, multi floors etc later)
 >> use the context thing to generate the castle/cave >
 >> fix loop so more minor updates (maybe action option - interact/take > ask/look > ) > work on rolls/test later 
 >> make inventory - > also maybe use keyword to call action ? (testa iaf) 
@@ -36,14 +35,26 @@ make the TTS thing work on server --- NEED TO FIX - works as in it is isntalled 
 
 #will be massive amount of data very fast -> keep it super simple?
 
+
+EXPLORE cave/castle/city/other - dungeon crawl mode
+
 #talk
-#action
-#move
-#### > feed JSON + last message?
+#look/ask
+#action/interact
+#move - works (but not with locks, slow to get out of a place, and no multi floor/exit function, also later- add so dont have name for each room shown asap)
+
+inventory
+### it turns out the LLM is very stupid - > 
 
 
+Combat mode - 
+
+travel/worldmap/hexcrawl mode -
 
 
+character generation >
+dungeon generation >
+World generation > 
 
 
 ### soundeffect for dice roll?
