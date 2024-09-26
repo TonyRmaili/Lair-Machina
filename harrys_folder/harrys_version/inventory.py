@@ -20,15 +20,6 @@ def system_prompt_function(system_prompt, user_prompt):
     return response['message']['content']
 
 
-# test with JSON- went no good
-# def load_inventory(file_path):
-#     with open(file_path, 'r') as file:
-#         data = json.load(file)
-#      # Properly extracting item names using list comprehension
-#     item_names = [item['name'] for item in data['inventory']]
-#     return item_names
-
-
 
 
 def open_file(file_path):
@@ -67,18 +58,6 @@ def check_inventory(player_action, inventory_items):
     elif "NO" in item_exists:
         input(f"it appears you cant do following action {player_action} with regards to your current inventory")
         return False
-
-
-
-#####tried JSON- no good
-# def remove_from_inventory(player_action, llm_output):
-#     inventory_file = 'inventory_test.json'
-     
-#     system_prompt = f"inventory JSON to match the action, DO NOT WRITE 'here is the description:', ONLY ANSWER with the updated JSON."
-#     user_prompt = f"Player action: {player_action}, what what item to remove from JSON: {llm_output}"
-#     modified_inventory = system_prompt_function(system_prompt, user_prompt)
-#     # Save the new room state to the associated text file
-#     save_file(inventory_file, modified_inventory)
 
 
 
@@ -156,40 +135,13 @@ def update_room_after_take(item_to_take, room_items):
     print(modified_content)
 
 
-
-    
-
-    # inventory_file = 'inventory_test.txt'
-     
-    # system_prompt = f"change inventory text to match the action (ie remove the shield from inventory if sold/dropped etc), DO NOT WRITE 'here is the description:', ONLY ANSWER with the updated text."
-    # user_prompt = f"Player action: {player_action}, what what item to remove from JSON: {llm_output}"
-    # modified_inventory = system_prompt_function(system_prompt, user_prompt)
-    # # Save the new room state to the associated text file
-    # save_file(inventory_file, modified_inventory)
-
-
-
-
-
-
-# inventory_file = 'inventory_test.json'
-# inventory_items = load_inventory(inventory_file)
-
-
-
 # testrun-loads text
 inventory_file = 'inventory_test.txt'
 inventory_items=open_file(inventory_file)
 # shows inventory text
 print(inventory_items)
 
-# player_action = input("what would you like to do (use inventory?")
-# if check_inventory(player_action, inventory_items):
-#     item_consumed = check_consumed(player_action, inventory_items)
-#     if item_consumed:
-#         # update inventory JSON
-#         remove_from_inventory(player_action, item_consumed)
-#         # give lore txt
+
 
 room_path = "living_room_state.txt"
 current_room = open_file(room_path)
