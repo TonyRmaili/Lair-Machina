@@ -109,7 +109,7 @@ def check_room_items(player_action, room_items):
     item_to_take = system_prompt_function(system_prompt, user_prompt)
     input(item_to_take)
     
-    system_prompt = f"Does the item to take, exists in the current room inventory/description:{room_items}? yes or no? why?"
+    system_prompt = f"is the item to take, in the current room inventory/description:{room_items}? ANSWER ONLY with YES or NO"
     user_prompt = f"item to take: {item_to_take}"
     item_exists = system_prompt_function(system_prompt, user_prompt)
     input(item_exists)
