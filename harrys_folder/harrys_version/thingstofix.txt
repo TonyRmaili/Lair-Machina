@@ -10,15 +10,17 @@ fix so ollama runs on the server - DONE -> WORKS (now running llama3.1 - not sur
 WORKS-
 make the TTS thing work on server - works as in it is isntalled and can generate speech, but playing sound in pygame, now also possible from the server with noMachine
 
-
 >> fix move thing - make it so move is separate action/option -> gives options for all adjacent rooms (work on locks, multi floors etc later)
+
+>> make inventory - > also maybe use keyword to call action ? (testa iaf) --- sort of works - need to merge it with room code, and test it some more, but the basics seem to work
 
 
 ###to do### 
 
 >> use the context thing to generate the castle/cave >
 >> fix loop so more minor updates (maybe action option - interact/take > ask/look > ) > work on rolls/test later 
->> make inventory - > also maybe use keyword to call action ? (testa iaf) 
+
+
 
 
 

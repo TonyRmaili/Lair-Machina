@@ -1,6 +1,14 @@
 """
-test for inventory - idea is that each item has attributes and that the LLM can update the JSON to add or remove things as needed
--maybe separate class for consumables (potions etc), weapons (dmg etc), and for misc/others - so that use item can specify if with mechanics or just text?
+test for inventory - idea is that you have a txt file for inventory and for room states
+-you can ask it to use a item from inventory - it will then decide if you have that item, if yes then it decides if the item is consumed/removed from inventory by doing this (if yes then it removes it) (OBS - need to implement so that it gets added to the room if dropped, also add lore description of the action, and the impact on the room/item)
+-you can also ask it to take things from the room - it will first decide what you are trying to take and send that to next function - which then decide if the thing is in the room (looks at room desxription), if yes then it updates the room description to remove the item.
+
+--still need to add the lore part so that it describes when you do the thing (take the books etc) - also need to update the room description if the player drops something--- maybe that is the same call- that always happens as long as it is a "Interact, action" and not ask/lore-
+
+
+>>after that start working on rolls? + merge this with the dungeon map file- and lastly sort out the context generator thing so that it makes the whole castle in one go.
+
+other idea for later? : -maybe separate class for consumables (potions etc), weapons (dmg etc), and for misc/others - so that use item can specify if with mechanics or just text?
 """
 
 import json
@@ -18,8 +26,6 @@ def system_prompt_function(system_prompt, user_prompt):
         ]
     )
     return response['message']['content']
-
-
 
 
 def open_file(file_path):
@@ -109,7 +115,7 @@ def check_room_items(player_action, room_items):
     item_to_take = system_prompt_function(system_prompt, user_prompt)
     input(item_to_take)
     
-    system_prompt = f"is the item to take, in the current room inventory/description:{room_items}? ANSWER ONLY with YES or NO"
+    system_prompt = f"Does the item to take, exists in the current room inventory/description:{room_items}? answer in caps YES or NO? why?"
     user_prompt = f"item to take: {item_to_take}"
     item_exists = system_prompt_function(system_prompt, user_prompt)
     input(item_exists)
@@ -145,6 +151,20 @@ print(inventory_items)
 
 room_path = "living_room_state.txt"
 current_room = open_file(room_path)
+
+# test use item 
+player_action = input("what would you like to do (use inventory item)?")
+if check_inventory(player_action, inventory_items):
+    item_consumed = check_consumed(player_action, inventory_items)
+    if item_consumed:
+        # update inventory
+        remove_from_inventory(player_action, item_consumed)
+        # give lore txt
+        # update room state - is in the other file
+
+
+
+
 
 print(current_room)
 
