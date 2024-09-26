@@ -1,14 +1,16 @@
 {
-  "player_inventory": [
+  "inventory": [
     {
-      "item_name": "SCYTHE",
-      "item_description": "A long-handled agricultural tool used for cutting grain and crops.",
-      "item_use": "Can be used to cut down small trees or thick vines."
+      "name": "Sword",
+      "description": "A sharp blade used to vanquish foes."
     },
     {
-      "item_name": "HELMET",
-      "item_description": "A sturdy helmet that provides protection from blunt trauma.",
-      "item_use": "Grants a 20% increase to defense against melee attacks."
+      "name": "Health Potion",
+      "description": "Restores 50 health points."
+    },
+    {
+      "name": "Leather Armor",
+      "description": "Provides basic protection."
     }
   ]
 }

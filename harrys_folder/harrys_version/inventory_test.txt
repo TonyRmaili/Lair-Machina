@@ -1,0 +1,3 @@
+Your inventory now contains:
+SHIELD
+DAGGER

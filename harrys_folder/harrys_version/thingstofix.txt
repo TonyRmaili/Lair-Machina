@@ -44,7 +44,8 @@ EXPLORE cave/castle/city/other - dungeon crawl mode
 #move - works (but not with locks, slow to get out of a place, and no multi floor/exit function, also later- add so dont have name for each room shown asap)
 
 inventory
-### it turns out the LLM is very stupid - > 
+### it turns out the LLM is very stupid - > 2 options -  try to go even harder on promptengineering and format/context stuff - OR - go more hardcoded - like keywords alla CAPS
+>>> problem right now - it sucks att making JSON 
 
 
 Combat mode - 
