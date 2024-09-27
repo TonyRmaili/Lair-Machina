@@ -14,6 +14,4 @@ def remove_item(name):
 
     
 
-
-
 remove_item('Candle')

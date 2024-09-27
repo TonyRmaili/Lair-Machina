@@ -9,45 +9,72 @@ class OllamaToolCall:
         self.model = 'llama3.1'
         self.messages =  [{"role": "user", "content": messages}]
 
+        # self.tools = [
+        #     {
+        #         'type':'function',
+        #         'function':{
+        #             'name':'addition',
+        #             'description':'adds numbers',
+        #             'parameters':
+        #               {
+        #                 'type':'object',
+        #                 'properties':{
+        #                     'a':{'type':'int'},
+        #                     'b':{'type':'int'}
+                            
+        #                 }
+        #             },
+        #             'required':['a','b']                             
+        #         }
+
+        #     },
+
+        #     {
+        #         'type':'function',
+        #         'function':{
+        #             'name':'subtraction',
+        #             'description':'subtracts numbers',
+        #             'parameters':
+        #               {
+        #                 'type':'object',
+        #                 'properties':{
+        #                     'a':{'type':'int'},
+        #                     'b':{'type':'int'}
+                            
+        #                 }
+        #             },
+        #             'required':['a','b']
+        #         }
+        #     },
+        # ]
+
         self.tools = [
+            # {
+            #     'type':'function',
+            #     'function':{
+            #         'name':'rolldice',
+            #         'description':'randomizes a number between 1 and 20',
+                                           
+            #     }
+            # },
             {
                 'type':'function',
                 'function':{
-                    'name':'addition',
-                    'description':'adds numbers',
+                    'name':'get_skill_mod',
+                    'description':'fetches the skill modifier: THE ONLY Available skills are stealth, medicine',
                     'parameters':
                       {
                         'type':'object',
                         'properties':{
-                            'a':{'type':'int'},
-                            'b':{'type':'int'}
+                            'skill':{'type':'str'}
+                           
                             
                         }
                     },
-                    'required':['a','b']                             
-                }
-
-            },
-
-            {
-                'type':'function',
-                'function':{
-                    'name':'subtraction',
-                    'description':'subtracts numbers',
-                    'parameters':
-                      {
-                        'type':'object',
-                        'properties':{
-                            'a':{'type':'int'},
-                            'b':{'type':'int'}
-                            
-                        }
-                    },
-                    'required':['a','b']
+                    'required':['skill']
                 }
             },
         ]
-
     
     def call_functions(self):
         
@@ -71,10 +98,11 @@ class OllamaToolCall:
                 print(f'function {name} with args {args}')
                 print(all_functions[name](**args))
 
+        
            
 
 if __name__ == '__main__':
 
-    functions = OllamaToolCall(messages='activate the add function. all args 5 < x < 100')
+    functions = OllamaToolCall(messages='I try to sneak past people')
     
     functions.activate_functions()
