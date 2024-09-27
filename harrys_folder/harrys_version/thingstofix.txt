@@ -1,18 +1,4 @@
-###done###
-fix so ollama runs on the server - DONE -> WORKS (now running llama3.1 - not sure if best option, but using that for now)
 
-
-####works better on llama3.1- and with added examples###
-# doesnt reply with just the JSON - starts or ends with "ofc I can do that blabla " or "I may have missed something please let me know if.."
-# doesnt do a great job - makes wierd categories / makes stuff up / misses things
-
-
-WORKS-
-make the TTS thing work on server - works as in it is isntalled and can generate speech, but playing sound in pygame, now also possible from the server with noMachine
-
->> fix move thing - make it so move is separate action/option -> gives options for all adjacent rooms (work on locks, multi floors etc later)
-
->> make inventory - > also maybe use keyword to call action ? (testa iaf) --- sort of works - need to merge it with room code, and test it some more, but the basics seem to work
 
 
 ###to do### 
@@ -90,3 +76,21 @@ World generation >
 for quest land wise > get to city X to warn the king or find the magic Y in dungeon Z
 
 
+
+
+
+
+###done###
+fix so ollama runs on the server - DONE -> WORKS (now running llama3.1 - not sure if best option, but using that for now)
+
+
+####works better on llama3.1- and with added examples###
+# doesnt reply with just the JSON - starts or ends with "ofc I can do that blabla " or "I may have missed something please let me know if.."
+# doesnt do a great job - makes wierd categories / makes stuff up / misses things
+
+WORKS-
+make the TTS thing work on server - works as in it is isntalled and can generate speech, but playing sound in pygame, now also possible from the server with noMachine
+
+>> fix move thing - make it so move is separate action/option -> gives options for all adjacent rooms (work on locks, multi floors etc later)
+
+>> make inventory - > also maybe use keyword to call action ? (testa iaf) --- sort of works - need to merge it with room code, and test it some more, but the basics seem to work
