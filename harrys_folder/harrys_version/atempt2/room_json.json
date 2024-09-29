@@ -2,18 +2,6 @@
     "description": "A cozy, circular room with stone walls and a high ceiling. The air is musty and filled with the scent of old books.",
     "items": [
         {
-            "name": "Old Wooden Desk",
-            "description": "A worn wooden desk with a single chair behind it, bearing an intricately carved wooden box.",
-            "properties": {
-                "interact": true,
-                "examine": true
-            },
-            "dimensions": {
-                "width": 2.5,
-                "depth": 1.5
-            }
-        },
-        {
             "name": "Bookshelf",
             "description": "A tall, narrow bookshelf with shelves filled to the brim with dusty old tomes.",
             "properties": {
@@ -23,29 +11,6 @@
             "dimensions": {
                 "height": 6.0,
                 "width": 1.5
-            }
-        },
-        {
-            "name": "Window",
-            "description": "A single, narrow window with shutters that can be opened or closed.",
-            "properties": {
-                "openable": true
-            },
-            "dimensions": {
-                "height": 2.0,
-                "width": 1.5
-            }
-        },
-        {
-            "name": "Door",
-            "description": "A sturdy wooden door with iron hinges and a large, rusted doorknob.",
-            "properties": {
-                "openable": true,
-                "locked": false
-            },
-            "dimensions": {
-                "height": 2.5,
-                "width": 1.0
             }
         }
     ],

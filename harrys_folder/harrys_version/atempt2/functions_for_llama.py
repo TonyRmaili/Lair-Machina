@@ -4,9 +4,10 @@ import json
 import random
 
 
-# Function to REMOVE an item from the room JSON
+# Function to REMOVE an item from the room JSON ####add , room_json as argument
 def remove_item_from_room(item_name: str):
 
+    # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
     room_file='room_json.json'    
     # Load room from file
     with open(room_file, 'r') as file:
@@ -14,6 +15,8 @@ def remove_item_from_room(item_name: str):
 
     
     item_found = False
+
+    # print(room_json)
     updated_items = []
 
     for item in room_json['items']:
@@ -26,12 +29,14 @@ def remove_item_from_room(item_name: str):
         room_json['items'] = updated_items
         
         # Save the updated room JSON back to the file
-        with open(file_path, 'w') as file:
+        with open(room_file, 'w') as file:
             json.dump(room_json, file, indent=4)
         
         return f"{item_name} has been removed from the room."
     else:
         return f"{item_name} not found in the room."
+
+
 
 
 # MAKE SKILLCHECK - works

@@ -44,7 +44,7 @@ class OllamaToolCall:
                 'type': 'function',
                 'function': {
                     'name': 'remove_item_from_room',
-                    'description': 'Removes an item from the room based on the player’s action, use it if the player takes something',
+                    'description': 'Removes an item from the room (and puts it in the players inventory) based on the players action, use it if the player takes something',
                     'parameters': {
                         'type': 'object',
                         'properties': {
@@ -79,8 +79,8 @@ class OllamaToolCall:
 
             if name in all_functions:
                 print(f'function {name} with args {args}')
-                # Call the function with the room JSON context
-                print(all_functions[name](**args, room_json=self.room_json))
+                # Call the function with the room JSON context ### add room_json=self.room_json
+                print(all_functions[name](**args))
            
 
 if __name__ == '__main__':
