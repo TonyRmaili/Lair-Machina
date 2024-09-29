@@ -1,0 +1,45 @@
+{
+    "description": "Bag of holding, a magic bag capable of holding unlimited items",
+    "items": [
+        {
+            "name": "Shield",
+            "description": "Large wooden shield with a skull painted on it",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "sword",
+            "description": "a sharp shortsword made of steel",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "sword",
+            "description": "leaning against the wall",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "morningstar",
+            "description": "a melee weapon with iron spikes",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "turtle",
+            "description": "a small sea turtle",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        }
+    ]
+}
