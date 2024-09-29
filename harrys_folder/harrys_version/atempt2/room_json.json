@@ -2,15 +2,11 @@
     "description": "A cozy, circular room with stone walls and a high ceiling. The air is musty and filled with the scent of old books.",
     "items": [
         {
-            "name": "Bookshelf",
-            "description": "A tall, narrow bookshelf with shelves filled to the brim with dusty old tomes.",
+            "name": "blue magic lantern",
+            "description": "none",
             "properties": {
                 "interact": true,
                 "examine": true
-            },
-            "dimensions": {
-                "height": 6.0,
-                "width": 1.5
             }
         }
     ],
