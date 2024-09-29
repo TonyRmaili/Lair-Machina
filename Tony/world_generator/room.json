@@ -1,39 +1,73 @@
 {
-    "description": "A cozy, dimly lit chamber with stone walls and a low ceiling.",
-    "items": [
-        {
-            "id": 1,
-            "name": "Candle",
-            "description": "A burning candle on a small wooden table",
-            "interactable": true
+    "description": "A cozy, dimly lit chamber with stone walls and a vaulted ceiling. The air is musty, and the scent of old parchment fills the space.",
+    "items": {
+        "table": {
+            "description": "A wooden table with intricate carvings of leaves and vines. It appears to be made of a rich, dark wood.",
+            "properties": {
+                "weight": 50,
+                "value": 100,
+                "durability": 80
+            },
+            "actions": [
+                {
+                    "type": "inspect",
+                    "description": "You examine the table more closely and notice that it has a small, hidden compartment in one of its legs."
+                }
+            ]
         },
-        {
-            "id": 2,
-            "name": "Leather Armor",
-            "description": "A suit of worn leather armor leaning against the wall",
-            "interactable": false
+        "bookshelf": {
+            "description": "A tall, narrow bookcase made of polished wooden planks. It is filled with tomes bound in leather and adorned with intricate gold filigree.",
+            "properties": {
+                "weight": 200,
+                "value": 500,
+                "durability": 90
+            },
+            "actions": [
+                {
+                    "type": "open",
+                    "description": "You push the bookshelf open, revealing a hidden compartment containing a rolled-up parchment with a cryptic message."
+                }
+            ]
         },
-        {
-            "id": 3,
-            "name": "Mysterious Scroll",
-            "description": "A rolled-up parchment with strange symbols on it",
-            "interactable": true
+        "window": {
+            "description": "A small, narrow window with panes of stained glass depicting scenes from mythology.",
+            "properties": {
+                "weight": 20,
+                "value": 50,
+                "durability": 70
+            },
+            "actions": [
+                {
+                    "type": "open",
+                    "description": "You push the window open, allowing a faint breeze to enter the room and carry with it the scent of blooming flowers."
+                }
+            ]
         },
-        {
-            "id": 4,
-            "name": "Small Key",
-            "description": "A small, rusty key lying on the floor",
-            "interactable": true
-        }
-    ],
+        "door": {
+            "description": "A sturdy wooden door with iron hinges and a heavy-looking iron knocker in the shape of a lion's head.",
+            "properties": {
+                "weight": 100,
+                "value": 200,
+                "durability": 85
+            },
+            "actions": [
+                {
+                    "type": "open",
+                    "description": "You turn the handle and push the door open, revealing a dark and foreboding hallway beyond."
+                }
+            ]
+        },
+        "leather-bound book": "New item",
+        "leather-bound book (yellowed pages, embossed cover with crescent-shaped moon symbol)": "New item"
+    },
     "properties": {
-        "temperature": 20,
+        "temperature": 18,
         "humidity": 60,
-        "illumination": "low"
+        "illumination": "dim"
     },
     "dimensions": {
-        "length": 4.5,
-        "width": 3.2,
-        "height": 2.8
+        "width": 4,
+        "length": 6,
+        "height": 3
     }
 }

@@ -49,14 +49,6 @@ class OllamaToolCall:
         # ]
 
         self.tools = [
-            # {
-            #     'type':'function',
-            #     'function':{
-            #         'name':'rolldice',
-            #         'description':'randomizes a number between 1 and 20',
-                                           
-            #     }
-            # },
             {
                 'type':'function',
                 'function':{
@@ -72,6 +64,31 @@ class OllamaToolCall:
                         }
                     },
                     'required':['skill']
+                }
+            },
+            {
+                'type':'function',
+                'function':{
+                    'name':'roll_dice',
+                    'description':'Roll the dice and adds a bonus integer to the roll. the integer CAN be negative or zero',
+                    'parameters':
+                      {
+                        'type':'object',
+                        'properties':{
+                            'prof':{'type':'int'}
+                           
+                            
+                        }
+                    },
+                    'required':['prof']
+                }
+            },
+            {
+                'type':'function',
+                'function':{
+                    'name':'no_function',
+                    'description':'Calls this function when no other function call fits the description',
+                    
                 }
             },
         ]
@@ -103,6 +120,5 @@ class OllamaToolCall:
 
 if __name__ == '__main__':
 
-    functions = OllamaToolCall(messages='I try to sneak past people')
-    
+    functions = OllamaToolCall(messages='activate all functions')
     functions.activate_functions()

@@ -56,13 +56,7 @@ data = {
     'factions': '''Describe the key organizations, guilds, or secret societies influencing political and social life. Provide details on their goals, leadership, alliances, and conflicts. Consider how these factions interact with major events, settlements, and power structures.''',
     'settlements': '''Design a variety of settlements, from grand capital cities to hidden villages in enchanted forests. For each settlement, describe its architectural style, layout, and key locations like marketplaces, temples, and fortresses. Highlight unique features such as floating islands or underground tunnels. Detail the ruling body, culture, and primary economic activities. Consider the historical significance or ongoing conflicts tied to each settlement.''',
     'npcs': '''Create a diverse group of non-playable characters, each with a unique backstory, motivations, and connections to the world. Include a wide range of characters, from rulers and wizards to ordinary citizens and travelers. For each NPC, describe their personality, goals, affiliations, and how they might assist or oppose players. Include details about their appearance, mannerisms, and secrets. Ensure each NPC has a well-defined arc tied to broader events or ambitions.''',
-    'landscapes': '''Generate descriptions of varied landscapes, from towering mountains and sprawling deserts to magical forests and eerie wastelands. Each landscape should have distinct geographical features, climate, and ecosystem. Include unique phenomena such as enchanted rivers, cursed swamps, or magical volcanoes. The landscapes should influence the world's history, civilizations, and resources.''',
-    
-    
-    
-    
-    
-    
+    'landscapes': '''Generate descriptions of varied landscapes, from towering mountains and sprawling deserts to magical forests and eerie wastelands. Each landscape should have distinct geographical features, climate, and ecosystem. Include unique phenomena such as enchanted rivers, cursed swamps, or magical volcanoes. The landscapes should influence the world's history, civilizations, and resources.''', 
 }
 
 
@@ -74,7 +68,7 @@ Ensure the room includes at least one door and one window. Any additional elemen
 Follow this example structure:
 {
     "description": "",
-    "items": [],
+    "items": {},
     "properties": {},
     "dimensions": {}
 }
