@@ -8,6 +8,14 @@
                 "interact": true,
                 "examine": true
             }
+        },
+        {
+            "name": "sword",
+            "description": "leaning against the wall",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
         }
     ],
     "properties": {

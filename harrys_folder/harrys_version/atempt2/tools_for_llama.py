@@ -63,9 +63,10 @@ class OllamaToolCall:
                         'type': 'object',
                         'properties': {
                             'item_name': {'type': 'string'},
+                            'item_description': {'type': 'string'}
                         }
                     },
-                    'required': ['item_name']
+                    'required': ['item_name', 'item_description']
                 }
             }
 
@@ -105,7 +106,7 @@ if __name__ == '__main__':
     # functions = OllamaToolCall(messages='I steal the bookshelf', room_file='room_json.json')
     # functions.activate_functions()
 
-    functions = OllamaToolCall(messages='I leave my blue magic lantern on the stine floor', room_file='room_json.json')
+    functions = OllamaToolCall(messages='I leave my sword leaning against the wall', room_file='room_json.json')
     functions.activate_functions()
 
 

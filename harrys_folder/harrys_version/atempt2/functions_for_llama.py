@@ -41,8 +41,7 @@ def remove_item_from_room(item_name: str):
 
 # Function to ADD an item to the room JSON
 # def add_item_to_room(item_name: str, item_description: str, room_json, file_path: str):
-def add_item_to_room(item_name: str):
-    print("yes? no? are we here?")
+def add_item_to_room(item_name: str, item_description: str):
 
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
     room_file='room_json.json'    
@@ -60,7 +59,7 @@ def add_item_to_room(item_name: str):
     # Create a new item dictionary
     new_item = {
         "name": item_name,
-        "description": "none",
+        "description": item_description,
         "properties": {
             "interact": True,
             "examine": True
