@@ -1,23 +1,6 @@
 {
     "description": "A cozy, circular room with stone walls and a high ceiling. The air is musty and filled with the scent of old books.",
-    "items": [
-        {
-            "name": "blue magic lantern",
-            "description": "none",
-            "properties": {
-                "interact": true,
-                "examine": true
-            }
-        },
-        {
-            "name": "sword",
-            "description": "leaning against the wall",
-            "properties": {
-                "interact": true,
-                "examine": true
-            }
-        }
-    ],
+    "items": [],
     "properties": {
         "lighting": "dimmly lit"
     },

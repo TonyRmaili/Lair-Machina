@@ -38,6 +38,56 @@ def remove_item_from_room(item_name: str):
 
 
 
+# Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
+def loot_item_from_room(item_name: str):
+
+    # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
+    room_file='room_json.json'    
+    # Load room from file
+    with open(room_file, 'r') as file:
+        room_json = json.load(file)
+    
+    item_found = False
+    item_looted = None
+
+    # print(room_json)
+    updated_items = []
+
+    for item in room_json['items']:
+        if item['name'].lower() == item_name.lower():
+            looted_item = item
+            item_found = True  # Item found, skip adding it to updated list
+        else:
+            updated_items.append(item)  # Keep the item if it doesn't match
+
+    if item_found:
+        room_json['items'] = updated_items
+        
+        # Save the updated room JSON back to the file
+        with open(room_file, 'w') as file:
+            json.dump(room_json, file, indent=4)
+        
+        print(f"{item_name} has been removed from the room.")
+        # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
+        inventory_file='character_inventory.json'    
+        # Load room from file
+        with open(inventory_file, 'r') as file:
+            inventory_json = json.load(file)
+        
+        # Add the looted item to the inventory
+        inventory_json['items'].append(looted_item)
+        
+        # Save the updated inventory JSON back to the file
+        with open(inventory_file, 'w') as file:
+            json.dump(inventory_json, file, indent=4)
+
+        return (f"{looted_item} now in player inventory")
+        
+    else:
+        return f"{item_name} not found in the room."
+
+
+
 
 # Function to ADD an item to the room JSON
 # def add_item_to_room(item_name: str, item_description: str, room_json, file_path: str):
@@ -118,8 +168,8 @@ all_functions = {
     
     'roll_skill_with_mod':roll_skill_with_mod,
     'remove_item_from_room': remove_item_from_room,
-    'add_item_to_room': add_item_to_room
-    
+    'add_item_to_room': add_item_to_room,
+    'loot_item_from_room': loot_item_from_room
 }
 
 
