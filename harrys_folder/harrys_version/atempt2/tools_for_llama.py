@@ -54,7 +54,7 @@ class OllamaToolCall:
                     'required': ['item_name']
                 }
             },
-                       {
+            {
                 'type': 'function',
                 'function': {
                     'name': 'leave_item_from_inventory_in_room',
@@ -66,6 +66,33 @@ class OllamaToolCall:
                         }
                     },
                     'required': ['item_name']
+                }
+            },
+                       {
+                'type': 'function',
+                'function': {
+                    'name': 'look_at_room',
+                    'description': 'gives a description of the room',
+                    'parameters': {
+                        'type': 'object',
+                        'properties': {
+                            'current_location': {'type': 'string'}
+                        }
+                    },
+                    'required': ['current_location']
+                }
+            },                                           {
+                'type': 'function',
+                'function': {
+                    'name': 'ask_stuff',
+                    'description': 'gives the in lore answer about things, use when the player makes a question about the world',
+                    'parameters': {
+                        'type': 'object',
+                        'properties': {
+                            'player_question': {'type': 'string'}
+                        }
+                    },
+                    'required': ['player_question']
                 }
             }
         ]

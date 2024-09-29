@@ -1,7 +1,67 @@
+import ollama
+
 from random import randint
 import json
 
 import random
+
+
+
+# need to add current location as arg
+def look_at_room(current_location):
+    #make dynamic  - like = current location instead
+    room_file='room_json.json'    
+    # Load room from file
+    with open(room_file, 'r') as file:
+        room_json = json.load(file)
+        
+    # make description of the room for the player
+    system_prompt = f"The player is in a room with following items and properties: {room_json}. Describe what the player sees when they look around as if you were a dungeon master based on the info you have about the room"
+    user_prompt = "Player action: I look around, what do I see?"
+    
+    
+    # Interacting with the LLaMA 3 model, with a system-level instruction
+    response = ollama.chat(
+        model="llama3.1", 
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+    )
+
+    room_intro = response['message']['content']
+    
+    return room_intro
+        
+def ask_stuff(player_question):
+
+    #make dynamic 
+    lore_file='lore.txt'
+    # Load room from file
+    with open(lore_file, 'r') as file:
+        lore = file.read()
+
+    # make description of the room for the player - need to work on prompt and the lore its given /scope etc- but works as POC
+    system_prompt = f"The game is set in this world: {lore}. try to answer any questions the player has with only describing some parts that a player character may know. Answer with describing what the character knows and how they know it as if you are the dungeon master"
+    user_prompt = f"Player action: {player_question}"
+        
+    
+    # Interacting with the LLaMA 3 model, with a system-level instruction
+    response = ollama.chat(
+        model="llama3.1", 
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+    )
+    
+    dm_answer = response['message']['content']
+
+    
+    return dm_answer
+# make a similar for action/roll result descriptions
+# Describe the result as the player tries to do the action as if you were a dungeon master based on the info you have
+
 
 
 # WORKS
@@ -173,7 +233,9 @@ all_functions = {
     
     'roll_skill_with_mod':roll_skill_with_mod,
     'loot_item_from_room': loot_item_from_room,
-    'leave_item_from_inventory_in_room': leave_item_from_inventory_in_room
+    'leave_item_from_inventory_in_room': leave_item_from_inventory_in_room,
+    'ask_stuff': ask_stuff,
+    'look_at_room': look_at_room
 }
 
 
