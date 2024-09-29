@@ -43,8 +43,8 @@ class OllamaToolCall:
             {
                 'type': 'function',
                 'function': {
-                    'name': 'remove_item_from_room',
-                    'description': 'Removes an item from the room (WITHOUT putting in the players inventory) based on the players action, use it if the player burns, or some how removes something',
+                    'name': 'loot_item_from_room',
+                    'description': 'Removes an item from the room and adds it to the players inventory based on the players action, use it if the player wants to take something in the room',
                     'parameters': {
                         'type': 'object',
                         'properties': {
@@ -54,26 +54,11 @@ class OllamaToolCall:
                     'required': ['item_name']
                 }
             },
-            {
+                       {
                 'type': 'function',
                 'function': {
-                    'name': 'add_item_to_room',
-                    'description': 'Adds an item to the room based on the players action, use it if the player wants to leave something in the room',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'item_name': {'type': 'string'},
-                            'item_description': {'type': 'string'}
-                        }
-                    },
-                    'required': ['item_name', 'item_description']
-                }
-            },
-                        {
-                'type': 'function',
-                'function': {
-                    'name': 'loot_item_from_room',
-                    'description': 'Removes an item from the room and adds it to the players inventory based on the players action, use it if the player wants to take something in the room',
+                    'name': 'leave_item_from_inventory_in_room',
+                    'description': 'Removes an item from the player inventory and adds it to the room JSON based on the players action, use it if the player wants to leave something from their inventory in the room',
                     'parameters': {
                         'type': 'object',
                         'properties': {

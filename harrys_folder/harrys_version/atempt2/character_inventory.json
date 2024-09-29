@@ -24,6 +24,22 @@
                 "interact": true,
                 "examine": true
             }
+        },
+        {
+            "name": "morningstar",
+            "description": "a melee weapon with iron spikes",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "turtle",
+            "description": "a small sea turtle",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
         }
     ]
 }

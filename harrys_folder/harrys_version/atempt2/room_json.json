@@ -1,6 +1,31 @@
 {
     "description": "A cozy, circular room with stone walls and a high ceiling. The air is musty and filled with the scent of old books.",
-    "items": [],
+    "items": [
+        {
+            "name": "aquarium",
+            "description": "glass box full of water",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "sword",
+            "description": "a sword",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        },
+        {
+            "name": "sword",
+            "description": "aquarium item",
+            "properties": {
+                "interact": true,
+                "examine": true
+            }
+        }
+    ],
     "properties": {
         "lighting": "dimmly lit"
     },
