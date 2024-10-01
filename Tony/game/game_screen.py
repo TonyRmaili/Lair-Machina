@@ -7,7 +7,7 @@ import pygame_menu.widgets.widget
 import pygame_menu.widgets.widget.scrollbar
 from debug import debug
 import os
-
+from textarea import TextArea
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
@@ -16,7 +16,7 @@ from world_generator.define_world import save_to_json, room
 class Game:
     def __init__(self):
         # setup
-        self.FPS = 30
+        self.FPS = 60
         self.WIDTH = 800
         self.HEIGHT = 600
         pygame.init()
@@ -58,31 +58,19 @@ class Game:
         with open('../world_generator/texts/lore.txt', 'r') as file:
             self.lore_text = file.read()
 
+        self.lore_area = TextArea(text=self.lore_text,WIDTH=self.WIDTH,HEIGHT=self.HEIGHT)
+
     def start_text_generation(self):
         # Start text generation in a separate thread
         self.gen_world.run_in_thread()
 
-    def world_lore(self,events):
-        
-        # if self.texts_ready:
-        #     try:
-        #         with open('../world_generator/texts/lore.txt', 'r') as file:
-        #             lore_text = file.read()
-        #     except FileNotFoundError:
-        #         lore_text = "Lore not generated yet."
-
-        self.lore_menu = pygame_menu.Menu('World Lore', self.WIDTH, self.HEIGHT,
-                                            theme=pygame_menu.themes.THEME_GREEN)
-        self.lore_menu.add.label(self.lore_text,max_char=-1, font_size=20)
-        self.lore_menu.update(events)
-        self.lore_menu.draw(self.screen)
+    def world_lore(self):
+        self.lore_area.display(screen=self.screen)
         
 
     def set_description(self, text):
         self.char_description = text
         print(f"Character description: {self.char_description}")
-
-        # self.menu.add.label(text, max_char=-1, font_size=20,wordwrap=True)
 
 
     def set_name(self, name):
@@ -120,13 +108,15 @@ class Game:
                 if self.game_active:
                     if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
                         self.game_active = False
+
+                    self.lore_area.event_handler(event=event)
                     
 
             if self.game_active:
-                self.screen.fill('white')
+                self.screen.fill('black')
                 if self.texts_ready:
                     # Lore is ready, show it
-                    self.world_lore(events)
+                    self.world_lore()
                 else:
                     # Show some loading message or animation while generating
                     loading_menu = pygame_menu.Menu('Loading World...', self.WIDTH, self.HEIGHT,
@@ -153,6 +143,8 @@ class Game:
             debug(f'Race: {self.char_race}', (10, 70))
             debug(f'text rdy: {self.texts_ready}', (10, 90))
             debug(f'is generating: {self.gen_world.is_generating}', (10, 110))
+
+
             pygame.display.flip()
             self.clock.tick(self.FPS)
 
