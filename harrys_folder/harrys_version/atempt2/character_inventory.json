@@ -34,8 +34,8 @@
             }
         },
         {
-            "name": "turtle",
-            "description": "a small sea turtle",
+            "name": "sword",
+            "description": "aquarium item",
             "properties": {
                 "interact": true,
                 "examine": true

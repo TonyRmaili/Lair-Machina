@@ -16,9 +16,6 @@ import ollama
 
 
 
-
-
-
 def system_prompt_function(system_prompt, user_prompt):
     # Interacting with the LLaMA 3 model, with a system-level instruction
     response = ollama.chat(

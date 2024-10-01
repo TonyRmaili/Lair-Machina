@@ -1,93 +1,87 @@
 **The Pantheon of Elyria**
 
-Elyria's pantheon is a diverse assembly of deities, each governing various aspects of reality. Their realms intersect and influence one another, reflecting the complex tapestry of life.
+In this high-fantasy world, the pantheon of deities is comprised of 12 primary gods and goddesses, each with their own domain and influence on the mortal realm.
 
-**Primary Deities**
+1. **Aethera, the Celestial Mother**
+	* Domain: Creation, Fertility, and Protection
+	* Symbol: The Starlit Serenity (a stylized star surrounded by a laurel wreath)
+	* Personality: Aethera is the embodiment of nurturing love and protection. She watches over the world, ensuring its balance and harmony.
+2. **Elyon, the Radiant King**
+	* Domain: Light, Order, and Justice
+	* Symbol: The Golden Lance (a shining lance with a gemstone tip)
+	* Personality: Elyon is the champion of justice, truth, and righteousness. He shines light upon the world, guiding mortals toward virtue.
+3. **Kaelara, the Fierce Warrioress**
+	* Domain: War, Strength, and Courage
+	* Symbol: The Battle-Scarred Shield (a shield emblazoned with a fierce lion's head)
+	* Personality: Kaelara is the goddess of battle, embodying strength, courage, and resilience. She inspires warriors to fight for what is just.
+4. **Nyxoria, the Mysterious Weaver**
+	* Domain: Fate, Time, and Destiny
+	* Symbol: The Cosmic Loom (a stylized loom with threads representing the fabric of time)
+	* Personality: Nyxoria is the weaver of fate, controlling the tapestry of time. She guides mortals toward their destined paths.
+5. **Aetheria, the Wind-Song Siren**
+	* Domain: Music, Poetry, and Inspiration
+	* Symbol: The Lyre of Aetheria (a delicate lyre with intricate carvings)
+	* Personality: Aetheria is the goddess of music, art, and inspiration. She whispers creative melodies to mortals.
+6. **Luminaria, the Radiant Maiden**
+	* Domain: Light, Healing, and Purification
+	* Symbol: The Luminous Leaf (a shining leaf with a delicate stem)
+	* Personality: Luminaria is the goddess of light, healing, and purification. She cleanses the world from darkness and suffering.
+7. **Vitalara, the Ferocious Huntress**
+	* Domain: Nature, Hunting, and Survival
+	* Symbol: The Hunting Bow (a sturdy bow with a curved quiver)
+	* Personality: Vitalara is the goddess of nature, hunting, and survival. She teaches mortals to respect and honor the land.
+8. **Sorcerer, the Arcane Sage**
+	* Domain: Magic, Knowledge, and Wisdom
+	* Symbol: The Tome of Sorcery (a worn leather tome bound with silver clasps)
+	* Personality: Sorcerer is the patron of magic, knowledge, and wisdom. He shares his secrets with those who seek understanding.
+9. **Morvane, the Grim Reaper**
+	* Domain: Death, Fate, and Reincarnation
+	* Symbol: The Scythe of Morvane (a curved scythe with a silver handle)
+	* Personality: Morvane is the embodiment of death, guiding mortals toward their final rest. He ensures the cycle of life continues.
+10. **Elara, the Loving Mother**
+	* Domain: Love, Family, and Protection
+	* Symbol: The Maternal Heart (a stylized heart with an outstretched hand)
+	* Personality: Elara is the goddess of love, family, and protection. She nurtures and cares for mortals in their times of need.
+11. **Arkeia, the Unyielding Protector**
+	* Domain: Protection, Security, and Vigilance
+	* Symbol: The Guardian's Shield (a sturdy shield with a silver eagle emblem)
+	* Personality: Arkeia is the guardian of protection, ensuring mortals are safeguarded from harm.
+12. **Threnody, the Forgotten God**
+	* Domain: Memories, History, and Lost Knowledge
+	* Symbol: The Ancient Scroll (a yellowed scroll with intricate writings)
+	* Personality: Threnody is a forgotten god, watching over memories, history, and lost knowledge. He whispers secrets to those who seek understanding.
 
-1. **Solara**: Goddess of Light and Life
-	* Domain: Creation, Order, Hope
-	* Symbol: The radiant sun
-	* Personality: Solara embodies warmth, nurturing qualities, and the pursuit of knowledge.
-	* Relationship with mortals: She watches over children, nurtures new ideas, and guides those seeking truth.
-	* Followers: The Solari, known for their compassion and pursuit of wisdom.
-2. **Erebus**: God of Darkness and Shadows
-	* Domain: Transformation, Change, Mystery
-	* Symbol: The crescent moon with a darkened center
-	* Personality: Erebus represents the unknown, the unseen forces that shape reality.
-	* Relationship with mortals: He guides those seeking answers in the shadows, offering wisdom through cryptic messages.
-	* Followers: The Erebusi, who understand the value of darkness and secrecy.
-3. **Aetheria**: Goddess of the Skies and Winds
-	* Domain: Freedom, Adventure, Exploration
-	* Symbol: A winged figure soaring above a rising sun
-	* Personality: Aetheria embodies the thrill of discovery, the love of exploration, and the desire for freedom.
-	* Relationship with mortals: She guides adventurers, offering protection from the elements and guiding them toward their destinies.
-	* Followers: The Aethers, known for their bravery and thirst for knowledge.
-4. **Terra**: Goddess of the Earth and Agriculture
-	* Domain: Fertility, Abundance, Cycles
-	* Symbol: An earthy, seed-filled heart surrounded by vines
-	* Personality: Terra represents nourishment, growth, and renewal.
-	* Relationship with mortals: She tends to the land, guiding farmers toward bountiful harvests and teaching them respect for nature's cycles.
-	* Followers: The Terrans, who understand the importance of living in harmony with the earth.
+**Relationships between the Gods**
 
-**Secondary Deities**
+Aethera and Elyon are considered the supreme deities, as they were present at the world's creation. They have a deep bond, with Aethera often seeking counsel from Elyon on matters of balance and justice.
 
-1. **Kaelos**: God of War and Conflict
-	* Domain: Battle, Competition, Courage
-	* Symbol: A sword with a balance scale at its hilt
-	* Personality: Kaelos embodies strength, determination, and resilience.
-	* Relationship with mortals: He appears to warriors, offering guidance in battle and recognizing valor in those who face danger.
-	* Followers: The Ka'elans, known for their martial prowess and unwavering commitment to justice.
-2. **Nexaria**: Goddess of Knowledge and Wisdom
-	* Domain: Intellect, Reason, Discovery
-	* Symbol: A stylized pair of scales with a lamp above them
-	* Personality: Nexaria represents curiosity, inquiry, and the pursuit of truth.
-	* Relationship with mortals: She guides scholars, inventors, and philosophers toward understanding and innovation.
-	* Followers: The Nexari, who value knowledge and seek wisdom in their endeavors.
-3. **Luminia**: Goddess of Love and Beauty
-	* Domain: Affection, Emotion, Aesthetics
-	* Symbol: A blooming flower surrounded by intertwined hearts
-	* Personality: Luminia embodies warmth, compassion, and the beauty of life.
-	* Relationship with mortals: She nurtures love between partners, inspires creativity in artists, and comforts those in sorrow.
-	* Followers: The Lumini, known for their kindness, empathy, and pursuit of artistic expression.
+Kaelara and Vitalara share a close relationship, as both goddesses embody strength and resilience. They often work together to guide warriors and hunters in their endeavors.
 
-**Lesser Spirits**
-
-1. **The Luminari**: A collective of lesser spirits who embody the virtues of Luminia.
-	* Domain: Protection, Guidance, Healing
-	* Symbol: Small, glowing orbs that radiate warmth and comfort
-	* Personality: The Luminari are compassionate, gentle beings who watch over children, heal the sick, and guide those lost.
-2. **The Kyrexi**: A group of mischievous spirits who delight in playing tricks on mortals.
-	* Domain: Mirth, Pranks, Playfulness
-	* Symbol: Whimsical symbols resembling masks or jesters' hats
-	* Personality: The Kyrexi are playful, cunning, and often unpredictable.
-3. **The Namaroth**: Forgotten gods of forgotten ages, now relegated to the realm of myth and legend.
-	* Domain: Ancient Knowledge, Historical Events
-	* Symbol: A collection of dusty scrolls or ancient artifacts
-	* Personality: The Namaroth embody the mysteries of a bygone era, their wisdom lost in the sands of time.
-
-**Demigods**
-
-1. **Aethereia's Children**: Born from her union with mortal heroes, these demigods possess exceptional abilities.
-	* Domain: Skilled warriors, master craftsmen
-	* Symbol: Wings or other motifs symbolizing Aetheria's influence
-	* Personality: Eager to prove themselves, they strive for greatness in their respective fields.
-2. **Kaelos' Chosen**: Mortals handpicked by the God of War for their bravery and strength.
-	* Domain: Battle prowess, martial arts
-	* Symbol: The balance scale emblem from Kaelos
-	* Personality: These demigods embody courage, loyalty, and an unwavering commitment to justice.
+Nyxoria is said to be the advisor to Morvane, helping him navigate the complexities of fate and mortality. Their bond is built on trust and understanding.
 
 **Interactions with Mortals**
 
-- **Prayers and Offerings**: Faithful followers of the deities make prayers and offerings to ensure their continued favor.
-- **Divine Intervention**: The gods intervene in mortal affairs when necessary, sometimes directly, other times through lesser spirits or prophetic dreams.
-- **Portents and Omens**: Divinations and prophecies guide mortals toward decisions and outcomes that shape the world's destiny.
+Aethera's worship emphasizes harmony with nature, fostering a deep connection between mortals and the land. Her followers often become guardians of the environment, working tirelessly to protect the world from harm.
 
-**Worship and Culture**
+Elyon's followers are known for their pursuit of justice and righteousness, striving to bring balance to the world through their actions.
 
-The worship of Elyria's pantheon shapes cultures in various ways:
+Kaelara's warriors are highly respected, as they embody courage and strength in the face of adversity. Their worship often involves ritual battles and competitions to test one's mettle.
 
-- **Rituals and Ceremonies**: Solarians celebrate the harvest with grand festivals, while Erebusi hold solemn vigils to commemorate the mysteries.
-- **Mythology and Folklore**: Stories of the gods' adventures and interactions with mortals are passed down through generations, influencing art, literature, and oral traditions.
-- **Ethics and Morality**: The principles of each deity guide mortal ethics: Solari prioritize justice and compassion; Erebusi value secrecy and wisdom; Aethers seek freedom and adventure.
+**Followers and Religious Practices**
 
-The pantheon of Elyria is a living tapestry, with divine forces influencing the world's development and shaping the destinies of mortals.
+Each god or goddess has a distinct following, with unique practices and traditions:
+
+* Aethera's followers are known for their dedication to protecting nature and preserving harmony.
+* Elyon's followers venerate truth, justice, and righteousness through sacred rituals and moral codes.
+* Kaelara's warriors engage in martial arts and competitions to test their prowess.
+* Nyxoria's followers study the mysteries of fate and time, seeking understanding and guidance.
+
+**Lesser Spirits, Demigods, or Forgotten Gods**
+
+These entities exist within the pantheon's periphery:
+
+* The forgotten god Threnody whispers secrets to those who seek knowledge from ancient times.
+* The lesser spirit Kaelori provides protection for hunters and trackers in the wilderness.
+* The demigod Lyraea serves as a messenger between Aetheria and mortal musicians, sharing creative melodies and inspiration.
+
+These entities influence the world's tapestry, adding depth and complexity to the cosmology.
