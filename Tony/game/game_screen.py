@@ -8,6 +8,8 @@ import pygame_menu.widgets.widget.scrollbar
 from debug import debug
 import os
 from textarea import TextArea
+from button import Button
+
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
@@ -57,8 +59,25 @@ class Game:
 
         with open('../world_generator/texts/lore.txt', 'r') as file:
             self.lore_text = file.read()
+            
+        with open('../world_generator/texts/factions.txt', 'r') as file:
+            self.factions_text = file.read()
 
-        self.lore_area = TextArea(text=self.lore_text,WIDTH=self.WIDTH,HEIGHT=self.HEIGHT)
+
+        self.lore_area = TextArea(text=self.lore_text,
+                                  WIDTH=self.WIDTH//2,
+                                  HEIGHT=self.HEIGHT//2,
+                                  x=self.WIDTH//2, title='Lore')
+        
+        self.faction_area = TextArea(text=self.factions_text,
+                                  WIDTH=self.WIDTH//2 -30,
+                                  HEIGHT=self.HEIGHT//2,
+                                  x=0, title='Factions',title_color='red'
+                                  )
+        
+        self.test_button = Button(image=None, pos=(400,400),
+            text_input='test',font=pygame.font.Font(None, 30),
+            base_color='blue',hovering_color='green')
 
     def start_text_generation(self):
         # Start text generation in a separate thread
@@ -66,6 +85,7 @@ class Game:
 
     def world_lore(self):
         self.lore_area.display(screen=self.screen)
+        self.faction_area.display(screen=self.screen)
         
 
     def set_description(self, text):
@@ -99,6 +119,7 @@ class Game:
     def run(self):
         while True:
             events = pygame.event.get()
+            mouse_pos = pygame.mouse.get_pos()
             for event in events:
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -109,14 +130,22 @@ class Game:
                     if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
                         self.game_active = False
 
+
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if self.test_button.checkForInput(mouse_pos):
+                            print('test button')
+                            
                     self.lore_area.event_handler(event=event)
+                    self.faction_area.event_handler(event=event)
                     
 
             if self.game_active:
-                self.screen.fill('black')
+                self.screen.fill('grey')
                 if self.texts_ready:
                     # Lore is ready, show it
                     self.world_lore()
+                    self.test_button.changeColor(mouse_pos)
+                    self.test_button.update(screen=self.screen)
                 else:
                     # Show some loading message or animation while generating
                     loading_menu = pygame_menu.Menu('Loading World...', self.WIDTH, self.HEIGHT,
@@ -137,12 +166,12 @@ class Game:
 
 
 
-            debug(f'Game State: {self.game_active}', (10, 10))
-            debug(f'Name: {self.char_name}', (10, 30))
-            debug(f'Class: {self.char_class}', (10, 50))
-            debug(f'Race: {self.char_race}', (10, 70))
-            debug(f'text rdy: {self.texts_ready}', (10, 90))
-            debug(f'is generating: {self.gen_world.is_generating}', (10, 110))
+            # debug(f'Game State: {self.game_active}', (10, 10))
+            # debug(f'Name: {self.char_name}', (10, 30))
+            # debug(f'Class: {self.char_class}', (10, 50))
+            # debug(f'Race: {self.char_race}', (10, 70))
+            # debug(f'text rdy: {self.texts_ready}', (10, 90))
+            # debug(f'is generating: {self.gen_world.is_generating}', (10, 110))
 
 
             pygame.display.flip()
