@@ -6,6 +6,13 @@ import json
 import random
 
 
+# To do:
+# 1 install ComfyUI + flux on server 
+# 2 when it works - try to set up api/fetch thing to generate img
+
+
+
+
 
 # need to add current location as arg
 def look_at_room(current_location):
