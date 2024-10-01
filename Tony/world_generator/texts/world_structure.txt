@@ -1,78 +1,55 @@
-**The World of Elyria**
+**The World of Eridoria**
 
-Elyria is a vast and diverse world comprising four continents: Aerthys, the land of sprawling cities and advanced technology; Vylonia, a realm of ancient magic and mystical forests; Eldrador, a harsh yet beautiful continent of ice and snow; and Khyronia, a tropical paradise of islands and lush jungles.
+Eridoria is a vast continent-spanning world, comprising six continents, each with its unique geography, climate, and cultures. These continents are connected by sprawling mountain ranges, deep oceanic trenches, and winding rivers that have shaped the course of history.
 
-**Continents and Regions**
+### The Continents:
 
-1. **Aerthys**
-	* Capital: The Arcadian City
-	* Governance: Democratic Republic
-	* Economy: Industrialized, Advanced Technology
-	* Culture: Innovation-driven, progressive society
-	* Notable Factions:
-		+ The Council of Innovators (lobbying for scientific progress)
-		+ The Order of the Inventors' Guild (promoting technological advancements)
-2. **Vylonia**
-	* Capital: The Enchanted Realm
-	* Governance: Monarchy, with magical advisors
-	* Economy: Agrarian, Magical resource-based
-	* Culture: Mystical, spiritual society
-	* Notable Factions:
-		+ The Order of the Silver Circle (magical protection and guidance)
-		+ The Covenant of the Ancients (protecting ancient knowledge and artifacts)
+1. **Aethoria**: A landmass dominated by ancient forests, crystal-clear lakes, and vast grasslands. Home to numerous nomadic tribes and settled communities that live in harmony with nature.
+2. **Elyria**: Characterized by sprawling mountain ranges, deep canyons, and arid deserts. Elyria is divided into several city-states that vie for power and control of the region's rich mineral resources.
+3. **Celyddon**: A tropical paradise of dense rainforests, vast mangrove swamps, and teeming coral reefs. The land is inhabited by a diverse array of tribal cultures and trading nations.
+4. **Nefaria**: Known for its harsh, frigid tundras and the frozen wastes of the northern glaciers. Nefaria's inhabitants are primarily nomadic tribes that have developed unique survival strategies to thrive in this unforgiving environment.
+5. **Vallara**: A landmass of diverse geography, from snow-capped peaks to vast plains and lush valleys. The people of Vallara live in a complex balance between agriculture, trade, and warfare.
+6. **Khyronia**: Characterized by dense jungles, mist-shrouded mountains, and the ruins of an ancient civilization that speak to its rich history.
 
-3. **Eldrador**
-	* Capital: The Icehaven Citadel
-	* Governance: Tribal Confederacy, Council of Elders
-	* Economy: Hunter-gatherer, resource-based
-	* Culture: Harsh environment-adapted society
-	* Notable Factions:
-		+ The Clan of the White Wolf (leadership and protection)
-		+ The League of the Frostborn (exploration and discovery)
+### Regions:
 
-4. **Khyronia**
-	* Capital: The Isle of Elyria
-	* Governance: Tribal Confederacy, Council of Elders
-	* Economy: Tropical resource-based, trade-oriented
-	* Culture: Vibrant, artistic society
-	* Notable Factions:
-		+ The Order of the Tides (naval and coastal protection)
-		+ The Guild of the Artisans' Craft (promoting craftsmanship and innovation)
+- **The Wysteria Plateau** (Aethoria): A vast expanse of grasslands home to nomadic tribes, where livestock breeding and trading thrive.
+- **The Kragnir Peaks** (Elyria): A mountainous region famous for its mining industry, which supplies precious metals and gems across the world.
+- **The Selvendom Forests** (Celyddon): The largest contiguous forest in Eridoria, hosting a variety of wild life and serving as a spiritual site for several indigenous tribes.
+- **The Kaltos Deserts** (Elyria): A harsh desert environment where several city-states have developed sophisticated irrigation systems to cultivate crops.
+- **The Nefarian Tundra** (Nefaria): Home to the nomadic Skypaws, who are skilled hunters and trackers that traverse the harsh landscape with agility and stealth.
 
-**Trade Routes and Conflicts**
+### Factions:
 
-1. **The Golden Trade Route**: Connecting Aerthys to Vylonia, facilitating trade in magical resources.
-2. **The Dragon's Spine**: A treacherous mountain pass between Eldrador and Khyronia, controlled by the White Wolf Clan.
-3. **The Azure Sea**: A body of water separating Khyronia from Vylonia, with the Tides' Order maintaining maritime trade routes.
+1. **The Order of the Silver Oak** (Aethoria): A religious order dedicated to the preservation of nature and harmony with the land.
+2. **The Guilds of Elyria**: Powerful trade guilds that control commerce, industry, and mining operations across Elyria.
+3. **The Celyddonian Alliance**: A coalition of city-states in Celyddon that promotes trade, peace, and mutual defense.
+4. **The Nefarian Brotherhood** (Nefaria): A secret society that advocates for the protection of the wilderness and its inhabitants.
 
-Notable Conflicts:
+### Economic Systems:
 
-1. **The Great Guild Wars**: Between Aerthys' Inventors' Guild and Vylonia's Silver Circle over technological advancements in magic.
-2. **The Frostborn Expedition**: Eldrador's League seeking to explore and map the Azure Sea, sparking tension with Khyronia's Order of the Tides.
+- **Bartering and Trade**: Goods are exchanged across regions through a network of caravans, traders, and merchant guilds.
+- **Agriculture**: In Vallara and Celyddon, agriculture is a key sector, with farmers trading goods across regional boundaries.
+- **Mining and Industry**: Elyria's mines produce precious metals, while Vallara's industry serves as a hub for tool-making and machinery.
 
-**Magic, Religion, and Ancient Technologies**
+### Conflicts:
 
-1. **Magic**: A powerful force in Vylonia and Aerthys, governed by laws of the arcane.
-2. **Religion**: Elyria has multiple faiths:
-	* The Solari (worshiping light and justice)
-	* The Erebusi (adoring the mysteries of darkness)
-	* The Aethers' pantheon (embracing freedom and adventure)
-3. **Ancient Technologies**: Aerthys boasts advanced machines, while Vylonia possesses magical artifacts from ancient civilizations.
+- **The Great Desert War** (Elyria): A centuries-long conflict between several city-states vying for control of the Kaltos Deserts.
+- **The Skypaws Revolt** (Nefaria): Periodic uprisings by the nomadic Skypaws against encroaching settlements and exploitation.
 
-**Economic Systems**
+### Magic, Religion, and Ancient Technologies:
 
-1. **Industrialized economies**: Aerthys and Vylonia's reliance on technology and magic drives their growth.
-2. **Resource-based economies**: Eldrador and Khyronia's focus on natural resources shapes their societies.
-3. **Trade-oriented economies**: The island nations of Khyronia thrive on maritime trade.
+1. **Magic**: Woven into the fabric of society in various forms, including enchantments for crops and protection spells for cities.
+2. **Religion**: Eridoria's cultures are deeply influenced by religious beliefs that emphasize harmony with nature (Aethoria), the pursuit of knowledge (Elyria), the balance between life and death (Nefaria), or the unity of all living beings (Celyddon).
+3. **Ancient Technologies**: The remnants of a lost civilization have been discovered in Khyronia, revealing advanced technologies such as sustainable energy systems and innovative agricultural practices.
 
-**Dynamic Setting**
+**Inhabitants and Populations:**
 
-Elyria is in a state of flux, with the balance of power shifting between regions. Conflicts simmer beneath the surface, awaiting ignition. Magic, technology, and ancient secrets await discovery or misuse. As explorers venture into this vast world, they will find adventure, challenges, and opportunities to shape Elyria's destiny.
+- **Aethorians**: Nomadic tribes and settled communities living in harmony with nature.
+- **Elyrians**: City-dwellers that value knowledge, industry, and trade.
+- **Celyddonians**: A diverse array of cultures focusing on unity and the balance between humans and nature.
+- **Nefarians**: Skilled nomads who have adapted to thrive in the harsh environment.
+- **Vallarians**: A complex society balancing agriculture, trade, and warfare.
+- **Khyronians**: Descendants of a lost civilization that continue to study and adapt ancient technologies.
 
-**Growth, Exploration, and Change**
-
-1. **New discoveries**: Uncovering lost technologies, magical artifacts, or hidden resources.
-2. **Emerging threats**: The rise of powerful factions, the resurgence of ancient evils, or unforeseen consequences of technological advancements.
-3. **Cultural exchange**: The sharing of ideas, innovations, and traditions between regions.
-
-As this world evolves, so will its stories, conflicts, and opportunities for exploration and discovery.
+Eridoria is a world where diversity is celebrated, and cultures are richly layered. The delicate balance between nature, technology, and human societies makes it a dynamic, ever-changing place where the pursuit of knowledge and peace is constantly challenged by conflict and exploration.

@@ -5,7 +5,7 @@ import json
 
 import random
 
-
+ 
 
 # need to add current location as arg
 def look_at_room(current_location):

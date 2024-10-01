@@ -1,5 +1,6 @@
 import json
-
+import sys
+import os
 
 readable_data = {
     'system': '''You are an advanced AI responsible for constructing a rich, detailed, and cohesive high-fantasy world.
@@ -78,10 +79,18 @@ Respond using JSON.
 
 
 
-def save_to_json(data,file_name):
+import os
+import json
 
-    with open(file_name, 'w') as f:
-        json.dump(data,f,indent=4)
+def save_to_json(data, file_name):
+    current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
+    file_path = os.path.join(current_dir, file_name)  # Construct the full path within world_gen
+    
+    with open(file_path, 'w') as f:  # Use file_path instead of file_name
+        json.dump(data, f, indent=4)
+
+    return file_path  # Optional: return the file path for confirmation
+
 
 
 if __name__=='__main__':

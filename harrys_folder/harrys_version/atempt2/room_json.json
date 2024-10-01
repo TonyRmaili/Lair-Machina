@@ -9,22 +9,7 @@
                 "examine": true
             }
         },
-        {
-            "name": "sword",
-            "description": "a sword",
-            "properties": {
-                "interact": true,
-                "examine": true
-            }
-        },
-        {
-            "name": "sword",
-            "description": "aquarium item",
-            "properties": {
-                "interact": true,
-                "examine": true
-            }
-        }
+        "turtle"
     ],
     "properties": {
         "lighting": "dimmly lit"
