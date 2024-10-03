@@ -7,8 +7,37 @@ import random
 
 
 # To do:
-# 1 install ComfyUI + flux on server 
-# 2 when it works - try to set up api/fetch thing to generate img
+# 1 install ComfyUI + flux on server  - WORKS
+# 2 when it works - try to set up api/fetch thing to generate img - WORKS (maybe try websocket later if time)
+
+
+
+
+# IDAG : 
+
+# > prova ljud generator - antingen jukebox eller midi style
+# >fixa bättre calls för bild och musik > så hamnar i rätt mapp etc (eventuellt funkar bättre med sockets?)
+
+
+# > ACTIONS
+# > loot/leave - funkar - men behöver ta in room_json som argument > BONUS - gör så att rummen i sig har typ chest/skåp etc som kan ha items i
+# > look - funkar? > bonus - gör så att rummen har beskrivningar som kan variera
+# > ask > anpassa? beror på hur genererar lore
+# > skillcheck (behöver göra den som layer) > describe(som slutlayer)
+
+# > talk? > gör sen när har NPCs
+
+
+# Generators/functions to make:
+# >>>>>>> generate dungeon/castle/etc loop 
+# >>>>>>> create character loop/stage
+# >>>>>>> create state/json - time/location/hp/etc
+
+# >>>>>>> combat loop/function + roll initiative call
+
+# >>>> prova lager av llama3.2 3B - Tools om blir stökigt med massa Tools för en 3.1 8b
+
+# >>>> prova annan språkigenkänning än whisper
 
 
 
@@ -74,7 +103,6 @@ def ask_stuff(player_question):
 # WORKS
 # Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
 def loot_item_from_room(item_name: str):
-
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
     room_file='room_json.json'    
     # Load room from file
@@ -82,7 +110,7 @@ def loot_item_from_room(item_name: str):
         room_json = json.load(file)
     
     item_found = False
-    item_looted = None
+    looted_item = None
 
     # print(room_json)
     updated_items = []
@@ -121,9 +149,6 @@ def loot_item_from_room(item_name: str):
         return f"{item_name} not found in the room."
 
 
-
-
-# 
 # Function to ADD an item to the room JSON - AND remove it from the players inventory
 # def leave_item_from_inventory_in_room(item_name: str, item_description: str, room_json, file_path: str):
 def leave_item_from_inventory_in_room(item_name: str):
