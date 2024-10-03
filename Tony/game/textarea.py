@@ -1,8 +1,9 @@
 import pygame
 
 class TextArea:
-    def __init__(self, text, WIDTH, HEIGHT, x=0, y=0, text_color=(255, 255, 255), bg_color=(0, 0, 0), title="", title_color=(255, 255, 255), title_font_size=30):
-        self.font_size = 24
+    def __init__(self, text, WIDTH, HEIGHT, x=0, y=0, text_color=(255, 255, 255),
+            bg_color=(0, 0, 0), title="", title_color=(255, 255, 255), title_font_size=30,font_size=24):
+        self.font_size = font_size
         self.scroll_speed = 20
         self.scrollbar_w = 20
 

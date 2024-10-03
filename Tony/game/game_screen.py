@@ -9,6 +9,8 @@ from debug import debug
 import os
 from textarea import TextArea
 from button import Button
+from image import Image
+from character_creation import CharCreactionScreen
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -39,7 +41,7 @@ class Game:
         self.menu.add.button('Play', self.start_the_game)
         self.menu.add.button('Quit', pygame_menu.events.EXIT)
 
-        
+        self.bg = CharCreactionScreen(pos=(0,0),scale=(self.WIDTH,self.HEIGHT))
     
         self.game_active = False
 
@@ -78,6 +80,15 @@ class Game:
         self.test_button = Button(image=None, pos=(400,400),
             text_input='test',font=pygame.font.Font(None, 30),
             base_color='blue',hovering_color='green')
+        
+
+
+        self.image = Image(
+            image='./pics/garry.jpg',
+            pos=(500,500),
+            scale=(50,50)
+
+        )
 
     def start_text_generation(self):
         # Start text generation in a separate thread
@@ -134,6 +145,8 @@ class Game:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if self.test_button.checkForInput(mouse_pos):
                             print('test button')
+                        if self.image.checkForInput(mouse_pos):
+                            print('garryu')
                             
                     self.lore_area.event_handler(event=event)
                     self.faction_area.event_handler(event=event)
@@ -143,9 +156,11 @@ class Game:
                 self.screen.fill('grey')
                 if self.texts_ready:
                     # Lore is ready, show it
+                    self.bg.run(screen=self.screen)
                     self.world_lore()
                     self.test_button.changeColor(mouse_pos)
                     self.test_button.update(screen=self.screen)
+                    self.image.update(screen=self.screen)
                 else:
                     # Show some loading message or animation while generating
                     loading_menu = pygame_menu.Menu('Loading World...', self.WIDTH, self.HEIGHT,
