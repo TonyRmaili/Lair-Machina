@@ -3,6 +3,23 @@ import pygame_menu
 import sys
 
 
+
+# IT WORKS TO MOVE AROUND AND CHANGE FLOOR. Need to have dynamic function for change floor, so takes floor as argument from list of floors, and import the room info etc
+
+# TO DO:
+# make floor change dynamic
+# add items to rooms
+# add inventory/hp etc screen 
+# import the loot actions from before
+# add the img generation call from before
+
+# test to add music generation and speech and see how slow it gets
+
+###make combat loop###
+# add monsters, call for initative, combat mode etc
+
+
+
 # Define a Room class to represent each room
 class Room:
     def __init__(self, name, description, connections, special=None):
