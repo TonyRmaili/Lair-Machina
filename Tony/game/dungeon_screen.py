@@ -7,13 +7,19 @@ from image import Image
 
 class DungeonSceen:
     def __init__(self,game,w,h):
-        path = './pics/'
-        pygame.display.set_caption("Lair Machina: Dungeon")
-
-        self.bg = Image(image=path+'floor.jpg',pos=(0,0),scale=(w,h))
-        self.character_image = Image(image=path+'garry.jpg',pos=(400,400),scale=(150,150))
-
         self.game = game
+        
+        pygame.display.set_caption("Lair Machina: Dungeon")
+        
+        path = './pics/'
+        self.bg = Image(image=path+'floor.jpg',pos=(0,0),scale=(w,h))
+        namepath = self.game.char.name
+        path = './pics/'+ namepath + '/'
+        # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
+        self.character_image = Image(image=path+'profile_img.png',pos=(400,400),scale=(150,150))
+
+
+
 
 
     def handle_event(self,events):

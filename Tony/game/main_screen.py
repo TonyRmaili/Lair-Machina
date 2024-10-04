@@ -14,6 +14,7 @@ from world_generator.generate_world import GenerateWorld
 from world_generator.define_world import save_to_json, room
 import threading
 
+from character import Character
 
 class Game:
     def __init__(self):
@@ -24,6 +25,8 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()
+        
+        self.char = Character()
 
         pygame.display.set_caption("Lair Machina")
 

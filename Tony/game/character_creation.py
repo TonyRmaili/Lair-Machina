@@ -19,7 +19,7 @@ class CreactionScreen:
 
         self.char_menu,self.menu_rect = self.create_char_menu(w,h)
          
-        self.char = Character()
+        self.char = game.char
         self.char.name = 'Traveler'
         self.char.klass = 'Fighter'
         self.char.race = 'Human'
@@ -55,7 +55,7 @@ class CreactionScreen:
         self.char.description = self.description_box.format_lines()
         print(self.char.description)
         # this is the img gen function
-        run_in_thread(self.char.description)
+        run_in_thread(self.char.description, self.char.name)
         self.game.game_mode = 'dungeon'
 
 

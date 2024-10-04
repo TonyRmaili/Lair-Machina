@@ -1,3 +1,6 @@
+import shutil
+import os
+from pathlib import Path 
 
 import json
 from urllib import request
@@ -177,18 +180,46 @@ def queue_prompt(prompt):
     req =  request.Request("http://127.0.0.1:8188/prompt", data=data)
     request.urlopen(req)
 
+def move_and_rename_latest_image(source_folder, destination_folder, new_filename):
+    # Get a list of all image files (jpg, png, etc.) in the source folder
+    image_extensions = ('.png')  # Add more extensions if needed
+    images = [file for file in Path(source_folder).glob('*') if file.suffix.lower() in image_extensions]
 
-def run_in_thread(prompt):
+    # Check if there are any images in the folder
+    if not images:
+        print("No images found in the source folder.")
+        return
+
+    # Find the latest image by modification time
+    latest_image = max(images, key=os.path.getmtime)
+
+    # Ensure the destination folder exists
+    os.makedirs(destination_folder, exist_ok=True)
+
+    # Create the destination path with the new filename and the same extension
+    destination_path = Path(destination_folder) / (new_filename + latest_image.suffix)
+
+    # Move the file (instead of copying)
+    shutil.move(str(latest_image), str(destination_path))
+
+    print(f"Moved and renamed the latest image: {latest_image} to {destination_path}")
+    
+
+def run_in_thread(art_description, character_name):
+    prompt = json.loads(prompt_text)
+    prompt["6"]["inputs"]["text"] = art_description
     # Run the text generation in a separate thread, pass the argument using args
     thread = threading.Thread(target=queue_prompt, args=(prompt,))
     thread.start()
+    
+    move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/', destination_folder=f'./pics/{character_name}', new_filename='profile_img' )
 
 if __name__=='__main__':
+  # this wont happen as the game uses thread
     prompt = json.loads(prompt_text)
     art_description=input("what to generate?")
     #set the text prompt for our positive CLIPTextEncode
     prompt["6"]["inputs"]["text"] = f"{art_description}"
-
+    print(prompt)
     queue_prompt(prompt)
 
-    # folder_path="/home/student/harry_and_tony_project/ComfyUI/output/"
