@@ -5,6 +5,9 @@ from image import Image
 from textarea import TextArea
 from input_text import InputText
 from character import Character
+from settings import custom_theme
+from comfy_prompt import queue_prompt,run_in_thread
+
 
 class CreactionScreen:
     def __init__(self,game,w,h):
@@ -27,8 +30,11 @@ class CreactionScreen:
 
    
     def create_char_menu(self,w,h):
+
+        theme = custom_theme(theme_name='THEME_BLUE')
+
         menu = pygame_menu.Menu('Create Character', w//2, h//2,
-                        theme=pygame_menu.themes.THEME_BLUE,position=(0,0))
+                        theme=theme,position=(0,0))
         
         rect = pygame.Rect(0, 0, w//2, h//2)
         
@@ -48,7 +54,10 @@ class CreactionScreen:
 
         self.char.description = self.description_box.format_lines()
         print(self.char.description)
-        self.game.game_mode = 'menu'
+        # this is the img gen function
+        run_in_thread(self.char.description)
+        self.game.game_mode = 'dungeon'
+
 
 
     def set_name(self,name):

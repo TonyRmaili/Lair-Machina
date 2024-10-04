@@ -8,4 +8,7 @@ class Character:
         self.klass = klass
         self.race = race
         self.description = description
+
+        self.image = None
+
         

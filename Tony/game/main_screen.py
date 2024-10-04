@@ -8,11 +8,11 @@ from button import Button
 from image import Image
 from character_creation import CreactionScreen
 from menu_screen import MenuScreen
-
+from dungeon_screen import DungeonSceen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
 from world_generator.define_world import save_to_json, room
-
+import threading
 
 
 class Game:
@@ -31,6 +31,10 @@ class Game:
 
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
+        self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
+
+
+    
 
     def run(self):
         while True:  
@@ -43,6 +47,9 @@ class Game:
 
             elif self.game_mode == 'creation':
                 self.creation_screen.run(screen=self.screen,events=events)
+
+            elif self.game_mode == 'dungeon':
+                self.dungeon_screen.run(screen=self.screen,events=events)
 
                                       
             pygame.display.flip()           

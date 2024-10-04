@@ -1,13 +1,16 @@
 import pygame
 import pygame_menu
-
+from settings import custom_theme
 
 
 class MenuScreen:
     def __init__(self,game,w,h) -> None:
         self.game = game
+
+        dark_theme = custom_theme()
+
         self.menu = pygame_menu.Menu('Welcome Adventurer', w, h,
-                                     theme=pygame_menu.themes.THEME_DARK)
+                                     theme=dark_theme)
         
         self.menu.add.button('New Game', self.new_game)
         self.menu.add.button('Continue', self.continue_game)
