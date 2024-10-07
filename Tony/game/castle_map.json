@@ -1,0 +1,32 @@
+{
+    "rooms": [
+        {
+            "name": "Door out",
+            "description": "This is the door out.",
+            "connections": {},
+            "special": "exit"
+        },
+        {
+            "name": "Room 1",
+            "description": "This is the first room north of Door in.",
+            "connections": {
+                "north": "Room 2"
+            },
+            "special": null
+        },
+        {
+            "name": "Room 2",
+            "description": "This room is north of Room 1.",
+            "connections": {
+                "east": "Room 3"
+            },
+            "special": null
+        },
+        {
+            "name": "Room 3",
+            "description": "This room is east of Room 2.",
+            "connections": {},
+            "special": "up-floor"
+        }
+    ]
+}

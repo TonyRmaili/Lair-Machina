@@ -43,3 +43,4 @@ class MenuScreen:
         screen.fill('black')
         self.menu.update(events)
         self.menu.draw(screen)
+        

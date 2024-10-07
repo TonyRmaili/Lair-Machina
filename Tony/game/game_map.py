@@ -1,7 +1,10 @@
 
 # TO DO:
-# make floor change dynamic - for move thing - so it 
-# add items to rooms
+
+
+# 1 - make floor change dynamic - for move thing - so it uses a JSON rather then a hardcoded map
+#2  add items to rooms
+
 # add inventory/hp etc screen 
 # import the loot actions from before
 # add the img generation call from before
@@ -14,6 +17,9 @@
 import pygame
 import pygame_menu
 import sys
+
+import time
+
 
 
 # Define a Room class to represent each room
@@ -38,6 +44,20 @@ class GameMap:
         self.WIDTH = 800
         self.HEIGHT = 600
         pygame.init()
+        
+        
+        # Initialize pygame mixer - for music
+        # pygame.mixer.init()
+        pygame.mixer.init(frequency=22050, size=-16, channels=2)
+        
+
+        # Load and play background music (loop indefinitely)
+        pygame.mixer.music.load('sound/The_journey(2).mp3')
+        pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+
+        pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
+        
+        
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()  # Clock object to control the game's framerate
         self.FPS = 60
@@ -47,16 +67,6 @@ class GameMap:
         pygame.font.init()
         # Create a font object. 'None' uses the default font, and 36 is the size
         self.font = pygame.font.Font(None, 36)
-        
-
-
-        # path = './pics/'
-        # self.bg = Image(image=path+'floor.jpg',pos=(0,0),scale=(w,h))
-        # namepath = self.game.char.name
-        # path = './pics/'+ namepath + '/'
-        # # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
-        # self.character_image = Image(image=path+'profile_img.png',pos=(400,400),scale=(150,150))
-
         
         # Game state: track the current room and position in the grid
         self.current_room = None
@@ -68,6 +78,8 @@ class GameMap:
         self.create_rooms()
 
     def create_rooms(self):
+        # This should be replaced with loading from a JSON file or similar  - here we need it use the generated JSONS
+
         # First floor rooms
         door_out = Room('Door out', 'This is the door out.', {}, special='exit')
         room1 = Room('Room 1', 'This is the first room north of Door in.', {})
@@ -274,12 +286,14 @@ class GameMap:
     def run(self,screen,events):
         screen.fill((0, 0, 0))  # Clear the screen with a black background, or choose another color
 
-         # Render the text "Map Mode Active" in white
+        # Render the text "Map Mode Active" in white
         text_surface = self.font.render('Map Mode Active', True, (255, 255, 255))
         # Blit the text surface onto the main screen surface at the calculated position
         screen.blit(text_surface, (0, 0))
         self.display_current_room()
         self.display_map()
+
+
         
         for event in events:
             self.handle_event(event=event)
@@ -290,3 +304,5 @@ class GameMap:
         # self.bg.update(screen=screen)
 
         # self.character_image.update(screen=screen)
+
+
