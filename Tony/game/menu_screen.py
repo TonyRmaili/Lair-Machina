@@ -14,6 +14,10 @@ class MenuScreen:
         
         self.menu.add.button('New Game', self.new_game)
         self.menu.add.button('Continue', self.continue_game)
+
+
+        self.menu.add.button('map', self.game_map)
+
         self.menu.add.button('Load Game', self.load_game)
         self.menu.add.button('Quit', pygame_menu.events.EXIT)
 
@@ -24,8 +28,12 @@ class MenuScreen:
         
 
     def continue_game(self):
-        print('continue game')
-
+        # self.game.game_mode = 'continue'
+        pass
+    
+    def game_map(self):
+        self.game.game_mode = 'map'
+        # print('continue game')
 
     def load_game(self):
         print('load game')
