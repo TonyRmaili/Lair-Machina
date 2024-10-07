@@ -19,7 +19,8 @@ class CreactionScreen:
 
         self.char_menu,self.menu_rect = self.create_char_menu(w,h)
          
-        self.char = game.char
+        self.char = self.game.char
+
         self.char.name = 'Traveler'
         self.char.klass = 'Fighter'
         self.char.race = 'Human'

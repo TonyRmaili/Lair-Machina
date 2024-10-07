@@ -1,77 +1,30 @@
 {
-    "description": "A cozy, well-lit chamber with stone walls and a wooden floor. The air is thick with the scent of old books.",
+    "description": "A cozy, circular room with a domed ceiling, lit by a soft blue glow emanating from luminescent mushrooms growing on the walls.",
     "items": {
-        "bookshelf": {
-            "type": "furniture",
-            "description": "A sturdy wooden bookshelf, adorned with intricate carvings of leaves and vines.",
-            "properties": {
-                "locked": false,
-                "contents": [
-                    "Tomes of Ancient Knowledge",
-                    "The Whispering Winds of Elyria"
-                ]
-            },
-            "interactables": [
-                "examine",
-                "open (if locked)"
-            ]
+        "torch": {
+            "type": "light source",
+            "description": "A torch made of polished wood, set into the wall to provide additional light.",
+            "status": "lit"
         },
-        "fireplace": {
-            "type": "furniture",
-            "description": "A warm, crackling fireplace with a polished stone surround.",
-            "properties": {
-                "lit": false,
-                "fuel": 0
-            },
-            "interactables": [
-                "light",
-                "add fuel (if lit)"
-            ]
+        "parchment scroll": {
+            "type": "document",
+            "description": "An old parchment scroll, yellowed with age, containing a cryptic message.",
+            "status": "rolled up"
         },
-        "window": {
-            "type": "exit",
-            "description": "A small, single-paned window with a view of the surrounding landscape.",
-            "properties": {
-                "locked": false,
-                "view": "a rolling meadow"
-            }
-        },
-        "door": {
-            "type": "exit",
-            "description": "A sturdy wooden door with iron hinges and a large, ornate knocker in the shape of a lion's head.",
-            "properties": {
-                "locked": false,
-                "destination": "the grand hall"
-            }
-        },
-        "rug": {
-            "type": "furniture",
-            "description": "A plush, crimson-colored rug with intricate patterns woven into its surface.",
-            "properties": {
-                "stainless": true
-            }
-        },
-        "chandelier": {
-            "type": "lighting",
-            "description": "A grand, crystal-encrusted chandelier suspended from the ceiling by a network of delicate chains.",
-            "properties": {
-                "lit": false,
-                "num_candles": 0
-            },
-            "interactables": [
-                "light",
-                "add candles (if lit)"
-            ]
+        "golden statue": {
+            "type": "ornamentation",
+            "description": "A gilded statue of an ancient ruler, standing atop a pedestal in the center of the room.",
+            "status": "intact"
         }
     },
     "properties": {
-        "temperature": 22,
-        "humidity": 60,
-        "lighting": "dim"
+        "exit": "north door",
+        "door status": "unlocked",
+        "window status": "open"
     },
     "dimensions": {
-        "width": 12,
-        "length": 10,
-        "height": 8
+        "length": 5,
+        "width": 4,
+        "height": 3
     }
 }

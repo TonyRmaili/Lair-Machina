@@ -3,6 +3,8 @@ import json
 import os
 import time
 import threading
+import matplotlib.pyplot as plt
+
 '''
 order to pass in data
 
@@ -86,6 +88,60 @@ class GenerateWorld:
         with open(room_file_path, "w") as file:
             file.write(resp)
 
+    def dungeon(self):
+        dungeon_blueprint_path = os.path.join(self.current_dir, 'dungeon_blueprint.json')
+        with open(dungeon_blueprint_path, 'r') as f:
+            data = json.load(f)
+        system = data['system']
+        templete = data['templete']
+
+        resp = ollama.generate(
+            model=self.model,
+            system=system,
+            prompt= templete,
+            format='json'
+        )
+
+        resp = resp['response']
+        resp = self.fix_json_string(json_string=resp)
+
+        room_file_path = os.path.join(self.current_dir, "dungeon.json")  
+        with open(room_file_path, "w") as file:
+            file.write(resp)
+
+
+    def extract_dungeon_coords(self):
+        dungeon_path = os.path.join(self.current_dir, 'dungeon.json')
+        with open(dungeon_path, 'r') as f:
+            data = json.load(f)
+
+        return data['rooms']
+    
+
+
+    def plot_dungeon(self):
+        rooms = self.extract_dungeon_coords()
+        fig, ax = plt.subplots()
+
+        # Plot each room
+        for i, room in enumerate(rooms):
+            x, y = room['coordinates']
+            ax.plot(x, y, 'bo')  # plot the room as a blue dot
+            ax.text(x, y, f'Room {i+1}', fontsize=9, ha='right')  # label the room
+
+            # Plot passage connections (straight lines between rooms)
+            if i > 0:
+                prev_x, prev_y = rooms[i-1]['coordinates']
+                ax.plot([prev_x, x], [prev_y, y], 'k-', lw=1)  # draw line between current and previous room
+
+        # Setting up the plot limits and grid
+        ax.set_xlim(-1, 9)
+        ax.set_ylim(-6, 2)
+        ax.grid(True)
+        ax.set_title("Dungeon Map")
+
+        plt.show()
+
     def fix_json_string(self, json_string):
         try:
             json_data = json.loads(json_string)
@@ -121,8 +177,16 @@ if __name__=='__main__':
 
 
     # world.run()
-    world.room()
+    # world.room()
 
+    world.dungeon()
+
+    # rooms = world.plot_dungeon()
+
+    # rooms = world.extract_dungeon_coords()
+
+    # for room in rooms:
+    #     print(f'coords: {room['coordinates']} | passages: {room['passages']}' )
 
     end_time = time.time()
     execution_time = end_time - start_time

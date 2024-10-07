@@ -2,6 +2,78 @@ import json
 import sys
 import os
 
+
+def save_to_json(data, file_name):
+    current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
+    file_path = os.path.join(current_dir, file_name)  # Construct the full path within world_gen
+    
+    with open(file_path, 'w') as f:  # Use file_path instead of file_name
+        json.dump(data, f, indent=4)
+
+    return file_path  # Optional: return the file path for confirmation
+
+
+
+dungeon_templete = {
+    'theme': str,  # The theme of the dungeon, e.g., "Ancient Ruins"
+    'description': str,  # A vivid description of the overall dungeon
+
+    'rooms': '''[
+        {
+            'id': int,  # Unique identifier for the room, e.g., 1, 2, 3...
+            'description': str,  # Detailed room description
+            'name': str # Room name derived from the description
+            'passages': str,  # Passageways description (how it connects to other rooms)
+            'items': [
+                {
+                    'name': str,  # Name of the item, e.g., "Ancient Sword"
+                    'description': str  # Description of the item, e.g., "A rusty sword that hums with ancient magic."
+                }
+            ],
+            'dimensions': (int, int),  # Room dimensions in terms of (length, width), e.g., (10, 20)
+            'coordinates': (int, int),  # X, Y coordinates of the room, e.g., (0, 2) and (1,2)
+            'properties': list,  # List of unique properties of the room, e.g., ['dark', 'trapped']
+            'secrets': str  # Description of any hidden elements, e.g., "A hidden trapdoor beneath the carpet"
+        }
+    ]'''
+}
+
+
+dungeon_system = {
+
+    'system': '''
+You are an expert Dungeon Master tasked with creating a fully realized dungeon for a Dungeons and Dragons-style adventure. The dungeon should be generated with a specific theme that fits the game's tone. Please fill in the template provided with detailed descriptions and creative elements. Here are the requirements:
+
+1.Dungeon Theme: Choose a fitting theme for the dungeon, such as an ancient ruin, cursed castle, or dark cave.
+
+2.Dungeon Description: Provide a vivid, atmospheric description of the dungeon that sets the tone for the adventure. Mention key features like architecture, lighting, and general mood.
+
+3.Rooms: Generate between 4 to 10 interconnected rooms, each with its own unique description. For each room, include:
+    ID: A unique identifier number.
+    Room name: name of the room fitting to its description
+    Room Description: A vivid and immersive description, highlighting key features and atmosphere.
+    Dimensions: Specify the approximate size of the room (in feet or meters).
+    Coordinates: Provide the coordinates for the room on a 2D grid (x, y).
+    Passageways: Describe the passageways that connect this room to others. These could include doors, hallways, hidden tunnels, or magical portals.
+    Items: Generate a list of items present in the room. Each item should include:
+    Name: A descriptive name (e.g., "Ancient Sword," "Healing Potion").
+    Description: A short description explaining the item's appearance, history, or magical properties.
+    Properties: Include unique properties or characteristics of the room, such as traps, environmental hazards, magical effects, or secret areas.
+    Secrets: If applicable, describe any hidden elements, such as secret doors, concealed traps, or hidden treasures.
+
+4.Room Connections: Ensure that each room is interconnected with logical passageways that lead to other rooms. The dungeon should feel cohesive and follow a natural flow between rooms.
+
+5.Room Count: The dungeon should contain between 4 and 10 rooms, each with its own distinct layout and features.
+
+Be as creative as possible with the descriptions and consider unique, unexpected elements to make the dungeon engaging and challenging.
+NEVER generate something that does not fit the templete description such as "you have reached the end of the dungeon"
+Respond using JSON.
+''',
+
+'templete': f'Using the following template, generate a dungeon with all these details {dungeon_templete}'
+
+}
+
 readable_data = {
     'system': '''You are an advanced AI responsible for constructing a rich, detailed, and cohesive high-fantasy world.
                 Your role is to be the architect, generating lore, characters, settings, and other world elements while maintaining consistency and depth.
@@ -60,7 +132,6 @@ data = {
     'landscapes': '''Generate descriptions of varied landscapes, from towering mountains and sprawling deserts to magical forests and eerie wastelands. Each landscape should have distinct geographical features, climate, and ecosystem. Include unique phenomena such as enchanted rivers, cursed swamps, or magical volcanoes. The landscapes should influence the world's history, civilizations, and resources.''', 
 }
 
-
 room ={"system": '''
 You are tasked with generating a detailed room based on the user's description. 
 Your response must fill in the following JSON fields: description, items, properties, and dimensions. 
@@ -79,22 +150,10 @@ Respond using JSON.
 
 
 
-import os
-import json
-
-def save_to_json(data, file_name):
-    current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
-    file_path = os.path.join(current_dir, file_name)  # Construct the full path within world_gen
-    
-    with open(file_path, 'w') as f:  # Use file_path instead of file_name
-        json.dump(data, f, indent=4)
-
-    return file_path  # Optional: return the file path for confirmation
-
-
 
 if __name__=='__main__':
     file = 'world_blueprint.json'
     room_file = 'room_blueprint.json'
+    dungeon_file = 'dungeon_blueprint.json'
 
-    save_to_json(room,room_file)
+    save_to_json(dungeon_system,dungeon_file)

@@ -3,8 +3,6 @@ import sys
 from image import Image
 
 
-
-
 class DungeonSceen:
     def __init__(self,game,w,h):
         self.game = game
@@ -16,10 +14,7 @@ class DungeonSceen:
         namepath = self.game.char.name
         path = './pics/'+ namepath + '/'
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
-        self.character_image = Image(image=path+'profile_img.png',pos=(400,400),scale=(150,150))
-
-
-
+        self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(400,400),scale=(150,150))
 
 
     def handle_event(self,events):
