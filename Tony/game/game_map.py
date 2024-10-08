@@ -1,9 +1,13 @@
 
 # TO DO:
 
+# 1 - make possible to do ollama calls in the game
 
-# 1 - make floor change dynamic - for move thing - so it uses a JSON rather then a hardcoded map
-#2  add items to rooms
+
+
+
+#  - make floor change dynamic - for move thing - so it uses a JSON rather then a hardcoded map
+#  add items to rooms
 
 # add inventory/hp etc screen 
 # import the loot actions from before
@@ -44,6 +48,18 @@ class GameMap:
         self.WIDTH = 800
         self.HEIGHT = 600
         pygame.init()
+
+
+        # test LLM calls
+        # TESTING: Set up the input box for LLM calls
+        self.input_box = pygame.Rect(100, 550, 600, 40)  # Position and size of the input box
+        self.color_inactive = pygame.Color('lightskyblue3')
+        self.color_active = pygame.Color(255, 0, 0)
+        self.color = self.color_inactive
+        self.active = False
+        self.text = ''
+        self.done = False
+        self.output_text = ''
         
         
         # Initialize pygame mixer - for music
@@ -76,6 +92,11 @@ class GameMap:
 
         # Create rooms and set up the initial floor
         self.create_rooms()
+
+
+
+
+
 
     def create_rooms(self):
         # This should be replaced with loading from a JSON file or similar  - here we need it use the generated JSONS
@@ -282,6 +303,28 @@ class GameMap:
                     self.trigger_down_floor()
                 else:
                     print("There's nothing special here.")
+        # testing for LLaMA calls
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(f"{self.input_box.collidepoint(event.pos)}")
+            # If the user clicked on the input_box rect.
+            if self.input_box.collidepoint(event.pos):
+                # Toggle the active variable.
+                self.active = not self.active
+            else:
+                self.active = False
+            # Change the current color of the input box.
+            self.color = self.color_active if self.active else self.color_inactive
+            print(self.color)
+        if event.type == pygame.KEYDOWN:
+            if self.active:
+                if event.key == pygame.K_RETURN:
+                    self.output_text = self.text  # Here you can call your LLaMA function
+                    self.text = ''  # Clear input text
+                elif event.key == pygame.K_BACKSPACE:
+                    self.text = self.text[:-1]
+                else:
+                    self.text += event.unicode
+
 
     def run(self,screen,events):
         screen.fill((0, 0, 0))  # Clear the screen with a black background, or choose another color
@@ -292,6 +335,28 @@ class GameMap:
         screen.blit(text_surface, (0, 0))
         self.display_current_room()
         self.display_map()
+        
+        
+
+
+        font = pygame.font.Font(None, 32)  # Default font of size 32
+        # screen.fill((30, 30, 30))
+        # Render the current text.
+        txt_surface = font.render(self.text, True, self.color)
+        # Resize the box if the text is too long.
+        width = max(200, txt_surface.get_width()+10)
+        self.input_box.w = width
+        # Blit the text.
+        screen.blit(txt_surface, (self.input_box.x+5, self.input_box.y+5))
+
+        # Display the output text
+        output_surface = font.render(self.output_text, True, pygame.Color('white'))
+        screen.blit(output_surface, (100, 500))  # Position the output text above the input box
+        # Blit the input_box rect.
+        pygame.draw.rect(screen, self.color, self.input_box, 2)
+
+        pygame.display.flip()
+
 
 
         
