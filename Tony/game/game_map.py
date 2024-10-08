@@ -24,6 +24,10 @@ import sys
 
 import time
 
+import threading
+
+sys.path.append('../function_calls/')  # Adjust the path
+from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 
 
 # Define a Room class to represent each room
@@ -318,7 +322,11 @@ class GameMap:
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
-                    self.output_text = self.text  # Here you can call your LLaMA function
+                    
+                    ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json') #room_file='room_json.json'
+                    ollama_text_output = ollama_instance.activate_functions()
+                    self.output_text = ollama_text_output
+                    # self.output_text = self.text  # Here you can call your LLaMA function
                     self.text = ''  # Clear input text
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
