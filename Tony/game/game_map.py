@@ -322,7 +322,8 @@ class GameMap:
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
-                    
+                    # WORKS - BUT NEEDS TO HAVE A GOOD JSON FILE TO USE. 
+                    # ALSO need to handle the output better - if it is a skill check or something > maybe it will always be text as long as it is structured right (LLM > skill check > LLM flavor text (from check + action) 
                     ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json') #room_file='room_json.json'
                     ollama_text_output = ollama_instance.activate_functions()
                     self.output_text = ollama_text_output
