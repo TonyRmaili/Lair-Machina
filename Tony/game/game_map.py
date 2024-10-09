@@ -286,18 +286,6 @@ class GameMap:
 
 
 
-    # def call_ollama(self, screen):
-    #     ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json')
-    #     ollama_text_output = ollama_instance.activate_functions()
-        
-    #     # Store the response in output_text when it's ready
-    #     # self.output_text = ollama_text_output
-    #     self.output_text = "YOLYOYLYOYLYOLYOL"
-    #     font = pygame.font.Font(None, 32)  # Default font of size 32
-
-    #     # Render the output text from Ollama tool
-    #     output_surface = font.render(self.output_text, True, pygame.Color('white'))
-    #     screen.blit(output_surface, (100, 500))  # Display above the input box
     def call_ollama(self, screen):
         ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json')
         ollama_text_output = ollama_instance.activate_functions()
@@ -353,21 +341,9 @@ class GameMap:
             if self.active:                    
                 # start the thread when Enter is pressed
                 if event.key == pygame.K_RETURN:
-                    self.call_ollama(screen)
-                    # self.text = ''  # Clear the input
-                    # threading.Thread(target=self.call_ollama()).start()  # Call Ollama in a separate thread
                     # WORKS - BUT NEEDS TO HAVE A GOOD JSON FILE TO USE. 
                     # ALSO need to handle the output better - if it is a skill check or something > maybe it will always be text as long as it is structured right (LLM > skill check > LLM flavor text (from check + action) 
-                    # ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json') #room_file='room_json.json'
-                    
-                    # ollama_text_output = ollama_instance.activate_functions()
-                    # input(ollama_text_output)
-                    # self.output_text = ollama_text_output
-                    # print(self.text)
-                    # print(self.output_text)
-                    
-                    # self.render_ollama_tool_respons(screen)
-                    # self.output_text = self.text  # Here you can call your LLaMA function
+                    self.call_ollama(screen)                    
                     self.text = ''  # Clear input text
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
@@ -375,16 +351,6 @@ class GameMap:
                     self.text += event.unicode
 
 
-        #MAYBE TRHOW AWAY - display input box 
-        # font = pygame.font.Font(None, 32)  # Default font of size 32
-        # # screen.fill((30, 30, 30))
-        # # Render the current text.
-        # txt_surface = font.render(self.text, True, self.color)
-        # # Resize the box if the text is too long.
-        # width = max(200, txt_surface.get_width()+10)
-        # self.input_box.w = width
-        # # Blit the text.
-        # screen.blit(txt_surface, (self.input_box.x+5, self.input_box.y+5))
 
     def wrap_text(self, text, font, max_width):
         """Splits the text into lines that fit within the max_width."""
@@ -446,149 +412,6 @@ class GameMap:
         # Update the display
         pygame.display.flip()
         
-    # def draw_text(screen, text, font, color, rect, aa=False, bkg=None):
-    #     # Create a list of lines for word wrapping
-    #     lines = []
-    #     words = text.split(' ')
-    #     space_width, _ = font.size(' ')
-    #     max_width = rect.width
-
-    #     # Wrap text by splitting words and fitting them into lines
-    #     current_line = []
-    #     current_width = 0
-    #     for word in words:
-    #         word_surface = font.size(word)[0]
-    #         if current_width + word_surface + space_width > max_width:
-    #             lines.append(' '.join(current_line))
-    #             current_line = [word]
-    #             current_width = word_surface
-    #         else:
-    #             current_line.append(word)
-    #             current_width += word_surface + space_width
-    #     if current_line:
-    #         lines.append(' '.join(current_line))
-
-    #     # Now render the text line by line
-    #     y = rect.top
-    #     for line in lines:
-    #         line_surface = font.render(line, aa, color, bkg)
-    #         screen.blit(line_surface, (rect.left, y))
-    #         y += font.get_linesize()
-
-    # def wrap_text(self, text, font, max_width):
-    #     """Splits the text into lines that fit within the max_width."""
-    #     words = text.split(' ')
-    #     lines = []
-    #     current_line = []
-    #     current_width = 0
-
-    #     # Measure each word's width and add it to the current line
-    #     for word in words:
-    #         word_width, _ = font.size(word + ' ')  # Measure width of word + space
-    #         if current_width + word_width > max_width:
-    #             # If adding the word exceeds max_width, start a new line
-    #             lines.append(' '.join(current_line))
-    #             current_line = [word]
-    #             current_width = word_width
-    #         else:
-    #             current_line.append(word)
-    #             current_width += word_width
-
-    #     # Add the last line if any words remain
-    #     if current_line:
-    #         lines.append(' '.join(current_line))
-
-    #     return lines
-
-    # def display_text_input_box(self, screen):
-    #     font = pygame.font.Font(None, 20)  # Font size 20 for wrapping
-    #     rect = pygame.Rect(100, 400, 600, 100)  # Define the text box area (width 600, height 100)
-        
-    #     # Wrap the output text
-    #     wrapped_text_lines = self.wrap_text(self.output_text, font, rect.width)
-
-    #     # Render each line of the wrapped text
-    #     y_offset = rect.y
-    #     for line in wrapped_text_lines:
-    #         output_surface = font.render(line, True, pygame.Color('white'))
-    #         screen.blit(output_surface, (rect.x, y_offset))  # Display above the input box
-    #         y_offset += font.get_linesize()  # Move down to render the next line
-
-    #     # Render the input text (no wrapping)
-    #     input_surface = font.render(self.text, True, pygame.Color('white'))
-    #     screen.blit(input_surface, (self.input_box.x + 5, self.input_box.y + 5))  # Display inside input box
-
-    #     # Blit the input box rectangle with the text inside
-    #     pygame.draw.rect(screen, self.color, self.input_box, 2)
-
-    #     # Update the display
-    #     pygame.display.flip()
-        
-    
-    # def display_text_input_box(self, screen):
-    #     # Fill the screen with black
-    #     # screen.fill((0, 0, 0))
-    #     font = pygame.font.Font(None, 20)  # Default font of size 32
-
-    #     # Render the output text from Ollama tool
-    #     output_surface = font.render(self.output_text, True, pygame.Color('white'))
-    #     screen.blit(output_surface, (100, 500))  # Display above the input box
-        
-    #     # Render the current input text
-    #     input_surface = font.render(self.text, True, pygame.Color('white'))
-    #     screen.blit(input_surface, (self.input_box.x + 5, self.input_box.y + 5))  # Display inside input box
-
-    #     # Blit the input box rectangle with the text inside
-    #     pygame.draw.rect(screen, self.color, self.input_box, 2)
-
-    #     # Update the display with the new drawing
-    #     pygame.display.flip()
-
-
-    # def display_text_input_box(self, screen):
-    #     font = pygame.font.Font(None, 20)  # Font size 20 for wrapping
-    #     rect = pygame.Rect(100, 400, 600, 100)  # Define the box area (width 600, height 100)
-        
-    #     # Display the output text in a wrapped format
-    #     self.draw_text(screen, self.output_text, font, pygame.Color('white'), rect)
-        
-    #     # Render the input text (doesn't need wrapping)
-    #     input_surface = font.render(self.text, True, pygame.Color('white'))
-    #     screen.blit(input_surface, (self.input_box.x + 5, self.input_box.y + 5))  # Display inside input box
-
-    #     # Blit the input box rectangle
-    #     pygame.draw.rect(screen, self.color, self.input_box, 2)
-        
-    #     pygame.display.flip()
-
-
-
-
-
-
-    # def render_ollama_tool_respons(self, screen, output_text):
-    #     font = pygame.font.Font(None, 32)  # Default font of size 32
-    #     # Display the output text
-    #     output_surface = font.render(self.output_text, True, pygame.Color('white'))
-    #     screen.blit(output_surface, (200, 600))  # Position the output text above the input box
-    #     # Blit the input_box rect.
-    #     pygame.draw.rect(screen, self.color, self.input_box, 2)
-
-    #     pygame.display.flip()
-
-
-    # def render_ollama_tool_respons(self, screen):
-    #     font = pygame.font.Font(None, 32)  # Default font of size 32
-
-    #     # Ensure that self.output_text is not empty or None
-    #     if self.output_text:
-    #         # Render the output text on the screen
-    #         output_surface = font.render(self.output_text, True, pygame.Color('white'))
-    #         screen.blit(output_surface, (200, 600))  # Display the text at position (200, 600)
-
-    #     # Update the display (called once here after drawing everything)
-    #     pygame.display.flip()
-
     
 
 
