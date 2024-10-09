@@ -2,7 +2,24 @@
     "rooms": [
         {
             "name": "Door out",
-            "description": "This is the door out.",
+            "description": "A cozy, circular room with stone walls and a high ceiling. The hallway to the castle, with the large door that is the main entrence to the castle.",
+            "items": [
+                {
+                    "name": "aquarium",
+                    "description": "glass box full of water",
+                    "properties": {
+                        "interact": true,
+                        "examine": true
+                    }
+                }
+            ],
+            "properties": {
+                "lighting": "dimmly lit"
+            },
+            "dimensions": {
+                "height": 3.0,
+                "radius": 4.0
+            },
             "connections": {},
             "special": "exit"
         },
