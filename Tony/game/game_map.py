@@ -286,8 +286,12 @@ class GameMap:
             text_surface = font.render(row_text, True, (255, 255, 255))
             self.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
-    
+        
     def make_speeach(self):
+        """
+        Uses TTS to make speech out of the next text prompt- probably good to have this activate on a button/option as it is quite slow for large texts 
+        - also maybe add the speed thing after (se harry folder), quite slow reading for large texts 
+        """
         # Initialize the model
         tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
 
