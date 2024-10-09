@@ -39,6 +39,7 @@ class Room:
         self.description = description  # Room description
         self.connections = connections  # Dictionary mapping directions (e.g., 'north') to connected rooms
         self.special = special  # Special feature (e.g., 'exit', 'up-floor', 'down-floor')
+        # self.output_text ='DEBUGG'
 
 
 class GameMap:
@@ -284,7 +285,36 @@ class GameMap:
 
 
 
-    def handle_event(self, event):
+
+    # def call_ollama(self, screen):
+    #     ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json')
+    #     ollama_text_output = ollama_instance.activate_functions()
+        
+    #     # Store the response in output_text when it's ready
+    #     # self.output_text = ollama_text_output
+    #     self.output_text = "YOLYOYLYOYLYOLYOL"
+    #     font = pygame.font.Font(None, 32)  # Default font of size 32
+
+    #     # Render the output text from Ollama tool
+    #     output_surface = font.render(self.output_text, True, pygame.Color('white'))
+    #     screen.blit(output_surface, (100, 500))  # Display above the input box
+    def call_ollama(self, screen):
+        ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json')
+        ollama_text_output = ollama_instance.activate_functions()
+
+        # Debugging: Check what ollama_text_output is
+        print(f"Ollama Output: {ollama_text_output}")
+
+        self.output_text = ollama_text_output  # Try assigning it
+        font = pygame.font.Font(None, 32)  # Default font of size 32
+
+        # Render the output text from Ollama tool
+        output_surface = font.render(self.output_text, True, pygame.Color('white'))
+        screen.blit(output_surface, (100, 500))  # Display above the input box
+
+
+
+    def handle_event(self, event, screen):
         # keys for player navigation
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
@@ -320,19 +350,94 @@ class GameMap:
             self.color = self.color_active if self.active else self.color_inactive
             print(self.color)
         if event.type == pygame.KEYDOWN:
-            if self.active:
+            if self.active:                    
+                # start the thread when Enter is pressed
                 if event.key == pygame.K_RETURN:
+                    self.call_ollama(screen)
+                    # self.text = ''  # Clear the input
+                    # threading.Thread(target=self.call_ollama()).start()  # Call Ollama in a separate thread
                     # WORKS - BUT NEEDS TO HAVE A GOOD JSON FILE TO USE. 
                     # ALSO need to handle the output better - if it is a skill check or something > maybe it will always be text as long as it is structured right (LLM > skill check > LLM flavor text (from check + action) 
-                    ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json') #room_file='room_json.json'
-                    ollama_text_output = ollama_instance.activate_functions()
-                    self.output_text = ollama_text_output
+                    # ollama_instance = OllamaToolCall(messages=self.text, room_file='castle_map.json') #room_file='room_json.json'
+                    
+                    # ollama_text_output = ollama_instance.activate_functions()
+                    # input(ollama_text_output)
+                    # self.output_text = ollama_text_output
+                    # print(self.text)
+                    # print(self.output_text)
+                    
+                    # self.render_ollama_tool_respons(screen)
                     # self.output_text = self.text  # Here you can call your LLaMA function
                     self.text = ''  # Clear input text
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
                     self.text += event.unicode
+
+
+        #MAYBE TRHOW AWAY - display input box 
+        # font = pygame.font.Font(None, 32)  # Default font of size 32
+        # # screen.fill((30, 30, 30))
+        # # Render the current text.
+        # txt_surface = font.render(self.text, True, self.color)
+        # # Resize the box if the text is too long.
+        # width = max(200, txt_surface.get_width()+10)
+        # self.input_box.w = width
+        # # Blit the text.
+        # screen.blit(txt_surface, (self.input_box.x+5, self.input_box.y+5))
+
+
+    def display_text_input_box(self, screen):
+        # Fill the screen with black
+        # screen.fill((0, 0, 0))
+        font = pygame.font.Font(None, 32)  # Default font of size 32
+
+        # Render the output text from Ollama tool
+        output_surface = font.render(self.output_text, True, pygame.Color('white'))
+        screen.blit(output_surface, (100, 500))  # Display above the input box
+        
+        # Render the current input text
+        input_surface = font.render(self.text, True, pygame.Color('white'))
+        screen.blit(input_surface, (self.input_box.x + 5, self.input_box.y + 5))  # Display inside input box
+
+        # Blit the input box rectangle with the text inside
+        pygame.draw.rect(screen, self.color, self.input_box, 2)
+
+        # Update the display with the new drawing
+        pygame.display.flip()
+
+
+
+
+
+
+
+
+
+    # def render_ollama_tool_respons(self, screen, output_text):
+    #     font = pygame.font.Font(None, 32)  # Default font of size 32
+    #     # Display the output text
+    #     output_surface = font.render(self.output_text, True, pygame.Color('white'))
+    #     screen.blit(output_surface, (200, 600))  # Position the output text above the input box
+    #     # Blit the input_box rect.
+    #     pygame.draw.rect(screen, self.color, self.input_box, 2)
+
+    #     pygame.display.flip()
+
+
+    # def render_ollama_tool_respons(self, screen):
+    #     font = pygame.font.Font(None, 32)  # Default font of size 32
+
+    #     # Ensure that self.output_text is not empty or None
+    #     if self.output_text:
+    #         # Render the output text on the screen
+    #         output_surface = font.render(self.output_text, True, pygame.Color('white'))
+    #         screen.blit(output_surface, (200, 600))  # Display the text at position (200, 600)
+
+    #     # Update the display (called once here after drawing everything)
+    #     pygame.display.flip()
+
+    
 
 
     def run(self,screen,events):
@@ -344,37 +449,24 @@ class GameMap:
         screen.blit(text_surface, (0, 0))
         self.display_current_room()
         self.display_map()
+        self.display_text_input_box(screen)
         
-        
+        # For testing
+        # self.output_text = "This is a test output from Ollama."
 
+        # Test output text rendering
+        # self.render_ollama_tool_respons(screen)
+                
 
-        font = pygame.font.Font(None, 32)  # Default font of size 32
-        # screen.fill((30, 30, 30))
-        # Render the current text.
-        txt_surface = font.render(self.text, True, self.color)
-        # Resize the box if the text is too long.
-        width = max(200, txt_surface.get_width()+10)
-        self.input_box.w = width
-        # Blit the text.
-        screen.blit(txt_surface, (self.input_box.x+5, self.input_box.y+5))
-
-        # Display the output text
-        output_surface = font.render(self.output_text, True, pygame.Color('white'))
-        screen.blit(output_surface, (100, 500))  # Position the output text above the input box
-        # Blit the input_box rect.
-        pygame.draw.rect(screen, self.color, self.input_box, 2)
-
-        pygame.display.flip()
 
 
 
         
         for event in events:
-            self.handle_event(event=event)
+            self.handle_event(event=event, screen=screen)
+                
         
-        
-        
-        
+        # pygame.display.flip()
         # self.bg.update(screen=screen)
 
         # self.character_image.update(screen=screen)

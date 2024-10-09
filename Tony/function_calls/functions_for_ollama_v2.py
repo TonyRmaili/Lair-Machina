@@ -52,7 +52,7 @@ import random
 # need to add current location as arg
 def look_at_room(current_location):
     #make dynamic  - like = current location instead
-    room_file='room_json.json'    
+    room_file='castle_map.json'    
     # Load room from file
     with open(room_file, 'r') as file:
         room_json = json.load(file)
@@ -72,7 +72,6 @@ def look_at_room(current_location):
     )
 
     room_intro = response['message']['content']
-    
     return room_intro
         
 def ask_stuff(player_question):
@@ -110,7 +109,7 @@ def ask_stuff(player_question):
 # Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
 def loot_item_from_room(item_name: str):
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-    room_file='room_json.json'    
+    room_file='castle_map.json'    
     # Load room from file
     with open(room_file, 'r') as file:
         room_json = json.load(file)
@@ -137,7 +136,7 @@ def loot_item_from_room(item_name: str):
         
         print(f"{item_name} has been removed from the room.")
         # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-        inventory_file='character_inventory.json'    
+        inventory_file='inventory_json.json'    
         # Load room from file
         with open(inventory_file, 'r') as file:
             inventory_json = json.load(file)
@@ -160,7 +159,7 @@ def loot_item_from_room(item_name: str):
 def leave_item_from_inventory_in_room(item_name: str):
     
     
-    inventory_file='character_inventory.json'    
+    inventory_file='inventory_json.json'    
     # Load inventory from file
     with open(inventory_file, 'r') as file:
         inventory_json = json.load(file)
@@ -191,7 +190,7 @@ def leave_item_from_inventory_in_room(item_name: str):
 
     ### ADDS ITEM REMOVED FROM INVENTORY TO ROOM JSON ###
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-    room_file='room_json.json'    
+    room_file='castle_map.json'    
     # Load room from file
     with open(room_file, 'r') as file:
         room_json = json.load(file)

@@ -121,7 +121,9 @@ class OllamaToolCall:
             if name in all_functions:
                 print(f'function {name} with args {args}')
                 # Call the function with the room JSON context ### add room_json=self.room_json
-                print(all_functions[name](**args))
+                result = all_functions[name](**args)
+                print(result)
+                return result
            
 
 if __name__ == '__main__':
