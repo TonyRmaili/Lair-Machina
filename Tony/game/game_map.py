@@ -18,6 +18,9 @@
 ###make combat loop###
 # add monsters, call for initative, combat mode etc
 
+from TTS.api import TTS
+
+
 import pygame
 import pygame_menu
 import sys
@@ -283,6 +286,13 @@ class GameMap:
             text_surface = font.render(row_text, True, (255, 255, 255))
             self.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
+    
+    def make_speeach(self):
+        # Initialize the model
+        tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
+
+        # Convert text to speech and save it to a file
+        tts.tts_to_file(text=f"{self.output_text}", file_path="./output.wav")
 
 
 
@@ -299,6 +309,13 @@ class GameMap:
         # Render the output text from Ollama tool
         output_surface = font.render(self.output_text, True, pygame.Color('white'))
         screen.blit(output_surface, (100, 500))  # Display above the input box
+        
+        self.make_speeach()
+        # Load and play the .wav file
+        output_file = "./output.wav"
+        voice_over = pygame.mixer.Sound(output_file)
+        voice_over.play()
+
 
 
 
@@ -412,7 +429,6 @@ class GameMap:
         # Update the display
         pygame.display.flip()
         
-    
 
 
     def run(self,screen,events):
