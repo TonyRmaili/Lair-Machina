@@ -38,7 +38,6 @@ dungeon_templete = {
     ]'''
 }
 
-
 dungeon_system = {
 
     'system': '''
@@ -73,6 +72,7 @@ Respond using JSON.
 'templete': f'Using the following template, generate a dungeon with all these details {dungeon_templete}'
 
 }
+
 
 readable_data = {
     'system': '''You are an advanced AI responsible for constructing a rich, detailed, and cohesive high-fantasy world.
@@ -155,5 +155,6 @@ if __name__=='__main__':
     file = 'world_blueprint.json'
     room_file = 'room_blueprint.json'
     dungeon_file = 'dungeon_blueprint.json'
+    
 
     save_to_json(dungeon_system,dungeon_file)

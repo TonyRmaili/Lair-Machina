@@ -1,230 +1,181 @@
 {
-    "theme": "Ancient Ruin",
-    "description": "The ancient ruin lies shrouded in a perpetual twilight, as if the very sun itself had abandoned this forsaken place. The air is thick with the scent of damp earth and decay. Overgrown vines creep through broken windows and doorways, as if nature itself sought to reclaim this crumbling edifice.",
+    "theme": "Abandoned Underwater Research Facility",
+    "description": "The underwater research facility was once a hub of scientific discovery and innovation. However, after a catastrophic accident that left the facility on the brink of collapse, it was abandoned and left to decay. The once-state-of-the-art equipment now lies in disarray, and the eerie silence is only broken by the creaking of twisted metal and the faint whispers of the past.",
     "rooms": [
         {
             "id": 1,
-            "description": "The grand entrance hall, a once-majestic space now reclaimed by the encroaching jungle.",
-            "name": "Entrance Hall",
-            "passages": "A large wooden door with intricate carvings leads to Room #2. A hidden passage behind the stone tapestry connects to Room #5.",
+            "name": "Reception Area",
+            "battle_map": "more opt for comfy generation",
+            "description": "A small, dimly lit reception area with a worn-out couch and a single, flickering light bulb. A large wooden counter stands opposite the entrance, with several broken computer terminals and a shattered glass window.",
+            "passages": "The only passage out of this room leads to Room 2.",
             "items": [
-                {
-                    "name": "The Last Chronicle of Eldrador",
-                    "description": "An ancient tome bound in worn leather, its pages yellowed by time."
+                { 
+                    "name": "Lost Logbook",
+                    "description": "A torn and dog-eared logbook belonging to one of the facility's researchers. The pages are filled with cryptic notes and diagrams, but a few entries seem to hint at a desperate attempt to warn others about an impending disaster."
                 }
             ],
-            "dimensions": [
-                20,
-                30
-            ],
-            "coordinates": [
-                -1,
-                -1
-            ],
+            "dimensions": "(10, 15)",
+            "coordinates": "(0, 0)",
             "properties": [
-                "dimly lit",
-                "overgrown"
+                "flickering light"
             ],
             "secrets": null
         },
         {
             "id": 2,
-            "description": "A narrow corridor lined with dusty portraits and flickering torches.",
-            "name": "Gallery Corridor",
-            "passages": "A door made of solid oak leads to Room #1. A narrow staircase descends into darkness, potentially leading to Room #6.",
+            "name": "Lab Area",
+            "description": "A large laboratory filled with rows of workstations and various scientific equipment. The walls are lined with shelves containing dusty jars, beakers, and other forgotten supplies.",
+            "passages": "The passage from Room 1 leads to a door that now hangs off its hinges. To the left is a dark corridor leading deeper into the facility (Room 3).",
             "items": [
                 {
-                    "name": "The Portrait of a Forgotten Queen",
-                    "description": "A faded portrait of a once-beautiful queen, her eyes seeming to follow those who gaze upon it."
+                    "name": "Disused Microscope",
+                    "description": "A broken microscope with a cracked lens and loose screws. It looks like it hasn't been used in years."
+                },
+                {
+                    "name": "Faded Diagrams",
+                    "description": "Several faded diagrams on the walls, depicting various scientific experiments and theories. One of them seems to be a crude illustration of an underwater vortex."
                 }
             ],
-            "dimensions": [
-                10,
-                5
-            ],
-            "coordinates": [
-                -1,
-                0
-            ],
+            "dimensions": "(20, 15)",
+            "coordinates": "(5, 0)",
             "properties": [
-                "flickering torches",
-                "narrow"
+                "dark",
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 3,
-            "description": "A large chamber filled with ancient artifacts and mysterious devices.",
-            "name": "The Repository",
-            "passages": "A door hidden behind a tapestry leads to Room #7. A series of cryptic symbols etched into the wall potentially reveal a secret passage to Room #8.",
+            "name": "Dark Corridor",
+            "description": "A narrow, dimly lit corridor with cold concrete walls and flickering fluorescent lights. The air is thick with the smell of decay and neglect.",
+            "passages": "The passage from Room 2 leads to a door that appears to be locked (Room 4). To the right is another dark corridor leading deeper into the facility (Room 5).",
             "items": [
                 {
-                    "name": "The Celestial Clockwork",
-                    "description": "An intricate device consisting of gears, cogs, and glittering gemstones that seem to move in harmony with the stars."
+                    "name": "Waterlogged Toolbox",
+                    "description": "A rusty toolbox half-submerged in water, with tools and equipment scattered all over the floor."
                 }
             ],
-            "dimensions": [
-                25,
-                15
-            ],
-            "coordinates": [
-                -1,
-                -3
-            ],
+            "dimensions": "(10, 5)",
+            "coordinates": "(15, -2)",
             "properties": [
-                "dimly lit",
-                "treacherous"
+                "dark",
+                "confined space"
             ],
-            "secrets": "A hidden compartment within the Celestial Clockwork device contains a small note with cryptic instructions."
+            "secrets": null
         },
         {
             "id": 4,
-            "description": "A musty room filled with old texts, scrolls, and forbidden knowledge.",
-            "name": "The Library",
-            "passages": "A door hidden behind a stack of dusty tomes leads to Room #5. A small window high above the floor potentially allows access to Room #9.",
+            "name": "Locked Storage Room",
+            "description": "A small storage room with several locked cabinets and a large safe in the center of the room. The air is stale, and the smell of mold permeates everything.",
+            "passages": "The passage from Room 3 appears to be blocked (locked door). To the left is another dark corridor leading back towards the entrance (Room 1).",
             "items": [
                 {
-                    "name": "The Forbidden Tome of Xandros",
-                    "description": "An ancient text bound in human skin, its pages filled with forbidden knowledge and dark magic."
+                    "name": "Keycard Reader",
+                    "description": "A damaged keycard reader that lies on the floor, with a few tangled wires and cables surrounding it."
                 }
             ],
-            "dimensions": [
-                15,
-                10
-            ],
-            "coordinates": [
-                -1,
-                -4
-            ],
+            "dimensions": "(5, 10)",
+            "coordinates": "(20, -3)",
             "properties": [
-                "musty",
-                "forbidden"
+                "locked",
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 5,
-            "description": "A hidden room deep within the ruin, concealing secrets and treasures.",
-            "name": "The Hidden Sanctum",
-            "passages": "Accessible through a secret passage behind the stone tapestry in Room #1. A small door leads to Room #4.",
+            "name": "Deeper Corridor",
+            "description": "A longer, darker corridor that stretches further into the facility. The walls are lined with pipes and electrical conduits, and the air is thick with dust.",
+            "passages": "The passage from Room 3 leads to a door that appears to be slightly ajar (Room 6). To the left is another dark corridor leading back towards Room 2.",
             "items": [
                 {
-                    "name": "The Golden Chalice of Eldrador",
-                    "description": "A golden chalice adorned with ancient runes, said to grant its owner immense power and wisdom."
+                    "name": "Water-Stained Map",
+                    "description": "A torn and water-stained map of the facility's layout, with several annotations and scribbles on it."
                 }
             ],
-            "dimensions": [
-                10,
-                5
-            ],
-            "coordinates": [
-                -1,
-                -2
-            ],
+            "dimensions": "(20, 5)",
+            "coordinates": "(25, -4)",
             "properties": [
-                "hidden",
-                "locked"
+                "dark",
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 6,
-            "description": "A labyrinthine staircase leading down into darkness.",
-            "name": "The Descent",
-            "passages": "The narrow staircase descends from the Gallery Corridor in Room #2. A series of cryptic symbols etched into the wall potentially reveal a secret passage to Room #8.",
+            "name": "Central Control Room",
+            "description": "A large control room with several computer terminals and a central console. The walls are lined with screens displaying cryptic messages and system alerts.",
+            "passages": "The passage from Room 5 leads to a door that appears to be locked (Room 7). To the right is another dark corridor leading towards Room 3.",
             "items": [
                 {
-                    "name": "A Flickering Candle",
-                    "description": "A candle made of a strange, glowing material that casts eerie shadows on the walls."
+                    "name": "Central Computer",
+                    "description": "A central computer system with several screens displaying various data and graphs. One of the screens seems to be showing a countdown timer."
                 }
             ],
-            "dimensions": [
-                5,
-                10
-            ],
-            "coordinates": [
-                -2,
-                -1
-            ],
+            "dimensions": "(20, 10)",
+            "coordinates": "(30, -5)",
             "properties": [
-                "dark",
-                "treacherous"
+                "locked",
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 7,
-            "description": "A large chamber filled with ancient artifacts and mysterious devices.",
-            "name": "The Repository",
-            "passages": "Accessible through a door hidden behind a tapestry in Room #3. A series of cryptic symbols etched into the wall potentially reveal a secret passage to Room #8.",
+            "name": "Abandoned Office",
+            "description": "A small office with several desks and chairs scattered around. The walls are lined with old files and papers, and the air is thick with dust.",
+            "passages": "The passage from Room 6 appears to be blocked (locked door). To the left is another dark corridor leading back towards Room 5.",
             "items": [
                 {
-                    "name": "The Celestial Atlas",
-                    "description": "A celestial map depicting the movements of stars and planets across the sky."
+                    "name": "Old Office Supplies",
+                    "description": "A box of old office supplies, including pens, paper clips, and staples."
                 }
             ],
-            "dimensions": [
-                25,
-                15
-            ],
-            "coordinates": [
-                -2,
-                -3
-            ],
+            "dimensions": "(10, 5)",
+            "coordinates": "(35, -6)",
             "properties": [
-                "dimly lit",
-                "treacherous"
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 8,
-            "description": "A room filled with cryptic symbols and ancient runes.",
-            "name": "The Cryptic Chamber",
-            "passages": "Accessible through a series of cryptic symbols etched into the wall in Room #3. A door hidden behind a tapestry leads to Room #7.",
+            "name": "Submerged Laboratory",
+            "description": "A laboratory that appears to be submerged underwater. The walls are lined with equipment and experiments, but everything is covered in water and sediment.",
+            "passages": "The passage from Room 7 leads to a door that appears to be locked (Room 9). To the right is another dark corridor leading back towards Room 6.",
             "items": [
                 {
-                    "name": "The Runes of Xandros",
-                    "description": "A set of ancient runes that, when deciphered, reveal the location of a powerful artifact."
+                    "name": "Waterlogged Equipment",
+                    "description": "A collection of waterlogged equipment, including microscopes, pipettes, and other scientific tools."
                 }
             ],
-            "dimensions": [
-                10,
-                5
-            ],
-            "coordinates": [
-                -2,
-                -4
-            ],
+            "dimensions": "(20, 10)",
+            "coordinates": "(40, -7)",
             "properties": [
-                "dimly lit",
-                "treacherous"
+                "water",
+                "confined space"
             ],
             "secrets": null
         },
         {
             "id": 9,
-            "description": "A small room with a single window high above the floor.",
-            "name": "The Window Chamber",
-            "passages": "Accessible through a small window high above the floor in Room #4. A door hidden behind a stack of dusty tomes leads to Room #5.",
+            "name": "Underwater Vortex Room",
+            "description": "A room that appears to be located at the center of an underwater vortex. The walls are lined with equipment and experiments, but everything is distorted and swirling around."
+        },
+        {
+            "id": 10,
+            "name": "Final Warning",
+            "description": "A small room with a single console displaying a countdown timer and several warnings about an impending disaster.",
+            "passages": null,
             "items": [
                 {
-                    "name": "A Rare, Ancient Book",
-                    "description": "A book bound in fine leather, its pages filled with knowledge from a long-lost civilization."
+                    "name": "Final Message",
+                    "description": "A final message from the scientists, detailing their attempts to warn others about the impending disaster."
                 }
             ],
-            "dimensions": [
-                5,
-                10
-            ],
-            "coordinates": [
-                -2,
-                -5
-            ],
-            "properties": [
-                "small",
-                "high"
-            ],
+            "dimensions": "(5, 5)",
+            "coordinates": "(45, -8)",
+            "properties": [],
             "secrets": null
         }
     ]

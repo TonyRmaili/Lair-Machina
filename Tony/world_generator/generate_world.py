@@ -12,6 +12,13 @@ lore > pantheon > world_structure > factions > settlements > npcs > landspaces
 
 '''
 
+
+# gå till comfy foldern. source comfyUIvenv/bin/activate
+# kör python3 main.py
+
+# steaming option for både text och tts generation?
+
+
 class GenerateWorld:
     def __init__(self):
         # Save all generated files in the same folder as this script
@@ -52,8 +59,6 @@ class GenerateWorld:
                 # If the file doesn't exist, assign an empty list
                 context = []
             
-            
-
             resp = ollama.generate(
                 system=self.system,
                 model=self.model,
@@ -109,7 +114,7 @@ class GenerateWorld:
         with open(room_file_path, "w") as file:
             file.write(resp)
 
-
+ 
     def extract_dungeon_coords(self):
         dungeon_path = os.path.join(self.current_dir, 'dungeon.json')
         with open(dungeon_path, 'r') as f:
@@ -117,7 +122,6 @@ class GenerateWorld:
 
         return data['rooms']
     
-
 
     def plot_dungeon(self):
         rooms = self.extract_dungeon_coords()
@@ -135,8 +139,8 @@ class GenerateWorld:
                 ax.plot([prev_x, x], [prev_y, y], 'k-', lw=1)  # draw line between current and previous room
 
         # Setting up the plot limits and grid
-        ax.set_xlim(-1, 9)
-        ax.set_ylim(-6, 2)
+        ax.set_xlim(-5, 5)
+        ax.set_ylim(-5, 5)
         ax.grid(True)
         ax.set_title("Dungeon Map")
 
@@ -178,15 +182,14 @@ if __name__=='__main__':
 
     # world.run()
     # world.room()
-
     world.dungeon()
 
-    # rooms = world.plot_dungeon()
 
-    # rooms = world.extract_dungeon_coords()
+    rooms = world.extract_dungeon_coords()
+    for room in rooms:
+        print(f'id {room['id']}   coords: {room['coordinates']} | passages: {room['passages']}' )
 
-    # for room in rooms:
-    #     print(f'coords: {room['coordinates']} | passages: {room['passages']}' )
+    rooms = world.plot_dungeon()
 
     end_time = time.time()
     execution_time = end_time - start_time
