@@ -1,19 +1,19 @@
 
+# DONE
+# 1 - DONE - make possible to do ollama calls in the game
+# 2 - DONE add speech and see how slow it gets - (quite slow)
+
 # TO DO:
-
-# 1 - make possible to do ollama calls in the game
-
-
-
 
 #  - make floor change dynamic - for move thing - so it uses a JSON rather then a hardcoded map
 #  add items to rooms
-
-# add inventory/hp etc screen 
 # import the loot actions from before
+### ALL THESE NEED THE TONY JSON GENERATOR TO COMPLY 
+
+# ADD BETTER UI -  # add inventory/hp etc screen 
 # add the img generation call from before
 
-# test to add music generation and speech and see how slow it gets
+# test to add music generation  
 
 ###make combat loop###
 # add monsters, call for initative, combat mode etc
