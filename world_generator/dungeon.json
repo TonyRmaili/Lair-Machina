@@ -1,21 +1,25 @@
 {
     "theme": "Moonlit Grotto",
-    "description": "A vast network of iridescent caverns, illuminated by a soft, lunar glow that seeps through glittering crystals embedded in the walls. The air is alive with an ethereal melody, as delicate waterfalls and melodic fountains harmonize with the whispers of ancient incantations etched into the stone. Dripping silver filaments hang from the ceiling like a thousand gossamer threads, casting an otherworldly shimmer across the polished obsidian floor. The scent of damp earth and blooming moonflowers fills the air, as if the very essence of the night sky has been distilled within this mystical sanctuary. Shadows dance upon the walls, as if the spirits of forgotten poets and sages whisper secrets to those who dare to listen. A haunting, wistful melody seems to emanate from the very heart of the grotto, beckoning adventurers deeper into its lunar-lit depths.",
+    "description": "The Moonlit Grotto is an otherworldly dungeon carved within a massive crystal cave, its walls shimmering with an ethereal glow. The air inside is heavy with the scent of saltwater and the faint hint of sea lavender, transporting those who venture within to a realm both familiar and yet utterly foreign. Flickering luminescent mushrooms cast eerie shadows on the crystalline walls as they sway in the gentle breeze, their soft whispering echoing off the cavernous space like an ethereal chorus. The moon's silvery light seeps through narrow crevices above, casting beams of pale blue light that dance across the floor like spectral fingers, beckoning adventurers deeper into the heart of the grotto.",
     "rooms": [
         {
-            "description": "This small chamber is nestled deep within the Moonlit Grotto. The walls are adorned with a series of delicate, crystal-encrusted shelves that seem to be infused with an ethereal glow. The air is filled with the sweet scent of blooming moonflowers, and the soft melody of dripping water echoes through the space. A small, ornate box rests upon one of the shelves, emitting a faint, pulsing light.",
-            "name": "Lunar Sanctuary",
+            "description": "A narrow corridor lined with luminescent mushrooms stretches into the darkness, their caps casting an ethereal glow that dances across the crystal-encrusted walls. The air is heavy with the scent of saltwater and sea lavender, creating a haunting melody that resonates through the cavernous space.",
+            "name": "Moonlit Promenade",
             "items": [
                 {
-                    "name": "Moonlit Box",
-                    "description": "A beautifully crafted box that emits a soft, pulsing light, as if it contains a fragment of the moon itself. The box is adorned with intricate, swirling patterns that seem to shift and shimmer in response to movement."
+                    "name": "Luminous Capsule",
+                    "description": "A delicate, glass-like vial containing a swirling mixture of moonlight and starlight. When held, it hums with a soft, lunar energy that enhances the user's connection to the mysteries of the night."
+                },
+                {
+                    "name": "Whispering Mushroom",
+                    "description": "One of the luminescent mushrooms has grown larger than its companions, emitting an otherworldly voice that whispers ancient secrets and forgotten lore. Its message is cryptic, but holds a hidden truth waiting to be deciphered by those with ears attuned to the whispers of the grotto."
                 }
             ],
             "properties": [
-                "peaceful",
-                "magical"
+                "crystal-lined",
+                "illuminated"
             ],
-            "secrets": "A small inscription etched into the shelf near the Moonlit Box reads: 'Only those who listen for the whispers of the night shall find solace within these walls.'",
+            "secrets": "A hidden pathway behind one of the mushrooms leads to an ancient, moonlit observatory containing ancient lunar charts and cryptic prophecies that foretell the coming of a celestial alignment. The alignment will unlock a hidden door in the grotto's central crystal formation, revealing the heart of the Moonlit Grotto.",
             "room_id": 1,
             "coordinates": [
                 1,
@@ -29,23 +33,19 @@
             ]
         },
         {
-            "description": "This vast chamber stretches deep into the heart of the Moonlit Grotto. The ceiling lost in darkness, the iridescent cavern is illuminated by a soft, lunar glow that seeps through glittering crystals embedded in the walls. Delicate waterfalls and melodic fountains harmonize with the whispers of ancient incantations etched into the stone, creating an ethereal melody that seems to emanate from the very heart of the grotto.",
-            "name": "Moonlit Cathedral",
+            "description": "A tranquil chamber within the Moonlit Grotto, filled with an ethereal mist that shimmers in hues of pale blue and silver. The walls are adorned with delicate, crystalline formations that refract and reflect the moonlight, casting a kaleidoscope of colors across the room. A soft, gentle breeze carries the scent of blooming sea lavender through the space, creating a soothing melody that calms the mind.",
+            "name": "Crystal Reflections",
             "items": [
                 {
-                    "name": "Lunar Lyre",
-                    "description": "An exquisitely crafted instrument with strings that seem to vibrate in harmony with the whispers of ancient incantations etched into the stone. The lyre emits a soft, pulsing light, as if it contains a fragment of the moon's musical essence."
-                },
-                {
-                    "name": "Grotto Grimoire",
-                    "description": "A worn, leather-bound tome adorned with intricate, swirling patterns that seem to shift and shimmer in response to movement. The pages appear to be filled with ancient knowledge and forgotten spells, written in a language that whispers secrets to those who dare to listen."
+                    "name": "Moonlit Tear Crystals",
+                    "description": "Delicate, crystalline structures that contain tiny pockets of moonlight. When touched, they release a fragment of the lunar essence, granting the user visions of past celestial alignments and their significance to the balance of nature."
                 }
             ],
             "properties": [
-                "large",
-                "magical"
+                "illuminated",
+                "crystal-lined"
             ],
-            "secrets": "A hidden compartment within the crystal-encrusted wall contains a cryptic message etched into the stone: 'In the silence of the night, seek the harmony of the spheres.'",
+            "secrets": "A hidden compartment within one of the crystalline formations contains an ancient diary belonging to a long-forgotten lunar priestess. The diary holds cryptic entries about the coming celestial alignment and its potential impact on the balance of nature.",
             "room_id": 2,
             "coordinates": [
                 2,
@@ -59,19 +59,23 @@
             ]
         },
         {
-            "description": "This serene grotto is nestled deep within the Moonlit Grotto. The walls are adorned with a series of delicate, crystal-encrusted shelves that seem to be infused with an ethereal glow. A small, glowing pool of water reflects the soft lunar light, casting an otherworldly shimmer across the polished obsidian floor. The air is filled with the sweet scent of blooming moonflowers, and the soft melody of dripping water echoes through the space.",
-            "name": "Moonlit Pool",
+            "description": "A majestic, crystal-clear lake fills the room, its surface reflecting the moon's silvery light like a mirror. The air is heavy with the scent of blooming sea lavender and saltwater, creating a haunting melody that resonates through the space. Delicate, crystalline formations rise from the lake's depths, refracting and reflecting the moonlight in a kaleidoscope of colors.",
+            "name": "Moonlit Mirador",
             "items": [
                 {
-                    "name": "Glowing Tear",
-                    "description": "A delicate droplet of liquid moonlight that rests upon a pedestal, emitting a soft, pulsing light. The tear seems to contain a fragment of the moon's essence, and its gentle glow has a calming effect on those who behold it."
+                    "name": "Stellar Reflections",
+                    "description": "A small, delicate pool of crystal-clear water that reflects the celestial alignment of the stars. When gazed upon, it grants the user a glimpse into the workings of the universe and its secrets."
+                },
+                {
+                    "name": "Moonpetal Blooms",
+                    "description": "Rare, luminescent blooms that flower on the lake's surface at nightfall, emitting a soft, ethereal light that enhances the user's connection to the mysteries of the lunar cycle."
                 }
             ],
             "properties": [
-                "peaceful",
-                "magical"
+                "illuminated",
+                "crystal-lined"
             ],
-            "secrets": "A small inscription etched into the shelf near the Glowing Tear reads: 'As the moon waxes full, so too shall your heart be filled with wisdom.'",
+            "secrets": "A hidden spring beneath the lake's surface contains a magical essence that can imbue water-based magic spells with the power of the moon. The essence is only accessible during the night of the celestial alignment, and its location must be deciphered from ancient lunar charts stored in the observatory hidden behind the Whispering Mushroom.",
             "room_id": 3,
             "coordinates": [
                 2,

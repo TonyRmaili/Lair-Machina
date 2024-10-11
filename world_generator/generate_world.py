@@ -6,7 +6,7 @@ import threading
 # import matplotlib.pyplot as plt
 import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from world_generator.define_world import generate_dungeon_blueprint
+from define_world import generate_dungeon_blueprint
 
 '''
 order to pass in data
@@ -26,16 +26,16 @@ class GenerateWorld:
     def __init__(self):
         # Save all generated files in the same folder as this script
         self.current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
-        self.blue_print_path = os.path.join(self.current_dir, 'world_blueprint.json')  # Path to world blueprint
+        # self.blue_print_path = os.path.join(self.current_dir, 'world_blueprint.json')  # Path to world blueprint
         self.model = 'llama3.1'
         
         # Load blueprint data
-        with open(self.blue_print_path, 'r') as f:
-            self.data = json.load(f)
+        # with open(self.blue_print_path, 'r') as f:
+        #     self.data = json.load(f)
 
-        self.system = self.data['system']
-        self.world_data = self.data.copy()
-        del self.world_data['system']
+        # self.system = self.data['system']
+        # self.world_data = self.data.copy()
+        # del self.world_data['system']
 
         self.is_generating = False
 
