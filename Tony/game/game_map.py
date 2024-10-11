@@ -5,10 +5,20 @@
 
 # TO DO:
 
+# prova ladda ner 
+# Pinokio - AI program interface thing - https://pinokio.computer/
+# and install > discover tab > MAGNeT - try it/see if it works (music generation) > if yes, make a call for it in the game
+
+
+
+# senare idag - > merge dungeon generation with this - so the loot action etc works
+### ALL THESE NEED THE TONY JSON GENERATOR TO COMPLY ###
 #  - make floor change dynamic - for move thing - so it uses a JSON rather then a hardcoded map
-#  add items to rooms
+#  add items to rooms - will be part of room generation
 # import the loot actions from before
-### ALL THESE NEED THE TONY JSON GENERATOR TO COMPLY 
+########################################################
+
+
 
 # ADD BETTER UI -  # add inventory/hp etc screen 
 # add the img generation call from before
@@ -17,6 +27,9 @@
 
 ###make combat loop###
 # add monsters, call for initative, combat mode etc
+
+
+# kanske force the room descriptions to be much more concise - so TTS becomes less tidious and faster to generate
 
 from TTS.api import TTS
 
