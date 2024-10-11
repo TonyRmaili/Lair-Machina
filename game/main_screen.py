@@ -24,6 +24,10 @@ from game_map import GameMap
 
 class Game:
     def __init__(self):
+        """
+        this is the main game class
+        will have all game modes/ screens etc in it, import it (game) in every screen to get the size etc
+        """
         # setup
         self.FPS = 60
         self.WIDTH = 800

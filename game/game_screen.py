@@ -17,6 +17,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
 from world_generator.define_world import save_to_json, room
 
+
+###OLD! DONT LOOK HERE - WILL BE DELETED AFTER - threading logic has been looted
+
 class Game:
     def __init__(self):
         # setup

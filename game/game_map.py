@@ -298,6 +298,8 @@ class GameMap:
             text_surface = font.render(row_text, True, (255, 255, 255))
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
+
+    ######DO NOT REMOVE; THIS IS THE PART THAT MAKES THE TEXT TO SPEECH WORK###### - too heavy for tiny computers 
         
     # def make_speeach(self):
     #     """

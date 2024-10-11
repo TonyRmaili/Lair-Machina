@@ -3,6 +3,10 @@ import pygame
 class InputText:
     def __init__(self, x, y, width, height, title, font_size=32, line_limit=20, 
                  bg_color='black', text_color=(0, 0, 0), title_color='black'):
+        """
+        this is a class that creates a text box for the user to input text
+        has formatting options for the text and the box, and can be used in any pygame project
+        """
         self.rect = pygame.Rect(x, y, width, height)
         self.title = title
         self.font = pygame.font.Font(None, font_size)
@@ -19,6 +23,9 @@ class InputText:
         self.text_area_rect = pygame.Rect(x, y + 40, width, height - 40)
 
     def handle_event(self, events):
+        """
+        handle the events for the text box - mouse down = active = TRUE, = can type in the box
+        """
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Toggle active state when the user clicks inside the text area

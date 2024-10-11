@@ -30,7 +30,9 @@ class MenuScreen:
     def continue_game(self):
         # self.game.game_mode = 'continue'
         pass
-    
+
+
+    # this should be part of the dungeon screen feature
     def game_map(self):
         self.game.game_mode = 'map'
         # print('continue game')
