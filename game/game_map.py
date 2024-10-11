@@ -42,7 +42,7 @@ import time
 
 import threading
 
-sys.path.append('../function_calls/')  # Adjust the path
+sys.path.append('./function_calls/')  # Adjust the path
 from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 
 
@@ -89,7 +89,7 @@ class GameMap:
         
 
         # Load and play background music (loop indefinitely)
-        pygame.mixer.music.load('sound/The_journey(2).mp3')
+        pygame.mixer.music.load('.\game\The_journey(2).mp3')
         pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
 
         pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)

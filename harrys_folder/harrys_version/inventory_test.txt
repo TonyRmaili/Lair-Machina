@@ -1,7 +1,0 @@
-Your inventory now contains:
-SHIELD
-VASE
-BOOKS
-DAGGERS
-MAGIC BOOK
-GOLDEN BOOK

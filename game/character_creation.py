@@ -11,7 +11,7 @@ from comfy_prompt import queue_prompt,run_in_thread
 
 class CreactionScreen:
     def __init__(self,game,w,h):
-        path = './pics/'
+        path = './game/pics/'
         self.bg = Image(image=path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))
         pygame.display.set_caption("Lair Machina: Character Creation")
 

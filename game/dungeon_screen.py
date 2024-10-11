@@ -9,10 +9,10 @@ class DungeonSceen:
         
         pygame.display.set_caption("Lair Machina: Dungeon")
         
-        path = './pics/'
+        path = './game/pics/'
         self.bg = Image(image=path+'floor.jpg',pos=(0,0),scale=(w,h))
         namepath = self.game.char.name
-        path = './pics/'+ namepath + '/'
+        path = './game/pics/'+ namepath + '/'
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
         self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(400,400),scale=(150,150))
 
