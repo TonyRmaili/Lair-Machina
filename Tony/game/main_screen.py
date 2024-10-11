@@ -11,7 +11,7 @@ from menu_screen import MenuScreen
 from dungeon_screen import DungeonSceen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
-from world_generator.define_world import save_to_json, room
+from world_generator.define_world import save_blueprint_to_json, room
 import threading
 
 from character import Character

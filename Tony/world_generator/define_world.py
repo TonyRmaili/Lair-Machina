@@ -1,7 +1,8 @@
 import json
 import sys
 import os
-from grid_maker import run_dungeon_maker,print_dungeon_map,room_data_to_text,generate_room_data
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from world_generator.grid_maker import run_dungeon_maker,print_dungeon_map,room_data_to_text,generate_room_data
 
 
 dungeon_template = ''' 

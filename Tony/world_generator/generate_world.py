@@ -4,7 +4,9 @@ import os
 import time
 import threading
 import matplotlib.pyplot as plt
-from define_world import generate_dungeon_blueprint
+import sys
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from world_generator.define_world import generate_dungeon_blueprint
 
 '''
 order to pass in data
