@@ -1,88 +1,89 @@
 {
-    "theme": "Moonlit Mirage",
-    "description": "The Moonlit Mirage is an otherworldly labyrinthine complex that appears to shift and change its layout as the phases of the moon wax and wane. As the adventurers delve deeper, they find themselves navigating through a maze of gleaming silver spires, iridescent mist-shrouded corridors, and crystal-lined halls that refract the light of the full moon into kaleidoscopic patterns. The air is alive with the whispers of ancient wisdom, echoing off the walls as the gentle breeze stirs the petals of ethereal flowers that bloom in secret gardens hidden within the labyrinth. As they explore further, the soft glow of luminescent fungi illuminates their path, but the shifting geometry of the maze seems to conspire against them, forcing them to confront the mysteries and illusions of their own perceptions.",
+    "theme": "Moonlit Grotto",
+    "description": "A vast network of iridescent caverns, illuminated by a soft, lunar glow that seeps through glittering crystals embedded in the walls. The air is alive with an ethereal melody, as delicate waterfalls and melodic fountains harmonize with the whispers of ancient incantations etched into the stone. Dripping silver filaments hang from the ceiling like a thousand gossamer threads, casting an otherworldly shimmer across the polished obsidian floor. The scent of damp earth and blooming moonflowers fills the air, as if the very essence of the night sky has been distilled within this mystical sanctuary. Shadows dance upon the walls, as if the spirits of forgotten poets and sages whisper secrets to those who dare to listen. A haunting, wistful melody seems to emanate from the very heart of the grotto, beckoning adventurers deeper into its lunar-lit depths.",
     "rooms": [
         {
-            "description": "The crystal-lined Hall of Refractions is a grand chamber filled with glittering crystals that refract the light of the full moon into shimmering patterns. The floor, made of polished silver stone, reflects the colors of the luminescent fungi growing along the walls, casting a kaleidoscope of hues across the room. A gentle breeze stirs the petals of ethereal flowers blooming in hidden gardens, their sweet fragrance wafting through the air as the whispers of ancient wisdom echo softly.",
-            "name": "Hall of Refractions",
+            "description": "This small chamber is nestled deep within the Moonlit Grotto. The walls are adorned with a series of delicate, crystal-encrusted shelves that seem to be infused with an ethereal glow. The air is filled with the sweet scent of blooming moonflowers, and the soft melody of dripping water echoes through the space. A small, ornate box rests upon one of the shelves, emitting a faint, pulsing light.",
+            "name": "Lunar Sanctuary",
             "items": [
                 {
-                    "name": "Moonlit Chalice",
-                    "description": "A delicate crystal goblet that glows with a soft, lunar light. The chalice is said to grant visions of the future when filled with the essence of rare, moon-petaled flowers."
+                    "name": "Moonlit Box",
+                    "description": "A beautifully crafted box that emits a soft, pulsing light, as if it contains a fragment of the moon itself. The box is adorned with intricate, swirling patterns that seem to shift and shimmer in response to movement."
                 }
             ],
             "properties": [
-                "moonlit",
-                "glittering",
-                "trapped"
+                "peaceful",
+                "magical"
             ],
-            "secrets": "A hidden compartment within the wall, accessible by pressing a crystal in the shape of a crescent moon in the correct sequence, contains a cryptic message etched into a piece of silver parchment: 'Where shadows dance, seek the light of the forgotten queen'.",
+            "secrets": "A small inscription etched into the shelf near the Moonlit Box reads: 'Only those who listen for the whispers of the night shall find solace within these walls.'",
             "room_id": 1,
-            "coordinates": [
-                1,
-                1
-            ],
-            "connections": [
-                [
-                    2,
-                    1
-                ],
-                [
-                    1,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "The labyrinthine Corridor of Whispers is a serpentine passageway shrouded in an iridescent mist that seems to shift and ripple like the surface of a moonlit lake. As the adventurers navigate through this twisting corridor, they are surrounded by the whispers of forgotten lore, their words echoing off the crystal-lined walls in a maddening refrain. The air is filled with the sweet scent of ethereal flowers, their delicate petals shimmering like stardust as they bloom and fade in the flickering light of luminescent fungi. Ahead, the corridor appears to narrow into a dark and foreboding tunnel, its entrance guarded by an enigmatic figure shrouded in shadows.",
-            "name": "Corridor of Whispers",
-            "items": [
-                {
-                    "name": "Whispering Orb",
-                    "description": "A delicate, crystal orb that seems to capture the whispers of the past and store them within its shimmering surface. As the adventurers listen closely, they can discern fragments of ancient wisdom and forgotten knowledge hidden within the orb's gentle hum."
-                }
-            ],
-            "properties": [
-                "iridescent",
-                "mist-shrouded",
-                "whispering"
-            ],
-            "secrets": "A hidden panel in the wall, disguised as a section of crystal that seems to be reflecting the light of the luminescent fungi, reveals a cryptic message etched into a piece of silver parchment: 'The truth lies not in what is seen, but in what is felt'. The panel can only be opened by feeling along the crystal surface with their fingers and locating the subtle pattern of raised dots that corresponds to the phases of the moon.",
-            "room_id": 2,
             "coordinates": [
                 1,
                 2
             ],
             "connections": [
                 [
-                    1,
-                    1
+                    2,
+                    2
                 ]
             ]
         },
         {
-            "description": "The Silver Spire of Reflections is a gleaming silver spire that pierces the sky like a shard of moonlight. Its walls are adorned with intricate etchings that seem to reflect the memories and emotions of all who approach it. The air around the spire appears to ripple and distort, as if reality itself is being warped by its presence. A delicate, crystal pool at its base mirrors the movements of the full moon above, creating a sense of timelessness and infinity.",
-            "name": "Silver Spire of Reflections",
+            "description": "This vast chamber stretches deep into the heart of the Moonlit Grotto. The ceiling lost in darkness, the iridescent cavern is illuminated by a soft, lunar glow that seeps through glittering crystals embedded in the walls. Delicate waterfalls and melodic fountains harmonize with the whispers of ancient incantations etched into the stone, creating an ethereal melody that seems to emanate from the very heart of the grotto.",
+            "name": "Moonlit Cathedral",
             "items": [
                 {
-                    "name": "Moonpool Orb",
-                    "description": "A delicate, crystal orb that seems to capture the reflections and memories of all who approach it. As the adventurers gaze into its surface, they can see glimpses of their own past, present, and future, superimposed upon the ever-changing patterns of the moon."
+                    "name": "Lunar Lyre",
+                    "description": "An exquisitely crafted instrument with strings that seem to vibrate in harmony with the whispers of ancient incantations etched into the stone. The lyre emits a soft, pulsing light, as if it contains a fragment of the moon's musical essence."
+                },
+                {
+                    "name": "Grotto Grimoire",
+                    "description": "A worn, leather-bound tome adorned with intricate, swirling patterns that seem to shift and shimmer in response to movement. The pages appear to be filled with ancient knowledge and forgotten spells, written in a language that whispers secrets to those who dare to listen."
                 }
             ],
             "properties": [
-                "silver",
-                "refracting",
-                "timeless"
+                "large",
+                "magical"
             ],
-            "secrets": "A hidden pathway, invisible to all but those who have been reflected within the spire's crystal pool, leads to a secret chamber containing a ancient tome bound in what appears to be the skin of a lunar butterfly. The tome is said to hold the secrets of the moon itself, and only reveals its knowledge to those who are able to reflect their own truth upon its surface.",
-            "room_id": 3,
+            "secrets": "A hidden compartment within the crystal-encrusted wall contains a cryptic message etched into the stone: 'In the silence of the night, seek the harmony of the spheres.'",
+            "room_id": 2,
             "coordinates": [
                 2,
                 1
             ],
             "connections": [
                 [
+                    2,
+                    2
+                ]
+            ]
+        },
+        {
+            "description": "This serene grotto is nestled deep within the Moonlit Grotto. The walls are adorned with a series of delicate, crystal-encrusted shelves that seem to be infused with an ethereal glow. A small, glowing pool of water reflects the soft lunar light, casting an otherworldly shimmer across the polished obsidian floor. The air is filled with the sweet scent of blooming moonflowers, and the soft melody of dripping water echoes through the space.",
+            "name": "Moonlit Pool",
+            "items": [
+                {
+                    "name": "Glowing Tear",
+                    "description": "A delicate droplet of liquid moonlight that rests upon a pedestal, emitting a soft, pulsing light. The tear seems to contain a fragment of the moon's essence, and its gentle glow has a calming effect on those who behold it."
+                }
+            ],
+            "properties": [
+                "peaceful",
+                "magical"
+            ],
+            "secrets": "A small inscription etched into the shelf near the Glowing Tear reads: 'As the moon waxes full, so too shall your heart be filled with wisdom.'",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
                     1,
+                    2
+                ],
+                [
+                    2,
                     1
                 ]
             ]
