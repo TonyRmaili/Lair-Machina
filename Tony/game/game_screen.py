@@ -28,6 +28,8 @@ class Game:
         self.clock = pygame.time.Clock()
 
         pygame.display.set_caption("Lair Machina")
+
+        
         
         # starter menu init
         self.menu = pygame_menu.Menu('Welcome Adventurer', self.WIDTH, self.HEIGHT,

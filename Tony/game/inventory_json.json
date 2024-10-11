@@ -1,0 +1,16 @@
+{
+    "inventory": [
+      {
+        "name": "Sword",
+        "description": "A sharp blade, made of steel, used to vanquish foes."
+      },
+      {
+        "name": "Health Potion",
+        "description": "A bottle with liquid that restores health"
+      },
+      {
+        "name": "Leather Armor",
+        "description": "A armor made of leather that provides basic protection."
+      }
+    ]
+  }

@@ -7,7 +7,7 @@ import sys
 # IT WORKS TO MOVE AROUND AND CHANGE FLOOR. Need to have dynamic function for change floor, so takes floor as argument from list of floors, and import the room info etc
 
 # TO DO:
-# make floor change dynamic
+# make floor change dynamic - for move thing - so it 
 # add items to rooms
 # add inventory/hp etc screen 
 # import the loot actions from before

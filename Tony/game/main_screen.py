@@ -13,8 +13,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
 from world_generator.define_world import save_blueprint_to_json, room
 import threading
-
 from character import Character
+
+
+
+# new - game map feature
+from game_map import GameMap
+
+
 
 class Game:
     def __init__(self):
@@ -27,6 +33,16 @@ class Game:
         self.clock = pygame.time.Clock()
         
         self.char = Character()
+        
+        # new map feature
+        # self.map = GameMap(game=self)
+        # self.map.create_rooms()
+        
+
+        # map feature
+        self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
+
+
 
         pygame.display.set_caption("Lair Machina")
 
@@ -35,8 +51,10 @@ class Game:
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
-
-
+        
+        # ???
+        self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
+        
     
 
     def run(self):
@@ -53,6 +71,10 @@ class Game:
 
             elif self.game_mode == 'dungeon':
                 self.dungeon_screen.run(screen=self.screen,events=events)
+
+                # new test
+            elif self.game_mode == 'map':
+                self.map_screen.run(screen=self.screen,events=events)
 
                                       
             pygame.display.flip()           

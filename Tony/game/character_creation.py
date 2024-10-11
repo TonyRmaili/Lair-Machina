@@ -57,7 +57,9 @@ class CreactionScreen:
         print(self.char.description)
         # this is the img gen function
         run_in_thread(self.char.description, self.char.name)
-        self.game.game_mode = 'dungeon'
+        # self.game.game_mode = 'dungeon'
+        self.game.game_mode = 'map'
+        
 
 
 
