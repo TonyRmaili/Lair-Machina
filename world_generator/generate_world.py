@@ -234,6 +234,8 @@ if __name__=='__main__':
     # world.dungeon_overview()
     # world.dungeon_rooms()
 
+
+    # This is the function that generates the entire dungeon
     world.run_dungeon()
 
 
