@@ -6,7 +6,7 @@ import os
 from textarea import TextArea
 from button import Button
 from image import Image
-from character_creation import CreactionScreen
+from character_screen import CreactionScreen
 from menu_screen import MenuScreen
 from dungeon_screen import DungeonSceen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -39,8 +39,6 @@ class Game:
         # self.map.create_rooms()
         
 
-        # map feature
-        self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
 
 
 
@@ -52,7 +50,7 @@ class Game:
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
         
-        # ???
+        # map feature
         self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
         
     

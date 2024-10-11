@@ -6,6 +6,12 @@ import json
 from urllib import request
 import threading
 
+"""
+This is the function used to generate the image for the character profile.
+takes a promt as input and sends it to the comfy server - could generate mapts/items anything
+"""
+
+
 
 prompt_text = """
 {

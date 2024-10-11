@@ -10,7 +10,7 @@ import os
 from textarea import TextArea
 from button import Button
 from image import Image
-from character_creation import CharCreactionScreen
+from game.character_screen import CharCreactionScreen
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))

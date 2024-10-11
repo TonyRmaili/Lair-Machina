@@ -4,6 +4,9 @@ from image import Image
 
 
 class DungeonSceen:
+    """
+    needs to be updated to merge with the game_map.py
+    """
     def __init__(self,game,w,h):
         self.game = game
         

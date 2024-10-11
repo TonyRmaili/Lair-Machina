@@ -2,6 +2,11 @@ import pygame
 
 class Image():
     def __init__(self, image, pos,anchor='topleft', scale=None):
+        """
+        used to display images on the screen
+        similar to the button class - so that we can have a uniform way of displaying images
+        """
+        
         self.image = pygame.image.load(image)
         self.x_pos = pos[0]
         self.y_pos = pos[1]

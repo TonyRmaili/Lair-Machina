@@ -10,6 +10,9 @@ from comfy_prompt import queue_prompt,run_in_thread
 
 
 class CreactionScreen:
+    """
+    This class is responsible for the character creation screen - it allows the player to create a character and saves the data
+    """
     def __init__(self,game,w,h):
         path = './game/pics/'
         self.bg = Image(image=path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))

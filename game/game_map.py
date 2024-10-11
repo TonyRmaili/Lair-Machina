@@ -61,13 +61,13 @@ class Room:
 class GameMap:
     def __init__(self, game,w,h):
         self.game = game
-        # self.screen = pygame.display.set_mode((w, h))
+        # self.game.screen = pygame.display.set_mode((w, h))
         pygame.display.set_caption("Lair Machina: MAP MODE")
 
         
         # Basic setup
-        self.WIDTH = 800
-        self.HEIGHT = 600
+        self.WIDTH = w
+        self.HEIGHT = h
         pygame.init()
 
 
@@ -95,7 +95,7 @@ class GameMap:
         pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
         
         
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        # self.game.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()  # Clock object to control the game's framerate
         self.FPS = 60
 
@@ -110,7 +110,6 @@ class GameMap:
         self.player_position = [2, 2]  # Starting position in the map (Room 1)
         self.special_action_available = None  # To track if a special action is available
         self.game_exit = False  # Flag to handle game exit
-
         # Create rooms and set up the initial floor
         self.create_rooms()
 
@@ -259,13 +258,13 @@ class GameMap:
 
     def display_current_room(self):
         # Display the current room's name and description
-        self.screen.fill((0, 0, 0))  # Clear screen with black
+        self.game.screen.fill((0, 0, 0))  # Clear screen with black
         font = pygame.font.Font(None, 36)
         text_surface = font.render(f"You are in {self.current_room.name}", True, (255, 255, 255))
-        self.screen.blit(text_surface, (50, 50))
+        self.game.screen.blit(text_surface, (50, 50))
 
         description_surface = font.render(self.current_room.description, True, (255, 255, 255))
-        self.screen.blit(description_surface, (50, 100))
+        self.game.screen.blit(description_surface, (50, 100))
 
         # Display instructions if a special action is available
         if self.special_action_available:
@@ -277,7 +276,7 @@ class GameMap:
             elif self.special_action_available == 'down-floor':
                 action_text += "go down"
             action_surface = font.render(action_text, True, (255, 255, 0))  # Yellow text
-            self.screen.blit(action_surface, (50, 150))
+            self.game.screen.blit(action_surface, (50, 150))
 
     def display_map(self):
         # Display the map in the top-right corner
@@ -297,7 +296,7 @@ class GameMap:
                 row_text += cell_text + ' '
             # Render the row text
             text_surface = font.render(row_text, True, (255, 255, 255))
-            self.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
+            self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
         
     # def make_speeach(self):
