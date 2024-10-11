@@ -1,21 +1,22 @@
 {
     "theme": "Moonlit Mirage",
-    "description": "Deep within the heart of a lush forest, lies the forgotten Moonlit Mirage - an ancient dream palace carved from crystal-like moonstone. The once-majestic structure now stands as a haunting testament to a long-lost civilization, its delicate spires and arches overgrown with vines and moss, reflecting the pale glow of the moon in shimmering silver hues. As night falls, the air thickens with an otherworldly mist that clings to the castle's walls like a damp shroud, carrying the whispers of forgotten dreams on its ethereal breeze. The wind stirs the crystal shards embedded within the walls, releasing a symphony of soft chimes that weave an enchanting melody through the night air, luring adventurers into the heart of this mystical place. Inside, corridors twist and turn like the paths of a dreamer's mind, while moonstone floors glimmer beneath your feet like pathways to forgotten memories. Shadows dance upon the walls, as if the spirits of those who once dwelled here still linger, trapped in a world between slumber and wakefulness.",
+    "description": "The Moonlit Mirage is an otherworldly labyrinthine complex that appears to shift and change its layout as the phases of the moon wax and wane. As the adventurers delve deeper, they find themselves navigating through a maze of gleaming silver spires, iridescent mist-shrouded corridors, and crystal-lined halls that refract the light of the full moon into kaleidoscopic patterns. The air is alive with the whispers of ancient wisdom, echoing off the walls as the gentle breeze stirs the petals of ethereal flowers that bloom in secret gardens hidden within the labyrinth. As they explore further, the soft glow of luminescent fungi illuminates their path, but the shifting geometry of the maze seems to conspire against them, forcing them to confront the mysteries and illusions of their own perceptions.",
     "rooms": [
         {
-            "description": "As you proceed deeper into the Moonlit Mirage, you come upon a narrow corridor that winds its way up to a series of delicate arches. The air is heavy with the scent of blooming flowers and the soft chimes of crystal shards embedded within the walls create an enchanting melody. A soft, ethereal light emanates from the crystal floors beneath your feet, illuminating the path ahead. The walls, made of polished moonstone, seem to shimmer in time with the chimes, casting a mesmerizing dance of shadows upon the walls.",
-            "name": "Moonlit Gallery",
+            "description": "The crystal-lined Hall of Refractions is a grand chamber filled with glittering crystals that refract the light of the full moon into shimmering patterns. The floor, made of polished silver stone, reflects the colors of the luminescent fungi growing along the walls, casting a kaleidoscope of hues across the room. A gentle breeze stirs the petals of ethereal flowers blooming in hidden gardens, their sweet fragrance wafting through the air as the whispers of ancient wisdom echo softly.",
+            "name": "Hall of Refractions",
             "items": [
                 {
-                    "name": "Songcrystal",
-                    "description": "A delicate crystal orb that glows with an otherworldly light. When touched, it releases a gentle melody that seems to harmonize with the crystal shards embedded within the walls."
+                    "name": "Moonlit Chalice",
+                    "description": "A delicate crystal goblet that glows with a soft, lunar light. The chalice is said to grant visions of the future when filled with the essence of rare, moon-petaled flowers."
                 }
             ],
             "properties": [
-                "dark",
+                "moonlit",
+                "glittering",
                 "trapped"
             ],
-            "secrets": "The songcrystal contains a subtle magical property that, when used in conjunction with the moonstone floors, can reveal hidden paths and secret chambers within the Moonlit Mirage. However, the crystal must be attuned to the individual's unique resonance before it can unlock these secrets.",
+            "secrets": "A hidden compartment within the wall, accessible by pressing a crystal in the shape of a crescent moon in the correct sequence, contains a cryptic message etched into a piece of silver parchment: 'Where shadows dance, seek the light of the forgotten queen'.",
             "room_id": 1,
             "coordinates": [
                 1,
@@ -25,24 +26,56 @@
                 [
                     2,
                     1
+                ],
+                [
+                    1,
+                    2
                 ]
             ]
         },
         {
-            "description": "As you proceed deeper into the Moonlit Mirage, you find yourself in a chamber that seems to be suspended between slumber and wakefulness. The walls, made of polished moonstone, appear to vibrate with an otherworldly energy, causing the crystal shards embedded within the structure to emit a soft, pulsing glow. The air is heavy with the scent of forgotten dreams, and the whispers of those who once dwelled here still linger, trapped in this mystical place. A delicate, silver mist clings to the walls, casting an ethereal veil over the chamber.",
-            "name": "The Dreamer's Nook",
+            "description": "The labyrinthine Corridor of Whispers is a serpentine passageway shrouded in an iridescent mist that seems to shift and ripple like the surface of a moonlit lake. As the adventurers navigate through this twisting corridor, they are surrounded by the whispers of forgotten lore, their words echoing off the crystal-lined walls in a maddening refrain. The air is filled with the sweet scent of ethereal flowers, their delicate petals shimmering like stardust as they bloom and fade in the flickering light of luminescent fungi. Ahead, the corridor appears to narrow into a dark and foreboding tunnel, its entrance guarded by an enigmatic figure shrouded in shadows.",
+            "name": "Corridor of Whispers",
             "items": [
                 {
-                    "name": "Dreamcatcher's Locket",
-                    "description": "A delicate, filigreed locket that contains a small crystal fragment attuned to the resonant frequency of the Moonlit Mirage. When opened, it releases a soft, dreamlike quality that can guide the wearer through the winding corridors and hidden chambers of this mystical place."
+                    "name": "Whispering Orb",
+                    "description": "A delicate, crystal orb that seems to capture the whispers of the past and store them within its shimmering surface. As the adventurers listen closely, they can discern fragments of ancient wisdom and forgotten knowledge hidden within the orb's gentle hum."
                 }
             ],
             "properties": [
-                "enchanted",
-                "cold"
+                "iridescent",
+                "mist-shrouded",
+                "whispering"
             ],
-            "secrets": "A hidden compartment within the locket contains a cryptic poem etched on a piece of vellum, which, when deciphered, reveals a hidden path that leads to a secret chamber deep within the Moonlit Mirage. The poem reads: 'Where shadows dance upon the wall, seek out the heart of moonstone's call.'",
+            "secrets": "A hidden panel in the wall, disguised as a section of crystal that seems to be reflecting the light of the luminescent fungi, reveals a cryptic message etched into a piece of silver parchment: 'The truth lies not in what is seen, but in what is felt'. The panel can only be opened by feeling along the crystal surface with their fingers and locating the subtle pattern of raised dots that corresponds to the phases of the moon.",
             "room_id": 2,
+            "coordinates": [
+                1,
+                2
+            ],
+            "connections": [
+                [
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "description": "The Silver Spire of Reflections is a gleaming silver spire that pierces the sky like a shard of moonlight. Its walls are adorned with intricate etchings that seem to reflect the memories and emotions of all who approach it. The air around the spire appears to ripple and distort, as if reality itself is being warped by its presence. A delicate, crystal pool at its base mirrors the movements of the full moon above, creating a sense of timelessness and infinity.",
+            "name": "Silver Spire of Reflections",
+            "items": [
+                {
+                    "name": "Moonpool Orb",
+                    "description": "A delicate, crystal orb that seems to capture the reflections and memories of all who approach it. As the adventurers gaze into its surface, they can see glimpses of their own past, present, and future, superimposed upon the ever-changing patterns of the moon."
+                }
+            ],
+            "properties": [
+                "silver",
+                "refracting",
+                "timeless"
+            ],
+            "secrets": "A hidden pathway, invisible to all but those who have been reflected within the spire's crystal pool, leads to a secret chamber containing a ancient tome bound in what appears to be the skin of a lunar butterfly. The tome is said to hold the secrets of the moon itself, and only reveals its knowledge to those who are able to reflect their own truth upon its surface.",
+            "room_id": 3,
             "coordinates": [
                 2,
                 1
@@ -50,40 +83,6 @@
             "connections": [
                 [
                     1,
-                    1
-                ],
-                [
-                    2,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "You find yourself in a grand, high-ceilinged chamber that seems to be the epicenter of the Moonlit Mirage's mystical energy. The walls, made of polished moonstone, appear to shimmer and glow with an otherworldly light, causing the crystal shards embedded within the structure to emit a kaleidoscope of colors. The air is filled with the whispers of ancient rituals, and the scent of incense wafts through the air, carrying the essence of forgotten ceremonies. At the far end of the chamber, a magnificent crystal fountain stands tall, its waters shimmering like liquid moonlight as they cascade into a shallow pool.",
-            "name": "The Heart of Moonstone",
-            "items": [
-                {
-                    "name": "Moonstone Chalice",
-                    "description": "A delicate, filigreed chalice that seems to be crafted from the very essence of the moon. When filled with liquid, it emits a soft, pulsing glow that resonates with the mystical energy of the Moonlit Mirage."
-                },
-                {
-                    "name": "Starlight Scroll",
-                    "description": "A delicate, parchment scroll that contains the ancient incantations and rituals used to awaken the mystical energies within the Moonlit Mirage. The script is written in a language that seems to shimmer and dance upon the page, as if the very stars themselves have imparted their secrets."
-                }
-            ],
-            "properties": [
-                "enchanted",
-                "magical"
-            ],
-            "secrets": "A hidden compartment within the moonstone chalice contains a tiny, crystal fragment attuned to the resonant frequency of the Moonlit Mirage. When used in conjunction with the Dreamcatcher's Locket, it can reveal a hidden path that leads to a secret chamber deep within the castle, where an ancient artifact lies waiting. The path is revealed by deciphering the cryptic poem etched on the vellum contained within the locket: 'Where shadows dance upon the wall, seek out the heart of moonstone's call.'",
-            "room_id": 3,
-            "coordinates": [
-                2,
-                2
-            ],
-            "connections": [
-                [
-                    2,
                     1
                 ]
             ]
