@@ -3,7 +3,7 @@ import json
 import os
 import time
 import threading
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.define_world import generate_dungeon_blueprint
@@ -157,29 +157,29 @@ class GenerateWorld:
 
 
  # old methods 
-    def plot_dungeon(self):
-        '''Deprecated'''
-        rooms = self.extract_dungeon_coords()
-        fig, ax = plt.subplots()
+    # def plot_dungeon(self):
+    #     '''Deprecated'''
+    #     rooms = self.extract_dungeon_coords()
+    #     fig, ax = plt.subplots()
 
-        # Plot each room
-        for i, room in enumerate(rooms):
-            x, y = room['coordinates']
-            ax.plot(x, y, 'bo')  # plot the room as a blue dot
-            ax.text(x, y, f'Room {i+1}', fontsize=9, ha='right')  # label the room
+    #     # Plot each room
+    #     for i, room in enumerate(rooms):
+    #         x, y = room['coordinates']
+    #         ax.plot(x, y, 'bo')  # plot the room as a blue dot
+    #         ax.text(x, y, f'Room {i+1}', fontsize=9, ha='right')  # label the room
 
-            # Plot passage connections (straight lines between rooms)
-            if i > 0:
-                prev_x, prev_y = rooms[i-1]['coordinates']
-                ax.plot([prev_x, x], [prev_y, y], 'k-', lw=1)  # draw line between current and previous room
+    #         # Plot passage connections (straight lines between rooms)
+    #         if i > 0:
+    #             prev_x, prev_y = rooms[i-1]['coordinates']
+    #             ax.plot([prev_x, x], [prev_y, y], 'k-', lw=1)  # draw line between current and previous room
 
-        # Setting up the plot limits and grid
-        ax.set_xlim(-5, 5)
-        ax.set_ylim(-5, 5)
-        ax.grid(True)
-        ax.set_title("Dungeon Map")
+    #     # Setting up the plot limits and grid
+    #     ax.set_xlim(-5, 5)
+    #     ax.set_ylim(-5, 5)
+    #     ax.grid(True)
+    #     ax.set_title("Dungeon Map")
 
-        plt.show()
+    #     plt.show()
 
     def fix_json_string(self, json_string):
         '''seems not to be needed'''
