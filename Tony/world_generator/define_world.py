@@ -1,79 +1,74 @@
 import json
 import sys
 import os
+from grid_maker import run_dungeon_maker,print_dungeon_map,room_data_to_text,generate_room_data
 
 
-def save_to_json(data, file_name):
-    current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
-    file_path = os.path.join(current_dir, file_name)  # Construct the full path within world_gen
-    
-    with open(file_path, 'w') as f:  # Use file_path instead of file_name
-        json.dump(data, f, indent=4)
+dungeon_template = ''' 
+Generate the dungeon using this template. Respond using JSON:
+{
+    "theme": str,  # The specific and creative theme of the dungeon, such as "Ancient Ruins," "Frozen Crypt," or "Volcanic Fortress."
+    "description": str  # A vivid, atmospheric description of the entire dungeon. Focus on the architecture, lighting, sounds, scents, and overall mood. Make it engaging and full of immersive details that draw players into the environment.
+}
+'''
 
-    return file_path  # Optional: return the file path for confirmation
+dungeon_system = '''
+You are an expert Dungeon Master tasked with creating a fully realized dungeon for a Dungeons and Dragons-style adventure. 
 
+Your task is to generate a dungeon using the provided template. This dungeon should have a creative and engaging theme that fits into a fantasy game world. Follow these detailed instructions:
 
+1. **Dungeon Theme**: Choose a fitting and unique theme for the dungeon that is captivating, such as "Ancient Ruins," "Cursed Castle," "Sunken Temple," or "Mystical Forest.". The theme should evoke a strong atmosphere.
 
-dungeon_templete = {
-    'theme': str,  # The theme of the dungeon, e.g., "Ancient Ruins"
-    'description': str,  # A vivid description of the overall dungeon
+2. **Dungeon Description**: Provide a vivid, atmospheric description of the dungeon that sets the tone for the adventure. Describe the architecture, lighting, and overall mood. You may include:
+   - Key environmental details (e.g., moss-covered stone walls, flickering torchlight, strange symbols etched into the floor)
+   - Sounds and smells that heighten the immersion (e.g., dripping water, distant echoes, damp, musty air)
+   - The mood or atmosphere (e.g., eerie, ominous, foreboding, mysterious)
+   - Unique features of the dungeon (e.g., "The walls hum faintly with an ancient magic" or "A cold, unnatural breeze flows through the corridors")
+   
+3. **Consistency**: Ensure that the theme and description match each other. The description should reflect the chosen theme in every detail.
 
-    'rooms': '''[
+### Key Rules:
+- Be creative and avoid clichés.
+- **Do NOT** include generic phrases like "you have reached the end of the dungeon" or "Here is your dungeon."
+- **Stick strictly** to the JSON template format.
+- Include only the requested information, nothing more.
+
+Respond using JSON format only.
+'''
+
+room_template = '''Generate the room using this template. Respond using JSON:
         {
-            'id': int,  # Unique identifier for the room, e.g., 1, 2, 3...
-            'description': str,  # Detailed room description
-            'name': str # Room name derived from the description
-            'passages': str,  # Passageways description (how it connects to other rooms)
-            'items': [
-                {
-                    'name': str,  # Name of the item, e.g., "Ancient Sword"
-                    'description': str  # Description of the item, e.g., "A rusty sword that hums with ancient magic."
-                }
-            ],
-            'dimensions': (int, int),  # Room dimensions in terms of (length, width), e.g., (10, 20)
-            'coordinates': (int, int),  # X, Y coordinates of the room, e.g., (0, 2) and (1,2)
-            'properties': list,  # List of unique properties of the room, e.g., ['dark', 'trapped']
-            'secrets': str  # Description of any hidden elements, e.g., "A hidden trapdoor beneath the carpet"
-        }
-    ]'''
-}
+        'description': str,  # Detailed room description
+        'name': str # Room name derived from the description
+        'items': [
+            {
+                'name': str,  # Name of the item, e.g., "Ancient Sword"
+                'description': str  # Description of the item, e.g., "A rusty sword that hums with ancient magic."
+            }
+        ],
+        'properties': list,  # List of unique properties of the room, e.g., ['dark', 'trapped']
+        'secrets': str  # Description of any hidden elements, e.g., "A hidden trapdoor beneath the carpet"
+        }'''
 
-dungeon_system = {
+room_system = '''
+You are an expert Dungeon Master tasked with creating individual rooms for a fully realized dungeon in a Dungeons and Dragons-style adventure. Each room should be engaging, atmospheric, and fit seamlessly within the dungeon's theme.
+You will be provided a template for room generation. Follow this detailed process to create each room:
+1. **Room Description**: Provide a vivid and immersive description of the room. Describe key environmental features such as the room’s architecture, lighting, and notable characteristics (e.g., stone walls covered in ancient moss, flickering torchlight casting ominous shadows, a damp, musty odor filling the space). The description should create a clear visual and sensory experience. Ensure the description fits with the overall theme of the dungeon.
+2. **Room Name**: Generate a fitting name for the room that matches its description. The name should evoke the room’s purpose or atmosphere (e.g., "Hall of Echoes," "Forgotten Armory," "The Sealed Chamber").
+3. **Items**: Add at least one interesting item found in the room. The items should be unique and engaging. Describe the item's appearance and any notable magical or historical properties (e.g., "Ancient Sword," with the description "A rusty sword that hums with faint magical energy, its blade etched with runes of a forgotten era"). Make sure the items are appropriate to the dungeon’s theme.
+4. **Room Properties**: List any unique properties of the room (e.g., "dark," "trapped," "cold"). These properties should enhance the room's atmosphere and provide gameplay elements for the players to interact with.
+5. **Secrets**: If the room contains any hidden elements or secrets, describe them (e.g., "A hidden trapdoor beneath the carpet leads to a secret chamber"). Secrets should be intriguing and fit naturally into the room’s design, offering players something to discover.
 
-    'system': '''
-You are an expert Dungeon Master tasked with creating a fully realized dungeon for a Dungeons and Dragons-style adventure. The dungeon should be generated with a specific theme that fits the game's tone. Please fill in the template provided with detailed descriptions and creative elements. Here are the requirements:
-
-1.Dungeon Theme: Choose a fitting theme for the dungeon, such as an ancient ruin, cursed castle, or dark cave.
-
-2.Dungeon Description: Provide a vivid, atmospheric description of the dungeon that sets the tone for the adventure. Mention key features like architecture, lighting, and general mood.
-
-3.Rooms: Generate between 4 to 10 interconnected rooms, each with its own unique description. For each room, include:
-    ID: A unique identifier number.
-    Room name: name of the room fitting to its description
-    Room Description: A vivid and immersive description, highlighting key features and atmosphere.
-    Dimensions: Specify the approximate size of the room (in feet or meters).
-    Coordinates: Provide the coordinates for the room on a 2D grid (x, y).
-    Passageways: Describe the passageways that connect this room to others. These could include doors, hallways, hidden tunnels, or magical portals.
-    Items: Generate a list of items present in the room. Each item should include:
-    Name: A descriptive name (e.g., "Ancient Sword," "Healing Potion").
-    Description: A short description explaining the item's appearance, history, or magical properties.
-    Properties: Include unique properties or characteristics of the room, such as traps, environmental hazards, magical effects, or secret areas.
-    Secrets: If applicable, describe any hidden elements, such as secret doors, concealed traps, or hidden treasures.
-
-4.Room Connections: Ensure that each room is interconnected with logical passageways that lead to other rooms. The dungeon should feel cohesive and follow a natural flow between rooms.
-
-5.Room Count: The dungeon should contain between 4 and 10 rooms, each with its own distinct layout and features.
-
-Be as creative as possible with the descriptions and consider unique, unexpected elements to make the dungeon engaging and challenging.
-NEVER generate something that does not fit the templete description such as "you have reached the end of the dungeon"
-Respond using JSON.
-''',
-
-'templete': f'Using the following template, generate a dungeon with all these details {dungeon_templete}'
-
-}
+### Key Rules:
+- Be as creative as possible with the descriptions, and avoid generic or cliché descriptions.
+- Ensure all room elements align with the overall theme and atmosphere of the dungeon.
+- **Do NOT** include generic phrases or descriptions that break immersion, such as "Here is your room."
+- Stick strictly to the JSON template format.
+- Respond with only the information requested and in the proper structure.
+Respond using JSON.'''
 
 
+# old prompts
 readable_data = {
     'system': '''You are an advanced AI responsible for constructing a rich, detailed, and cohesive high-fantasy world.
                 Your role is to be the architect, generating lore, characters, settings, and other world elements while maintaining consistency and depth.
@@ -150,11 +145,46 @@ Respond using JSON.
 
 
 
+def generate_dungeon_blueprint(dungeon_system=dungeon_system,
+                               dungeon_template=dungeon_template,
+                               room_system=room_system,
+                               room_template=room_template,
+                               rows=4,cols=4,room_ratio=0.3):
+
+    dungeon_map,room_count,room_data = run_dungeon_maker(rows=rows,cols=cols,room_ratio=room_ratio)
+    # room_data = room_data_to_text(room_data=room_data)
+    room_data = generate_room_data(dungeon_map=dungeon_map)
+
+    data = {
+        'map':dungeon_map,
+        'room_count':room_count,
+        'room_data':room_data,
+        'room_system':room_system,
+        'room_template':room_template,
+        'system':dungeon_system,
+        'template':dungeon_template
+    }
+
+    return data
+
+
+
+def save_blueprint_to_json(data, file_name):
+    current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
+    file_path = os.path.join(current_dir, file_name)  # Construct the full path within world_gen
+    
+    with open(file_path, 'w') as f:  # Use file_path instead of file_name
+        json.dump(data, f, indent=4)
+
+    return file_path  # Optional: return the file path for confirmation
+
 
 if __name__=='__main__':
-    file = 'world_blueprint.json'
-    room_file = 'room_blueprint.json'
-    dungeon_file = 'dungeon_blueprint.json'
+    # file = 'world_blueprint.json'
+    # room_file = 'room_blueprint.json'
+    # dungeon_file = 'dungeon_blueprint.json'
     
 
-    save_to_json(dungeon_system,dungeon_file)
+    # save_blueprint_to_json(dungeon_system,dungeon_file)
+
+    generate_dungeon_blueprint()

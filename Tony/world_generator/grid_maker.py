@@ -119,19 +119,59 @@ def generate_room_data(dungeon_map):
     return room_data
 
 
-if __name__=='__main__':
-    rows = 6
-    cols = 6
-    target_room_ratio = 0.3 # Adjust the ratio of rooms
+def room_data_to_text(room_data):
+    # Reverse the room_data dictionary to map coordinates to room IDs
+    coord_to_room_id = {info['coord']: room_id for room_id, info in room_data.items()}
+    
+    # Create a list to store the formatted text for each room
+    output_lines = []
 
-    dungeon_map = generate_dungeon_grid(rows, cols, target_room_ratio)
-    filtered_map = filter_empty_rows(dungeon_map=dungeon_map)
-    print_dungeon_map(dungeon_map=filtered_map)
-
-    rooms = count_rooms(filtered_map)
-    print(f'room count {rooms}')
-
-    room_data = generate_room_data(filtered_map)
-
+    # Loop through each room in room_data
     for room_id, info in room_data.items():
-        print(f"Room ID: {room_id}, Coordinates: {info['coord']}, Connections: {info['connections']}")
+        # Map coordinates of connections to their respective room IDs
+        connected_rooms = [coord_to_room_id[coord] for coord in info['connections']]
+        # Format the output for the current room
+        connected_rooms_str = ', '.join(str(room) for room in connected_rooms)
+        room_info = f"Room ID: {room_id}, Coordinates: {info['coord']}, Connections: to room {connected_rooms_str}"
+        output_lines.append(room_info)
+
+    # Return the formatted text as a single string, with each room's info on a new line
+    return '\n'.join(output_lines)
+
+
+def run_dungeon_maker(rows=4,cols=4,room_ratio=0.3):
+    dungeon_map = generate_dungeon_grid(rows=rows,cols=cols,target_room_ratio=room_ratio)
+    filtered_map = filter_empty_rows(dungeon_map=dungeon_map)
+    room_count = count_rooms(dungeon_map=filtered_map)
+
+    room_data = generate_room_data(dungeon_map=filtered_map)
+
+    return filtered_map,room_count,room_data
+
+
+if __name__=='__main__':
+
+
+    map,room_count,data = run_dungeon_maker()
+
+    print_dungeon_map(dungeon_map=map)
+
+    print(data)
+
+    print(room_count)
+
+    # rows = 4
+    # cols = 4
+    # target_room_ratio = 0.3 # Adjust the ratio of rooms
+
+    # dungeon_map = generate_dungeon_grid(rows, cols, target_room_ratio)
+    # filtered_map = filter_empty_rows(dungeon_map=dungeon_map)
+    # print_dungeon_map(dungeon_map=filtered_map)
+
+    # rooms = count_rooms(filtered_map)
+    # print(f'room count {rooms}')
+
+    # room_data = generate_room_data(filtered_map)
+
+    # for room_id, info in room_data.items():
+    #     print(f"Room ID: {room_id}, Coordinates: {info['coord']}, Connections: {info['connections']}")

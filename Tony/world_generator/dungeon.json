@@ -1,182 +1,92 @@
 {
-    "theme": "Abandoned Underwater Research Facility",
-    "description": "The underwater research facility was once a hub of scientific discovery and innovation. However, after a catastrophic accident that left the facility on the brink of collapse, it was abandoned and left to decay. The once-state-of-the-art equipment now lies in disarray, and the eerie silence is only broken by the creaking of twisted metal and the faint whispers of the past.",
+    "theme": "Moonlit Mirage",
+    "description": "Deep within the heart of a lush forest, lies the forgotten Moonlit Mirage - an ancient dream palace carved from crystal-like moonstone. The once-majestic structure now stands as a haunting testament to a long-lost civilization, its delicate spires and arches overgrown with vines and moss, reflecting the pale glow of the moon in shimmering silver hues. As night falls, the air thickens with an otherworldly mist that clings to the castle's walls like a damp shroud, carrying the whispers of forgotten dreams on its ethereal breeze. The wind stirs the crystal shards embedded within the walls, releasing a symphony of soft chimes that weave an enchanting melody through the night air, luring adventurers into the heart of this mystical place. Inside, corridors twist and turn like the paths of a dreamer's mind, while moonstone floors glimmer beneath your feet like pathways to forgotten memories. Shadows dance upon the walls, as if the spirits of those who once dwelled here still linger, trapped in a world between slumber and wakefulness.",
     "rooms": [
         {
-            "id": 1,
-            "name": "Reception Area",
-            "battle_map": "more opt for comfy generation",
-            "description": "A small, dimly lit reception area with a worn-out couch and a single, flickering light bulb. A large wooden counter stands opposite the entrance, with several broken computer terminals and a shattered glass window.",
-            "passages": "The only passage out of this room leads to Room 2.",
-            "items": [
-                { 
-                    "name": "Lost Logbook",
-                    "description": "A torn and dog-eared logbook belonging to one of the facility's researchers. The pages are filled with cryptic notes and diagrams, but a few entries seem to hint at a desperate attempt to warn others about an impending disaster."
-                }
-            ],
-            "dimensions": "(10, 15)",
-            "coordinates": "(0, 0)",
-            "properties": [
-                "flickering light"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 2,
-            "name": "Lab Area",
-            "description": "A large laboratory filled with rows of workstations and various scientific equipment. The walls are lined with shelves containing dusty jars, beakers, and other forgotten supplies.",
-            "passages": "The passage from Room 1 leads to a door that now hangs off its hinges. To the left is a dark corridor leading deeper into the facility (Room 3).",
+            "description": "As you proceed deeper into the Moonlit Mirage, you come upon a narrow corridor that winds its way up to a series of delicate arches. The air is heavy with the scent of blooming flowers and the soft chimes of crystal shards embedded within the walls create an enchanting melody. A soft, ethereal light emanates from the crystal floors beneath your feet, illuminating the path ahead. The walls, made of polished moonstone, seem to shimmer in time with the chimes, casting a mesmerizing dance of shadows upon the walls.",
+            "name": "Moonlit Gallery",
             "items": [
                 {
-                    "name": "Disused Microscope",
-                    "description": "A broken microscope with a cracked lens and loose screws. It looks like it hasn't been used in years."
+                    "name": "Songcrystal",
+                    "description": "A delicate crystal orb that glows with an otherworldly light. When touched, it releases a gentle melody that seems to harmonize with the crystal shards embedded within the walls."
+                }
+            ],
+            "properties": [
+                "dark",
+                "trapped"
+            ],
+            "secrets": "The songcrystal contains a subtle magical property that, when used in conjunction with the moonstone floors, can reveal hidden paths and secret chambers within the Moonlit Mirage. However, the crystal must be attuned to the individual's unique resonance before it can unlock these secrets.",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ]
+        },
+        {
+            "description": "As you proceed deeper into the Moonlit Mirage, you find yourself in a chamber that seems to be suspended between slumber and wakefulness. The walls, made of polished moonstone, appear to vibrate with an otherworldly energy, causing the crystal shards embedded within the structure to emit a soft, pulsing glow. The air is heavy with the scent of forgotten dreams, and the whispers of those who once dwelled here still linger, trapped in this mystical place. A delicate, silver mist clings to the walls, casting an ethereal veil over the chamber.",
+            "name": "The Dreamer's Nook",
+            "items": [
+                {
+                    "name": "Dreamcatcher's Locket",
+                    "description": "A delicate, filigreed locket that contains a small crystal fragment attuned to the resonant frequency of the Moonlit Mirage. When opened, it releases a soft, dreamlike quality that can guide the wearer through the winding corridors and hidden chambers of this mystical place."
+                }
+            ],
+            "properties": [
+                "enchanted",
+                "cold"
+            ],
+            "secrets": "A hidden compartment within the locket contains a cryptic poem etched on a piece of vellum, which, when deciphered, reveals a hidden path that leads to a secret chamber deep within the Moonlit Mirage. The poem reads: 'Where shadows dance upon the wall, seek out the heart of moonstone's call.'",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    2,
+                    2
+                ]
+            ]
+        },
+        {
+            "description": "You find yourself in a grand, high-ceilinged chamber that seems to be the epicenter of the Moonlit Mirage's mystical energy. The walls, made of polished moonstone, appear to shimmer and glow with an otherworldly light, causing the crystal shards embedded within the structure to emit a kaleidoscope of colors. The air is filled with the whispers of ancient rituals, and the scent of incense wafts through the air, carrying the essence of forgotten ceremonies. At the far end of the chamber, a magnificent crystal fountain stands tall, its waters shimmering like liquid moonlight as they cascade into a shallow pool.",
+            "name": "The Heart of Moonstone",
+            "items": [
+                {
+                    "name": "Moonstone Chalice",
+                    "description": "A delicate, filigreed chalice that seems to be crafted from the very essence of the moon. When filled with liquid, it emits a soft, pulsing glow that resonates with the mystical energy of the Moonlit Mirage."
                 },
                 {
-                    "name": "Faded Diagrams",
-                    "description": "Several faded diagrams on the walls, depicting various scientific experiments and theories. One of them seems to be a crude illustration of an underwater vortex."
+                    "name": "Starlight Scroll",
+                    "description": "A delicate, parchment scroll that contains the ancient incantations and rituals used to awaken the mystical energies within the Moonlit Mirage. The script is written in a language that seems to shimmer and dance upon the page, as if the very stars themselves have imparted their secrets."
                 }
             ],
-            "dimensions": "(20, 15)",
-            "coordinates": "(5, 0)",
             "properties": [
-                "dark",
-                "confined space"
+                "enchanted",
+                "magical"
             ],
-            "secrets": null
-        },
-        {
-            "id": 3,
-            "name": "Dark Corridor",
-            "description": "A narrow, dimly lit corridor with cold concrete walls and flickering fluorescent lights. The air is thick with the smell of decay and neglect.",
-            "passages": "The passage from Room 2 leads to a door that appears to be locked (Room 4). To the right is another dark corridor leading deeper into the facility (Room 5).",
-            "items": [
-                {
-                    "name": "Waterlogged Toolbox",
-                    "description": "A rusty toolbox half-submerged in water, with tools and equipment scattered all over the floor."
-                }
+            "secrets": "A hidden compartment within the moonstone chalice contains a tiny, crystal fragment attuned to the resonant frequency of the Moonlit Mirage. When used in conjunction with the Dreamcatcher's Locket, it can reveal a hidden path that leads to a secret chamber deep within the castle, where an ancient artifact lies waiting. The path is revealed by deciphering the cryptic poem etched on the vellum contained within the locket: 'Where shadows dance upon the wall, seek out the heart of moonstone's call.'",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
             ],
-            "dimensions": "(10, 5)",
-            "coordinates": "(15, -2)",
-            "properties": [
-                "dark",
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 4,
-            "name": "Locked Storage Room",
-            "description": "A small storage room with several locked cabinets and a large safe in the center of the room. The air is stale, and the smell of mold permeates everything.",
-            "passages": "The passage from Room 3 appears to be blocked (locked door). To the left is another dark corridor leading back towards the entrance (Room 1).",
-            "items": [
-                {
-                    "name": "Keycard Reader",
-                    "description": "A damaged keycard reader that lies on the floor, with a few tangled wires and cables surrounding it."
-                }
-            ],
-            "dimensions": "(5, 10)",
-            "coordinates": "(20, -3)",
-            "properties": [
-                "locked",
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 5,
-            "name": "Deeper Corridor",
-            "description": "A longer, darker corridor that stretches further into the facility. The walls are lined with pipes and electrical conduits, and the air is thick with dust.",
-            "passages": "The passage from Room 3 leads to a door that appears to be slightly ajar (Room 6). To the left is another dark corridor leading back towards Room 2.",
-            "items": [
-                {
-                    "name": "Water-Stained Map",
-                    "description": "A torn and water-stained map of the facility's layout, with several annotations and scribbles on it."
-                }
-            ],
-            "dimensions": "(20, 5)",
-            "coordinates": "(25, -4)",
-            "properties": [
-                "dark",
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 6,
-            "name": "Central Control Room",
-            "description": "A large control room with several computer terminals and a central console. The walls are lined with screens displaying cryptic messages and system alerts.",
-            "passages": "The passage from Room 5 leads to a door that appears to be locked (Room 7). To the right is another dark corridor leading towards Room 3.",
-            "items": [
-                {
-                    "name": "Central Computer",
-                    "description": "A central computer system with several screens displaying various data and graphs. One of the screens seems to be showing a countdown timer."
-                }
-            ],
-            "dimensions": "(20, 10)",
-            "coordinates": "(30, -5)",
-            "properties": [
-                "locked",
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 7,
-            "name": "Abandoned Office",
-            "description": "A small office with several desks and chairs scattered around. The walls are lined with old files and papers, and the air is thick with dust.",
-            "passages": "The passage from Room 6 appears to be blocked (locked door). To the left is another dark corridor leading back towards Room 5.",
-            "items": [
-                {
-                    "name": "Old Office Supplies",
-                    "description": "A box of old office supplies, including pens, paper clips, and staples."
-                }
-            ],
-            "dimensions": "(10, 5)",
-            "coordinates": "(35, -6)",
-            "properties": [
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 8,
-            "name": "Submerged Laboratory",
-            "description": "A laboratory that appears to be submerged underwater. The walls are lined with equipment and experiments, but everything is covered in water and sediment.",
-            "passages": "The passage from Room 7 leads to a door that appears to be locked (Room 9). To the right is another dark corridor leading back towards Room 6.",
-            "items": [
-                {
-                    "name": "Waterlogged Equipment",
-                    "description": "A collection of waterlogged equipment, including microscopes, pipettes, and other scientific tools."
-                }
-            ],
-            "dimensions": "(20, 10)",
-            "coordinates": "(40, -7)",
-            "properties": [
-                "water",
-                "confined space"
-            ],
-            "secrets": null
-        },
-        {
-            "id": 9,
-            "name": "Underwater Vortex Room",
-            "description": "A room that appears to be located at the center of an underwater vortex. The walls are lined with equipment and experiments, but everything is distorted and swirling around."
-        },
-        {
-            "id": 10,
-            "name": "Final Warning",
-            "description": "A small room with a single console displaying a countdown timer and several warnings about an impending disaster.",
-            "passages": null,
-            "items": [
-                {
-                    "name": "Final Message",
-                    "description": "A final message from the scientists, detailing their attempts to warn others about the impending disaster."
-                }
-            ],
-            "dimensions": "(5, 5)",
-            "coordinates": "(45, -8)",
-            "properties": [],
-            "secrets": null
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ]
         }
     ]
 }

@@ -1,0 +1,84 @@
+[
+    {
+        "description": "The air is heavy with an unnatural stillness as you enter a grand hall at the heart of the Sunken Temple. The ceiling disappears into darkness, its height lost to the gloom above. Flickering luminescent mushrooms dot the walls, casting eerie shadows on the damp stone floor. A series of ancient murals depict the ritual dances of a long-lost civilization, their vibrant colors now faded but still evocative of the temple's former glory.",
+        "name": "The Grand Hall",
+        "items": [
+            {
+                "name": "Starlight Chalice",
+                "description": "A delicate chalice made from a shell that shines with an ethereal light. Its beauty is mesmerizing, and it seems to glow in sync with the luminescent mushrooms."
+            }
+        ],
+        "properties": [
+            "dark",
+            "still"
+        ],
+        "secrets": null,
+        "room_id": 1,
+        "coordinates": [
+            1,
+            1
+        ],
+        "connections": [
+            [
+                2,
+                1
+            ]
+        ]
+    },
+    {
+        "description": "The sound of gently lapping waves against the temple's pillars creates an otherworldly melody as you find yourself in a small chamber filled with ancient artifacts. Shelves made from coral and shells line the walls, each one crowded with dusty relics that seem to hold the weight of forgotten memories. A faint hum emanates from the air itself, as if the very fabric of time has been warped within this sunken sanctum.",
+        "name": "The Chamber of Relics",
+        "items": [
+            {
+                "name": "Tidesong Lyre",
+                "description": "A beautifully crafted lyre with strings made from glowing seaweed. Its surface is etched with ancient runes that seem to shimmer in sync with the hum of time."
+            }
+        ],
+        "properties": [
+            "dark",
+            "mysterious"
+        ],
+        "secrets": "A hidden compartment behind one of the shelves contains a cryptic message scrawled on a piece of yellowed parchment, hinting at the true purpose of the Sunken Temple.",
+        "room_id": 2,
+        "coordinates": [
+            2,
+            1
+        ],
+        "connections": [
+            [
+                1,
+                1
+            ],
+            [
+                2,
+                2
+            ]
+        ]
+    },
+    {
+        "description": "The sound of dripping water echoes through the narrow passageway as you swim deeper into the Sunken Temple. The walls, once adorned with vibrant murals depicting the ancient rituals of a long-lost civilization, now seem to glow with an ethereal light that casts eerie shadows on the damp stone floor. Flickering luminescent mushrooms dot the passageways, casting flickering shadows that seem to dance with malevolent intent, hinting at the dark secrets buried beneath the waves.",
+        "name": "The Glimmering Passage",
+        "items": [
+            {
+                "name": "Moonlit Shell",
+                "description": "A delicate shell that shines with a soft, lunar light. Its beauty is mesmerizing, and it seems to glow in sync with the luminescent mushrooms, as if calling out to you from the darkness."
+            }
+        ],
+        "properties": [
+            "dark",
+            "twisty"
+        ],
+        "secrets": "A hidden compartment within one of the luminescent mushrooms contains a small, rolled-up parchment with an cryptic poem that hints at the temple's forgotten lore.",
+        "room_id": 3,
+        "coordinates": [
+            2,
+            2
+        ],
+        "connections": [
+            [
+                2,
+                1
+            ]
+        ]
+    }
+]

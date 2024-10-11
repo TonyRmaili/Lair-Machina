@@ -1,6 +1,8 @@
 import ollama
 import os
 import json
+import sys
+
 
 dungeon_blueprint = {
 'system':'''You are an expert Dungeon Master tasked with creating a fully realized dungeon for a Dungeons and Dragons-style adventure.
@@ -95,16 +97,9 @@ def dungeon_generate():
     
 
 
-   
-
-
 if __name__=='__main__':
     resp = dungeon_generate()
 
     # data = load_json('dungeon.json')
-    
-
-
-   
     # save_json(json_data=data,file_path='dungeon.json')
    

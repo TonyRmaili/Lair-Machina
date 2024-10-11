@@ -4,6 +4,7 @@ import os
 import time
 import threading
 import matplotlib.pyplot as plt
+from define_world import generate_dungeon_blueprint
 
 '''
 order to pass in data
@@ -35,6 +36,10 @@ class GenerateWorld:
         del self.world_data['system']
 
         self.is_generating = False
+
+        # dungeon maker
+
+        self.dungeon_data = generate_dungeon_blueprint(rows=3,cols=2,room_ratio=0.5)
 
 
     def run_in_thread(self):
@@ -93,37 +98,65 @@ class GenerateWorld:
         with open(room_file_path, "w") as file:
             file.write(resp)
 
-    def dungeon(self):
-        dungeon_blueprint_path = os.path.join(self.current_dir, 'dungeon_blueprint.json')
-        with open(dungeon_blueprint_path, 'r') as f:
-            data = json.load(f)
-        system = data['system']
-        templete = data['templete']
 
+    def dungeon_overview(self):
         resp = ollama.generate(
-            model=self.model,
-            system=system,
-            prompt= templete,
-            format='json'
-        )
-
+           model=self.model,
+           system=self.dungeon_data['system'],
+           prompt=self.dungeon_data['template'],
+           format='json'
+       )
         resp = resp['response']
-        resp = self.fix_json_string(json_string=resp)
+        return resp
 
-        room_file_path = os.path.join(self.current_dir, "dungeon.json")  
-        with open(room_file_path, "w") as file:
-            file.write(resp)
+    def dungeon_rooms(self,theme,description):
+        previous_rooms = []
+        dungeon_theme = theme
+        dungeon_description = description
+        room_template = self.dungeon_data['room_template']
+        room_system = self.dungeon_data['room_system']
+        room_count = self.dungeon_data['room_count']
+        room_data = self.dungeon_data['room_data']
+        
+        for i in range(room_count):
+            count = i+1
+            resp= ollama.generate(
+                model=self.model,
+                system=f'{room_system}.This is the dungeons theme {dungeon_theme} and the dungeons description {dungeon_description}',
+                prompt=f'{room_template} and these are the previous rooms {previous_rooms}',
+                format='json'
+            )
 
- 
-    def extract_dungeon_coords(self):
-        dungeon_path = os.path.join(self.current_dir, 'dungeon.json')
-        with open(dungeon_path, 'r') as f:
-            data = json.load(f)
+            resp = resp['response']
+            resp_dict = json.loads(resp)
+            resp_dict['room_id'] = count
+            resp_dict['coordinates'] = room_data[count]['coord']
+            resp_dict['connections'] = room_data[count]['connections']
 
-        return data['rooms']
-    
+            previous_rooms.append(resp_dict)
 
+        return previous_rooms
+
+    def run_dungeon(self):
+        self.is_generating = True
+        overview_resp = self.dungeon_overview()
+        overview_dict = json.loads(overview_resp)
+        theme = overview_dict['theme']
+        description = overview_dict['description']
+        rooms = self.dungeon_rooms(theme=theme,description=description)
+
+        overview_dict['rooms'] = rooms
+
+        # self.save_to_json(resp=overview_dict,name='dungeon')
+        with open('dungeon.json', 'w') as json_file:
+            json.dump(overview_dict, json_file, indent=4)
+        self.is_generating = False
+
+
+
+ # old methods 
     def plot_dungeon(self):
+        '''Deprecated'''
         rooms = self.extract_dungeon_coords()
         fig, ax = plt.subplots()
 
@@ -147,6 +180,7 @@ class GenerateWorld:
         plt.show()
 
     def fix_json_string(self, json_string):
+        '''seems not to be needed'''
         try:
             json_data = json.loads(json_string)
 
@@ -157,6 +191,17 @@ class GenerateWorld:
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
             return None
+
+    def save_to_json(self,resp,name):
+        path = os.path.join(self.current_dir, name+".json")  
+        with open(path, "w") as file:
+            file.write(resp)
+
+    def load_json(self,name):
+        path = os.path.join(self.current_dir,name+".json")
+        with open(path,'r') as file:
+            data = json.load(file)
+        return data
 
     def save_context(self, context):
         context_file_path = os.path.join(self.current_dir, 'context.json')  # Save context.json in world_gen
@@ -182,14 +227,14 @@ if __name__=='__main__':
 
     # world.run()
     # world.room()
-    world.dungeon()
+    # world.dungeon()
+
+    # world.dungeon_overview()
+    # world.dungeon_rooms()
+
+    world.run_dungeon()
 
 
-    rooms = world.extract_dungeon_coords()
-    for room in rooms:
-        print(f'id {room['id']}   coords: {room['coordinates']} | passages: {room['passages']}' )
-
-    rooms = world.plot_dungeon()
 
     end_time = time.time()
     execution_time = end_time - start_time
