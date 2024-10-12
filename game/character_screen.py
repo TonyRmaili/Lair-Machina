@@ -14,7 +14,7 @@ class CreactionScreen:
     This class is responsible for the character creation screen - it allows the player to create a character and saves the data
     """
     def __init__(self,game,w,h):
-        path = './game/pics/'
+        path = './pics/'
         self.bg = Image(image=path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))
         pygame.display.set_caption("Lair Machina: Character Creation")
 

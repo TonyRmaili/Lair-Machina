@@ -1,13 +1,11 @@
 import ollama
-from functions_for_ollama_v2 import all_functions
+from function_calls.functions_for_ollama_v2 import all_functions
 import json
 
 # Function to load the room JSON from a file - not part of the LLM-class
 def load_room_from_file(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
-
-
 
 
 class OllamaToolCall:

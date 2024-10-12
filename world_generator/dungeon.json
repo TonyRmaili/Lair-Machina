@@ -1,25 +1,26 @@
 {
-    "theme": "Moonlit Grotto",
-    "description": "The Moonlit Grotto is an otherworldly dungeon carved within a massive crystal cave, its walls shimmering with an ethereal glow. The air inside is heavy with the scent of saltwater and the faint hint of sea lavender, transporting those who venture within to a realm both familiar and yet utterly foreign. Flickering luminescent mushrooms cast eerie shadows on the crystalline walls as they sway in the gentle breeze, their soft whispering echoing off the cavernous space like an ethereal chorus. The moon's silvery light seeps through narrow crevices above, casting beams of pale blue light that dance across the floor like spectral fingers, beckoning adventurers deeper into the heart of the grotto.",
+    "theme": "Shattered Astral Sanctum",
+    "description": "The Shattered Astral Sanctum lies like a shard of splintered moonlight amidst a tangle of twisted, silverwood trees. This once-venerable temple was home to an ancient cabal of star-worshiping adepts who communed with celestial bodies to unlock the secrets of the cosmos. Now, it stands as a testament to their hubris and the catastrophic event known only as 'The Great Dissonance.' The air is heavy with the stench of burned incense and ozone, as if the very fabric of reality still smolders from the cataclysmic collision of astral energies. Flickering luminescent mushrooms cast eerie shadows on walls adorned with cracked, celestial maps, their symbols now twisted into grotesque, otherworldly sigils that seem to writhe like living things. The floor creaks beneathfoot, a mosaic of star-enameled tiles that reflect the sickle moon's pale glow, while above, the vaulted ceiling appears as a shattered pane of glass, through which a thousand stars twinkle with an unearthly light, their whispers echoing through the halls in a maddening susurrus. Time itself seems to be unraveling within these crumbling sanctums, and those who venture here will soon discover that they are not alone in this forsaken place.",
     "rooms": [
         {
-            "description": "A narrow corridor lined with luminescent mushrooms stretches into the darkness, their caps casting an ethereal glow that dances across the crystal-encrusted walls. The air is heavy with the scent of saltwater and sea lavender, creating a haunting melody that resonates through the cavernous space.",
-            "name": "Moonlit Promenade",
+            "description": "The Celestial Cartographer's Study lies within a circular nook of the Shattered Astral Sanctum. The room is dominated by a beautifully crafted, star-wooden desk, upon which rests an intricately drawn map of the cosmos. The map appears to be hand-drawn and depicts various celestial bodies in their correct positions, but with subtle anomalies that hint at an otherworldly perspective. A faint, ethereal glow emanates from the map, as if it is infused with stardust. Shelves lining the walls are adorned with ancient texts bound in a strange, star-enameled material, and rows of crystal-tipped quills stand at attention like sentinels. The air is thick with the scent of old parchment and the soft hum of celestial energies.",
+            "name": "The Cartographer's Sanctum",
             "items": [
                 {
-                    "name": "Luminous Capsule",
-                    "description": "A delicate, glass-like vial containing a swirling mixture of moonlight and starlight. When held, it hums with a soft, lunar energy that enhances the user's connection to the mysteries of the night."
+                    "name": "The Starlit Atlas",
+                    "description": "A comprehensive, hand-drawn map of the cosmos that seems to shift and change as one studies it. The map is adorned with intricate, glowing lines that pulse with a soft blue light, hinting at an otherworldly power."
                 },
                 {
-                    "name": "Whispering Mushroom",
-                    "description": "One of the luminescent mushrooms has grown larger than its companions, emitting an otherworldly voice that whispers ancient secrets and forgotten lore. Its message is cryptic, but holds a hidden truth waiting to be deciphered by those with ears attuned to the whispers of the grotto."
+                    "name": "The Quill of Starseekers",
+                    "description": "A quill crafted from a rare, star-wood material and tipped with a crystal shard. It hums softly when moved, suggesting its use in celestial divination or cartography."
                 }
             ],
             "properties": [
-                "crystal-lined",
-                "illuminated"
+                "dark",
+                "cold",
+                "magical"
             ],
-            "secrets": "A hidden pathway behind one of the mushrooms leads to an ancient, moonlit observatory containing ancient lunar charts and cryptic prophecies that foretell the coming of a celestial alignment. The alignment will unlock a hidden door in the grotto's central crystal formation, revealing the heart of the Moonlit Grotto.",
+            "secrets": null,
             "room_id": 1,
             "coordinates": [
                 1,
@@ -33,50 +34,20 @@
             ]
         },
         {
-            "description": "A tranquil chamber within the Moonlit Grotto, filled with an ethereal mist that shimmers in hues of pale blue and silver. The walls are adorned with delicate, crystalline formations that refract and reflect the moonlight, casting a kaleidoscope of colors across the room. A soft, gentle breeze carries the scent of blooming sea lavender through the space, creating a soothing melody that calms the mind.",
-            "name": "Crystal Reflections",
+            "description": "A narrow corridor, known as the Luminous Labyrinthine Passage, winds its way through the heart of the Shattered Astral Sanctum. The walls are lined with a series of glittering, crystal-lined alcoves that seem to absorb and refract the flickering luminescent light emanating from the mushrooms that grow in the darkness. As one proceeds down the passage, the air grows thick with an otherworldly energy that seems to pulse in time with the soft hum of the celestial bodies outside. The floor beneathfoot is made of a polished, star-enameled material that reflects the eerie glow of the luminescent mushrooms, making it seem as though one is walking through a tunnel of pure, liquid moonlight.",
+            "name": "The Luminous Labyrinthine Passage",
             "items": [
                 {
-                    "name": "Moonlit Tear Crystals",
-                    "description": "Delicate, crystalline structures that contain tiny pockets of moonlight. When touched, they release a fragment of the lunar essence, granting the user visions of past celestial alignments and their significance to the balance of nature."
+                    "name": "The Celestial Compass",
+                    "description": "A delicate, crystal-tipped compass that seems to point towards the very center of the Shattered Astral Sanctum. As one holds it, they can feel a subtle, otherworldly energy coursing through their veins, as if the compass is attuned to the heartbeat of the celestial bodies themselves."
                 }
             ],
             "properties": [
-                "illuminated",
-                "crystal-lined"
+                "dark",
+                "trapped"
             ],
-            "secrets": "A hidden compartment within one of the crystalline formations contains an ancient diary belonging to a long-forgotten lunar priestess. The diary holds cryptic entries about the coming celestial alignment and its potential impact on the balance of nature.",
+            "secrets": "A hidden, pressure plate-activated door lies at the very end of the passage, leading to a secret chamber deep within the heart of the sanctum. The door is cleverly concealed behind a tapestry of interlocking, luminescent mushrooms that seem to shift and change as one approaches.",
             "room_id": 2,
-            "coordinates": [
-                2,
-                1
-            ],
-            "connections": [
-                [
-                    2,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "A majestic, crystal-clear lake fills the room, its surface reflecting the moon's silvery light like a mirror. The air is heavy with the scent of blooming sea lavender and saltwater, creating a haunting melody that resonates through the space. Delicate, crystalline formations rise from the lake's depths, refracting and reflecting the moonlight in a kaleidoscope of colors.",
-            "name": "Moonlit Mirador",
-            "items": [
-                {
-                    "name": "Stellar Reflections",
-                    "description": "A small, delicate pool of crystal-clear water that reflects the celestial alignment of the stars. When gazed upon, it grants the user a glimpse into the workings of the universe and its secrets."
-                },
-                {
-                    "name": "Moonpetal Blooms",
-                    "description": "Rare, luminescent blooms that flower on the lake's surface at nightfall, emitting a soft, ethereal light that enhances the user's connection to the mysteries of the lunar cycle."
-                }
-            ],
-            "properties": [
-                "illuminated",
-                "crystal-lined"
-            ],
-            "secrets": "A hidden spring beneath the lake's surface contains a magical essence that can imbue water-based magic spells with the power of the moon. The essence is only accessible during the night of the celestial alignment, and its location must be deciphered from ancient lunar charts stored in the observatory hidden behind the Whispering Mushroom.",
-            "room_id": 3,
             "coordinates": [
                 2,
                 2
@@ -87,8 +58,34 @@
                     2
                 ],
                 [
+                    3,
+                    2
+                ]
+            ]
+        },
+        {
+            "description": "A vast, domed chamber known as the Shattered Astral Sanctum's Grand Oculus lies at the very heart of the temple. The room is a masterpiece of celestial engineering, with a translucent, crystal-encrusted dome that filters and refracts the light of the moon, casting an ethereal glow over the proceedings. The air is heavy with the scent of ozone and burned incense, as if the fabric of reality itself still smolders from the catastrophic event known as 'The Great Dissonance.' Flickering luminescent mushrooms sprout from the floor, their eerie light casting shadows on the walls, which are adorned with cracked, celestial maps that seem to writhe like living things. A lone, ornate chair sits at the very center of the room, as if awaiting the return of a long-lost star-god.",
+            "name": "The Grand Oculus",
+            "items": [
+                {
+                    "name": "The Starforged Chalice",
+                    "description": "A delicate, crystal chalice that seems to contain the essence of a thousand stars within its depths. The chalice hums softly with celestial energy, as if it is attuned to the heartbeat of the cosmos itself."
+                }
+            ],
+            "properties": [
+                "dark",
+                "magical"
+            ],
+            "secrets": "A hidden panel in the wall, disguised as a cracked section of celestial map, conceals a cryptic message etched into the surface. The message reads: 'The harmony of the spheres lies not in their balance, but in their discord.'",
+            "room_id": 3,
+            "coordinates": [
+                3,
+                2
+            ],
+            "connections": [
+                [
                     2,
-                    1
+                    2
                 ]
             ]
         }

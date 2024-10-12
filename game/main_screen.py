@@ -16,7 +16,6 @@ import threading
 from character import Character
 
 
-
 # new - game map feature
 from game_map import GameMap
 
