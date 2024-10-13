@@ -45,6 +45,7 @@ class Game:
     def run(self):
         while True:  
             events = pygame.event.get()
+            mouse_pos = pygame.mouse.get_pos()
             self.screen.fill('white')  
 
             
@@ -52,10 +53,10 @@ class Game:
                 self.menu_screen.run(screen=self.screen,events=events)
 
             elif self.game_mode == 'creation':
-                self.creation_screen.run(screen=self.screen,events=events)
+                self.creation_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
             elif self.game_mode == 'dungeon':
-                self.dungeon_screen.run(screen=self.screen,events=events)
+                self.dungeon_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
                 # new test
             # elif self.game_mode == 'map':

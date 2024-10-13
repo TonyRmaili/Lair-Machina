@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 
 class InputText:
     def __init__(self, x, y, width, height, title, font_size=32, line_limit=20, 
@@ -62,6 +62,7 @@ class InputText:
         margin = 10  # You can adjust this margin to make line breaks happen later
         
         # Check if the current line's width exceeds the text area's width minus the margin
+        
         if text_surface.get_width() > self.text_area_rect.width - margin:
             words = self.lines[-1].split(' ')
             if len(words) > 1:
@@ -75,7 +76,7 @@ class InputText:
         else:
             # Add the character to the current line if it doesn't exceed the width
             self.lines[-1] += char
-
+        
 
     def scroll(self, direction):
         # Scroll up or down by adjusting the scroll offset

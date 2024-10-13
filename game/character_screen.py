@@ -1,9 +1,9 @@
 import pygame
 import pygame_menu
 import sys
-from image import Image
-from textarea import TextArea
-from input_text import InputText
+from widgets.image import Image
+from widgets.textarea import TextArea
+from widgets.input_text import InputText
 from character import Character
 from settings import custom_theme
 from comfy_prompt import queue_prompt,run_in_thread
@@ -62,21 +62,17 @@ class CreactionScreen:
         self.game.game_mode = 'dungeon'
         # self.game.game_mode = 'map'
         
-
     def set_name(self,name):
         self.char.name = name
        
-
     def set_class(self, selected_value, index):
         selected_class, class_id = selected_value
         self.char.klass = selected_class[0]
         
-
     def set_race(self, selected_value, index):
         selected_race, race_id = selected_value
         self.char.race = selected_race[0]
-        
-       
+           
     def handle_event(self,events):
         for event in events:
             # handles quits 
@@ -88,12 +84,10 @@ class CreactionScreen:
                     self.game.game_mode = 'menu'
                     
             
-    def run(self,screen,events):
+    def run(self,screen,events,mouse_pos):
         
         self.handle_event(events)
-        self.bg.update(screen=screen)
-
-        mouse_pos = pygame.mouse.get_pos()
+        self.bg.draw(screen=screen)
 
         # Only update and draw the menu if the mouse is over it
         if self.menu_rect.collidepoint(mouse_pos):

@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 
 class Image():
     def __init__(self, image, pos,anchor='topleft', scale=None):
@@ -17,7 +17,7 @@ class Image():
         setattr(self.rect, anchor, pos)
 
 
-    def update(self, screen):
+    def draw(self, screen):
         screen.blit(self.image, self.rect)
 
     def checkForInput(self, position):
@@ -25,9 +25,11 @@ class Image():
             return True
         return False
 
-    # def changeImage(self, new_image, scale=None):
-    #     """Change the image being displayed."""
-    #     self.image = new_image
-    #     if scale is not None:
-    #         self.image = pygame.transform.scale(self.image, scale)
-    #     self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+    def changeImage(self, new_image, scale=None):
+        """Change the image being displayed."""
+        self.image = new_image
+        if scale is not None:
+            self.image = pygame.transform.scale(self.image, scale)
+        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+
+    
