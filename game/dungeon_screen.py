@@ -47,7 +47,6 @@ class DungeonSceen:
             self.response = None  # Clear the response after updating the box
 
     def handle_event(self,events,mouse_pos):
-        
         self.prompt_button.changeColor(position=mouse_pos)
         for event in events:
             # handles quits 
