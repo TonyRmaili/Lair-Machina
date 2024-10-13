@@ -47,7 +47,12 @@ class InputText:
                     else:
                         self.add_character(event.unicode)
 
-    
+
+    def send_text(self):
+        latest_lines = self.format_lines()
+        self.lines = [""]
+        return latest_lines
+
     def add_character(self, char):
     # Render the current line to measure its width
         current_line_text = self.lines[-1] + char

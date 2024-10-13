@@ -56,6 +56,16 @@ class TextArea:
         if current_line:
             lines.append(current_line)  # Add the last line
         return lines
+    
+    def new_text(self, text):
+        """
+        Updates the text in the text area and recalculates the scrolling and rendering logic.
+        """
+        self.text_lines = self.render_text(text=text, WIDTH=self.WIDTH)
+        self.scroll_y = 0  # Reset scroll to the top
+        self.max_scroll = max(0, len(self.text_lines) * self.font_size - (self.HEIGHT - self.title_padding))
+        self.scrollbar_h = max(30, int((self.HEIGHT - self.title_padding) * (self.HEIGHT - self.title_padding) / (len(self.text_lines) * self.font_size)))
+        self.scrollbar_rect = pygame.Rect(self.x + self.WIDTH - self.scrollbar_w, self.y + self.title_padding, self.scrollbar_w, self.scrollbar_h)
 
     def event_handler(self, event):
         # Define the text area as a rectangle, exclude the title area

@@ -1,10 +1,8 @@
-import pygame
 import pygame_menu
 from settings import custom_theme
 
-
 class MenuScreen:
-    def __init__(self,game,w,h) -> None:
+    def __init__(self,game,w,h):
         self.game = game
 
         dark_theme = custom_theme()

@@ -1,8 +1,6 @@
 import pygame_menu
 
 
-
-
 def custom_theme(theme_name: str = 'THEME_DARK'):
     # Dynamically retrieve the theme using getattr
     theme = getattr(pygame_menu.themes, theme_name).copy()  # Get the theme by name and copy it

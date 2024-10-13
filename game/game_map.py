@@ -92,7 +92,7 @@ class GameMap:
         pygame.mixer.music.load('The_journey(2).mp3')
         pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
 
-        pygame.mixer.music.set_volume(0.3)  # Set background music volume (0.0 to 1.0)
+        pygame.mixer.music.set_volume(0)  # Set background music volume (0.0 to 1.0)
         
         
         # self.game.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
