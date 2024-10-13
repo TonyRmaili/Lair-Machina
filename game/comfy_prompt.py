@@ -177,7 +177,7 @@ prompt_text = """
   }
 }
 """
-
+image_generation_event = threading.Event()
 
 # # WORKS######################
 def queue_prompt(prompt):
@@ -210,15 +210,35 @@ def move_and_rename_latest_image(source_folder, destination_folder, new_filename
 
     print(f"Moved and renamed the latest image: {latest_image} to {destination_path}")
     
+    image_generation_event.set()
+
 
 def run_in_thread(art_description, character_name):
     prompt = json.loads(prompt_text)
     prompt["6"]["inputs"]["text"] = art_description
+
+
+    # Reset the event before starting the image generation
+    image_generation_event.clear()
+
     # Run the text generation in a separate thread, pass the argument using args
-    thread = threading.Thread(target=queue_prompt, args=(prompt,))
-    thread.start()
+    thread1 = threading.Thread(target=queue_prompt, args=(prompt,))
+    thread1.start()
     
-    move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/', destination_folder=f'./pics/{character_name}', new_filename='profile_img' )
+    # move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/', destination_folder=f'./pics/{character_name}', new_filename='profile_img' )
+
+    thread2 = threading.Thread(
+        target=move_and_rename_latest_image,
+        args=('/home/student/harry_and_tony_project/ComfyUI/output/', f'./pics/{character_name}', 'profile_img')
+    )
+    thread2.start()
+
+    thread1.join()
+    thread2.join()
+
+    # Set the event to indicate the image generation is done
+    image_generation_event.set()
+
 
 if __name__=='__main__':
   # this wont happen as the game uses thread

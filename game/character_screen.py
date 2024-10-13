@@ -6,8 +6,8 @@ from widgets.textarea import TextArea
 from widgets.input_text import InputText
 from character import Character
 from settings import custom_theme
-from comfy_prompt import queue_prompt,run_in_thread
- 
+from comfy_prompt import queue_prompt,run_in_thread,image_generation_event
+# import threading 
 
 class CreactionScreen:
     """
@@ -29,8 +29,11 @@ class CreactionScreen:
         self.char.race = 'Human'
 
        
-        self.description_box = InputText(750, 50, 300, 200, title="Description", font_size=24, 
+        self.description_box = InputText(450, 50, 300, 200, title="Description", font_size=24, 
                 bg_color=(69, 69, 69), text_color=(255, 255, 255), title_color=(255, 255, 255))
+
+        # threading attributes
+        self.is_fetching = False
 
    
     def create_char_menu(self,w,h):
@@ -57,11 +60,24 @@ class CreactionScreen:
 
         self.char.description = self.description_box.format_lines()
         print(self.char.description)
+
         # this is the img gen function
-        # run_in_thread(self.char.description, self.char.name)
-        self.game.game_mode = 'dungeon'
-        # self.game.game_mode = 'map'
-        
+        # if self.char.description:
+        #     run_in_thread(self.char.description, self.char.name)
+
+        if self.char.description:
+        # Start image generation in thread and wait for completion
+            run_in_thread(self.char.description, self.char.name)
+
+            # Wait for the image generation to complete before switching game mode
+            print("Waiting for image generation to complete...")
+            image_generation_event.wait()
+
+            print("Image generation completed. Starting dungeon mode.")
+            self.game.game_mode = 'dungeon'
+            # self.game.game_mode = 'map'
+
+
     def set_name(self,name):
         self.char.name = name
        
@@ -82,10 +98,8 @@ class CreactionScreen:
             elif event.type == pygame.KEYDOWN:                
                 if event.key == pygame.K_q:
                     self.game.game_mode = 'menu'
-                    
-            
+                             
     def run(self,screen,events,mouse_pos):
-        
         self.handle_event(events)
         self.bg.draw(screen=screen)
 

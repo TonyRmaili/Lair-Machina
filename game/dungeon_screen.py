@@ -17,8 +17,9 @@ class DungeonSceen:
         self.bg = Image(image=path+'floor.jpg',pos=(250,0),scale=(w-250,h-250))
         namepath = self.game.char.name
         path = './pics/'+ namepath + '/'
+
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
-        self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(w-250,h-250),scale=(250,250))
+        self.character_image = Image(image=path+'profile_img.png',pos=(w-250,h-250),scale=(250,250))
 
         self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
         self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
