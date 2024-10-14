@@ -7,7 +7,7 @@ from widgets.button import Button
 import ollama
 import threading
 
-class DungeonSceen:
+class DungeonScreen:
     """
     needs to be updated to merge with the game_map.py
     """
@@ -20,7 +20,7 @@ class DungeonSceen:
         path = './pics/'+ namepath + '/'
 
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
-        self.character_image = Image(image=path+'profile_img.png',pos=(w-250,h-250),scale=(250,250))
+        self.character_image = Image(image=self.char.image,pos=(w-250,h-250),scale=(250,250))
 
         self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,
                         title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
@@ -31,6 +31,7 @@ class DungeonSceen:
         self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',
                 image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36))
         
+
         # threading attributes
         self.response = None  
         self.is_fetching = False  
@@ -75,11 +76,12 @@ class DungeonSceen:
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.update_response()
         self.bg.draw(screen=screen)
-
+        
         self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
         self.response_box.draw(screen=screen)
         self.prompt_button.draw(screen=screen)
+        
 
 
 

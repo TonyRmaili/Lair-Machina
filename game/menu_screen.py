@@ -20,19 +20,17 @@ class MenuScreen:
         self.menu.add.button('Quit', pygame_menu.events.EXIT)
 
 
-    
     def new_game(self):
         self.game.game_mode = 'creation'
         
-
     def continue_game(self):
         # self.game.game_mode = 'continue'
         pass
 
-
     # this should be part of the dungeon screen feature
     def game_map(self):
-        self.game.game_mode = 'map'
+        pass
+        # self.game.game_mode = 'map'
         # print('continue game')
 
     def load_game(self):

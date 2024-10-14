@@ -16,8 +16,6 @@ class CreactionScreen:
     def __init__(self,game,w,h):
         path = './pics/'
         self.bg = Image(image=path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))
-        pygame.display.set_caption("Lair Machina: Character Creation")
-
         self.game = game
 
         self.char_menu,self.menu_rect = self.create_char_menu(w,h)
@@ -33,6 +31,7 @@ class CreactionScreen:
 
         # threading attributes
         self.is_fetching = False
+
 
    
     def create_char_menu(self,w,h):
@@ -59,10 +58,11 @@ class CreactionScreen:
 
         self.char.description = self.description_box.format_lines()
         print(self.char.description)
-
+        
         self.game.game_mode ='loading'
         self.game.loading_screen.start_image_generation()
         # self.game.game_mode = 'map'
+
 
 
     def set_name(self,name):

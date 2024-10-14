@@ -4,7 +4,7 @@ from debug import debug
 import os
 from character_screen import CreactionScreen
 from menu_screen import MenuScreen
-from dungeon_screen import DungeonSceen
+from dungeon_screen import DungeonScreen
 from loading_screen import LoadingScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from character import Character
@@ -37,7 +37,7 @@ class Game:
         
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
-        self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
+        self.dungeon_screen = None
         self.loading_screen = LoadingScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         
         # map feature
@@ -46,6 +46,7 @@ class Game:
     
 
     def run(self):
+
         while True:  
             events = pygame.event.get()
             mouse_pos = pygame.mouse.get_pos()
@@ -59,8 +60,10 @@ class Game:
                 self.creation_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
             elif self.game_mode == 'dungeon':
+                if self.dungeon_screen is None:
+                    self.dungeon_screen = DungeonScreen(game=self, w=self.WIDTH, h=self.HEIGHT)
                 self.dungeon_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
-
+                
             elif self.game_mode == 'loading':
                 self.loading_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
