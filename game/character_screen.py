@@ -6,8 +6,7 @@ from widgets.textarea import TextArea
 from widgets.input_text import InputText
 from character import Character
 from settings import custom_theme
-from comfy_prompt import queue_prompt,run_in_thread,image_generation_event
-# import threading 
+
 
 class CreactionScreen:
     """
@@ -29,11 +28,8 @@ class CreactionScreen:
         self.description_box = InputText(450, 50, 300, 200, title="Description", font_size=24, 
                 bg_color=(69, 69, 69), text_color=(255, 255, 255), title_color=(255, 255, 255))
 
-        # threading attributes
-        self.is_fetching = False
-
-
-   
+       
+    
     def create_char_menu(self,w,h):
         theme = custom_theme(theme_name='THEME_BLUE')
 
@@ -60,7 +56,7 @@ class CreactionScreen:
         print(self.char.description)
         
         self.game.game_mode ='loading'
-        self.game.loading_screen.start_image_generation()
+        self.game.loading_screen.img_generator()
         # self.game.game_mode = 'map'
 
 
