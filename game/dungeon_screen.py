@@ -44,7 +44,8 @@ class DungeonSceen:
         
 
         self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
-
+        
+        
 
         #set starting- current room
         self.current_room_id = 0
@@ -63,6 +64,7 @@ class DungeonSceen:
         self.game_exit = False  # Flag to handle game exit
 
 
+        self.current_room_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
 
 
         # print(self.dungeon['rooms'][self.current_room_id]['name'])
@@ -79,14 +81,15 @@ class DungeonSceen:
 
 
     def display_current_room(self):
-        # Display the current room's name and description
-        self.game.screen.fill((0, 0, 0))  # Clear screen with black
-        font = pygame.font.Font(None, 36)
-        text_surface = font.render(f"You are in {self.current_room.name}", True, (255, 255, 255))
-        self.game.screen.blit(text_surface, (50, 50))
+        
+        # # Display the current room's name and description
+        # self.game.screen.fill((0, 0, 0))  # Clear screen with black
+        # font = pygame.font.Font(None, 36)
+        # text_surface = font.render(f"You are in {self.current_room_name}", True, (255, 255, 255))
+        # self.game.screen.blit(text_surface, (50, 50))
 
-        description_surface = font.render(self.current_room.description, True, (255, 255, 255))
-        self.game.screen.blit(description_surface, (50, 100))
+        # description_surface = font.render(self.current_room_description, True, (255, 255, 255))
+        # self.game.screen.blit(description_surface, (50, 100))
 
         # Display instructions if a special action is available
         if self.special_action_available:
@@ -201,6 +204,8 @@ class DungeonSceen:
         # self.response_box.draw(screen=screen)
         # self.prompt_button.draw(screen=screen)
         self.display_map()
+        self.current_room_box.new_text(text=self.current_room_description)
+        self.current_room_box.draw(screen=screen)
 
         # self.map_grid.draw(screen=screen)
         
