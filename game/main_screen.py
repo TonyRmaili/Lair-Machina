@@ -5,6 +5,7 @@ import os
 from character_screen import CreactionScreen
 from menu_screen import MenuScreen
 from dungeon_screen import DungeonSceen
+from loading_screen import LoadingScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from character import Character
 # from game_map import GameMap
@@ -33,9 +34,11 @@ class Game:
 
         self.game_mode = 'menu'
 
+        
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
+        self.loading_screen = LoadingScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         
         # map feature
         # self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
@@ -57,6 +60,9 @@ class Game:
 
             elif self.game_mode == 'dungeon':
                 self.dungeon_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
+
+            elif self.game_mode == 'loading':
+                self.loading_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
                 # new test
             # elif self.game_mode == 'map':

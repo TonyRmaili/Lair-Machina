@@ -166,7 +166,12 @@ def generate_dungeon_blueprint(dungeon_system=dungeon_system,
         'template':dungeon_template
     }
 
+
+    with open('dungeon_map.json', 'w') as f:  # Use file_path instead of file_name
+        json.dump(data['map'], f, indent=4)
+
     return data
+
 
 
 

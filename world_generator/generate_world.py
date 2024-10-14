@@ -44,6 +44,7 @@ class GenerateWorld:
         self.dungeon_data = generate_dungeon_blueprint(rows=3,cols=2,room_ratio=0.5)
 
 
+
     def run_in_thread(self):
         # Run the text generation in a separate thread
         thread = threading.Thread(target=self.run)
@@ -119,6 +120,7 @@ class GenerateWorld:
         room_system = self.dungeon_data['room_system']
         room_count = self.dungeon_data['room_count']
         room_data = self.dungeon_data['room_data']
+        dungeon_map = self.dungeon_data['map']
         
         for i in range(room_count):
             count = i+1
@@ -140,6 +142,7 @@ class GenerateWorld:
         return previous_rooms
 
     def run_dungeon(self):
+
         self.is_generating = True
         overview_resp = self.dungeon_overview()
         overview_dict = json.loads(overview_resp)

@@ -28,7 +28,6 @@ class CreactionScreen:
         self.char.klass = 'Fighter'
         self.char.race = 'Human'
 
-       
         self.description_box = InputText(450, 50, 300, 200, title="Description", font_size=24, 
                 bg_color=(69, 69, 69), text_color=(255, 255, 255), title_color=(255, 255, 255))
 
@@ -61,21 +60,9 @@ class CreactionScreen:
         self.char.description = self.description_box.format_lines()
         print(self.char.description)
 
-        # this is the img gen function
-        # if self.char.description:
-        #     run_in_thread(self.char.description, self.char.name)
-
-        if self.char.description:
-        # Start image generation in thread and wait for completion
-            run_in_thread(self.char.description, self.char.name)
-
-            # Wait for the image generation to complete before switching game mode
-            print("Waiting for image generation to complete...")
-            image_generation_event.wait()
-
-            print("Image generation completed. Starting dungeon mode.")
-            self.game.game_mode = 'dungeon'
-            # self.game.game_mode = 'map'
+        self.game.game_mode ='loading'
+        self.game.loading_screen.start_image_generation()
+        # self.game.game_mode = 'map'
 
 
     def set_name(self,name):
