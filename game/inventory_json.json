@@ -1,16 +1,20 @@
 {
     "inventory": [
-      {
-        "name": "Sword",
-        "description": "A sharp blade, made of steel, used to vanquish foes."
-      },
-      {
-        "name": "Health Potion",
-        "description": "A bottle with liquid that restores health"
-      },
-      {
-        "name": "Leather Armor",
-        "description": "A armor made of leather that provides basic protection."
-      }
+        {
+            "name": "Sword",
+            "description": "A sharp blade, made of steel, used to vanquish foes."
+        },
+        {
+            "name": "Health Potion",
+            "description": "A bottle with liquid that restores health"
+        },
+        {
+            "name": "Leather Armor",
+            "description": "A armor made of leather that provides basic protection."
+        },
+        {
+            "name": "Glimmering Starlight Dust",
+            "description": "Tiny fragments of starlight distilled into a sparkling dust. This precious substance is rumored to hold within it the essence of creation's earliest moments and could grant immense insight to those who possess it."
+        }
     ]
-  }
+}

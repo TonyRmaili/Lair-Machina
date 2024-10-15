@@ -32,7 +32,9 @@ from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 
 class DungeonScreen:
     """
-    needs to be updated to merge with the game_map.py
+    this is the game mode 
+    - works to move
+    -still working on loot etc
     """
     def __init__(self,game,w,h):
         self.game = game
@@ -56,7 +58,7 @@ class DungeonScreen:
         #set starting- current room
         self.current_room_id = 0
 
-        with open('./dungeon.json') as f:
+        with open('./updated_dungeon.json') as f:
             self.dungeon = json.load(f)
         
         self.current_room_data = self.dungeon['rooms'][self.current_room_id]
@@ -64,6 +66,15 @@ class DungeonScreen:
         self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
         self.current_x = self.dungeon['rooms'][self.current_room_id]['coordinates'][0]
         self.current_y = self.dungeon['rooms'][self.current_room_id]['coordinates'][1]
+        
+        # the room json path from updated dungeon . json
+        self.current_room_items_path = self.dungeon['rooms'][self.current_room_id]['items_file']
+        
+        with open(self.current_room_items_path) as f:
+            self.current_room_items = json.load(f)
+        
+        print(self.current_room_items)
+        
         
 
         # Game state: track the current room and position in the grid
@@ -140,6 +151,9 @@ class DungeonScreen:
             self.current_y = self.dungeon['rooms'][self.current_room_id]['coordinates'][1]
             self.player_move_options = self.dungeon['rooms'][self.current_room_id]['connections']
             self.update_current_room_box()
+            # update so looking at the right room JSON
+            self.current_room_items_path = self.dungeon['rooms'][self.current_room_id]['items_file']
+        
         else:
             print('invalid move')
             
@@ -180,9 +194,13 @@ class DungeonScreen:
 
         # NOW IT WORKS ATLEAST - but needs to take the current room? otherwise too much bullshit?
         
-        # give it the current room in the JSON? 
         
-        ollama_instance = OllamaToolCall(messages=f"{prompt}, the player is currently in the room: {self.current_room_name}", room_file='castle_map.json')
+        # give it the current room in the JSON? 
+        self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
+        print(self.room_file)
+        
+        
+        ollama_instance = OllamaToolCall(messages=f'{prompt}. these are the items in the room: {self.current_room_items} This is the room_file: ./{self.room_file}', room_file=self.room_file)
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
@@ -219,6 +237,7 @@ class DungeonScreen:
             
             # keys for player navigation
             if event.type == pygame.KEYDOWN:
+                print(self.current_room_items_path)
                 if event.key == pygame.K_UP:
                     self.move_to_room('north')
                 elif event.key == pygame.K_DOWN:
@@ -253,7 +272,8 @@ class DungeonScreen:
         self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
-        self.current_room_options_box.draw(screen=screen)        
+        self.current_room_options_box.draw(screen=screen)
+                
 
         # self.map_grid.draw(screen=screen)
         
