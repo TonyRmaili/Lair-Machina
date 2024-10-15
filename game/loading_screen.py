@@ -6,7 +6,7 @@ from widgets.input_text import InputText
 from widgets.button import Button
 import time
 import threading
-from comfy_prompt import run_in_thread, image_generation_event
+from comfy_prompt import run_comfy
 import os
 
 
@@ -20,32 +20,33 @@ class LoadingScreen:
 
         self.loading_complete = False
 
-    def img_generator(self):
-        run_in_thread(self.char.description, self.char.name)
-        image_path = f'./pics/{self.char.name}/profile_img.png'
+        self.gen_button = Button(pos=(w-325,h-400),text_input='Submit',
+                image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36))
 
-        # Continuously check if the image has been generated
-        while not os.path.exists(image_path):
-            print("Waiting for image generation...")
-            time.sleep(1)  # Sleep for a short duration before checking again
-            # Wait for the image generation to complete
+    def img_generator(self):
+        run_comfy(self.char.description, self.char.name)
         
-        
-        print("Image has been generated!")
         self.char.image = f'./pics/{self.char.name}/profile_img.png'
         self.loading_complete = True
             
 
-    # def start_image_generation(self):
-    #     threading.Thread(target=self.img_generator).start() 
+    def start_image_generation(self):
+        threading.Thread(target=self.img_generator).start() 
 
 
     def handle_event(self,events,mouse_pos):
+        self.gen_button.changeColor(position=mouse_pos)
         for event in events:
             # handles quits 
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.gen_button.checkForInput(mouse_pos):
+                    self.start_image_generation()
+                    
+
             self.terminal_box.handle_event(event=event)
 
     
@@ -53,6 +54,7 @@ class LoadingScreen:
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.bg.draw(screen=screen)
         self.terminal_box.draw(screen=screen)
+        self.gen_button.draw(screen)
 
         if self.loading_complete:
             self.game.game_mode ='dungeon'

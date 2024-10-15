@@ -56,7 +56,7 @@ class CreactionScreen:
         print(self.char.description)
         
         self.game.game_mode ='loading'
-        self.game.loading_screen.img_generator()
+        # self.game.loading_screen.img_generator()
         # self.game.game_mode = 'map'
 
 

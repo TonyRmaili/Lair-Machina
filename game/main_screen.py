@@ -26,25 +26,17 @@ class Game:
         
         self.char = Character()
         
-        # new map feature
-        # self.map = GameMap(game=self)
-        # self.map.create_rooms()
-        
         pygame.display.set_caption("Lair Machina")
 
         self.game_mode = 'menu'
 
-        
+        # screens
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.dungeon_screen = None
         self.loading_screen = LoadingScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         
-        # map feature
-        # self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
-        
     
-
     def run(self):
 
         while True:  
@@ -67,11 +59,7 @@ class Game:
             elif self.game_mode == 'loading':
                 self.loading_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
 
-                # new test
-            # elif self.game_mode == 'map':
-            #     self.map_screen.run(screen=self.screen,events=events)
-
-                                      
+            
             pygame.display.flip()           
             self.clock.tick(self.FPS)
 

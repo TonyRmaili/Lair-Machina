@@ -229,7 +229,6 @@ def queue_prompt(prompt):
 
 def run_comfy(description, name):
     source_path = '/home/student/harry_and_tony_project/ComfyUI/output/'
-    destination_folder = '/desired/destination/folder'  # Set your destination folder here
     current_date = datetime.now()
     # Prepare the prompt and update it with the description
     prompt = json.loads(prompt_text)  # Assuming prompt_text is defined somewhere
