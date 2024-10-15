@@ -84,6 +84,14 @@ class DungeonScreen:
         with open(self.current_room_items_path) as f:
             self.current_room_items = json.load(f)
         
+        # Extract only the names of the items in the inventory
+        # room_item_names = [item['name'] for item in self.current_room_items]
+        # Check if item is a dictionary before trying to access 'name'
+        room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
+
+            
+        self.current_room_items = f'{room_item_names}'
+
         print(self.current_room_items)
         
         
@@ -113,7 +121,19 @@ class DungeonScreen:
     def update_current_room_box(self):
         self.current_room_box = TextArea(text=self.current_room_description,WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
         self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+        
+        with open(self.current_room_items_path) as f:
+            self.current_room_items = json.load(f)
+        
+        # Extract only the names of the items in the inventory
+        # room_item_names = [item['name'] for item in self.current_room_items]
+        # Check if item is a dictionary before trying to access 'name'
+        room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
 
+            
+        self.current_room_items = f'{room_item_names}'
+
+        self.current_room_items_box = TextArea(text=self.current_room_items,WIDTH=250,HEIGHT=250,x=0,y=300,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
 
         # # Display instructions if a special action is available
         # if self.special_action_available:
@@ -168,6 +188,9 @@ class DungeonScreen:
             
             with open(self.current_room_items_path) as f:
                 self.current_room_items = json.load(f)        
+            
+            self.update_current_room_box()
+            
         else:
             print('invalid move')
             
@@ -206,10 +229,10 @@ class DungeonScreen:
         
         # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        # print(self.room_file)
+        print(self.inventory)
+        # print(self.current_room_items)
         
-        
-        ollama_instance = OllamaToolCall(messages=f'{prompt}. these are the items in the room: {self.current_room_items} This is the room_file: ./{self.room_file}', room_file=self.room_file)
+        ollama_instance = OllamaToolCall(messages=f'{prompt}. these are the items in the room: {self.current_room_items}, This is the players current inventory: {self.inventory} This is the room_file: ./{self.room_file}', room_file=self.room_file)
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
@@ -297,8 +320,10 @@ class DungeonScreen:
         
         self.update_inventory_box()
         self.inventory_box.draw(screen=screen)
+        
                 
-
+        self.current_room_items_box.draw(screen=screen)
+        
         # self.map_grid.draw(screen=screen)
         
 

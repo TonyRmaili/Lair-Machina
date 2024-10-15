@@ -1,10 +1,10 @@
 [
     {
-        "name": "Stellar Lyre",
-        "description": "A lyre crafted from a fallen star's crystalline essence, its strings humming with celestial harmonics. When played, it is said to summon melodies that can weave the fabric of reality itself."
+        "name": "Dust",
+        "description": "dry."
     },
     {
-        "name": "Glimmering Starlight Dust",
-        "description": "Tiny fragments of starlight distilled into a sparkling dust. This precious substance is rumored to hold within it the essence of creation's earliest moments and could grant immense insight to those who possess it."
+        "name": "Crystal Resonator",
+        "description": "A delicate crystal shard attuned to the celestial harmonics that resonate through the shattered spires. When held, it allows you to sense subtle changes in the fabric of reality and track hidden patterns within the spires' labyrinthine structure."
     }
 ]
