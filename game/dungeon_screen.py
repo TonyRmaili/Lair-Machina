@@ -47,7 +47,7 @@ class DungeonScreen:
 
         # Ollama chat windows
         self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
-        self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
+        self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=0,y=500,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
         
         self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
@@ -56,7 +56,7 @@ class DungeonScreen:
         #set starting- current room
         self.current_room_id = 0
 
-        with open('../world_generator/dungeon.json') as f:
+        with open('./dungeon.json') as f:
             self.dungeon = json.load(f)
         
         self.current_room_data = self.dungeon['rooms'][self.current_room_id]
@@ -146,7 +146,7 @@ class DungeonScreen:
 
     def display_map(self):
         # displays the map in the top right corner - from the JSON file
-        with open('../world_generator/dungeon_map.json') as f:
+        with open('./dungeon_map.json') as f:
             self.map_grid = json.load(f)
 
         # Display the map in the top-right corner

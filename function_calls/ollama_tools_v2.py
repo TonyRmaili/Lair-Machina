@@ -1,5 +1,5 @@
 import ollama
-from function_calls.functions_for_ollama_v2 import all_functions
+from functions_for_ollama_v2 import all_functions
 import json
 
 # Function to load the room JSON from a file - not part of the LLM-class
