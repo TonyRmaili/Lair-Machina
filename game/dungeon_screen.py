@@ -14,11 +14,9 @@ class DungeonScreen:
     def __init__(self,game,w,h):
         self.game = game
         self.char = game.char
-        path = './pics/'
-        self.bg = Image(image=path+'floor.jpg',pos=(250,0),scale=(w-250,h-250))
-        namepath = self.game.char.name
-        path = './pics/'+ namepath + '/'
-
+        path = f'./pics/{self.char.name}/dungeon_rooms/'
+        self.bg = Image(image=path+'1.png',pos=(250,0),scale=(w-250,h-250))
+        
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
         self.character_image = Image(image=self.char.image,pos=(w-250,h-250),scale=(250,250))
 

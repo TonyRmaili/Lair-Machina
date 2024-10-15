@@ -201,7 +201,6 @@ def get_file_info(folder_path):
 
             file_info_list.append(file_info)
     return file_info_list
-
  
 def scan_for_latest_img(source_folder,current_date):
     file_data = get_file_info(source_folder)
@@ -211,14 +210,24 @@ def scan_for_latest_img(source_folder,current_date):
         else:
             return file['name']
 
-def move_and_rename_img(source_folder, file_name, char_name):
+def fix_room_id(room_id):
+    pass
+
+def move_and_rename_img(source_folder, file_name, char_name, image_type, room_id):
     source_file = os.path.join(source_folder, file_name)
-    destination_file = os.path.join(f'./pics/{char_name}', 'profile_img.png')
+    if image_type == 'profile':
+        destination_folder = os.path.join('./pics', char_name)
+        destination_file = os.path.join(destination_folder, 'profile_img.png')
+    elif image_type == 'room' and room_id:
+        destination_folder = os.path.join('./pics', char_name, 'dungeon_rooms')
+        destination_file = os.path.join(destination_folder, f'{room_id}.png')
+
+    # Create the directory if it doesn't exist
+    os.makedirs(destination_folder, exist_ok=True)
 
     # Move and rename the file
     shutil.move(source_file, destination_file)
     print(f"File moved and renamed to {destination_file}")
-
 
 def queue_prompt(prompt):
     p = {"prompt": prompt}
@@ -226,7 +235,8 @@ def queue_prompt(prompt):
     req = request.Request("http://127.0.0.1:8188/prompt", data=data)
     response = request.urlopen(req)
 
-def run_comfy(description, name):
+
+def run_comfy(description, char_name, time_limit=120,image_type='profile',room_id=None):
     source_path = '/home/student/harry_and_tony_project/ComfyUI/output/'
     current_date = datetime.now()
     # Prepare the prompt and update it with the description
@@ -238,7 +248,6 @@ def run_comfy(description, name):
 
     checking_img = True
     latest_file = None
-    time_limit = 120
     start_time = time.time()
     # Keep checking for the latest image
     while checking_img:
@@ -257,7 +266,7 @@ def run_comfy(description, name):
 
     # Move and rename the latest image
     if latest_file:
-        move_and_rename_img(source_path, latest_file, name)
+        move_and_rename_img(source_path, latest_file, char_name,image_type,room_id)
 
 
   

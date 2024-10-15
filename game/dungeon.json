@@ -1,97 +1,85 @@
 {
-    "theme": "Moonlit Grotto",
-    "description": "Deep within a crescent-shaped coastline, the Moonlit Grotto emerges from the rocky face like a shimmering pearl. As players step through the entrance, they're met with an ethereal veil of silver mist that dances in the gentle ocean breeze. The air is alive with the sweet scent of blooming moonflowers and the soft lapping of waves against the walls. The grotto's interior is a labyrinthine network of glittering crystal formations, luminescent fungi, and iridescent shells that seem to shift colors with every step. Flickering luminescent orbs suspended from the ceiling cast an otherworldly glow, casting an eerie blue light on the walls as they undulate in time with the sound of lapping water. The only sounds are the soothing melody of the waves and the faint whispering of ancient sea songs that seem to carry on the wind.",
+    "theme": "Moonlit Mirage",
+    "description": "The Moonlit Mirage is an ancient, labyrinthine temple complex buried beneath a perpetual veil of shimmering mist and ethereal moonlight. The architecture appears to be a blend of ornate filigree and stark, angular lines, as if the very fabric of reality has been twisted to create this surreal edifice. Flickering luminescent orbs suspended from delicate crystal fixtures cast an otherworldly glow across the walls, illuminating intricate carvings that seem to dance with the shadows. The air is heavy with the scent of jasmine and sandalwood, a sweet, heady aroma that intoxicates the senses but offers no clear clue as to what secrets lie within. Distant whispers on the wind speak in hushed tones, tantalizing hints of ancient knowledge hidden behind veils of silver mist. As you step into this mystical realm, the soft susurrations grow louder, drawing you deeper into a world where time itself seems to be woven from starlight and moonbeams.",
     "rooms": [
         {
-            "description": "The room is a natural continuation of the grotto's crystal formations. It appears to be an underwater chamber filled with a kaleidoscope of bioluminescent sea creatures that light up the space in shimmering shades of blue, green, and purple. The walls are covered in a thick layer of glittering mother-of-pearl shells, each one reflecting the soft luminescence within the room like tiny mirrors.",
-            "name": "Chamber of Luminous Reflections",
+            "description": "You find yourself in a grand, crystal-lined antechamber that shimmers with an ethereal light. The air is heavy with the scent of jasmine and sandalwood. A series of delicate, luminescent orbs suspended from filigree fixtures cast an otherworldly glow across the walls, illuminating intricate carvings that seem to dance with the shadows. Ahead, a magnificent crystal door adorned with runes of protection stands at the far end of the chamber, its surface reflecting the soft light.",
+            "name": "Moonlit Threshold",
             "items": [
                 {
-                    "name": "Moonlit Pearl",
-                    "description": "A delicate pearl that shines with a light reminiscent of a full moon. It glows softly in one's hand, and its surface appears to ripple like the gentle waves outside."
-                },
-                {
-                    "name": "Glimmering Shell Fragment",
-                    "description": "A broken shell fragment that still retains some of its bioluminescent properties, casting an ethereal glow on any surface it touches."
+                    "name": "Aether's Gift",
+                    "description": "A delicate, crystal vial filled with a shimmering mist that seems to shift and change color in the flickering light. The vial is etched with runes of protection and appears to be imbued with a faint magical aura."
                 }
             ],
             "properties": [
-                "darkness",
-                "glowing"
+                "illuminated",
+                "magical"
             ],
-            "secrets": "Behind the wall of mother-of-pearl shells, a hidden compartment containing a note that reads: 'The light within is not just for seeing but also for guiding. Seek the path where shadows dance with moonlight.'",
+            "secrets": "A hidden, intricate pattern on the floor seems to shift subtly as you approach. It's unclear if this is a trap or merely an optical illusion, but it may provide a clue to unlocking the crystal door ahead.",
             "room_id": 1,
-            "coordinates": [
-                1,
-                1
-            ],
-            "connections": [
-                [
-                    2,
-                    1
-                ],
-                [
-                    1,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "The room is a tranquil oasis within the grotto, filled with the soft scent of blooming moonflowers and the gentle hum of a melodic brook that flows through the center. The walls are adorned with delicate, glowing mushrooms that seem to absorb and reflect the light of the luminescent orbs above, casting an ethereal blue-green hue throughout the space. A small, intricately carved wooden boat is nestled in the reeds near the brook's edge, its surface etched with a poem that reads: 'In moonlit waters, where shadows play / Seek the reflection of a brighter day.'",
-            "name": "Pool of Lunar Reflections",
-            "items": [
-                {
-                    "name": "Moonflower Petal",
-                    "description": "A delicate petal from one of the blooming moonflowers that fills the air with its sweet scent. When carried, it releases a gentle fragrance and seems to attract beneficial creatures that grant temporary boosts to charm and persuasion checks."
-                },
-                {
-                    "name": "Wooden Boat Carvings",
-                    "description": "The intricate carvings on the wooden boat's surface depict various constellations and lunar phases. When examined closely, they reveal hidden patterns that can be used to decode ancient moonlit messages and grants a small bonus to wisdom checks related to celestial bodies."
-                }
-            ],
-            "properties": [
-                "peaceful",
-                "glowing"
-            ],
-            "secrets": "The wooden boat's surface is actually a pressure plate, triggering a hidden mechanism that opens a secret compartment within the room. Inside, a note reads: 'In times of turmoil, seek the calm within / For it is in stillness that true wisdom begins.' The compartment also contains a small vial filled with a few glowing mushroom spores that grant temporary resistance to cold temperatures.",
-            "room_id": 2,
             "coordinates": [
                 1,
                 2
             ],
             "connections": [
                 [
-                    1,
-                    1
+                    2,
+                    2
                 ]
             ]
         },
         {
-            "description": "The room is a vast, starlit cavern within the Moonlit Grotto. The ceiling lost in darkness, it appears to be an endless sea of twinkling stars, while the walls are lined with rows of glittering crystal formations that reflect the soft luminescence of the celestial bodies above. A delicate, silvered moon hangs suspended from the roof, casting a gentle, ethereal glow throughout the space. The air is filled with the sweet scent of blooming starflowers and the faint whispering of ancient sea songs carried on the wind.",
-            "name": "Celestial Vault",
+            "description": "As you venture further into The Moonlit Mirage, you stumble upon the Whispering Gallery - a narrow, crescent-shaped room filled with an otherworldly silence. The walls are adorned with delicate, silver filigree that seems to be woven from the very essence of moonbeams. Flickering luminescent orbs hang from the ceiling, casting an eerie, blue-green glow across the floor. The air is heavy with the scent of night-blooming flowers, and the whispers you've heard since entering the temple grow louder here, seeming to emanate from the walls themselves.",
+            "name": "Whispering Gallery",
             "items": [
                 {
-                    "name": "Stellar Shard",
-                    "description": "A delicate, crystalline shard that reflects the light of the stars like a tiny mirror. It glows softly with an otherworldly energy and seems to attract beneficial celestial creatures that grant temporary boosts to wisdom checks related to astronomy."
-                },
-                {
-                    "name": "Moonflower Starflower",
-                    "description": "A rare, lunar-blooming flower that only unfurls under the light of a full moon. Its petals shimmer with an ethereal glow and release a fragrance that enhances charm and persuasion checks for a short duration."
+                    "name": "Moonwhisper's Chime",
+                    "description": "A delicate, crystal wind chime that hangs from the ceiling, its intricate, filigree-patterned metalwork seeming to dance with the shadows. When gently touched, the chime emits a soft, melodic hum that harmonizes perfectly with the whispers in the room."
                 }
             ],
             "properties": [
-                "dark",
-                "starlit"
+                "silent",
+                "magical"
             ],
-            "secrets": "Behind one of the crystal formations, a hidden compartment contains a note that reads: 'The celestial vault holds more than just starlight; it also holds the secrets of time itself. Seek the ancient lunar calendar etched upon the walls to unlock the mysteries of the ages.'",
-            "room_id": 3,
+            "secrets": "A series of subtle, pressure plates on the floor seem to be hidden beneath the intricately patterned tilework. If stepped upon in a specific sequence, they may unlock a hidden compartment within the wall, containing an ancient scroll with cryptic information about The Moonlit Mirage.",
+            "room_id": 2,
             "coordinates": [
                 2,
                 1
             ],
             "connections": [
                 [
+                    2,
+                    2
+                ]
+            ]
+        },
+        {
+            "description": "You enter a room that seems to be a forgotten repository of ancient knowledge. Shelves lined with dusty, leather-bound tomes stretch towards the ceiling, their spines adorned with intricate gold filigree that catches the flickering light from luminescent orbs. The air is thick with dust and the scent of aged parchment. A lone, ornate lantern hangs from the ceiling, casting an eerie, golden glow across the room. In the center of the room stands a large, ornate desk, its surface covered in scattered papers, quills, and inkwells. A single, leather-bound book lies open on the desk, as if the previous occupant had just stepped away.",
+            "name": "Moonlit Archives",
+            "items": [
+                {
+                    "name": "The Lunar Chronicle",
+                    "description": "A large, leather-bound tome with pages filled with cryptic notes and diagrams. The book seems to be written in an ancient dialect, but the illustrations depict scenes from a world that defies the laws of reality."
+                }
+            ],
+            "properties": [
+                "dark",
+                "cluttered"
+            ],
+            "secrets": "A hidden compartment within one of the bookshelves contains a small, silver key etched with runes of unlocking. If discovered, this key may unlock a door leading to a previously unknown part of The Moonlit Mirage.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
                     1,
+                    2
+                ],
+                [
+                    2,
                     1
                 ]
             ]
