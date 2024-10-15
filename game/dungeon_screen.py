@@ -25,7 +25,12 @@ from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 #         # self.output_text ='DEBUGG'
 
 
-class DungeonSceen:
+
+
+
+
+
+class DungeonScreen:
     """
     needs to be updated to merge with the game_map.py
     """
@@ -39,10 +44,11 @@ class DungeonSceen:
         # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
         self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(w-250,h-250),scale=(250,250))
 
+
+        # Ollama chat windows
         self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
         self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
         
-
         self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
         
@@ -56,32 +62,38 @@ class DungeonSceen:
         self.current_room_data = self.dungeon['rooms'][self.current_room_id]
         self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
         self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+        self.current_x = self.dungeon['rooms'][self.current_room_id]['coordinates'][0]
+        self.current_y = self.dungeon['rooms'][self.current_room_id]['coordinates'][1]
+        
 
         # Game state: track the current room and position in the grid
         self.player_move_options = self.dungeon['rooms'][self.current_room_id]['connections']  # move options from current in the map
-        self.player_position = self.dungeon['rooms'][self.current_room_id]['coordinates']  # Starting position in the map (Room 1)
+        self.player_position = [self.dungeon['rooms'][self.current_room_id]['coordinates'][0], self.dungeon['rooms'][self.current_room_id]['coordinates'][1]] # player position in the map
+        print(self.player_position)
+
+
+        # room info boxes
+        self.current_room_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
+        self.current_room_options_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+
         self.special_action_available = None  # To track if a special action is available
         self.game_exit = False  # Flag to handle game exit
-
-
-        self.current_room_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
-
-
-        # print(self.dungeon['rooms'][self.current_room_id]['name'])
-        # print(self.dungeon['rooms'][self.current_room_id]['description'])
         
-        # self.current_room = self.dungeon[self.current_room_id]
         
-        # print(self.current_room)
-        
+        print(self.player_move_options)
+        print(self.player_position)
         
         # threading attributes
         self.response = None  
         self.is_fetching = False  
 
 
-    def display_current_room(self):
-        
+    def update_current_room_box(self):
+        self.current_room_box = TextArea(text=self.current_room_description,WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
+        self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+
+
+
         # # Display the current room's name and description
         # self.game.screen.fill((0, 0, 0))  # Clear screen with black
         # font = pygame.font.Font(None, 36)
@@ -91,18 +103,79 @@ class DungeonSceen:
         # description_surface = font.render(self.current_room_description, True, (255, 255, 255))
         # self.game.screen.blit(description_surface, (50, 100))
 
-        # Display instructions if a special action is available
-        if self.special_action_available:
-            action_text = "Press 'U' to "
-            if self.special_action_available == 'exit':
-                action_text += "exit"
-            elif self.special_action_available == 'up-floor':
-                action_text += "go up"
-            elif self.special_action_available == 'down-floor':
-                action_text += "go down"
-            action_surface = font.render(action_text, True, (255, 255, 0))  # Yellow text
-            self.game.screen.blit(action_surface, (50, 150))
+        # # Display instructions if a special action is available
+        # if self.special_action_available:
+        #     action_text = "Press 'U' to "
+        #     if self.special_action_available == 'exit':
+        #         action_text += "exit"
+        #     elif self.special_action_available == 'up-floor':
+        #         action_text += "go up"
+        #     elif self.special_action_available == 'down-floor':
+        #         action_text += "go down"
+        #     action_surface = font.render(action_text, True, (255, 255, 0))  # Yellow text
+        #     self.game.screen.blit(action_surface, (50, 150))
 
+
+
+    def get_room_by_coordinates(self, rooms, new_coordinates):
+        """Get the room ID based on the coordinates - would be better if id/coordinates were in the top level of the json so we could just use the coordinates as a key, but this works for now, and I guess it would be messy to change the generator function prompts etc"""
+        for room in rooms:
+            if room['coordinates'] == new_coordinates:
+                return room['room_id']  # Or return room itself if you need more info
+
+    def move_to_room(self, direction):
+        # Calculate new position
+        new_x = self.player_position[0]
+        new_y = self.player_position[1]
+        if direction == 'north':
+            new_y -= 1
+        elif direction == 'south':
+            new_y += 1
+        elif direction == 'east':
+            new_x += 1
+        elif direction == 'west':
+            new_x -= 1
+        
+        if [new_x, new_y] in self.player_move_options:
+            print('valid move')
+            self.player_position = [new_x, new_y]
+            print(self.current_room_id)
+            self.current_room_id = self.get_room_by_coordinates(rooms=self.dungeon['rooms'],new_coordinates=self.player_position)
+            self.current_room_id = self.current_room_id - 1
+            print(self.current_room_id)
+            self.current_room_data = self.dungeon['rooms'][self.current_room_id]
+            self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
+            self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+            self.current_x = self.dungeon['rooms'][self.current_room_id]['coordinates'][0]
+            self.current_y = self.dungeon['rooms'][self.current_room_id]['coordinates'][1]
+            self.player_move_options = self.dungeon['rooms'][self.current_room_id]['connections']
+            self.update_current_room_box()
+        else:
+            print('invalid move')
+            
+        # # Check bounds
+        # if 0 <= new_x < len(self.map_grid[0]) and 0 <= new_y < len(self.map_grid):
+        #     # Check if cell is not a wall ('-')
+        #     target_cell = self.map_grid[new_y][new_x]
+        #     if target_cell != '-':
+        #         # Update player position
+        #         self.player_position = [new_x, new_y]
+        #         # Optionally, print the new player position for debugging
+        #         print(f"Player moved to position: {self.player_position}")
+
+        #         # Update current room based on position
+        #         room_name = self.position_to_room.get(tuple(self.player_position))
+        #         if room_name:
+        #             self.current_room = self.current_floor_rooms[room_name]
+        #             print(f"Moved to {self.current_room.name}")
+        #             self.special_action_available = self.current_room.special
+        #         else:
+        #             self.current_room = Room('Unknown', 'An empty space.', {})
+        #             self.special_action_available = None
+        #     else:
+        #         print("Cannot move to a wall!")
+        # else:
+        #     print("Cannot move out of bounds!")
 
 
 
@@ -184,6 +257,17 @@ class DungeonSceen:
                 if event.key == pygame.K_q:
                     self.game.game_mode = 'menu'
             
+            # keys for player navigation
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    self.move_to_room('north')
+                elif event.key == pygame.K_DOWN:
+                    self.move_to_room('south')
+                elif event.key == pygame.K_LEFT:
+                    self.move_to_room('west')
+                elif event.key == pygame.K_RIGHT:
+                    self.move_to_room('east')
+            
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.prompt_button.checkForInput(mouse_pos) and not self.is_fetching:
                     prompt = self.prompt_box.send_text()
@@ -206,6 +290,9 @@ class DungeonSceen:
         self.display_map()
         self.current_room_box.new_text(text=self.current_room_description)
         self.current_room_box.draw(screen=screen)
+        
+        self.update_current_room_box()
+        self.current_room_options_box.draw(screen=screen)        
 
         # self.map_grid.draw(screen=screen)
         

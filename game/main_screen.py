@@ -4,7 +4,7 @@ from debug import debug
 import os
 from character_screen import CreactionScreen
 from menu_screen import MenuScreen
-from dungeon_screen import DungeonSceen
+from dungeon_screen import DungeonScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from character import Character
 # from game_map import GameMap
@@ -35,7 +35,7 @@ class Game:
 
         self.creation_screen = CreactionScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
-        self.dungeon_screen = DungeonSceen(game=self,w=self.WIDTH,h=self.HEIGHT)
+        self.dungeon_screen = DungeonScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         
         # map feature
         # self.map_screen = GameMap(game=self,w=self.WIDTH,h=self.HEIGHT)
