@@ -93,16 +93,6 @@ class DungeonScreen:
         self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
 
 
-
-        # # Display the current room's name and description
-        # self.game.screen.fill((0, 0, 0))  # Clear screen with black
-        # font = pygame.font.Font(None, 36)
-        # text_surface = font.render(f"You are in {self.current_room_name}", True, (255, 255, 255))
-        # self.game.screen.blit(text_surface, (50, 50))
-
-        # description_surface = font.render(self.current_room_description, True, (255, 255, 255))
-        # self.game.screen.blit(description_surface, (50, 100))
-
         # # Display instructions if a special action is available
         # if self.special_action_available:
         #     action_text = "Press 'U' to "
@@ -153,32 +143,6 @@ class DungeonScreen:
         else:
             print('invalid move')
             
-        # # Check bounds
-        # if 0 <= new_x < len(self.map_grid[0]) and 0 <= new_y < len(self.map_grid):
-        #     # Check if cell is not a wall ('-')
-        #     target_cell = self.map_grid[new_y][new_x]
-        #     if target_cell != '-':
-        #         # Update player position
-        #         self.player_position = [new_x, new_y]
-        #         # Optionally, print the new player position for debugging
-        #         print(f"Player moved to position: {self.player_position}")
-
-        #         # Update current room based on position
-        #         room_name = self.position_to_room.get(tuple(self.player_position))
-        #         if room_name:
-        #             self.current_room = self.current_floor_rooms[room_name]
-        #             print(f"Moved to {self.current_room.name}")
-        #             self.special_action_available = self.current_room.special
-        #         else:
-        #             self.current_room = Room('Unknown', 'An empty space.', {})
-        #             self.special_action_available = None
-        #     else:
-        #         print("Cannot move to a wall!")
-        # else:
-        #     print("Cannot move out of bounds!")
-
-
-
 
     def display_map(self):
         # displays the map in the top right corner - from the JSON file
@@ -205,12 +169,6 @@ class DungeonScreen:
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
 
-    def update_map(self):
-        # Update the map grid based on the current room and position
-        # self.map_grid.new_text(text=)
-        pass
-
-
     def ask_ollama_tools(self, prompt):
         # # we need to have it so each room has its own json file - 
         # '../world_generator/dungeon.json'
@@ -222,7 +180,9 @@ class DungeonScreen:
 
         # NOW IT WORKS ATLEAST - but needs to take the current room? otherwise too much bullshit?
         
-        ollama_instance = OllamaToolCall(messages=prompt, room_file='castle_map.json')
+        # give it the current room in the JSON? 
+        
+        ollama_instance = OllamaToolCall(messages=f"{prompt}, the player is currently in the room: {self.current_room_name}", room_file='castle_map.json')
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
@@ -283,10 +243,11 @@ class DungeonScreen:
         self.update_response()
         self.bg.draw(screen=screen)
 
-        # self.character_image.draw(screen=screen)
-        # self.prompt_box.draw(screen=screen,events=events)
-        # self.response_box.draw(screen=screen)
-        # self.prompt_button.draw(screen=screen)
+        self.character_image.draw(screen=screen)
+        self.prompt_box.draw(screen=screen,events=events)
+        self.response_box.draw(screen=screen)
+        self.prompt_button.draw(screen=screen)
+
         self.display_map()
         self.current_room_box.new_text(text=self.current_room_description)
         self.current_room_box.draw(screen=screen)
