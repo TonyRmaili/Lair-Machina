@@ -3,11 +3,12 @@ import os
 from pathlib import Path 
 import time
 import json
-from urllib import request
 import threading
 import asyncio
 import aiohttp
 from concurrent.futures import ThreadPoolExecutor
+import urllib.request as request
+from datetime import datetime
 
 """
 This is the function used to generate the image for the character profile.
@@ -179,157 +180,82 @@ prompt_text = """
 }
 """
 
-image_generation_event = threading.Event()
 
-# # WORKS######################
+def get_file_info(folder_path):
+    # List to store information of each file
+    file_info_list = []
+    
+    # Loop through each file in the directory
+    for file_name in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, file_name)
+        
+        # Check if it's a file, not a directory
+        if os.path.isfile(file_path):
+            # Get file stats
+            file_stats = os.stat(file_path)
+            
+            # Gather the file's details as datetime objects for times
+            file_info = {
+                "name": file_name,
+                "creation_time": datetime.fromtimestamp(file_stats.st_ctime)
+            }
+
+            file_info_list.append(file_info)
+    return file_info_list
+
+ 
+def scan_for_latest_img(source_folder,current_date):
+    file_data = get_file_info(source_folder)
+    for file in file_data:
+        if current_date > file['creation_time']:
+            continue  
+        else:
+            return file['name']
+
+def move_and_rename_img(source_folder, file_name, char_name):
+    source_file = os.path.join(source_folder, file_name)
+    destination_file = os.path.join(f'./pics/{char_name}', 'profile_img.png')
+
+    # Move and rename the file
+    shutil.move(source_file, destination_file)
+    print(f"File moved and renamed to {destination_file}")
+
+
 def queue_prompt(prompt):
     p = {"prompt": prompt}
     data = json.dumps(p).encode('utf-8')
-    req =  request.Request("http://127.0.0.1:8188/prompt", data=data)
-    request.urlopen(req)
-    
+    req = request.Request("http://127.0.0.1:8188/prompt", data=data)
+    response = request.urlopen(req)
 
-# def wait_for_image(source_folder, timeout=60):
-#     """ Wait for the image to be generated, with a timeout. """
-#     start_time = time.time()
-#     while time.time() - start_time < timeout:
-#         # Check if new image exists in the source folder
-#         image_extensions = ('.png',)
-#         images = [file for file in Path(source_folder).glob('*') if file.suffix.lower() in image_extensions]
-#         if images:
-#             return images
-#         time.sleep(1)  # Wait a second before checking again
-#     return None
-
-
-async def async_prompt(prompt):
-    p = {"prompt": prompt}
-    data = json.dumps(p)
-    
-    async with aiohttp.ClientSession() as session:
-        async with session.post("http://127.0.0.1:8188/prompt", data=data) as response:
-            await response.text()  # Handle the response if needed
-
-
-# def move_and_rename_latest_image(source_folder, destination_folder, new_filename):
-#     images = wait_for_image(source_folder)
-    
-#     if not images:
-#         print("No images found or timeout reached.")
-#         return
-
-#     latest_image = max(images, key=os.path.getmtime)
-
-#     os.makedirs(destination_folder, exist_ok=True)
-#     destination_path = Path(destination_folder) / (new_filename + latest_image.suffix)
-#     shutil.move(str(latest_image), str(destination_path))
-
-#     print(f"Moved and renamed the latest image: {latest_image} to {destination_path}")
-
-# def generate_and_move_image(description, character_name):
-#     prompt = json.loads(prompt_text)
-#     prompt["6"]["inputs"]["text"] = description
-    
-#     # Clear the event to indicate image generation hasn't started yet
-#     image_generation_event.clear()
-
-#     # Start prompt generation in a separate thread
-#     thread1 = threading.Thread(target=queue_prompt, args=(prompt,))
-#     thread1.start()
-
-#     # Wait for the image generation event to be set
-#     image_generation_event.wait()
-
-#     # Move and rename image after prompt generation
-#     move_and_rename_latest_image(
-#         source_folder='/home/student/harry_and_tony_project/ComfyUI/output/',
-#         destination_folder=f'./pics/{character_name}', 
-#         new_filename='profile_img'
-#     )
-
-#     thread1.join()
-
-
-
-
-def move_and_rename_latest_image(source_folder, destination_folder, new_filename):
-    # Get a list of all image files (jpg, png, etc.) in the source folder
-    image_extensions = ('.png')  # Add more extensions if needed
-    images = [file for file in Path(source_folder).glob('*') if file.suffix.lower() in image_extensions]
-
-    # Check if there are any images in the folder
-    if not images:
-        print("No images found in the source folder.")
-        return
-
-    # Find the latest image by modification time
-    latest_image = max(images, key=os.path.getmtime)
-
-    # Ensure the destination folder exists
-    os.makedirs(destination_folder, exist_ok=True)
-
-    # Create the destination path with the new filename and the same extension
-    destination_path = Path(destination_folder) / (new_filename + latest_image.suffix)
-
-    # Move the file (instead of copying)
-    shutil.move(str(latest_image), str(destination_path))
-
-    print(f"Moved and renamed the latest image: {latest_image} to {destination_path}")
-    
-    
-async def async_test_run(description, character_name):
-    prompt = json.loads(prompt_text)
+def run_comfy(description, name):
+    source_path = '/home/student/harry_and_tony_project/ComfyUI/output/'
+    destination_folder = '/desired/destination/folder'  # Set your destination folder here
+    current_date = datetime.now()
+    # Prepare the prompt and update it with the description
+    prompt = json.loads(prompt_text)  # Assuming prompt_text is defined somewhere
     prompt["6"]["inputs"]["text"] = description
-    
-    
-    await async_prompt(prompt)  # Wait for prompt generation to finish
-    
-    # Run the move function after prompt is complete
-    move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/',
-                                 destination_folder=f'./pics/{character_name}', 
-                                 new_filename='profile_img')
+
+    # Queue the prompt
+    queue_prompt(prompt)
+
+    checking_img = True
+    latest_file = None
+
+    # Keep checking for the latest image
+    while checking_img:
+        latest_file = scan_for_latest_img(source_path,current_date)
+        
+        if latest_file:  # If a new file is found, exit the loop
+            checking_img = False
+        else:
+            time.sleep(5)  # Wait for 5 seconds before checking again
+
+    # Move and rename the latest image
+    if latest_file:
+        move_and_rename_img(source_path, latest_file, name)
 
 
-def thread_test_run(description, character_name):
-    prompt = json.loads(prompt_text)
-    prompt["6"]["inputs"]["text"] = description
-    
-    # Run the prompt generation in a thread pool
-    with ThreadPoolExecutor() as executor:
-        future = executor.submit(queue_prompt, prompt)
-        future.result()  # This will block until queue_prompt completes
-    
-    # Move and rename the image after the prompt has completed
-    move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/',
-                                 destination_folder=f'./pics/{character_name}', 
-                                 new_filename='profile_img')
-
-
-
-def run_in_thread(art_description, character_name):
-    prompt = json.loads(prompt_text)
-    prompt["6"]["inputs"]["text"] = art_description
-    
-    image_generation_event.clear()
-
-    # Run the text generation in a separate thread, pass the argument using args
-    thread1 = threading.Thread(target=queue_prompt, args=(prompt,))
-    thread1.start()
-    
-    # move_and_rename_latest_image(source_folder='/home/student/harry_and_tony_project/ComfyUI/output/', destination_folder=f'./pics/{character_name}', new_filename='profile_img' )
-
-    thread2 = threading.Thread(
-        target=move_and_rename_latest_image,
-        args=('/home/student/harry_and_tony_project/ComfyUI/output/', f'./pics/{character_name}', 'profile_img')
-    )
-    thread2.start()
-
-    thread1.join()
-    thread2.join()
-
-    image_generation_event.set()
-    
-
+  
 if __name__=='__main__':
   # this wont happen as the game uses thread
     prompt = json.loads(prompt_text)
