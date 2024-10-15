@@ -49,14 +49,25 @@ class DungeonScreen:
 
         # Ollama chat windows
         self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
-        self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=0,y=500,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
+        self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=500,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
         
         self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
-        
+        self.inventory_box = TextArea(text='',WIDTH=550,HEIGHT=h-400,x=500,y=200,text_color=(255, 255, 255),bg_color=(69, 255, 69),title='Inventory box',title_color='black')
+
 
         #set starting- current room
         self.current_room_id = 0
+
+        with open('./inventory_json.json') as f:
+            self.inventory = json.load(f)
+        
+        
+                
+        # Extract only the names of the items in the inventory
+        item_names = [item['name'] for item in self.inventory['inventory']]
+            
+        self.inventory = f'{item_names}'
 
         with open('./updated_dungeon.json') as f:
             self.dungeon = json.load(f)
@@ -153,7 +164,10 @@ class DungeonScreen:
             self.update_current_room_box()
             # update so looking at the right room JSON
             self.current_room_items_path = self.dungeon['rooms'][self.current_room_id]['items_file']
-        
+            self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
+            
+            with open(self.current_room_items_path) as f:
+                self.current_room_items = json.load(f)        
         else:
             print('invalid move')
             
@@ -184,20 +198,15 @@ class DungeonScreen:
 
 
     def ask_ollama_tools(self, prompt):
-        # # we need to have it so each room has its own json file - 
-        # '../world_generator/dungeon.json'
-        # using wrong room file now
-
-
         # not sure if works with threading 
         # self.is_fetching = True  # Mark that we are fetching
 
-        # NOW IT WORKS ATLEAST - but needs to take the current room? otherwise too much bullshit?
+        # NOW IT WORKS ATLEAST - but needs to run the "room_fixer" after generation, so that each room is a separate jsonfile, it cant handle all rooms data at the same time
         
         
-        # give it the current room in the JSON? 
+        # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        print(self.room_file)
+        # print(self.room_file)
         
         
         ollama_instance = OllamaToolCall(messages=f'{prompt}. these are the items in the room: {self.current_room_items} This is the room_file: ./{self.room_file}', room_file=self.room_file)
@@ -217,7 +226,19 @@ class DungeonScreen:
         # self.response = resp['response']
         # self.is_fetching = False  # Mark that fetching is done
         
+    def update_inventory_box(self):
+        with open('./inventory_json.json') as f:
+            self.inventory = json.load(f)
+            
+        
+        # Extract only the names of the items in the inventory
+        item_names = [item['name'] for item in self.inventory['inventory']]
+            
+        self.inventory = f'{item_names}'
 
+        self.inventory_box.new_text(text=self.inventory)
+        
+        
     def update_response(self):
         # Check if there's a new response and update the response box
         if self.response:
@@ -260,7 +281,7 @@ class DungeonScreen:
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.update_response()
-        self.bg.draw(screen=screen)
+        # self.bg.draw(screen=screen)
 
         self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
@@ -273,6 +294,9 @@ class DungeonScreen:
         
         self.update_current_room_box()
         self.current_room_options_box.draw(screen=screen)
+        
+        self.update_inventory_box()
+        self.inventory_box.draw(screen=screen)
                 
 
         # self.map_grid.draw(screen=screen)
