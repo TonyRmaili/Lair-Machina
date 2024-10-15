@@ -5,7 +5,6 @@ import time
 import json
 import threading
 import asyncio
-import aiohttp
 from concurrent.futures import ThreadPoolExecutor
 import urllib.request as request
 from datetime import datetime
@@ -239,15 +238,22 @@ def run_comfy(description, name):
 
     checking_img = True
     latest_file = None
-
+    time_limit = 120
+    start_time = time.time()
     # Keep checking for the latest image
     while checking_img:
+        elapsed_time = time.time() - start_time
+
+        if elapsed_time > time_limit:
+          print(f"No image found within {time_limit} seconds. Exiting...")
+          break
+
         latest_file = scan_for_latest_img(source_path,current_date)
         
         if latest_file:  # If a new file is found, exit the loop
             checking_img = False
         else:
-            time.sleep(5)  # Wait for 5 seconds before checking again
+            time.sleep(2)  # Wait for 5 seconds before checking again
 
     # Move and rename the latest image
     if latest_file:
