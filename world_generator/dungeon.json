@@ -1,32 +1,57 @@
 {
-    "theme": "Shattered Astral Sanctum",
-    "description": "The Shattered Astral Sanctum lies like a shard of splintered moonlight amidst a tangle of twisted, silverwood trees. This once-venerable temple was home to an ancient cabal of star-worshiping adepts who communed with celestial bodies to unlock the secrets of the cosmos. Now, it stands as a testament to their hubris and the catastrophic event known only as 'The Great Dissonance.' The air is heavy with the stench of burned incense and ozone, as if the very fabric of reality still smolders from the cataclysmic collision of astral energies. Flickering luminescent mushrooms cast eerie shadows on walls adorned with cracked, celestial maps, their symbols now twisted into grotesque, otherworldly sigils that seem to writhe like living things. The floor creaks beneathfoot, a mosaic of star-enameled tiles that reflect the sickle moon's pale glow, while above, the vaulted ceiling appears as a shattered pane of glass, through which a thousand stars twinkle with an unearthly light, their whispers echoing through the halls in a maddening susurrus. Time itself seems to be unraveling within these crumbling sanctums, and those who venture here will soon discover that they are not alone in this forsaken place.",
+    "theme": "Moonlit Maze",
+    "description": "The Moonlit Maze sprawls across a vast, silver-sand plain like an ethereal labyrinth. Towering crystal spires, their facets glinting in the lunar light, serve as natural walls, channeling the players through a serpentine path of shimmering white stone and glittering stardust. As they navigate the twisting corridors, the soft whisper of celestial music drifts on the breeze, weaving an otherworldly melody that seems to change pitch with each step. Dappled shadows dance across the walls as wispy, luminescent tendrils sprout from the ground, imbuing the air with an essence of moonflowers and stardust. The scent of starlight and forgotten memories wafts through the maze, beckoning adventurers deeper into its shimmering depths.",
     "rooms": [
         {
-            "description": "The Celestial Cartographer's Study lies within a circular nook of the Shattered Astral Sanctum. The room is dominated by a beautifully crafted, star-wooden desk, upon which rests an intricately drawn map of the cosmos. The map appears to be hand-drawn and depicts various celestial bodies in their correct positions, but with subtle anomalies that hint at an otherworldly perspective. A faint, ethereal glow emanates from the map, as if it is infused with stardust. Shelves lining the walls are adorned with ancient texts bound in a strange, star-enameled material, and rows of crystal-tipped quills stand at attention like sentinels. The air is thick with the scent of old parchment and the soft hum of celestial energies.",
-            "name": "The Cartographer's Sanctum",
+            "description": "This winding gallery stretches into the heart of the Moonlit Maze like a shimmering tendril of moonlight. The walls, crafted from a glittering white stone that seems almost liquid in the lunar light, are adorned with intricate carvings that depict scenes from celestial mythology. As you step into this ethereal space, the soft music of the maze deepens, weaving an enchanting melody around you. The air is filled with the sweet scent of moonflowers and stardust.",
+            "name": "Gallery of Lunar Tales",
             "items": [
                 {
-                    "name": "The Starlit Atlas",
-                    "description": "A comprehensive, hand-drawn map of the cosmos that seems to shift and change as one studies it. The map is adorned with intricate, glowing lines that pulse with a soft blue light, hinting at an otherworldly power."
-                },
-                {
-                    "name": "The Quill of Starseekers",
-                    "description": "A quill crafted from a rare, star-wood material and tipped with a crystal shard. It hums softly when moved, suggesting its use in celestial divination or cartography."
+                    "name": "Celestial Lyre",
+                    "description": "A delicate lyre that shines like a fallen star, its strings humming with an otherworldly music that seems to echo the secrets of the universe. As you lift it, the instrument begins to play a haunting melody that resonates deep within your soul."
                 }
             ],
             "properties": [
-                "dark",
-                "cold",
-                "magical"
+                "moonlit",
+                "enchanted"
             ],
-            "secrets": null,
+            "secrets": "A hidden compartment in the lyre contains a cryptic poem etched on a piece of moonstone, hinting at a hidden portal somewhere within the maze.",
             "room_id": 1,
             "coordinates": [
                 1,
-                2
+                1
             ],
             "connections": [
+                [
+                    2,
+                    1
+                ]
+            ]
+        },
+        {
+            "description": "This circular room is filled with an eerie, pulsating glow that seems to emanate from the very walls themselves. The crystal spires outside appear to be arranged in a deliberate pattern, casting an ever-changing kaleidoscope of colors across the floor. A series of delicate, luminescent orbs hang from the ceiling, casting an ethereal light upon the room's inhabitants. The air is heavy with the scent of moonflowers and stardust.",
+            "name": "Chamber of Celestial Illumination",
+            "items": [
+                {
+                    "name": "Stellar Chalice",
+                    "description": "A delicate, crystal chalice that contains a swirling vortex of colors, seemingly drawn from the very essence of the stars themselves. As you lift it, the colors begin to swirl and dance within the cup, imbuing you with visions of distant worlds and forgotten knowledge."
+                }
+            ],
+            "properties": [
+                "moonlit",
+                "enchanted"
+            ],
+            "secrets": "A hidden compartment in the wall contains a cryptic poem etched on a piece of polished moonstone, hinting at a powerful celestial artifact hidden somewhere within the maze. The compartments can be opened by solving a complex pattern of colors cast by the crystal spires outside.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    1,
+                    1
+                ],
                 [
                     2,
                     2
@@ -34,58 +59,28 @@
             ]
         },
         {
-            "description": "A narrow corridor, known as the Luminous Labyrinthine Passage, winds its way through the heart of the Shattered Astral Sanctum. The walls are lined with a series of glittering, crystal-lined alcoves that seem to absorb and refract the flickering luminescent light emanating from the mushrooms that grow in the darkness. As one proceeds down the passage, the air grows thick with an otherworldly energy that seems to pulse in time with the soft hum of the celestial bodies outside. The floor beneathfoot is made of a polished, star-enameled material that reflects the eerie glow of the luminescent mushrooms, making it seem as though one is walking through a tunnel of pure, liquid moonlight.",
-            "name": "The Luminous Labyrinthine Passage",
+            "description": "This tranquil pool of stardust fills a natural amphitheater within the Moonlit Maze. The walls, composed of glittering white stone, are adorned with intricate carvings that depict scenes from celestial mythology. As night falls, the sky above transforms into a canvas of twinkling stars, and the air is filled with the sweet scent of moonflowers and stardust. A delicate, crystal bridge spans the pool, connecting two distant points within the maze.",
+            "name": "Pool of Stardust",
             "items": [
                 {
-                    "name": "The Celestial Compass",
-                    "description": "A delicate, crystal-tipped compass that seems to point towards the very center of the Shattered Astral Sanctum. As one holds it, they can feel a subtle, otherworldly energy coursing through their veins, as if the compass is attuned to the heartbeat of the celestial bodies themselves."
+                    "name": "Cosmic Tear",
+                    "description": "A delicate droplet of stardust that glistens like a fallen star. As you lift it, the tear begins to glow with an otherworldly light, imbuing you with visions of distant worlds and forgotten knowledge."
                 }
             ],
             "properties": [
-                "dark",
-                "trapped"
+                "moonlit",
+                "enchanted"
             ],
-            "secrets": "A hidden, pressure plate-activated door lies at the very end of the passage, leading to a secret chamber deep within the heart of the sanctum. The door is cleverly concealed behind a tapestry of interlocking, luminescent mushrooms that seem to shift and change as one approaches.",
-            "room_id": 2,
+            "secrets": "A hidden compartment beneath the crystal bridge contains a cryptic poem etched on a piece of polished moonstone, hinting at a hidden portal somewhere within the maze. The compartments can be opened by solving a complex pattern of starlight cast across the pool's surface.",
+            "room_id": 3,
             "coordinates": [
                 2,
                 2
             ],
             "connections": [
                 [
-                    1,
-                    2
-                ],
-                [
-                    3,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "A vast, domed chamber known as the Shattered Astral Sanctum's Grand Oculus lies at the very heart of the temple. The room is a masterpiece of celestial engineering, with a translucent, crystal-encrusted dome that filters and refracts the light of the moon, casting an ethereal glow over the proceedings. The air is heavy with the scent of ozone and burned incense, as if the fabric of reality itself still smolders from the catastrophic event known as 'The Great Dissonance.' Flickering luminescent mushrooms sprout from the floor, their eerie light casting shadows on the walls, which are adorned with cracked, celestial maps that seem to writhe like living things. A lone, ornate chair sits at the very center of the room, as if awaiting the return of a long-lost star-god.",
-            "name": "The Grand Oculus",
-            "items": [
-                {
-                    "name": "The Starforged Chalice",
-                    "description": "A delicate, crystal chalice that seems to contain the essence of a thousand stars within its depths. The chalice hums softly with celestial energy, as if it is attuned to the heartbeat of the cosmos itself."
-                }
-            ],
-            "properties": [
-                "dark",
-                "magical"
-            ],
-            "secrets": "A hidden panel in the wall, disguised as a cracked section of celestial map, conceals a cryptic message etched into the surface. The message reads: 'The harmony of the spheres lies not in their balance, but in their discord.'",
-            "room_id": 3,
-            "coordinates": [
-                3,
-                2
-            ],
-            "connections": [
-                [
                     2,
-                    2
+                    1
                 ]
             ]
         }

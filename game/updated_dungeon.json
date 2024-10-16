@@ -5,12 +5,6 @@
         {
             "description": "You find yourself in a grand, crystal-lined chamber deep within the shattered spires. The room is filled with an otherworldly glow, as if the very walls are infused with starlight. Shattered crystals of all shapes and sizes lie scattered across the floor, their facets reflecting shards of light that dance like diamonds against the dark sky visible through the jagged opening in the ceiling. The air is thick with the scent of ozone and starlight, and you can feel the distant thrum of crystalline structures tuning themselves to celestial harmonics echoing through the night air.",
             "name": "The Crystal Sanctum",
-            "items": [
-                {
-                    "name": "Starheart Crystal",
-                    "description": "A delicate crystal shard that pulsates with an ethereal energy, its facets reflecting a kaleidoscope of starlight colors. It is said to hold the essence of celestial harmonics within its crystalline structure."
-                }
-            ],
             "properties": [
                 "illuminated",
                 "harmonically-resonant"
@@ -26,21 +20,12 @@
                     2,
                     2
                 ]
-            ]
+            ],
+            "items_file": "room_items/room_1_items.json"
         },
         {
             "description": "You stumble upon a room that appears to be a relic of the spires' former glory. The walls are adorned with intricate carvings depicting scenes of celestial events and ancient civilizations. Flickering luminescent orbs suspended from the ceiling cast an eerie, otherworldly glow across the space, making it seem as though the very stars have been brought indoors. A delicate, crystal-encrusted music box in the center of the room slowly turns, its melody intertwining with the whispers of ancient knowledge carried on the wind outside.",
             "name": "The Starlit Conservatory",
-            "items": [
-                {
-                    "name": "Stellar Lyre",
-                    "description": "A lyre crafted from a fallen star's crystalline essence, its strings humming with celestial harmonics. When played, it is said to summon melodies that can weave the fabric of reality itself."
-                },
-                {
-                    "name": "Glimmering Starlight Dust",
-                    "description": "Tiny fragments of starlight distilled into a sparkling dust. This precious substance is rumored to hold within it the essence of creation's earliest moments and could grant immense insight to those who possess it."
-                }
-            ],
             "properties": [
                 "illuminated",
                 "harmonically-resonant"
@@ -56,21 +41,12 @@
                     2,
                     2
                 ]
-            ]
+            ],
+            "items_file": "room_items/room_2_items.json"
         },
         {
             "description": "You find yourself standing at the edge of a vast, crystalline plain within the Shattered Spires. Towering shards of crystal rise from the ground like glassy mountains, their facets reflecting a kaleidoscope of colors that dance in time with the celestial harmonics echoing through the night air. The ground beneath your feet resonates with an otherworldly energy, as if it were a tuning fork attuned to the very fabric of reality. A shimmering pathway of crystalline steps winds its way across this ethereal landscape, beckoning you towards secrets and mysteries hidden within the heart of the spires.",
             "name": "The Shattered Plain",
-            "items": [
-                {
-                    "name": "Crystal Resonator",
-                    "description": "A delicate crystal shard attuned to the celestial harmonics that resonate through the shattered spires. When held, it allows you to sense subtle changes in the fabric of reality and track hidden patterns within the spires' labyrinthine structure."
-                },
-                {
-                    "name": "Stellar Cartographer's Journal",
-                    "description": "A worn leather journal filled with cryptic notes and celestial maps that seem to point towards a deeper understanding of the shattered spires' power. The cartographer's writings hint at an imminent alignment of celestial bodies that will unlock previously unknown secrets within this labyrinthine complex."
-                }
-            ],
             "properties": [
                 "illuminated",
                 "harmonically-resonant"
@@ -90,7 +66,8 @@
                     2,
                     1
                 ]
-            ]
+            ],
+            "items_file": "room_items/room_3_items.json"
         }
     ]
 }

@@ -42,7 +42,7 @@ import time
 
 import threading
 
-# sys.path.append('./function_calls/')  # Adjust the path
+sys.path.append('./function_calls/')  # Adjust the path
 from function_calls.ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 
 
