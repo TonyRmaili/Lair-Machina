@@ -45,9 +45,9 @@ class LoadingScreen:
     def dungeon_generator(self):
         self.terminal_text = self.terminal_text+'generating dungeon json'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)
-        # world = GenerateWorld()
-        # world.run_dungeon()
-        # self.dungeon_room_splitter()
+        world = GenerateWorld()
+        world.run_dungeon()
+        self.dungeon_room_splitter()
  
         with open('dungeon.json') as f:
             dungeon_data = json.load(f)

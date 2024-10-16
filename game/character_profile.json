@@ -1,0 +1,8 @@
+{
+    "name": "Traveler",
+    "klass": "Fighter",
+    "race": "Human",
+    "description": "",
+    "image": "./pics/Traveler/profile_img.png",
+    "inventory": []
+}

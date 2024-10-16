@@ -1,4 +1,4 @@
-
+import json
 class Character:
     """
     Character class - holds character data - each character is a instance of this class - if we want to make saves persistent we can save the data in a json file
@@ -11,5 +11,10 @@ class Character:
         self.description = description
 
         self.image = None
-
+        self.inventory = []
         
+
+    def save_profile(self, filename="character_profile.json"):
+        # Save the instance's __dict__ directly as JSON
+        with open(filename, 'w') as json_file:
+            json.dump(self.__dict__, json_file, indent=4)

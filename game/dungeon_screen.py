@@ -11,7 +11,6 @@ sys.path.append('../function_calls/')  # Adjust the path
 from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 
 
-
 class DungeonScreen:
     """
     this is the game mode 
@@ -270,9 +269,12 @@ class DungeonScreen:
         for event in events:
             # handles quits 
             if event.type == pygame.QUIT:
+                # handle character save 
+                self.char.save_profile()
                 pygame.quit()
                 sys.exit()
-            
+                
+
             # keys for player navigation
             if event.type == pygame.KEYDOWN:
                 print(self.current_room_items_path)
@@ -292,6 +294,7 @@ class DungeonScreen:
                     threading.Thread(target=self.ask_ollama_tools, args=(prompt,)).start()
 
             self.DM_box.handle_event(event=event)
+            self.inventory_box.handle_event(event=event)
 
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)

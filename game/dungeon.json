@@ -1,69 +1,69 @@
 {
-    "theme": "Moonlit Grotto",
-    "description": "As you step through the shimmering curtains of mist, you find yourself within a vast, crystal-lined chamber deep beneath the moon's silvery gaze. The air is alive with the soft luminescence of glowworms and the gentle rustle of subterranean waterways. The walls, polished to an ethereal sheen by centuries of dripping moisture, seem to hum softly in harmony with the distant song of a secret river. Unseen currents weave through the cavern, carrying scents of damp earth, salt spray, and the faint tang of forgotten treasures. The darkness is illuminated by an ethereal glow, as if the moon itself had descended to guide those brave enough to delve into this mystical realm.",
+    "theme": "The Dreaming Spires",
+    "description": "Towering above a sea of whispering reeds, The Dreaming Spires rise like shards of splintered moonlight from the heart of the mystical Wysteria Fens. These crumbling, ethereal spires were once the sacred sanctum of the long-lost Lythari \u2013 an ancient people attuned to the very fabric of dreams. Now, as the last wisps of moonlight dance across their weathered facades, The Dreaming Spires awaken from a slumber that spanned centuries. Their walls, once vibrant with the murals of forgotten epiphanies and the echoes of whispered secrets, now whisper cryptic incantations to the wind. Dripping water weeps a melancholy serenade through the corridors, while the scent of damp earth and the essence of blooming reeds wafts through the halls like the promise of forgotten memories. The air is heavy with anticipation as the spires stir from their slumber, beckoning brave adventurers into the realms of the subconscious \u2013 where terrors and wonders alike await those willing to confront the darkness within.",
     "rooms": [
         {
-            "description": "The air is alive with the soft luminescence of glowworms and the gentle rustle of subterranean waterways. The walls, polished to an ethereal sheen by centuries of dripping moisture, seem to hum softly in harmony with the distant song of a secret river. Unseen currents weave through the cavern, carrying scents of damp earth, salt spray, and the faint tang of forgotten treasures.",
-            "name": "The Whispering Grotto",
+            "description": "You find yourself in a narrow corridor that seems to be a continuation of the grand hall you discovered earlier. The walls, once adorned with vibrant murals, now bear only faint reminders of their former glory. The air is thick with the scent of damp earth and blooming reeds, and the sound of dripping water echoes through the passageway like a melancholy serenade. Ahead of you, the corridor stretches into darkness, punctuated by flickering torches that cast eerie shadows on the walls.",
+            "name": "The Forgotten Gallery",
             "properties": [
-                "illuminated",
-                "wet"
+                "dark",
+                "narrow"
             ],
-            "secrets": "A hidden passage behind the crystal cluster leads to a secret chamber containing ancient artifacts and cryptic messages. The path is indicated by a series of subtle changes in the wall's luminescence.",
+            "secrets": "As you examine the murals on the wall more closely, you notice a small, almost imperceptible seam in one of the stones. It seems to be a hidden trigger, and if pressed correctly, it might reveal a secret compartment or message.",
             "room_id": 1,
-            "coordinates": [
-                1,
-                1
-            ],
-            "connections": [
-                [
-                    2,
-                    1
-                ],
-                [
-                    1,
-                    2
-                ]
-            ],
-            "items_file": "room_items\\room_1_items.json"
-        },
-        {
-            "description": "As you venture deeper into the Moonlit Grotto, a chamber of eerie tranquility unfolds before you. The air is heavy with the scent of damp earth and the faint tang of forgotten treasures. A series of crystal formations embedded within the walls seem to capture the lunar cycle, their facets reflecting hues of moonlit silver and dark blue. In the center of this space stands an ancient statue, its features worn by time but radiating a gentle, ethereal glow.",
-            "name": "The Lunar Sanctum",
-            "properties": [
-                "illuminated",
-                "cold"
-            ],
-            "secrets": "A hidden compartment within the statue contains a message from an ancient civilization, detailing a celestial alignment crucial for unlocking the secrets of this mystical realm. The path is indicated by subtle changes in the crystal formations' luminescence.",
-            "room_id": 2,
             "coordinates": [
                 1,
                 2
             ],
             "connections": [
                 [
-                    1,
-                    1
+                    2,
+                    2
                 ]
             ],
-            "items_file": "room_items\\room_2_items.json"
+            "items_file": "room_items\\room_1_items.json"
         },
         {
-            "description": "The chamber deepens into a vast, crystal-lined space where moonbeams converge, casting a sea of silver light upon the polished walls. Unseen currents whisper through the cavern, carrying scents of salt spray and forgotten treasures. A faint melody drifts from an unseen source, harmonizing with the gentle hum of the crystals.",
-            "name": "The Lunar Convergence",
+            "description": "You step into a small, spherical chamber deep within The Dreaming Spires. The room is encircled by an intricately carved, crystal-lined wall that refracts and reflects the faint moonlight seeping through the spire's windows. The air inside is stale, but it carries the whispers of forgotten dreams. In the center of the room, a delicate, gemstone-encrusted lyre lies atop a pedestal, its strings eerily silent. The only sound is the soft hum of magic emanating from the instrument.",
+            "name": "The Silent Melody",
             "properties": [
-                "illuminated",
-                "cold"
+                "quiet",
+                "magical"
             ],
-            "secrets": "A hidden panel within the crystal formation contains a cryptic message from an ancient civilization, detailing a lunar alignment crucial for unlocking the secrets of this mystical realm. The path is indicated by subtle changes in the crystals' luminescence and the soft melody's tempo.",
-            "room_id": 3,
+            "secrets": "As you examine the lyre more closely, you notice that one of its strings is slightly out of tune. If you manage to adjust it correctly, the instrument might awaken and reveal hidden secrets or even conjure a sonic blast.",
+            "room_id": 2,
             "coordinates": [
                 2,
                 1
             ],
             "connections": [
                 [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "room_items\\room_2_items.json"
+        },
+        {
+            "description": "You find yourself in a grand, high-ceilinged chamber within The Dreaming Spires. The room is dominated by an enormous, crystal-encrusted chandelier that hangs from the vaulted ceiling like a shard of splintered starlight. The walls are adorned with vibrant, yet faded murals depicting scenes of ancient rituals and mystical events. The air is alive with the whispers of forgotten memories, and the scent of damp earth and blooming reeds wafts through the space like a promise of hidden truths. Ahead of you, a grand staircase curves up into the shadows like a crescent moon, beckoning you towards secrets yet unknown.",
+            "name": "The Celestial Sanctum",
+            "properties": [
+                "grand",
+                "magical"
+            ],
+            "secrets": "As you examine the murals on the wall more closely, you notice that one of them seems to be a hidden key. If you manage to decipher its meaning and press it correctly, the chandelier might reveal a secret compartment or message.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
                     1,
+                    2
+                ],
+                [
+                    2,
                     1
                 ]
             ],
