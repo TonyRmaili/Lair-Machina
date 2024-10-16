@@ -49,7 +49,7 @@ class DungeonScreen:
 
         # Ollama chat windows
         # prompt - input text - ok
-        self.prompt_box = InputText(x=0,y=h-250,width=w-450,height=h-385,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
+        self.prompt_box = InputText(x=0,y=h-250,width=w-450,height=h-385,title='',bg_color=(69, 69, 69), text_color=(255, 255, 255))
         self.prompt_button = Button(pos=(w-500,h-50),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
         
@@ -97,7 +97,9 @@ class DungeonScreen:
             
         self.current_room_items = f'{room_item_names}'
 
-        print(self.current_room_items)
+        # print(self.current_room_items)
+        self.current_room_items_box = TextArea(text=self.current_room_items,font_size=20,WIDTH=340,HEIGHT=75,x=5,y=265,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
+
         
         
 
@@ -138,8 +140,8 @@ class DungeonScreen:
             
         self.current_room_items = f'{room_item_names}'
         
-        # GREEN INVENTORY BOX
-        self.current_room_items_box = TextArea(text=self.current_room_items,WIDTH=250,HEIGHT=250,x=0,y=300,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
+        # list of items in a room
+        self.current_room_items_box.new_text(text=self.current_room_items)
 
         # # Display instructions if a special action is available
         # if self.special_action_available:
@@ -328,7 +330,7 @@ class DungeonScreen:
         self.inventory_box.draw(screen=screen)
         
                 
-        # self.current_room_items_box.draw(screen=screen)
+        self.current_room_items_box.draw(screen=screen)
         
         # self.map_grid.draw(screen=screen)
         
