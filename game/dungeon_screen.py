@@ -84,7 +84,7 @@ class DungeonScreen:
         # Check if item is a dictionary before trying to access 'name'
         room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
 
-            
+        # 
         self.current_room_items = f'{room_item_names}'
 
         # print(self.current_room_items)
@@ -230,7 +230,7 @@ class DungeonScreen:
         print(self.inventory)
         # print(self.current_room_items)
         
-        ollama_instance = OllamaToolCall(messages=f'{prompt}. these are the items in the room: {self.current_room_items}, This is the players current inventory: {self.inventory} This is the room_file: ./{self.room_file}', room_file=self.room_file)
+        ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.inventory} The room_file: ./{self.room_file}', room_file=self.room_file)
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         

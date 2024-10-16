@@ -1,6 +1,10 @@
 [
     {
-        "name": "Grotto Core Fragment",
-        "description": "A shard of crystal that seems to be a fragment of the Grotto's radiant core. When attuned to its unique resonance, this crystal shard can channel and amplify magical energies, allowing for more powerful spellcasting."
+        "name": "Elyrian Lyre",
+        "description": "An ancient instrument adorned with intricate patterns that seem to shift and change color in harmony with the light. Its strings emit a soft, ethereal music that resonates deep within one's soul."
+    },
+    {
+        "name": "Harmonic Key",
+        "description": "A delicate crystal key that, when used in conjunction with the Whispering Harmony music box from the Chamber of Echoing Memories, reveals a hidden resonance within the Lyre itself. The key glows softly in harmony with the music, as if attuning itself to the harmonics of the instrument."
     }
 ]

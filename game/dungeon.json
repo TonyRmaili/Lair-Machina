@@ -1,15 +1,15 @@
 {
-    "theme": "Glimmering Grotto",
-    "description": "Deep within the heart of a primordial forest lies the Glimmering Grotto \u2013 an ethereal dungeon shrouded in mystery. This shimmering network of crystal caves and glittering waterfalls has been illuminated for centuries by a radiant, otherworldly glow emanating from the depths of its core. The walls of the grotto are made up of crystalline formations that refract and reflect the luminescent light, casting an ever-changing tapestry of colors across the cavernous interior. As you venture deeper into the Grotto, the air thickens with the sweet scent of blooming mushrooms and the soft chirping of iridescent winged creatures flit about your head. The sound of gently flowing water creates a soothing melody that underscores an air of peace and tranquility \u2013 until, suddenly, it's interrupted by an unsettling silence. It is then that you realize the Grotto has been waiting for you.",
+    "theme": "The Shattered Spires of Elyria",
+    "description": "Deep within the heart of a primeval forest lies The Shattered Spires of Elyria, an ancient, ethereal cathedral of crystalline spires that have lain shattered and overgrown for millennia. As adventurers step between the colossal, tree-like pillars, the air is filled with the sweet scent of blooming wildflowers and the soft chime of refracted moonlight filtering through the crystal shards. Dappled sunlight dancing across the forest floor creates an illusion of movement within the crystalline structure, as if the very essence of Elyria's ancient magic still stirs. The ground beneath is spongy with moss and ferns, and the soft rustle of leaves echoes through the halls, punctuated by the faint whispers of forgotten hymns. Ahead lies the grand central chamber, where shards of crystal pierce the sky like a shattered rainbow. It is here that ancient secrets slumber, waiting for brave adventurers to shatter their eternal silence.",
     "rooms": [
         {
-            "description": "You find yourself in the Whispering Gallery \u2013 a vast crystal cavern that amplifies even the faintest whispers into a resounding echo. The walls of this grand chamber are covered in glittering crystalline formations that refract light, casting an ever-changing kaleidoscope of colors across the floor. A soft mist rises from the ground, carrying with it the sweet scent of blooming moonflowers. As you stand at the center of this natural amphitheater, the sound of dripping water and distant chimes creates a soothing melody that harmonizes perfectly with your own heartbeat.",
-            "name": "Whispering Gallery",
+            "description": "Beyond a curtain of vines lies the Hall of Reflected Souls. The room is a natural cavern, its walls polished to a glassy sheen by centuries of dripping water. Thousands of delicate, crystalline shards suspended from the ceiling cast an ethereal glow across the space, refracting the light into a kaleidoscope of colors that seem to dance just beyond reach. In the center of the room, a pool of still water reflects the shimmering crystals above, creating an illusion of depth and timelessness.",
+            "name": "Hall of Reflected Souls",
             "properties": [
-                "echoing",
-                "illuminated"
+                "cold",
+                "unstable"
             ],
-            "secrets": "Hidden within the swirling crystals is a small inscription that reads: 'Only whispers bring clarity.'",
+            "secrets": "A series of small, almost imperceptible grooves in the floor, when touched in sequence with a specific crystal key hidden elsewhere in the spires, reveal a hidden passageway that leads to a secret library.",
             "room_id": 1,
             "coordinates": [
                 1,
@@ -19,44 +19,19 @@
                 [
                     2,
                     1
-                ],
-                [
-                    1,
-                    2
                 ]
             ],
             "items_file": "room_items/room_1_items.json"
         },
         {
-            "description": "You find yourself in the Luminous Pool \u2013 a serene and mystical chamber deep within the heart of the Glimmering Grotto. This tranquil space is dominated by an ethereal pool of water that seems to be the source of the grotto's radiant, otherworldly glow. The walls are adorned with delicate crystalline formations that refract light into a kaleidoscope of colors, casting shimmering patterns across the floor. A soft melody created by the gentle lapping of the pool's waters against its crystal rim fills the air, while the sweet scent of blooming starflowers wafts through the space, imbuing it with an aura of enchantment and peace.",
-            "name": "Luminous Pool",
+            "description": "Beyond a tangle of overgrown vines lies the Chamber of Echoing Memories. The room is a small, circular space surrounded by a ring of crystal shards that pierce the earth like shards of glass. A delicate, filigree-patterned archway made from a single piece of crystalline material spans the entrance, its intricate details reflecting the soft moonlight filtering through the forest above. Inside, the walls are adorned with a mosaic of glittering, polished stones in shades of blue and green that seem to shimmer and change color as one moves around the room. A single, ancient-looking music box sits atop a pedestal at the center of the space, its delicate ballerina frozen in mid-twirl. The air is filled with the faint scent of old books and memories.",
+            "name": "Chamber of Echoing Memories",
             "properties": [
-                "illuminated",
-                "peaceful"
+                "cold",
+                "dark"
             ],
-            "secrets": "Hidden beneath the surface of the Luminous Pool is a small, intricately carved stone statue with an inscription that reads: 'True wisdom lies in stillness.'",
+            "secrets": "A series of fine, almost imperceptible lines etched into the floor around the music box reveal a hidden message when viewed under moonlight. The message reads: 'Beneath the Songbird's Melody' and is believed to point to a secret location elsewhere in the spires.",
             "room_id": 2,
-            "coordinates": [
-                1,
-                2
-            ],
-            "connections": [
-                [
-                    1,
-                    1
-                ]
-            ],
-            "items_file": "room_items/room_2_items.json"
-        },
-        {
-            "description": "You find yourself in the Shimmering Grotto \u2013 a majestic chamber deep within the heart of the crystal caves. The walls and ceiling are adorned with glittering crystalline formations that refract light into a dazzling display of colors, casting an ever-changing tapestry across the floor. A soft breeze carries the sweet scent of blooming moonflowers through the space, while the gentle chime of tiny windcatchers embedded within the crystals creates a soothing melody. In the center of this breathtaking chamber lies the source of the Grotto's radiant glow: a magnificent crystal core that pulses with an otherworldly energy.",
-            "name": "Shimmering Grotto",
-            "properties": [
-                "illuminated",
-                "peaceful"
-            ],
-            "secrets": "Hidden within the crystalline formations is a series of intricate engravings that read: 'As colors dance, truth reveals itself.'",
-            "room_id": 3,
             "coordinates": [
                 2,
                 1
@@ -64,6 +39,31 @@
             "connections": [
                 [
                     1,
+                    1
+                ],
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "room_items/room_2_items.json"
+        },
+        {
+            "description": "Beyond a cascade of crystalline shards lies the Chamber of Resonant Harmonies. The room is a natural amphitheater, its walls composed of glittering crystal formations that refract and reflect the light in dazzling patterns. A series of delicate, petal-like structures suspended from the ceiling seem to be in constant motion, as if driven by an invisible breeze. At the center of the space stands an ancient instrument - the Elyrian Lyre - its strings humming with a soft, ethereal music that resonates deep within one's soul.",
+            "name": "Chamber of Resonant Harmonies",
+            "properties": [
+                "cold",
+                "resonant"
+            ],
+            "secrets": "A series of fine, almost imperceptible lines etched into the floor around the Lyre reveal a hidden message when viewed under moonlight. The message reads: 'In Harmony with Elyria's Heart' and is believed to point to a secret location elsewhere in the spires.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
+                    2,
                     1
                 ]
             ],

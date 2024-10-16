@@ -19,23 +19,55 @@ class OllamaToolCall:
         self.room_json = load_room_from_file(room_file)
 
 
+        # action tool - typ I try to do this > decide if roll and AC > roll > result
+        # typ tar in player action -> + DC
+
+    #    {
+    #             'type':'function',
+    #             'function':{
+    #                 'name':'roll_skill_with_mod',
+    #                 'description':'Rolls for using a skill and displayes result: THE ONLY Available skills are acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival',
+    #                 'parameters':
+    #                   {
+    #                     'type':'object',
+    #                     'properties':{
+    #                         'skill':{'type':'str'}
+                           
+                            
+    #                     }
+    #                 },
+    #                 'required':['skill']
+    #             }
+    #         },
+
+
         #define the tool - so far - skillcheckroll and remove item from room JSON 
         self.tools = [
+                 
             {
                 'type':'function',
                 'function':{
-                    'name':'roll_skill_with_mod',
+                    'name':'resolve_hard_action',
                     'description':'Rolls for using a skill and displayes result: THE ONLY Available skills are acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival',
                     'parameters':
-                      {
+                    {
                         'type':'object',
                         'properties':{
-                            'skill':{'type':'str'}
-                           
-                            
-                        }
-                    },
-                    'required':['skill']
+                            "skill": {
+                                "type": "string",
+                                "description": "The name of the skill to use."
+                            },
+                            "dc": {
+                                "type": "int",
+                                "description": "the difficulty level of the task between 1-20"
+                            },
+                            "player_action": {
+                                "type": "string",
+                                "description": "The action the player is atempting"
+                            }
+                        },
+                    'required':['skill', 'dc', 'player_action']
+                    }
                 }
             },
             {
@@ -63,7 +95,7 @@ class OllamaToolCall:
                 "type": "function",
                 "function": {
                     "name": 'leave_item_from_inventory_in_room',
-                    "description": 'Removes an item from the player inventory and adds it to the room JSON based on the players action, use it if the player wants to leave something from their inventory in the room',
+                    "description": 'Removes an item from the player inventory and adds it to the room JSON. USE IF PLAYER WANT TO LEAVE, THROW or DROP something in the room',
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -81,33 +113,43 @@ class OllamaToolCall:
                 }
             },
             {
-                'type': 'function',
-                'function': {
-                    'name': 'look_at_room',
-                    'description': 'gives a description of the room',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'current_location': {'type': 'string'}
-                        }
-                    },
-                    'required': ['current_location']
-                }
-            },                                           {
-                'type': 'function',
-                'function': {
-                    'name': 'ask_stuff',
-                    'description': 'gives the in lore answer about things, use when the player makes a question about the world',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'player_question': {'type': 'string'}
-                        }
-                    },
-                    'required': ['player_question']
+                "type": "function",
+                "function": {
+                    "name": 'look_at_room',
+                    "description": 'gives a description of the room and whats in the room for the player. Use when player asks to look around',
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "current_room_description": {
+                                "type": "string",
+                                "description": "The description of the current room"
+                            },
+                            "room_file": {
+                                "type": "string",
+                                "description": "The file path to the JSON file that contains the room's items."
+                            }
+                        },
+                        "required": ["current_room_description", "room_file"]
+                    }
                 }
             }
         ]
+    
+            #     {
+            #     'type': 'function',
+            #     'function': {
+            #         'name': 'ask_stuff',
+            #         'description': 'gives the in lore answer about things, use when the player makes a question about the world',
+            #         'parameters': {
+            #             'type': 'object',
+            #             'properties': {
+            #                 'player_question': {'type': 'string'}
+            #             }
+            #         },
+            #         'required': ['player_question']
+            #     }
+            # }
+
     
     # this is what the LLM will use to see all the functions it has
     def call_functions(self):
@@ -168,3 +210,18 @@ if __name__ == '__main__':
     # functions = OllamaToolCall(messages='I try to tell the dragon to stand back')
     
     # functions.activate_functions()
+    
+    
+    
+    
+    
+    # needed:
+    # question tool - tar player question och room info + item info (kanske update state if needed?)
+    # action tool - typ I try to do this > decide if roll and AC > roll > result
+    # flavortext-wrapper
+    
+    # remove item from inventory
+    # update description of item > state?
+    
+    
+    # first - > try to make action tool? Then > flavor wrapper?
