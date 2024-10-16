@@ -101,7 +101,7 @@ class OllamaToolCall:
                         "properties": {
                             "item_name": {
                                 "type": "string",
-                                "description": "The name of the item the player wants to loot. THE ITEM NEEDS TO EXIST IN THE PLAYER CURRENT INVENTORY"
+                                "description": "The name of the item the player wants to leave. THE ITEM NEEDS TO EXIST IN THE PLAYER CURRENT INVENTORY"
                             },
                             "room_file": {
                                 "type": "string",
