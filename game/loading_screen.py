@@ -12,6 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from world_generator.generate_world import GenerateWorld
 import json
 
+
 class LoadingScreen:
     def __init__(self,game,w,h):
         self.game = game
@@ -46,6 +47,7 @@ class LoadingScreen:
         self.terminal_box.new_text(text=self.terminal_text)
         world = GenerateWorld()
         world.run_dungeon()
+        self.dungeon_room_splitter()
  
         with open('dungeon.json') as f:
             dungeon_data = json.load(f)
@@ -60,7 +62,48 @@ class LoadingScreen:
 
         self.char.image = f'./pics/{self.char.name}/profile_img.png'
         
-        
+
+
+
+    def dungeon_room_splitter(self):
+        # Load dungeon JSON from a file
+        with open('dungeon.json', 'r') as dungeon_file:
+            dungeon = json.load(dungeon_file)
+            
+        # Directory where you want to save the item JSON files
+        output_directory = "room_items"
+
+        # Create directory for room items if it doesn't exist
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
+        # Loop through each room and create a JSON file for the items
+        for room in dungeon['rooms']:
+            # Extract room name or room_id to name the file
+            room_id = room['room_id']
+            
+            # Define the file name and path
+            item_file_name = f"room_{room_id}_items.json"
+            item_file_path = os.path.join(output_directory, item_file_name)
+            
+            # Extract items
+            room_items = room.get('items', [])
+            
+            # Save items as a JSON file
+            with open(item_file_path, 'w') as item_file:
+                json.dump(room_items, item_file, indent=4)
+            
+            # Update the original dungeon room to include the path to the items file
+            room['items_file'] = item_file_path
+            
+            # Remove the inline items array from the room
+            del room['items']
+
+        # Save the modified dungeon JSON
+        with open('dungeon.json', 'w') as dungeon_file:
+            json.dump(dungeon, dungeon_file, indent=4)
+
+        print("Room item files and updated dungeon JSON have been saved.")        
     
     def prepare_rooms(self,rooms_data):
         self.terminal_text = self.terminal_text+'preparing rooms data'+'\n'
@@ -90,6 +133,9 @@ class LoadingScreen:
                     
 
             self.terminal_box.handle_event(event=event)
+
+
+
 
     
     def run(self,screen,events,mouse_pos):

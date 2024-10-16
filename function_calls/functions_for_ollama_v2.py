@@ -101,9 +101,9 @@ def ask_stuff(player_question):
 
 # WORKS
 # Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
-def loot_item_from_room(item_name: str):
+def loot_item_from_room(item_name: str, room_file: str):
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-    room_file='castle_map.json'    
+    room_file=room_file    
     # Load room from file
     with open(room_file, 'r') as file:
         room_json = json.load(file)
@@ -114,7 +114,7 @@ def loot_item_from_room(item_name: str):
     # print(room_json)
     updated_items = []
 
-    for item in room_json['items']:
+    for item in room_json:
         if item['name'].lower() == item_name.lower():
             looted_item = item
             item_found = True  # Item found, skip adding it to updated list
@@ -122,7 +122,7 @@ def loot_item_from_room(item_name: str):
             updated_items.append(item)  # Keep the item if it doesn't match
 
     if item_found:
-        room_json['items'] = updated_items
+        room_json = updated_items
         
         # Save the updated room JSON back to the file
         with open(room_file, 'w') as file:
@@ -136,7 +136,7 @@ def loot_item_from_room(item_name: str):
             inventory_json = json.load(file)
         
         # Add the looted item to the inventory
-        inventory_json['items'].append(looted_item)
+        inventory_json['inventory'].append(looted_item)
         
         # Save the updated inventory JSON back to the file
         with open(inventory_file, 'w') as file:
@@ -150,9 +150,9 @@ def loot_item_from_room(item_name: str):
 
 # Function to ADD an item to the room JSON - AND remove it from the players inventory
 # def leave_item_from_inventory_in_room(item_name: str, item_description: str, room_json, file_path: str):
-def leave_item_from_inventory_in_room(item_name: str):
+def leave_item_from_inventory_in_room(item_name: str, room_file: str):
     
-    
+    room_file = room_file
     inventory_file='inventory_json.json'    
     # Load inventory from file
     with open(inventory_file, 'r') as file:
@@ -163,7 +163,7 @@ def leave_item_from_inventory_in_room(item_name: str):
 
     updated_items = []
 
-    for item in inventory_json['items']:
+    for item in inventory_json['inventory']:
         if item['name'].lower() == item_name.lower():
             # set the item player wants to leave to variable for adding in room later
             item_to_leave = item_name
@@ -172,7 +172,7 @@ def leave_item_from_inventory_in_room(item_name: str):
             updated_items.append(item)  # Keep the item if it doesn't match
 
     if item_found:
-        inventory_json['items'] = updated_items
+        inventory_json['inventory'] = updated_items
         
         # Save the updated inventory JSON back to the file
         with open(inventory_file, 'w') as file:
@@ -184,7 +184,7 @@ def leave_item_from_inventory_in_room(item_name: str):
 
     ### ADDS ITEM REMOVED FROM INVENTORY TO ROOM JSON ###
     # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-    room_file='castle_map.json'    
+    room_file=room_file    
     # Load room from file
     with open(room_file, 'r') as file:
         room_json = json.load(file)
@@ -192,7 +192,7 @@ def leave_item_from_inventory_in_room(item_name: str):
     updated_items = []
 
 
-    for item in room_json['items']:
+    for item in room_json:
         updated_items.append(item)  # Keep the item if it doesn't match
 
         
@@ -212,7 +212,7 @@ def leave_item_from_inventory_in_room(item_name: str):
     updated_items.append(new_item)
 
     #change the json to updated 
-    room_json['items'] = updated_items
+    room_json = updated_items
     
     # Save the updated room JSON back to the file
     with open(room_file, 'w') as file:

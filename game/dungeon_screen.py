@@ -39,42 +39,39 @@ class DungeonScreen:
     def __init__(self,game,w,h):
         self.game = game
         self.WIDTH = w
-        path = './pics/'
-        self.bg = Image(image=path+'floor.jpg',pos=(250,0),scale=(w-250,h-250))
-        namepath = self.game.char.name
-        path = './pics/'+ namepath + '/'
-        # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet (solved in tonys async version?)
-        self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(w-200,h-250),scale=(200,200))
-
+        self.char = game.char
+        
+        
+        path = f'./pics/{self.char.name}/dungeon_rooms/'
+        self.bg = Image(image=path+'1.png',pos=(5,5),scale=(349,250))
+        self.character_image = Image(image=self.char.image,pos=(w-250,h-250),scale=(250,250))
 
         # Ollama chat windows
         # prompt - input text - ok
         self.prompt_box = InputText(x=0,y=h-250,width=w-450,height=h-385,title='',bg_color=(69, 69, 69), text_color=(255, 255, 255))
         self.prompt_button = Button(pos=(w-500,h-50),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
-        
         # response from LLM - text area -ok
         self.response_box = TextArea(text='',WIDTH=w-355,HEIGHT=h-255,x=350,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
         
-        
-        # player invetory - text area - OK
+        # player inventory - text area - OK
         self.inventory_box = TextArea(text='',WIDTH=w-550,HEIGHT=h-390,x=w-450,y=h-248,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
-
 
         #set starting- current room
         self.current_room_id = 0
 
-        with open('./inventory_json.json') as f:
+
+
+        # set inventory to items
+        with open('inventory_json.json') as f:
             self.inventory = json.load(f)
         
-        
-                
         # Extract only the names of the items in the inventory
         item_names = [item['name'] for item in self.inventory['inventory']]
             
         self.inventory = f'{item_names}'
 
-        with open('./updated_dungeon.json') as f:
+        with open('dungeon.json') as f:
             self.dungeon = json.load(f)
         
         self.current_room_data = self.dungeon['rooms'][self.current_room_id]
@@ -312,7 +309,7 @@ class DungeonScreen:
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.update_response()
-        # self.bg.draw(screen=screen)
+        self.bg.draw(screen=screen)
         
         self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
@@ -321,7 +318,7 @@ class DungeonScreen:
 
         self.display_map()
         self.current_room_box.new_text(text=self.current_room_description)
-        self.current_room_box.draw(screen=screen)
+        # self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
         # self.current_room_options_box.draw(screen=screen)

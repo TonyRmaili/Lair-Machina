@@ -1,96 +1,73 @@
 {
-    "theme": "The Shattered Spires",
-    "description": "A labyrinthine complex of towering crystal spires lies shattered across a vast, starlit plain. The once-majestic structures now pierce the darkness like shards of glass, their facets reflecting a thousand points of light that dance with an otherworldly energy. As you navigate this ethereal landscape, the air vibrates with the whispers of ancient knowledge, while the ground hums with the gentle resonance of long-dormant magic. The scent of ozone and starlight fills your nostrils, and the distant thrum of crystalline structures tuning themselves to celestial harmonics echoes through the night air, as if the very fabric of reality was being subtly manipulated by some long-forgotten force. In this dreamscape realm, time itself appears to be fluid, with moments from past and future bleeding into one another like watercolors on wet parchment.",
+    "theme": "Glimmering Grotto",
+    "description": "Deep within the heart of a primordial forest lies the Glimmering Grotto \u2013 an ethereal dungeon shrouded in mystery. This shimmering network of crystal caves and glittering waterfalls has been illuminated for centuries by a radiant, otherworldly glow emanating from the depths of its core. The walls of the grotto are made up of crystalline formations that refract and reflect the luminescent light, casting an ever-changing tapestry of colors across the cavernous interior. As you venture deeper into the Grotto, the air thickens with the sweet scent of blooming mushrooms and the soft chirping of iridescent winged creatures flit about your head. The sound of gently flowing water creates a soothing melody that underscores an air of peace and tranquility \u2013 until, suddenly, it's interrupted by an unsettling silence. It is then that you realize the Grotto has been waiting for you.",
     "rooms": [
         {
-            "description": "You find yourself in a grand, crystal-lined chamber deep within the shattered spires. The room is filled with an otherworldly glow, as if the very walls are infused with starlight. Shattered crystals of all shapes and sizes lie scattered across the floor, their facets reflecting shards of light that dance like diamonds against the dark sky visible through the jagged opening in the ceiling. The air is thick with the scent of ozone and starlight, and you can feel the distant thrum of crystalline structures tuning themselves to celestial harmonics echoing through the night air.",
-            "name": "The Crystal Sanctum",
-            "items": [
-                {
-                    "name": "Starheart Crystal",
-                    "description": "A delicate crystal shard that pulsates with an ethereal energy, its facets reflecting a kaleidoscope of starlight colors. It is said to hold the essence of celestial harmonics within its crystalline structure."
-                }
+            "description": "You find yourself in the Whispering Gallery \u2013 a vast crystal cavern that amplifies even the faintest whispers into a resounding echo. The walls of this grand chamber are covered in glittering crystalline formations that refract light, casting an ever-changing kaleidoscope of colors across the floor. A soft mist rises from the ground, carrying with it the sweet scent of blooming moonflowers. As you stand at the center of this natural amphitheater, the sound of dripping water and distant chimes creates a soothing melody that harmonizes perfectly with your own heartbeat.",
+            "name": "Whispering Gallery",
+            "properties": [
+                "echoing",
+                "illuminated"
             ],
+            "secrets": "Hidden within the swirling crystals is a small inscription that reads: 'Only whispers bring clarity.'",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ],
+                [
+                    1,
+                    2
+                ]
+            ],
+            "items_file": "room_items/room_1_items.json"
+        },
+        {
+            "description": "You find yourself in the Luminous Pool \u2013 a serene and mystical chamber deep within the heart of the Glimmering Grotto. This tranquil space is dominated by an ethereal pool of water that seems to be the source of the grotto's radiant, otherworldly glow. The walls are adorned with delicate crystalline formations that refract light into a kaleidoscope of colors, casting shimmering patterns across the floor. A soft melody created by the gentle lapping of the pool's waters against its crystal rim fills the air, while the sweet scent of blooming starflowers wafts through the space, imbuing it with an aura of enchantment and peace.",
+            "name": "Luminous Pool",
             "properties": [
                 "illuminated",
-                "harmonically-resonant"
+                "peaceful"
             ],
-            "secrets": "A hidden compartment within the crystal-lined wall contains a cryptic message etched onto a parchment: 'When stars align, darkness yields.'",
-            "room_id": 1,
+            "secrets": "Hidden beneath the surface of the Luminous Pool is a small, intricately carved stone statue with an inscription that reads: 'True wisdom lies in stillness.'",
+            "room_id": 2,
             "coordinates": [
                 1,
                 2
             ],
             "connections": [
                 [
-                    2,
-                    2
+                    1,
+                    1
                 ]
-            ]
+            ],
+            "items_file": "room_items/room_2_items.json"
         },
         {
-            "description": "You stumble upon a room that appears to be a relic of the spires' former glory. The walls are adorned with intricate carvings depicting scenes of celestial events and ancient civilizations. Flickering luminescent orbs suspended from the ceiling cast an eerie, otherworldly glow across the space, making it seem as though the very stars have been brought indoors. A delicate, crystal-encrusted music box in the center of the room slowly turns, its melody intertwining with the whispers of ancient knowledge carried on the wind outside.",
-            "name": "The Starlit Conservatory",
-            "items": [
-                {
-                    "name": "Stellar Lyre",
-                    "description": "A lyre crafted from a fallen star's crystalline essence, its strings humming with celestial harmonics. When played, it is said to summon melodies that can weave the fabric of reality itself."
-                },
-                {
-                    "name": "Glimmering Starlight Dust",
-                    "description": "Tiny fragments of starlight distilled into a sparkling dust. This precious substance is rumored to hold within it the essence of creation's earliest moments and could grant immense insight to those who possess it."
-                }
-            ],
+            "description": "You find yourself in the Shimmering Grotto \u2013 a majestic chamber deep within the heart of the crystal caves. The walls and ceiling are adorned with glittering crystalline formations that refract light into a dazzling display of colors, casting an ever-changing tapestry across the floor. A soft breeze carries the sweet scent of blooming moonflowers through the space, while the gentle chime of tiny windcatchers embedded within the crystals creates a soothing melody. In the center of this breathtaking chamber lies the source of the Grotto's radiant glow: a magnificent crystal core that pulses with an otherworldly energy.",
+            "name": "Shimmering Grotto",
             "properties": [
                 "illuminated",
-                "harmonically-resonant"
+                "peaceful"
             ],
-            "secrets": "A hidden compartment behind one of the carvings on the wall contains a set of celestial charts that point to an imminent astronomical event. It is said that this alignment will unlock a previously unknown aspect of the shattered spires' power.",
-            "room_id": 2,
+            "secrets": "Hidden within the crystalline formations is a series of intricate engravings that read: 'As colors dance, truth reveals itself.'",
+            "room_id": 3,
             "coordinates": [
                 2,
                 1
             ],
             "connections": [
                 [
-                    2,
-                    2
-                ]
-            ]
-        },
-        {
-            "description": "You find yourself standing at the edge of a vast, crystalline plain within the Shattered Spires. Towering shards of crystal rise from the ground like glassy mountains, their facets reflecting a kaleidoscope of colors that dance in time with the celestial harmonics echoing through the night air. The ground beneath your feet resonates with an otherworldly energy, as if it were a tuning fork attuned to the very fabric of reality. A shimmering pathway of crystalline steps winds its way across this ethereal landscape, beckoning you towards secrets and mysteries hidden within the heart of the spires.",
-            "name": "The Shattered Plain",
-            "items": [
-                {
-                    "name": "Crystal Resonator",
-                    "description": "A delicate crystal shard attuned to the celestial harmonics that resonate through the shattered spires. When held, it allows you to sense subtle changes in the fabric of reality and track hidden patterns within the spires' labyrinthine structure."
-                },
-                {
-                    "name": "Stellar Cartographer's Journal",
-                    "description": "A worn leather journal filled with cryptic notes and celestial maps that seem to point towards a deeper understanding of the shattered spires' power. The cartographer's writings hint at an imminent alignment of celestial bodies that will unlock previously unknown secrets within this labyrinthine complex."
-                }
-            ],
-            "properties": [
-                "illuminated",
-                "harmonically-resonant"
-            ],
-            "secrets": "A hidden compartment within a crystal formation near the center of the plain contains a set of ancient keys that, when used in conjunction with specific celestial alignments, can unlock previously sealed aspects of the spires' power.",
-            "room_id": 3,
-            "coordinates": [
-                2,
-                2
-            ],
-            "connections": [
-                [
                     1,
-                    2
-                ],
-                [
-                    2,
                     1
                 ]
-            ]
+            ],
+            "items_file": "room_items/room_3_items.json"
         }
     ]
 }

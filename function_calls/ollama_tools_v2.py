@@ -39,34 +39,48 @@ class OllamaToolCall:
                 }
             },
             {
-                'type': 'function',
-                'function': {
-                    'name': 'loot_item_from_room',
-                    'description': 'Removes an item from the room and adds it to the players inventory based on the players action, use it if the player wants to take something in the room',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'item_name': {'type': 'string'}
-                        }
-                    },
-                    'required': ['item_name']
+                "type": "function",
+                "function": {
+                    "name": "loot_item_from_room",
+                    "description": "Removes an item from the room and adds it to the player's inventory.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "item_name": {
+                                "type": "string",
+                                "description": "The name of the item the player wants to loot."
+                            },
+                            "room_file": {
+                                "type": "string",
+                                "description": "The file path to the JSON file that contains the room's inventory."
+                            }
+                        },
+                        "required": ["item_name", "room_file"]
+                    }
                 }
             },
             {
-                'type': 'function',
-                'function': {
-                    'name': 'leave_item_from_inventory_in_room',
-                    'description': 'Removes an item from the player inventory and adds it to the room JSON based on the players action, use it if the player wants to leave something from their inventory in the room',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            'item_name': {'type': 'string'}
-                        }
-                    },
-                    'required': ['item_name']
+                "type": "function",
+                "function": {
+                    "name": 'leave_item_from_inventory_in_room',
+                    "description": 'Removes an item from the player inventory and adds it to the room JSON based on the players action, use it if the player wants to leave something from their inventory in the room',
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "item_name": {
+                                "type": "string",
+                                "description": "The name of the item the player wants to loot. THE ITEM NEEDS TO EXIST IN THE PLAYER CURRENT INVENTORY"
+                            },
+                            "room_file": {
+                                "type": "string",
+                                "description": "The file path to the JSON file that contains the room's inventory."
+                            }
+                        },
+                        "required": ["item_name", "room_file"]
+                    }
                 }
             },
-                       {
+            {
                 'type': 'function',
                 'function': {
                     'name': 'look_at_room',
