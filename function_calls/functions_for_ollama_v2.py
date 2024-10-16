@@ -269,13 +269,7 @@ def leave_item_from_inventory_in_room(item_name: str, room_file: str):
     return f"{item_name} has been added to the room."
 
 
-
-
-
-
-# MAKE SKILLCHECK - works
-def roll_skill_with_mod(skill: str) -> str:
-    # Dictionary of D&D skills with corresponding modifiers
+def resolve_hard_action(skill: str, dc: int, player_action: str):
     skills = {
         'acrobatics': 2,      # Dexterity
         'animal handling': 1, # Wisdom
@@ -301,25 +295,79 @@ def roll_skill_with_mod(skill: str) -> str:
     if skill.lower() in skills:
         mod = skills[skill.lower()]
         roll = random.randint(1, 20)  # Roll a d20
-        total = roll + mod
-        return f"Rolled {roll} for {skill}, with a modifier of {mod}. Total: {total}"
-    else:
-        return "Invalid skill."
+        total = roll + mod    
+
+        system_prompt=f"You are the dungeon master, the player attempted and an action an made a roll, describe the outcome. start with typing out, action: {player_action}, {skill} roll: {total}, vs task DC {dc}. then give the description of the outcome"
+        user_prompt=f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
+        response = ollama.chat(
+            model="llama3.1", 
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+        )
+        
+        action_outcome = response['message']['content']
+        
+        # idea: here it could make a toolcall - > with the outcome, what should it do with the room? - remove item/HP other? update something etc
+        
+    return action_outcome
+
+# MAKE SKILLCHECK - works
+# def roll_skill_with_mod(skill: str) -> str:
+#     # Dictionary of D&D skills with corresponding modifiers
+#     skills = {
+#         'acrobatics': 2,      # Dexterity
+#         'animal handling': 1, # Wisdom
+#         'arcana': 0,          # Intelligence
+#         'athletics': 3,       # Strength
+#         'deception': 2,       # Charisma
+#         'history': 0,         # Intelligence
+#         'insight': 1,         # Wisdom
+#         'intimidation': 2,    # Charisma
+#         'investigation': 1,   # Intelligence
+#         'medicine': 2,        # Wisdom
+#         'nature': 0,          # Intelligence
+#         'perception': 1,      # Wisdom
+#         'performance': 2,     # Charisma
+#         'persuasion': 2,      # Charisma
+#         'religion': 0,        # Intelligence
+#         'sleight of hand': 3, # Dexterity
+#         'stealth': 3,         # Dexterity
+#         'survival': 1         # Wisdom
+#     }
+
+#     # Check if the skill exists in the dictionary
+#     if skill.lower() in skills:
+#         mod = skills[skill.lower()]
+#         roll = random.randint(1, 20)  # Roll a d20
+#         total = roll + mod
+#         return f"Rolled {roll} for {skill}, with a modifier of {mod}. Total: {total}"
+#     else:
+#         return "Invalid skill."
 
 
 
 # name all functions that the LLM has access to
 all_functions = {
     
-    'roll_skill_with_mod':roll_skill_with_mod,
+    'resolve_hard_action': resolve_hard_action,
     'loot_item_from_room': loot_item_from_room,
     'leave_item_from_inventory_in_room': leave_item_from_inventory_in_room,
     'look_at_room': look_at_room
 }
 
+    # 'roll_skill_with_mod':roll_skill_with_mod,
 
     # 'ask_stuff': ask_stuff,
 
 # to do:
-# make sure look, skill, loot and leave works
+# make sure look, skill, loot and leave works - yes
 # add flavor call at the end of action
+
+
+# - action sort of works - it sets a DC and it rolls - and describes outcome, but has no context when it does - add context somehow?
+# - also add a update thing at the end > that reads the outcome and calls for > hp add /remove, status effect, update item - state - similar
+
+
+# add a ask/inspect action - asking about a item thing- it should fetch it, answer the question, and add if new information? (again awesome if context ofc)

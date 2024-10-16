@@ -19,23 +19,55 @@ class OllamaToolCall:
         self.room_json = load_room_from_file(room_file)
 
 
+        # action tool - typ I try to do this > decide if roll and AC > roll > result
+        # typ tar in player action -> + DC
+
+    #    {
+    #             'type':'function',
+    #             'function':{
+    #                 'name':'roll_skill_with_mod',
+    #                 'description':'Rolls for using a skill and displayes result: THE ONLY Available skills are acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival',
+    #                 'parameters':
+    #                   {
+    #                     'type':'object',
+    #                     'properties':{
+    #                         'skill':{'type':'str'}
+                           
+                            
+    #                     }
+    #                 },
+    #                 'required':['skill']
+    #             }
+    #         },
+
+
         #define the tool - so far - skillcheckroll and remove item from room JSON 
         self.tools = [
+                 
             {
                 'type':'function',
                 'function':{
-                    'name':'roll_skill_with_mod',
+                    'name':'resolve_hard_action',
                     'description':'Rolls for using a skill and displayes result: THE ONLY Available skills are acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival',
                     'parameters':
-                      {
+                    {
                         'type':'object',
                         'properties':{
-                            'skill':{'type':'str'}
-                           
-                            
-                        }
-                    },
-                    'required':['skill']
+                            "skill": {
+                                "type": "string",
+                                "description": "The name of the skill to use."
+                            },
+                            "dc": {
+                                "type": "int",
+                                "description": "the difficulty level of the task between 1-20"
+                            },
+                            "player_action": {
+                                "type": "string",
+                                "description": "The action the player is atempting"
+                            }
+                        },
+                    'required':['skill', 'dc', 'player_action']
+                    }
                 }
             },
             {

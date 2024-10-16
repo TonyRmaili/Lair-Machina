@@ -1,6 +1,10 @@
 [
     {
-        "name": "Luminous Fragment",
-        "description": "A shard of crystalline material that glows with an ethereal light, seemingly infused with the essence of the moon. It pulsates gently, as if attuned to the rhythm of the lunar cycle."
+        "name": "Echoing Tear",
+        "description": "A delicate crystal prism that hums softly in harmony with the whispers of the forest. Its facets reflect the light around it, creating a miniature rainbow effect that seems to change color according to the mood of those nearby."
+    },
+    {
+        "name": "Lunar Serenade Songbook",
+        "description": "A beautifully illustrated book containing the melodies and harmonies of the lunar sprites that inhabit the Moonlit Gardens. The pages are filled with intricate drawings of the creatures, their songs written in a language that seems to match the rhythm of the cosmos."
     }
 ]
