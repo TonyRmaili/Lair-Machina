@@ -43,8 +43,8 @@ class DungeonScreen:
         self.bg = Image(image=path+'floor.jpg',pos=(250,0),scale=(w-250,h-250))
         namepath = self.game.char.name
         path = './pics/'+ namepath + '/'
-        # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet
-        self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(w-250,h-250),scale=(250,250))
+        # THIS NEEDS TO HAVE errorhandling/async - if the img or folder is not created yet (solved in tonys async version?)
+        self.character_image = Image(image=path+'ComfyUI_00019_.png',pos=(w-200,h-250),scale=(200,200))
 
 
         # Ollama chat windows
@@ -58,7 +58,7 @@ class DungeonScreen:
         
         
         # player invetory - text area - OK
-        self.inventory_box = TextArea(text='',WIDTH=w-355,HEIGHT=h-390,x=w-450,y=h-248,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
+        self.inventory_box = TextArea(text='',WIDTH=w-550,HEIGHT=h-390,x=w-450,y=h-248,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
 
 
         #set starting- current room
@@ -107,8 +107,8 @@ class DungeonScreen:
         print(self.player_position)
 
 
-        # room info boxes
-        self.current_room_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
+        # room info boxes 
+        self.current_room_box = TextArea(text='',font_size=18,WIDTH=340,HEIGHT=250,x=5,y=5,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
         self.current_room_options_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
 
         self.special_action_available = None  # To track if a special action is available
@@ -124,7 +124,7 @@ class DungeonScreen:
 
 
     def update_current_room_box(self):
-        self.current_room_box = TextArea(text=self.current_room_description,WIDTH=250,HEIGHT=250,x=0,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
+        self.current_room_box.new_text(text=self.current_room_description)
         self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
         
         with open(self.current_room_items_path) as f:
@@ -312,14 +312,14 @@ class DungeonScreen:
         self.update_response()
         # self.bg.draw(screen=screen)
 
-        # self.character_image.draw(screen=screen)
+        self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
         self.response_box.draw(screen=screen)
         self.prompt_button.draw(screen=screen)
 
         self.display_map()
         self.current_room_box.new_text(text=self.current_room_description)
-        # self.current_room_box.draw(screen=screen)
+        self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
         # self.current_room_options_box.draw(screen=screen)
