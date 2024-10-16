@@ -18,8 +18,8 @@ class Game:
         """
         # setup
         self.FPS = 60
-        self.WIDTH = 800
-        self.HEIGHT = 600
+        self.WIDTH = 945
+        self.HEIGHT = 650
         pygame.init()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()

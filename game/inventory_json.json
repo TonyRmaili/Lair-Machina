@@ -5,8 +5,12 @@
             "description": "Tiny fragments of starlight distilled into a sparkling dust. This precious substance is rumored to hold within it the essence of creation's earliest moments and could grant immense insight to those who possess it."
         },
         {
-            "name": "Grotto Crystal",
-            "description": "A delicate crystal pendant that pulsates softly in harmony with the pool's luminescence. When worn, its gentle light amplifies the wearer's innate magical abilities, allowing for more precise and powerful spellcasting."
+            "name": "Lunar Serenade Songbook",
+            "description": "A beautifully illustrated book containing the melodies and harmonies of the lunar sprites that inhabit the Moonlit Gardens. The pages are filled with intricate drawings of the creatures, their songs written in a language that seems to match the rhythm of the cosmos."
+        },
+        {
+            "name": "Seaflower Petal",
+            "description": "A delicate, moon-kissed petal that seems to capture the essence of the night. It glows softly with a gentle, ethereal light, as if infused with the magic of the lunar cycle."
         }
     ]
 }

@@ -1,69 +1,69 @@
 {
-    "theme": "Glimmering Grotto",
-    "description": "Deep within the heart of a primordial forest lies the Glimmering Grotto \u2013 an ethereal dungeon shrouded in mystery. This shimmering network of crystal caves and glittering waterfalls has been illuminated for centuries by a radiant, otherworldly glow emanating from the depths of its core. The walls of the grotto are made up of crystalline formations that refract and reflect the luminescent light, casting an ever-changing tapestry of colors across the cavernous interior. As you venture deeper into the Grotto, the air thickens with the sweet scent of blooming mushrooms and the soft chirping of iridescent winged creatures flit about your head. The sound of gently flowing water creates a soothing melody that underscores an air of peace and tranquility \u2013 until, suddenly, it's interrupted by an unsettling silence. It is then that you realize the Grotto has been waiting for you.",
+    "theme": "Moonlit Grotto",
+    "description": "The Moonlit Grotto is a mystical dungeon nestled within a crescent-shaped cove, where the soft glow of luminescent mushrooms illuminates the entrance. As adventurers step inside, they're enveloped by an ethereal silence, punctuated only by the gentle lapping of waves against the shore and the distant call of nocturnal creatures. The air is filled with the sweet scent of blooming seaflowers, their delicate petals swaying in the faint breeze that wafts through the grotto's entrance. Inside, the walls are adorned with glittering shells, polished to a mirror finish by the constant ebb and flow of the tides. Flickering luminescent orbs, suspended from the ceiling like glowing jellyfish, cast an otherworldly light upon the crystalline formations that encrust the caverns' walls. The grotto's atmosphere is both calming and foreboding, as if the very essence of the moon has been distilled within its labyrinthine passages.",
     "rooms": [
         {
-            "description": "You find yourself in the Whispering Gallery \u2013 a vast crystal cavern that amplifies even the faintest whispers into a resounding echo. The walls of this grand chamber are covered in glittering crystalline formations that refract light, casting an ever-changing kaleidoscope of colors across the floor. A soft mist rises from the ground, carrying with it the sweet scent of blooming moonflowers. As you stand at the center of this natural amphitheater, the sound of dripping water and distant chimes creates a soothing melody that harmonizes perfectly with your own heartbeat.",
-            "name": "Whispering Gallery",
-            "properties": [
-                "echoing",
-                "illuminated"
-            ],
-            "secrets": "Hidden within the swirling crystals is a small inscription that reads: 'Only whispers bring clarity.'",
-            "room_id": 1,
-            "coordinates": [
-                1,
-                1
-            ],
-            "connections": [
-                [
-                    2,
-                    1
-                ],
-                [
-                    1,
-                    2
-                ]
-            ],
-            "items_file": "room_items/room_1_items.json"
-        },
-        {
-            "description": "You find yourself in the Luminous Pool \u2013 a serene and mystical chamber deep within the heart of the Glimmering Grotto. This tranquil space is dominated by an ethereal pool of water that seems to be the source of the grotto's radiant, otherworldly glow. The walls are adorned with delicate crystalline formations that refract light into a kaleidoscope of colors, casting shimmering patterns across the floor. A soft melody created by the gentle lapping of the pool's waters against its crystal rim fills the air, while the sweet scent of blooming starflowers wafts through the space, imbuing it with an aura of enchantment and peace.",
-            "name": "Luminous Pool",
+            "description": "As adventurers step into this chamber, they're surrounded by a breathtaking sight: crystalline formations that refract and reflect the soft glow of luminescent orbs, suspended from the ceiling like glowing jellyfish. The air is filled with the sweet scent of blooming seaflowers, their delicate petals swaying in the faint breeze that wafts through the grotto's entrance. The walls are adorned with glittering shells, polished to a mirror finish by the constant ebb and flow of the tides.",
+            "name": "The Glimmering Cavern",
             "properties": [
                 "illuminated",
-                "peaceful"
+                "cold"
             ],
-            "secrets": "Hidden beneath the surface of the Luminous Pool is a small, intricately carved stone statue with an inscription that reads: 'True wisdom lies in stillness.'",
-            "room_id": 2,
+            "secrets": "A hidden compartment within the crystalline formations can be accessed by solving a puzzle etched into the shell-adorned walls. The compartment contains a cryptic message etched onto a piece of moonstone, hinting at an ancient ritual tied to the full moon.",
+            "room_id": 1,
             "coordinates": [
                 1,
                 2
             ],
             "connections": [
                 [
-                    1,
-                    1
+                    2,
+                    2
                 ]
             ],
-            "items_file": "room_items/room_2_items.json"
+            "items_file": "room_items/room_1_items.json"
         },
         {
-            "description": "You find yourself in the Shimmering Grotto \u2013 a majestic chamber deep within the heart of the crystal caves. The walls and ceiling are adorned with glittering crystalline formations that refract light into a dazzling display of colors, casting an ever-changing tapestry across the floor. A soft breeze carries the sweet scent of blooming moonflowers through the space, while the gentle chime of tiny windcatchers embedded within the crystals creates a soothing melody. In the center of this breathtaking chamber lies the source of the Grotto's radiant glow: a magnificent crystal core that pulses with an otherworldly energy.",
-            "name": "Shimmering Grotto",
+            "description": "As adventurers step into this room, they're met with a soothing melody - the soft lapping of waves against the shore and the distant call of nocturnal creatures. The air is filled with the sweet scent of blooming seaflowers, their delicate petals swaying in the faint breeze that wafts through the grotto's entrance. Flickering luminescent orbs, suspended from the ceiling like glowing jellyfish, cast an otherworldly light upon the crystalline formations that encrust the caverns' walls.",
+            "name": "The Whispering Cove",
             "properties": [
                 "illuminated",
-                "peaceful"
+                "calming"
             ],
-            "secrets": "Hidden within the crystalline formations is a series of intricate engravings that read: 'As colors dance, truth reveals itself.'",
-            "room_id": 3,
+            "secrets": "A hidden passage behind a shell-adorned wall can be accessed by listening to the specific melody of the nocturnal creatures, which will harmonize with a unique resonant frequency embedded in the luminescent orbs. The passage leads to a room filled with ancient moonstones, each bearing an inscription that hints at a long-lost ritual tied to the phases of the moon.",
+            "room_id": 2,
             "coordinates": [
                 2,
                 1
             ],
             "connections": [
                 [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "room_items/room_2_items.json"
+        },
+        {
+            "description": "A small, intimate chamber filled with an assortment of delicate, glowing mushrooms that line the walls and ceiling. The air is thick with the scent of damp earth and moss, and the soft hum of luminescent energy emanates from the fungi. A tranquil pool of water, reflecting the moon's gentle light, lies at the center of the room.",
+            "name": "The Moonlit Oasis",
+            "properties": [
+                "illuminated",
+                "tranquil"
+            ],
+            "secrets": "A hidden compartment within the pool of water can be accessed by solving a puzzle etched into the surrounding stones. The compartment contains a vial filled with a glowing, lunar essence that seems to hold the secrets of the moon's cycles.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
                     1,
+                    2
+                ],
+                [
+                    2,
                     1
                 ]
             ],
