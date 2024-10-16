@@ -6,27 +6,9 @@ from widgets.input_text import InputText
 from widgets.button import Button
 import ollama
 import threading
-
 import json
-
-
 sys.path.append('../function_calls/')  # Adjust the path
 from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
-
-# # Define a Room class to represent each room
-# class Room:
-#     def __init__(self, name, description, connections, special=None):
-        
-        
-#         self.name = name  # Room name
-#         self.description = description  # Room description
-#         self.connections = connections  # Dictionary mapping directions (e.g., 'north') to connected rooms
-#         self.special = special  # Special feature (e.g., 'exit', 'up-floor', 'down-floor')
-#         # self.output_text ='DEBUGG'
-
-
-
-
 
 
 
@@ -37,30 +19,41 @@ class DungeonScreen:
     -still working on loot etc
     """
     def __init__(self,game,w,h):
+        # setup
         self.game = game
         self.WIDTH = w
+        self.HEIGHT = h
         self.char = game.char
-        
-        
         path = f'./pics/{self.char.name}/dungeon_rooms/'
-        self.bg = Image(image=path+'1.png',pos=(5,5),scale=(349,250))
-        self.character_image = Image(image=self.char.image,pos=(w-250,h-250),scale=(250,250))
 
-        # Ollama chat windows
-        # prompt - input text - ok
-        self.prompt_box = InputText(x=0,y=h-250,width=w-450,height=h-385,title='',bg_color=(69, 69, 69), text_color=(255, 255, 255))
-        self.prompt_button = Button(pos=(w-500,h-50),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
-        
-        # response from LLM - text area -ok
-        self.response_box = TextArea(text='',WIDTH=w-355,HEIGHT=h-255,x=350,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
-        
-        # player inventory - text area - OK
-        self.inventory_box = TextArea(text='',WIDTH=w-550,HEIGHT=h-390,x=w-450,y=h-248,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
 
+        self.dungeon_room_img = Image(image=path+'1.png',pos=(0,0),scale=(0.4*w,0.5*h))
+
+
+        self.character_image = Image(image=self.char.image,pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
+
+        #Text boxes
+        self.prompt_box = InputText(x=0,y=0.75*h,width=0.75*w,height=0.25*h,
+                        title='',bg_color=(69, 69, 69), text_color=(255, 255, 255),font_size=24)
+
+
+        self.prompt_button = Button(pos=(0.07*w,0.78*h),text_input='Submit',
+                            base_color="black", hovering_color="Green") 
+        
+        self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.5*h,x=0.4*w,y=0,
+            text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Dungeon Master',title_color='black')
+
+
+
+        self.inventory_box = TextArea(text='',WIDTH=0.2*w,HEIGHT=0.25*h,x=0,y=0.5*h,
+                    text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
+
+        self.current_room_options_box = TextArea(text='',WIDTH=0.2*w,HEIGHT=0.25*h,x=0.2*w,y=0.5*h,
+                            text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+        
+        
         #set starting- current room
         self.current_room_id = 0
-
-
 
         # set inventory to items
         with open('inventory_json.json') as f:
@@ -95,11 +88,11 @@ class DungeonScreen:
         self.current_room_items = f'{room_item_names}'
 
         # print(self.current_room_items)
-        self.current_room_items_box = TextArea(text=self.current_room_items,font_size=20,WIDTH=340,HEIGHT=75,x=5,y=265,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
+        self.current_room_items_box = TextArea(text=self.current_room_items,font_size=20,WIDTH=0.2*w,HEIGHT=0.25*h,x=0.4*w,y=0.5*h,
+                                        text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
+
 
         
-        
-
         # Game state: track the current room and position in the grid
         self.player_move_options = self.dungeon['rooms'][self.current_room_id]['connections']  # move options from current in the map
         self.player_position = [self.dungeon['rooms'][self.current_room_id]['coordinates'][0], self.dungeon['rooms'][self.current_room_id]['coordinates'][1]] # player position in the map
@@ -108,7 +101,6 @@ class DungeonScreen:
 
         # room info boxes 
         self.current_room_box = TextArea(text='',font_size=18,WIDTH=340,HEIGHT=250,x=5,y=5,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
-        self.current_room_options_box = TextArea(text='',WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
 
         self.special_action_available = None  # To track if a special action is available
         self.game_exit = False  # Flag to handle game exit
@@ -124,7 +116,12 @@ class DungeonScreen:
 
     def update_current_room_box(self):
         self.current_room_box.new_text(text=self.current_room_description)
-        self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",WIDTH=250,HEIGHT=250,x=0,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+
+
+        self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",
+                                                 WIDTH=0.2*self.WIDTH,HEIGHT=0.25*self.HEIGHT,x=0.2*self.WIDTH,y=0.5*self.HEIGHT,
+                                                 text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+        
         
         with open(self.current_room_items_path) as f:
             self.current_room_items = json.load(f)
@@ -151,8 +148,6 @@ class DungeonScreen:
         #         action_text += "go down"
         #     action_surface = font.render(action_text, True, (255, 255, 0))  # Yellow text
         #     self.game.screen.blit(action_surface, (50, 150))
-
-
 
     def get_room_by_coordinates(self, rooms, new_coordinates):
         """Get the room ID based on the coordinates - would be better if id/coordinates were in the top level of the json so we could just use the coordinates as a key, but this works for now, and I guess it would be messy to change the generator function prompts etc"""
@@ -199,7 +194,6 @@ class DungeonScreen:
         else:
             print('invalid move')
             
-
     def display_map(self):
         # displays the map in the top right corner - from the JSON file
         with open('./dungeon_map.json') as f:
@@ -208,8 +202,8 @@ class DungeonScreen:
         # Display the map in the top-right corner
         font = pygame.font.Font(None, 24)
         cell_size = 20  # Cell size for better fit
-        grid_offset_x = self.WIDTH - 150  # X offset for where the grid will be displayed
-        grid_offset_y = 50  # Y offset for where the grid will be displayed
+        grid_offset_x = 0.7*self.WIDTH # X offset for where the grid will be displayed
+        grid_offset_y = 0.6*self.HEIGHT  # Y offset for where the grid will be displayed
 
         for row_idx, row in enumerate(self.map_grid):
             row_text = ''
@@ -223,7 +217,6 @@ class DungeonScreen:
             # Render the row text
             text_surface = font.render(row_text, True, (0, 0, 0))
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
-
 
     def ask_ollama_tools(self, prompt):
         # not sure if works with threading 
@@ -241,7 +234,7 @@ class DungeonScreen:
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
-        self.response_box.new_text(text=self.response)
+        self.DM_box.new_text(text=self.response)
         self.response = None  # Clear the response after updating the box
 
 
@@ -265,12 +258,11 @@ class DungeonScreen:
         self.inventory = f'{item_names}'
 
         self.inventory_box.new_text(text=self.inventory)
-        
-        
+         
     def update_response(self):
         # Check if there's a new response and update the response box
         if self.response:
-            self.response_box.new_text(text=self.response)
+            self.DM_box.new_text(text=self.response)
             self.response = None  # Clear the response after updating the box
 
     def handle_event(self,events,mouse_pos):
@@ -280,9 +272,6 @@ class DungeonScreen:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:                
-                if event.key == pygame.K_q:
-                    self.game.game_mode = 'menu'
             
             # keys for player navigation
             if event.type == pygame.KEYDOWN:
@@ -300,36 +289,35 @@ class DungeonScreen:
                 if self.prompt_button.checkForInput(mouse_pos) and not self.is_fetching:
                     prompt = self.prompt_box.send_text()
                     # Start a new thread for the LLM request
-                    
                     threading.Thread(target=self.ask_ollama_tools, args=(prompt,)).start()
-                    # threading.Thread(target=self.ask_ollama, args=(prompt,)).start()
 
-            self.response_box.handle_event(event=event)
+            self.DM_box.handle_event(event=event)
 
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.update_response()
-        self.bg.draw(screen=screen)
+        self.dungeon_room_img.draw(screen=screen)
         
         self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
-        self.response_box.draw(screen=screen)
-        self.prompt_button.draw(screen=screen)
+        self.DM_box.draw(screen=screen)
 
-        self.display_map()
-        self.current_room_box.new_text(text=self.current_room_description)
+        self.prompt_button.draw(screen=screen)
+        
+
+        # these are deprecated
+        # self.current_room_box.new_text(text=self.current_room_description)
         # self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
-        # self.current_room_options_box.draw(screen=screen)
+        self.current_room_options_box.draw(screen=screen)
         
         self.update_inventory_box()
         self.inventory_box.draw(screen=screen)
-        
-                
+             
         self.current_room_items_box.draw(screen=screen)
-        
-        # self.map_grid.draw(screen=screen)
+        self.display_map()
+
         
 
        

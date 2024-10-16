@@ -2,7 +2,7 @@ import pygame
 import sys
 from debug import debug
 import os
-from character_screen import CreactionScreen
+from creation_screen import CreactionScreen
 from menu_screen import MenuScreen
 from dungeon_screen import DungeonScreen
 from loading_screen import LoadingScreen
@@ -18,8 +18,8 @@ class Game:
         """
         # setup
         self.FPS = 60
-        self.WIDTH = 800
-        self.HEIGHT = 600
+        self.WIDTH = 945
+        self.HEIGHT = 650
         pygame.init()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock = pygame.time.Clock()

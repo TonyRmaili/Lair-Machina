@@ -24,8 +24,7 @@ class MenuScreen:
         self.game.game_mode = 'creation'
         
     def continue_game(self):
-        # self.game.game_mode = 'continue'
-        pass
+        self.game.game_mode = 'dungeon'
 
     # this should be part of the dungeon screen feature
     def game_map(self):

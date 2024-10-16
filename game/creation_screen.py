@@ -25,7 +25,7 @@ class CreactionScreen:
         self.char.klass = 'Fighter'
         self.char.race = 'Human'
 
-        self.description_box = InputText(450, 50, 300, 200, title="Description", font_size=24, 
+        self.description_box = InputText(550, 50, 300, 200, title="Description", font_size=24, 
                 bg_color=(69, 69, 69), text_color=(255, 255, 255), title_color=(255, 255, 255))
 
        
@@ -78,9 +78,7 @@ class CreactionScreen:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:                
-                if event.key == pygame.K_q:
-                    self.game.game_mode = 'menu'
+            
                              
     def run(self,screen,events,mouse_pos):
         self.handle_event(events)

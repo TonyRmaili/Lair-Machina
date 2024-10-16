@@ -23,7 +23,7 @@ class LoadingScreen:
 
         self.loading_complete= False
         self.gen_button = Button(pos=(w-325,h-400),text_input='Submit',
-                image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36))
+                base_color="black", hovering_color="Green")
         
         self.terminal_text = ''
 
@@ -37,7 +37,7 @@ class LoadingScreen:
     def char_img_generator(self):
         self.terminal_text = self.terminal_text+'generating character image'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)
-        run_comfy(self.char.description, self.char.name)
+        # run_comfy(self.char.description, self.char.name)
         
         self.char.image = f'./pics/{self.char.name}/profile_img.png'
         
@@ -45,9 +45,9 @@ class LoadingScreen:
     def dungeon_generator(self):
         self.terminal_text = self.terminal_text+'generating dungeon json'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)
-        world = GenerateWorld()
-        world.run_dungeon()
-        self.dungeon_room_splitter()
+        # world = GenerateWorld()
+        # world.run_dungeon()
+        # self.dungeon_room_splitter()
  
         with open('dungeon.json') as f:
             dungeon_data = json.load(f)
@@ -55,15 +55,13 @@ class LoadingScreen:
         self.terminal_box.new_text(text=self.terminal_text)
         rooms =self.prepare_rooms(rooms_data=dungeon_data['rooms'])
         
-        for room in rooms:
-            description = room['description']
-            room_id = room['id']
-            run_comfy(description,self.char.name,image_type='room',room_id=room_id)
+        # for room in rooms:
+        #     description = room['description']
+        #     room_id = room['id']
+        #     run_comfy(description,self.char.name,image_type='room',room_id=room_id)
 
         self.char.image = f'./pics/{self.char.name}/profile_img.png'
         
-
-
 
     def dungeon_room_splitter(self):
         # Load dungeon JSON from a file
@@ -135,9 +133,6 @@ class LoadingScreen:
             self.terminal_box.handle_event(event=event)
 
 
-
-
-    
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.bg.draw(screen=screen)

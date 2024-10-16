@@ -1,6 +1,4 @@
 
-
-
 class Character:
     """
     Character class - holds character data - each character is a instance of this class - if we want to make saves persistent we can save the data in a json file
