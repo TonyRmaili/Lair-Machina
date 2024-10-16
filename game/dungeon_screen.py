@@ -91,7 +91,7 @@ class DungeonScreen:
         # Check if item is a dictionary before trying to access 'name'
         room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
 
-            
+        # 
         self.current_room_items = f'{room_item_names}'
 
         # print(self.current_room_items)
