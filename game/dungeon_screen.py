@@ -48,12 +48,17 @@ class DungeonScreen:
 
 
         # Ollama chat windows
-        self.prompt_box = InputText(x=0,y=h-250,width=w-250,height=h-250,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
-        self.response_box = TextArea(text='',WIDTH=250,HEIGHT=h-300,x=500,y=100,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
+        # prompt - input text - ok
+        self.prompt_box = InputText(x=0,y=h-250,width=w-450,height=h-385,title='prompt box',bg_color=(69, 69, 69), text_color=(255, 255, 255))
+        self.prompt_button = Button(pos=(w-500,h-50),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
-        self.prompt_button = Button(pos=(w-325,h-275),text_input='Submit',image=None,base_color="black", hovering_color="Green",font=pygame.font.Font(None, 36)) 
         
-        self.inventory_box = TextArea(text='',WIDTH=550,HEIGHT=h-400,x=500,y=200,text_color=(255, 255, 255),bg_color=(69, 255, 69),title='Inventory box',title_color='black')
+        # response from LLM - text area -ok
+        self.response_box = TextArea(text='',WIDTH=w-355,HEIGHT=h-255,x=350,y=0,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='response box',title_color='black')
+        
+        
+        # player invetory - text area - OK
+        self.inventory_box = TextArea(text='',WIDTH=w-355,HEIGHT=h-390,x=w-450,y=h-248,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Player Inventory',title_color='black')
 
 
         #set starting- current room
@@ -132,7 +137,8 @@ class DungeonScreen:
 
             
         self.current_room_items = f'{room_item_names}'
-
+        
+        # GREEN INVENTORY BOX
         self.current_room_items_box = TextArea(text=self.current_room_items,WIDTH=250,HEIGHT=250,x=0,y=300,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room items:',title_color='black')
 
         # # Display instructions if a special action is available
@@ -306,23 +312,23 @@ class DungeonScreen:
         self.update_response()
         # self.bg.draw(screen=screen)
 
-        self.character_image.draw(screen=screen)
+        # self.character_image.draw(screen=screen)
         self.prompt_box.draw(screen=screen,events=events)
         self.response_box.draw(screen=screen)
         self.prompt_button.draw(screen=screen)
 
         self.display_map()
         self.current_room_box.new_text(text=self.current_room_description)
-        self.current_room_box.draw(screen=screen)
+        # self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
-        self.current_room_options_box.draw(screen=screen)
+        # self.current_room_options_box.draw(screen=screen)
         
         self.update_inventory_box()
         self.inventory_box.draw(screen=screen)
         
                 
-        self.current_room_items_box.draw(screen=screen)
+        # self.current_room_items_box.draw(screen=screen)
         
         # self.map_grid.draw(screen=screen)
         
