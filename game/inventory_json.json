@@ -1,16 +1,16 @@
 {
     "inventory": [
         {
-            "name": "Ancient Scroll Fragment",
-            "description": "A torn piece of parchment bearing an ancient script and a faded image of a crescent moon. The writing appears to be in a forgotten language, yet whispers secrets to those who listen closely."
-        },
-        {
             "name": "Ancient Star Chart",
             "description": "A tattered parchment containing cryptic star maps and celestial navigation charts from a bygone era. The ink appears ancient but still whispers the mysteries of the cosmos to those who listen closely."
         },
         {
             "name": "Lunar Essence Fragment",
             "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
+        },
+        {
+            "name": "Glowing Crystal Cluster",
+            "description": "A delicate arrangement of crystals embedded within the wall, pulsating with a soft blue light that mirrors the gentle glow of the moon outside."
         }
     ]
 }
