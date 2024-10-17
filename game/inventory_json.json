@@ -1,32 +1,8 @@
 {
     "inventory": [
         {
-            "name": "Ancient Star Chart",
-            "description": "A tattered parchment containing cryptic star maps and celestial navigation charts from a bygone era. The ink appears ancient but still whispers the mysteries of the cosmos to those who listen closely."
-        },
-        {
             "name": "Lunar Essence Fragment",
             "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
-        },
-        {
-            "name": "Glowing Crystal Cluster",
-            "description": "A delicate arrangement of crystals embedded within the wall, pulsating with a soft blue light that mirrors the gentle glow of the moon outside."
-        },
-        {
-            "name": "The Lythari Chronicle",
-            "description": "A tattered leather-bound book adorned with intricate locks and rusted clasps. The cover is worn, but the pages within are filled with cryptic symbols that seem to shift and change as you gaze upon them."
-        },
-        {
-            "name": "Crystal Chime",
-            "description": "A delicate crystal orb that glows softly when you hold it, resonating at the same frequency as the labyrinth's hum. It seems to amplify your own harmonics, causing your footsteps and voice to blend in perfect harmony with the chimes of the labyrinth."
-        },
-        {
-            "name": "Starlight Droplets",
-            "description": "A vial filled with droplets of a substance that looks like liquid starlight. It's said that these droplets can preserve memories and emotions, allowing you to relive moments from your past in vivid detail when you consume them."
-        },
-        {
-            "name": "Moonstone Chalice",
-            "description": "A delicate chalice crafted from a single piece of glowing moonstone. The crystal's facets seem to reflect a kaleidoscope of starlight, as if it were plucked straight from the heavens."
         }
     ]
 }
