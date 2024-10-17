@@ -1,9 +1,6 @@
 import sys
-
 import ollama
-
-sys.path.append('../function_calls/')  # Adjust the path
-from functions_for_ollama_v2 import all_functions
+from function_calls.functions_for_ollama_v2 import all_functions
 import json
 
 # Function to load the room JSON from a file

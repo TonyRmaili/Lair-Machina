@@ -7,9 +7,9 @@ from widgets.button import Button
 import ollama
 import threading
 import json
-sys.path.append('../function_calls/')  # Adjust the path
-from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
-from ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
+from function_calls.ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
+from function_calls.ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
+from debug import debug
 
 
 class DungeonScreen:
@@ -34,8 +34,6 @@ class DungeonScreen:
                 pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
         
         
-        
-
         #Text boxes
         # prompt box + button
         self.prompt_box = InputText(x=0,y=0.75*h,width=0.75*w,height=0.25*h,
@@ -154,13 +152,13 @@ class DungeonScreen:
         new_x = self.player_position[0]
         new_y = self.player_position[1]
         if direction == 'north':
-            new_y -= 1
-        elif direction == 'south':
-            new_y += 1
-        elif direction == 'east':
-            new_x += 1
-        elif direction == 'west':
             new_x -= 1
+        elif direction == 'south':
+            new_x += 1
+        elif direction == 'east':
+            new_y += 1
+        elif direction == 'west':
+            new_y -= 1
         
         if [new_x, new_y] in self.player_move_options:
             print('valid move')
@@ -197,11 +195,12 @@ class DungeonScreen:
         grid_offset_x = 0.25*self.WIDTH # X offset for where the grid will be displayed
         grid_offset_y = 0.65*self.HEIGHT  # Y offset for where the grid will be displayed
 
+
         for row_idx, row in enumerate(self.map_grid):
             row_text = ''
             for col_idx, cell in enumerate(row):
                 # Check if this is the player's position and mark it with 'X'
-                if [col_idx+1, row_idx+1] == self.player_position:
+                if [row_idx+1, col_idx+1] == self.player_position:
                     cell_text = 'X'
                 else:
                     cell_text = cell
@@ -229,10 +228,10 @@ class DungeonScreen:
         self.DM_box.new_text(text=self.response)
         
         
-        ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='../game/inventory_json.json', room_file=self.room_file)
-        self.response = ollama_instance_state.activate_functions()
+        # ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='inventory_json.json', room_file=self.room_file)
+        # self.response = ollama_instance_state.activate_functions()
 
-        self.DM_box.new_text(text=self.response)
+        # self.DM_box.new_text(text=self.response)
         self.response = None  # Clear the response after updating the box
 
 
@@ -296,6 +295,7 @@ class DungeonScreen:
 
             self.DM_box.handle_event(event=event)
             self.inventory_box.handle_event(event=event)
+            self.current_room_box.handle_event(event=event)
 
     def run(self,screen,events,mouse_pos):
         self.handle_event(events=events,mouse_pos=mouse_pos)

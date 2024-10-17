@@ -3,6 +3,18 @@
         {
             "name": "Lunar Essence Fragment",
             "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
+        },
+        {
+            "name": "Moonlit Harp",
+            "description": "A delicate harp crafted from a single piece of polished moonstone. Its strings seem to reflect the colors of the desert sunset, and when plucked, they resonate with the very essence of forgotten memories."
+        },
+        {
+            "name": "Lunar Melodies Music Box",
+            "description": "A delicate, crystal music box that plays a haunting melody reminiscent of forgotten moonlit nights. Its lid is etched with the symbols of ancient lunar cycles."
+        },
+        {
+            "name": "Stellar Lantern",
+            "description": "A delicate lantern crafted from a shell that seems to hold within it a piece of captured starlight. Its gentle glow appears to pulse in sync with the whispers carried on the desert breeze."
         }
     ]
 }

@@ -8,7 +8,6 @@ import random
 
 
 def update_player_hp(player_hp_path: str, hp_change: int, reason: str):
-    
     with open(player_hp_path, 'r') as file:
         player_data = json.load(file)
         
