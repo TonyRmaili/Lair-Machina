@@ -15,6 +15,14 @@
         {
             "name": "The Lythari Chronicle",
             "description": "A tattered leather-bound book adorned with intricate locks and rusted clasps. The cover is worn, but the pages within are filled with cryptic symbols that seem to shift and change as you gaze upon them."
+        },
+        {
+            "name": "Crystal Chime",
+            "description": "A delicate crystal orb that glows softly when you hold it, resonating at the same frequency as the labyrinth's hum. It seems to amplify your own harmonics, causing your footsteps and voice to blend in perfect harmony with the chimes of the labyrinth."
+        },
+        {
+            "name": "Starlight Droplets",
+            "description": "A vial filled with droplets of a substance that looks like liquid starlight. It's said that these droplets can preserve memories and emotions, allowing you to relive moments from your past in vivid detail when you consume them."
         }
     ]
 }

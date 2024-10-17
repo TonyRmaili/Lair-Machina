@@ -46,7 +46,7 @@ class LoadingScreen:
         world.run_dungeon()
         self.dungeon_room_splitter()
  
-        with open('dungeon.json') as f:
+        with open(self.char.dungeon_path+'dungeon.json') as f:
             dungeon_data = json.load(f)
         self.terminal_text = self.terminal_text+'generating dungeon rooms images'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)

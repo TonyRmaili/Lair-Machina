@@ -20,7 +20,8 @@ class Character:
 
 
 
-    def save_profile(self, filename="character_profile.json"):
-        # Save the instance's __dict__ directly as JSON
+    def save_profile(self):
+        
+        filename=self.profile_path+"save_file.json"
         with open(filename, 'w') as json_file:
             json.dump(self.__dict__, json_file, indent=4)

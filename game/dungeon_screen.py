@@ -195,7 +195,7 @@ class DungeonScreen:
             
     def display_map(self):
         # displays the map in the top right corner - from the JSON file
-        with open('./dungeon_map.json') as f:
+        with open(self.char.dungeon_path+'dungeon_map.json') as f:
             self.map_grid = json.load(f)
 
         # Display the map in the top-right corner

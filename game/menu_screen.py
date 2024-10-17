@@ -17,10 +17,11 @@ class MenuScreen:
 
 
     def load_profile(self,filename="character_profile.json"):
-        with open(filename, 'r') as json_file:
-            data = json.load(json_file)
+        # with open(filename, 'r') as json_file:
+        #     data = json.load(json_file)
         
-        self.char.__dict__.update(data)
+        # self.char.__dict__.update(data)
+        self.game.game_mode = 'load_profile'
         
     
     def new_game(self):
@@ -31,7 +32,7 @@ class MenuScreen:
         self.game.game_mode = 'dungeon'
 
     def load_game(self):
-        print('load game')
+        self.game.game_mode = 'load_profile'
 
     def run(self,screen,events):
         screen.fill('black')

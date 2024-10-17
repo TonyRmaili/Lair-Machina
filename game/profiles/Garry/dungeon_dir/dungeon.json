@@ -1,0 +1,73 @@
+{
+    "theme": "Moonlit Mirage",
+    "description": "The Moonlit Mirage is an otherworldly dungeon built within a series of shifting sand dunes, as if the very desert itself had been sculpted into labyrinthine corridors and crystal-filled caverns. The air is alive with the soft whispers of forgotten memories and the faint scent of starlight, carried on the breeze that stirs the constantly rearranging sands. Towering crystal spires jut from the ground like shards of broken moonlight, their facets reflecting a kaleidoscope of colors across the shifting dunes. Flickering lanterns crafted from delicate shells cast an ethereal glow, illuminating the paths through this surreal expanse. As you navigate the ever-changing maze, the whispers grow louder, urging you deeper into the heart of the Mirage.",
+    "rooms": [
+        {
+            "description": "As you step into this room, you're enveloped by a calming oasis within the ever-changing dunes. The soft whispering grows softer here, replaced by the gentle burble of a crystal-clear fountain. Water features intricately carved from glittering moonstone stones cascade down one wall, creating a soothing melody that seems to calm even the most frayed nerves. A carpet woven with delicate starlight patterns stretches across the floor, leading you deeper into this serene sanctuary.",
+            "name": "The Serene Oasis",
+            "properties": [
+                "serene",
+                "illuminated"
+            ],
+            "secrets": "Hidden behind a falling curtain of crystal water is an ancient inscription etched into the moonstone stones, reading 'The Mirrors Reflect'.",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                2
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Garry/dungeon_dir/room_items/room_1_items.json"
+        },
+        {
+            "description": "As you venture deeper into The Moonlit Mirage, this room unfolds like a canvas of shifting moonlight. Towering crystal spires pierce the ceiling, their facets reflecting a mesmerizing dance of colors across the walls. Softly glowing lanterns crafted from delicate shells cast an ethereal glow, illuminating pathways through the ever-changing maze. The air is alive with the whispers of forgotten memories, each one echoing off the crystal formations like a whispered secret.",
+            "name": "The Luminous Gallery",
+            "properties": [
+                "illuminated",
+                "reflected"
+            ],
+            "secrets": "Hidden within the crystal formations is an ancient mechanism that, when triggered by the right sequence of whispers from the desert sands, reveals a hidden compartment containing a note with cryptic instructions.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Garry/dungeon_dir/room_items/room_2_items.json"
+        },
+        {
+            "description": "As you step into this room, you're enveloped by the haunting melodies of an ancient harp. Its strings seem to vibrate with the very essence of forgotten memories, each note echoing off the crystal spires like a whispered promise. The air is alive with the scent of starlight and the whispers grow louder here, as if the very fabric of time has been woven into the music itself. A delicate harp crafted from a single piece of polished moonstone lies at the room's center, its strings humming softly in anticipation.",
+            "name": "The Whispered Serenade",
+            "properties": [
+                "haunting",
+                "illuminated"
+            ],
+            "secrets": "Hidden within the harp's intricate carvings is a small compartment containing a delicate starlight-encrusted note that, when played on the right frequency by the harp's strings, reveals a hidden message etched into the crystal spires above.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
+                    1,
+                    2
+                ],
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "./profiles/Garry/dungeon_dir/room_items/room_3_items.json"
+        }
+    ]
+}

@@ -2,7 +2,7 @@
     "name": "Traveler",
     "klass": "Fighter",
     "race": "Human",
-    "description": "a zebra",
+    "description": "A traveling merchant",
     "image": null,
     "inventory": [],
     "profile_path": "./profiles/Traveler/",

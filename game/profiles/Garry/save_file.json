@@ -1,0 +1,11 @@
+{
+    "name": "Garry",
+    "klass": "Fighter",
+    "race": "Human",
+    "description": "Male dwarf wizard in heavy armor\nand a buzz haircut and yellow hair",
+    "image": null,
+    "inventory": [],
+    "profile_path": "./profiles/Garry/",
+    "dungeon_path": "./profiles/Garry/dungeon_dir/",
+    "sound_path": "./profiles/Garry/sound/"
+}

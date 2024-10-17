@@ -1,37 +1,36 @@
 {
-    "theme": "Moonlit Grotto",
-    "description": "Deep within a crescent-shaped cove, the Moonlit Grotto stretches its ethereal presence across the rocky shoreline. The entrance, an archway of glittering crystalline formations, beckons adventurers to step into a realm where the soft luminescence of moonstones and glowing fungi paint the walls with a gentle, blue-green hue. A fine mist rises from the ground, veiling the air in a veil of mystery, as the sound of softly lapping waves against the shore provides a soothing serenade that seems almost hypnotic. Strange symbols etched into the walls appear to shift and writhe like living serpents, whispering secrets to those brave enough to listen. The atmosphere is one of enchantment and foreboding, where dreams seem to seep from the very stones themselves.",
+    "theme": "Moonlit Mirage",
+    "description": "The Moonlit Mirage is an ethereal labyrinth of crystalline spires and shimmering silver walls that seem to ripple like a mirage in the desert. The air within is alive with the sweet scent of blooming lunar flowers, their petals reflecting the soft light of luminescent orbs embedded in the ceiling. As players wander through the winding corridors, they are enveloped by an otherworldly silence, punctuated only by the faint whispers of forgotten melodies carried on the breeze. The walls hum softly with a gentle, soothing energy that seems to synchronize the heartbeat of all who enter, drawing them deeper into the mystical heart of the Mirage. Flickering candles cast dancing shadows across the crystal floor, creating an illusion of depth and dimensionality. As night falls outside, the luminescent orbs brighten, casting a soft blue glow over the entire complex, imbuing it with an aura of mysticism and wonder.",
     "rooms": [
         {
-            "description": "You find yourself standing at the entrance of a small chamber within the Moonlit Grotto. The air is filled with an otherworldly energy as the soft luminescence of moonstones and glowing fungi paint the walls with a gentle, blue-green hue. Strange symbols etched into the walls appear to shift and writhe like living serpents, whispering secrets to those brave enough to listen. A fine mist rises from the ground, veiling the air in a veil of mystery.",
-            "name": "Chamber of Whispers",
+            "description": "This room is a circular chamber with a domed ceiling, its walls lined with a series of luminescent orbs that cast an ethereal glow across the crystal floor. The air is filled with the sweet scent of blooming lunar flowers, their petals reflecting the soft light in a mesmerizing dance. In the center of the room stands an ancient, stone pedestal upon which rests a delicate, crystal music box adorned with intricate carvings of lunar cycles.",
+            "name": "Moonlit Serenade",
             "properties": [
-                "ethereal",
-                "mysterious"
+                "peaceful",
+                "enchanting"
             ],
-            "secrets": "The symbols on the walls are actually a magical lock, requiring a specific sequence of steps and pressure points to unlock a hidden compartment containing a powerful artifact. The mist rising from the ground is not just for show; it has healing properties that can mend wounds.",
+            "secrets": "The music box can be wound using the soft, silvery threads that hang from the luminescent orbs on the ceiling. Once wound, it will play a melody that resonates with the heartbeat of any who listen.",
             "room_id": 1,
             "coordinates": [
                 1,
-                2
+                1
             ],
             "connections": [
                 [
                     2,
-                    2
+                    1
                 ]
             ],
             "items_file": "./profiles/Traveler/dungeon_dir/room_items/room_1_items.json"
         },
         {
-            "description": "Beyond the Chamber of Whispers lies a narrow, winding path that descends deeper into the heart of the Moonlit Grotto. The air grows colder and more damp as you make your way through a series of twisting tunnels and caverns, the soft luminescence of moonstones and glowing fungi giving way to an eerie, blue-green glow that seems almost otherworldly. The sound of dripping water echoes off the walls, punctuated by the faint rustle of unknown creatures in the darkness.",
-            "name": "The Shattered Cavern",
+            "description": "A winding corridor with walls that seem to ripple like a mirage in the desert. The air is alive with the sweet scent of blooming lunar flowers, their petals reflecting the soft light of luminescent orbs embedded in the ceiling. Flickering candles cast dancing shadows across the crystal floor, creating an illusion of depth and dimensionality.",
+            "name": "Mirage's Passage",
             "properties": [
-                "dark",
-                "cold",
+                "ethereal",
                 "mysterious"
             ],
-            "secrets": "A hidden compartment can be found behind one of the fungal sconces, containing a cryptic message etched onto a small, silvered mirror. The message reads: 'The path to the heart of the grotto is not always the shortest route.'",
+            "secrets": "A hidden compartment within the wall contains a rolled-up parchment with a cryptic message that reads: 'Where shadows dance, seek the truth in the music of the spheres.' The compartment can be accessed by pressing the correct sequence of luminescent orbs on the ceiling.",
             "room_id": 2,
             "coordinates": [
                 2,
@@ -39,30 +38,30 @@
             ],
             "connections": [
                 [
-                    2,
-                    2
+                    1,
+                    1
+                ],
+                [
+                    3,
+                    1
                 ]
             ],
             "items_file": "./profiles/Traveler/dungeon_dir/room_items/room_2_items.json"
         },
         {
-            "description": "As you navigate through The Shattered Cavern, a narrow, winding path opens up to a vast, moonlit chamber. The air is filled with the sweet scent of blooming flowers and the soft chirping of nocturnal creatures. A large, crystal formation at the far end of the room reflects the gentle light of the moonstones, casting an otherworldly glow across the walls. Strange symbols etched into the stone appear to match the patterns on the Shattered Crystal you found in The Shattered Cavern.",
-            "name": "The Celestial Chamber",
+            "description": "A chamber filled with an array of crystal formations that refract and reflect the soft luminescent light of the ceiling. The walls are adorned with delicate, silver filigree that seems to shimmer in harmony with the gentle energy emanating from the crystals. A small, moon-shaped fountain babbles softly in one corner, its waters reflecting the lunar cycles etched into the surrounding filigree.",
+            "name": "Moonlit Harmony",
             "properties": [
-                "ethereal",
-                "mysterious"
+                "peaceful",
+                "enchanting"
             ],
-            "secrets": "A hidden compartment can be found behind one of the moonlit blooms, containing a small, delicate key etched with a crescent moon symbol. The key is said to unlock a secret door leading to a hidden glade deep within the Moonlit Grotto.",
+            "secrets": "The crystal formations on the walls are actually tuned resonators that amplify and manipulate sound waves. The correct sequence of notes played on the wind chime can unlock a hidden room filled with ancient lunar instruments, waiting to be rediscovered.",
             "room_id": 3,
             "coordinates": [
-                2,
-                2
+                3,
+                1
             ],
             "connections": [
-                [
-                    1,
-                    2
-                ],
                 [
                     2,
                     1

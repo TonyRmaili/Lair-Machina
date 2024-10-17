@@ -6,6 +6,7 @@ from creation_screen import CreactionScreen
 from menu_screen import MenuScreen
 from dungeon_screen import DungeonScreen
 from loading_screen import LoadingScreen
+from load_profile_screen import LoadProfile
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from character import Character
 # from game_map import GameMap
@@ -35,10 +36,10 @@ class Game:
         self.menu_screen = MenuScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
         self.dungeon_screen = None
         self.loading_screen = LoadingScreen(game=self,w=self.WIDTH,h=self.HEIGHT)
+        self.load_profile_screen = LoadProfile(game=self,w=self.WIDTH,h=self.HEIGHT)
         
     
     def run(self):
-
         while True:  
             events = pygame.event.get()
             mouse_pos = pygame.mouse.get_pos()
@@ -55,6 +56,9 @@ class Game:
                 if self.dungeon_screen is None:
                     self.dungeon_screen = DungeonScreen(game=self, w=self.WIDTH, h=self.HEIGHT)
                 self.dungeon_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
+                
+            elif self.game_mode == 'load_profile':
+                self.load_profile_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
                 
             elif self.game_mode == 'loading':
                 self.loading_screen.run(screen=self.screen,events=events,mouse_pos=mouse_pos)
