@@ -27,7 +27,7 @@ class DungeonScreen:
         path = f'./pics/{self.char.name}/dungeon_rooms/'
 
 
-        self.dungeon_room_img = Image(image=path+'1.png',pos=(0,0),scale=(0.4*w,0.5*h))
+        self.dungeon_room_img = Image(image=path+'1.png',pos=(595,0),scale=(0.35*w,0.45*h))
 
 
         self.character_image = Image(image=self.char.image,pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
@@ -40,7 +40,7 @@ class DungeonScreen:
         self.prompt_button = Button(pos=(0.07*w,0.78*h),text_input='Submit',
                             base_color="black", hovering_color="Green") 
         
-        self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.5*h,x=0.4*w,y=0,
+        self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Dungeon Master',title_color='black')
 
 
@@ -100,7 +100,7 @@ class DungeonScreen:
 
 
         # room info boxes 
-        self.current_room_box = TextArea(text='',font_size=18,WIDTH=340,HEIGHT=250,x=5,y=5,text_color=(255, 255, 255),bg_color=(69, 69, 69),title=self.current_room_name,title_color='black')
+        self.current_room_box = TextArea(text='',font_size=18,WIDTH=370,HEIGHT=185,x=0.605*w,y=0.46*h,text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Room Description',title_color='black')
 
         self.special_action_available = None  # To track if a special action is available
         self.game_exit = False  # Flag to handle game exit
@@ -115,12 +115,13 @@ class DungeonScreen:
 
 
     def update_current_room_box(self):
-        self.current_room_box.new_text(text=self.current_room_description)
+        self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
+        
+        self.current_room_box.new_text(text=f"{self.current_room_name} - {self.current_room_description}")
 
-
-        self.current_room_options_box = TextArea(text=f"move options:{self.player_move_options}, current location:{self.player_position}",
+        self.current_room_options_box = TextArea(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}", font_size=20,
                                                  WIDTH=0.2*self.WIDTH,HEIGHT=0.25*self.HEIGHT,x=0.2*self.WIDTH,y=0.5*self.HEIGHT,
-                                                 text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Move info:',title_color='black')
+                                                 text_color=(255, 255, 255),bg_color=(69, 69, 69),title=f'You are in:',title_color='black')
         
         
         with open(self.current_room_items_path) as f:
@@ -202,13 +203,12 @@ class DungeonScreen:
         # Display the map in the top-right corner
         font = pygame.font.Font(None, 24)
         cell_size = 20  # Cell size for better fit
-        grid_offset_x = 0.7*self.WIDTH # X offset for where the grid will be displayed
-        grid_offset_y = 0.6*self.HEIGHT  # Y offset for where the grid will be displayed
+        grid_offset_x = 0.25*self.WIDTH # X offset for where the grid will be displayed
+        grid_offset_y = 0.65*self.HEIGHT  # Y offset for where the grid will be displayed
 
         for row_idx, row in enumerate(self.map_grid):
             row_text = ''
             for col_idx, cell in enumerate(row):
-                print(col_idx, row_idx)
                 # Check if this is the player's position and mark it with 'X'
                 if [col_idx+1, row_idx+1] == self.player_position:
                     cell_text = 'X'
@@ -307,8 +307,8 @@ class DungeonScreen:
         
 
         # these are deprecated
-        # self.current_room_box.new_text(text=self.current_room_description)
-        # self.current_room_box.draw(screen=screen)
+        self.current_room_box.new_text(text=self.current_room_description)
+        self.current_room_box.draw(screen=screen)
         
         self.update_current_room_box()
         self.current_room_options_box.draw(screen=screen)
