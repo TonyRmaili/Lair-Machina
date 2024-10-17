@@ -23,12 +23,12 @@ lore > pantheon > world_structure > factions > settlements > npcs > landspaces
 
 
 class GenerateWorld:
-    def __init__(self):
+    def __init__(self,save_path):
         # Save all generated files in the same folder as this script
         self.current_dir = os.path.dirname(__file__)  # Get the directory of the current file (world_gen)
         # self.blue_print_path = os.path.join(self.current_dir, 'world_blueprint.json')  # Path to world blueprint
         self.model = 'llama3.1'
-        
+        self.save_path = save_path
         # Load blueprint data
         # with open(self.blue_print_path, 'r') as f:
         #     self.data = json.load(f)
@@ -46,7 +46,7 @@ class GenerateWorld:
         self.dungeon_data['map']
         
         # ADD PATH TO FOLDER WITH CHARACTER NAME
-        with open('dungeon_map.json', 'w') as json_file:
+        with open(self.save_path+'dungeon_map.json', 'w') as json_file:
             json.dump(self.dungeon_data['map'], json_file, indent=4)
 
 
@@ -126,8 +126,7 @@ class GenerateWorld:
         room_system = self.dungeon_data['room_system']
         room_count = self.dungeon_data['room_count']
         room_data = self.dungeon_data['room_data']
-        dungeon_map = self.dungeon_data['map']
-        
+    
         for i in range(room_count):
             count = i+1
             resp= ollama.generate(
@@ -148,7 +147,6 @@ class GenerateWorld:
         return previous_rooms
 
     def run_dungeon(self):
-
         self.is_generating = True
         overview_resp = self.dungeon_overview()
         overview_dict = json.loads(overview_resp)
@@ -159,36 +157,10 @@ class GenerateWorld:
         overview_dict['rooms'] = rooms
 
         # self.save_to_json(resp=overview_dict,name='dungeon')
-        with open('dungeon.json', 'w') as json_file:
+        with open(self.save_path+'dungeon.json', 'w') as json_file:
             json.dump(overview_dict, json_file, indent=4)
         self.is_generating = False
 
-
-
- # old methods 
-    # def plot_dungeon(self):
-    #     '''Deprecated'''
-    #     rooms = self.extract_dungeon_coords()
-    #     fig, ax = plt.subplots()
-
-    #     # Plot each room
-    #     for i, room in enumerate(rooms):
-    #         x, y = room['coordinates']
-    #         ax.plot(x, y, 'bo')  # plot the room as a blue dot
-    #         ax.text(x, y, f'Room {i+1}', fontsize=9, ha='right')  # label the room
-
-    #         # Plot passage connections (straight lines between rooms)
-    #         if i > 0:
-    #             prev_x, prev_y = rooms[i-1]['coordinates']
-    #             ax.plot([prev_x, x], [prev_y, y], 'k-', lw=1)  # draw line between current and previous room
-
-    #     # Setting up the plot limits and grid
-    #     ax.set_xlim(-5, 5)
-    #     ax.set_ylim(-5, 5)
-    #     ax.grid(True)
-    #     ax.set_title("Dungeon Map")
-
-    #     plt.show()
 
     def fix_json_string(self, json_string):
         '''seems not to be needed'''

@@ -13,6 +13,12 @@ class Character:
         self.image = None
         self.inventory = []
         
+        # paths
+        self.profile_path = None
+        self.dungeon_path = None
+        self.sound_path = None
+
+
 
     def save_profile(self, filename="character_profile.json"):
         # Save the instance's __dict__ directly as JSON

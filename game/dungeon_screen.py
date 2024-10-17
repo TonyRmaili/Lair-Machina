@@ -23,11 +23,10 @@ class DungeonScreen:
         self.WIDTH = w
         self.HEIGHT = h
         self.char = game.char
-        path = f'./pics/{self.char.name}/dungeon_rooms/'
+        path = self.char.dungeon_path+'images/'
 
 
         self.dungeon_room_img = Image(image=path+'1.png',pos=(0,0),scale=(0.4*w,0.5*h))
-
 
         self.character_image = Image(image=self.char.image,pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
 
@@ -249,7 +248,9 @@ class DungeonScreen:
     def update_inventory_box(self):
         with open('./inventory_json.json') as f:
             self.inventory = json.load(f)
-            
+        
+        # function_calls and inventory needs rework before char.inventory replaces it
+        # self.char.inventory = self.inventory['inventory']
         
         # Extract only the names of the items in the inventory
         item_names = [item['name'] for item in self.inventory['inventory']]

@@ -1,0 +1,73 @@
+{
+    "theme": "The Dreaming Halls of Somnium",
+    "description": "As you step through the shimmering veils of mist that shroud the entrance, you find yourself within the labyrinthine halls of Somnium. The air is alive with the whispers of forgotten dreams and the faint scent of sandalwood wafts through the corridors like a promise of hidden truths. The walls, crafted from a glittering white stone that seems almost otherworldly, are adorned with intricate carvings that appear to shift and change as you gaze upon them. Flickering luminescent orbs, suspended from the ceiling by delicate filaments, cast an ethereal glow over the environment, making it seem as though you're walking through a realm born of the subconscious. The soft susurrations of the wind, carrying the echoes of distant memories and forgotten secrets, weave an aura of mystery around every corner, beckoning you deeper into the heart of Somnium.",
+    "rooms": [
+        {
+            "description": "The room is a circular chamber with walls lined in a glittering white stone that seems almost otherworldly. The ceiling disappears into darkness, making it impossible to discern where it begins or ends. A delicate chandelier, suspended from the ceiling by thin, ethereal filaments, casts an eerie glow over the space. The air is heavy with the scent of sandalwood and the whispers of forgotten dreams seem to emanate from the stone itself.",
+            "name": "The Heart of Somnium",
+            "properties": [
+                "ethereal",
+                "dreamlike"
+            ],
+            "secrets": "A hidden compartment in the stone wall, accessible only when the luminescent orbs align properly with the carvings on the wall, contains a note that reads: 'Beneath the shadows lies the truth.'",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "room_items\\room_1_items.json"
+        },
+        {
+            "description": "As you step into this chamber, the soft susurrations of forgotten memories envelop you. The room is a dimly lit, oval-shaped space with walls covered in ancient carvings that depict scenes from dreams and nightmares. A series of luminescent orbs, suspended from the ceiling by tenuous threads, cast an otherworldly glow over the environment. The air is thick with the scent of damp earth and forgotten history. In the center of the room, a lone, ornate key rests upon a pedestal, as if waiting for its purpose to be fulfilled.",
+            "name": "The Chamber of Lost Memories",
+            "properties": [
+                "dimly lit",
+                "mysterious"
+            ],
+            "secrets": "A hidden pressure plate on the floor, disguised as a worn patch of stone, when triggered, reveals a hidden compartment in the wall containing a tattered parchment with cryptic notes about an ancient ritual to unlock the true potential of Somnium.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    3,
+                    1
+                ]
+            ],
+            "items_file": "room_items\\room_2_items.json"
+        },
+        {
+            "description": "The room is a narrow corridor with walls adorned with ancient carvings that depict the blurred lines between reality and dreams. The air is heavy with the scent of old parchment and forgotten knowledge. Flickering luminescent orbs, suspended from the ceiling by thin filaments, cast an eerie glow over the space. The susurrations of distant memories whisper through the corridor, beckoning you deeper into the heart of Somnium.",
+            "name": "The Corridor of Fractured Memories",
+            "properties": [
+                "narrow",
+                "mysterious"
+            ],
+            "secrets": "A hidden compartment in the wall, accessible only when the luminescent orbs align properly with the carvings on the wall, contains a note that reads: 'The fabric of Somnium is woven from the threads of forgotten memories. Seek out the Weaver's Loom to unravel the truth.'",
+            "room_id": 3,
+            "coordinates": [
+                3,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "room_items\\room_3_items.json"
+        }
+    ]
+}

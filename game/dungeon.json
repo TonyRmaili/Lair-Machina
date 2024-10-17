@@ -1,15 +1,15 @@
 {
-    "theme": "The Dreaming Spires",
-    "description": "Towering above a sea of whispering reeds, The Dreaming Spires rise like shards of splintered moonlight from the heart of the mystical Wysteria Fens. These crumbling, ethereal spires were once the sacred sanctum of the long-lost Lythari \u2013 an ancient people attuned to the very fabric of dreams. Now, as the last wisps of moonlight dance across their weathered facades, The Dreaming Spires awaken from a slumber that spanned centuries. Their walls, once vibrant with the murals of forgotten epiphanies and the echoes of whispered secrets, now whisper cryptic incantations to the wind. Dripping water weeps a melancholy serenade through the corridors, while the scent of damp earth and the essence of blooming reeds wafts through the halls like the promise of forgotten memories. The air is heavy with anticipation as the spires stir from their slumber, beckoning brave adventurers into the realms of the subconscious \u2013 where terrors and wonders alike await those willing to confront the darkness within.",
+    "theme": "Moonlit Masquerade",
+    "description": "The entrance to the Moonlit Masquerade lies hidden behind a tapestry of tangled vines and overgrown bushes, as if nature itself sought to conceal the grandeur within. A crescent moon casts an ethereal glow upon the structure's facade, where intricate carvings of masks and celestial bodies dance across the walls in a whimsical display of artistry. The air is heavy with the scent of lavender and the distant hum of nocturnal insects, adding to the mystique of this enchanted place. Inside, crystal chandeliers refract hues of blue and purple, casting an otherworldly ambiance throughout the labyrinthine corridors and opulent chambers. Strange whispers echo through the halls, seemingly emanating from the very masks that adorn the walls, making one question the true nature of this masquerade. As adventurers navigate deeper into the Moonlit Masquerade, they begin to unravel a web of secrets tied to an ancient cult of performers who weaved magic into their art, leaving behind a legacy both captivating and treacherous.",
     "rooms": [
         {
-            "description": "You find yourself in a narrow corridor that seems to be a continuation of the grand hall you discovered earlier. The walls, once adorned with vibrant murals, now bear only faint reminders of their former glory. The air is thick with the scent of damp earth and blooming reeds, and the sound of dripping water echoes through the passageway like a melancholy serenade. Ahead of you, the corridor stretches into darkness, punctuated by flickering torches that cast eerie shadows on the walls.",
-            "name": "The Forgotten Gallery",
+            "description": "A grand ballroom with a crystal-encrusted chandelier at its center. The walls are adorned with an assortment of ornate masks in various shapes and sizes, their faces seeming to shift as the moonlight dances across them. A delicate dance of shadows is played out on the floor, where fragments of forgotten performances appear to still linger.",
+            "name": "The Masquerade Ballroom",
             "properties": [
-                "dark",
-                "narrow"
+                "illuminated",
+                "sensitive_to_noise"
             ],
-            "secrets": "As you examine the murals on the wall more closely, you notice a small, almost imperceptible seam in one of the stones. It seems to be a hidden trigger, and if pressed correctly, it might reveal a secret compartment or message.",
+            "secrets": "A hidden compartment within one of the masks conceals a note with an enigmatic poem that reads: 'Where shadows dance and moonlight gleams, seek the melody that echoes through dreams.'",
             "room_id": 1,
             "coordinates": [
                 1,
@@ -24,13 +24,13 @@
             "items_file": "room_items\\room_1_items.json"
         },
         {
-            "description": "You step into a small, spherical chamber deep within The Dreaming Spires. The room is encircled by an intricately carved, crystal-lined wall that refracts and reflects the faint moonlight seeping through the spire's windows. The air inside is stale, but it carries the whispers of forgotten dreams. In the center of the room, a delicate, gemstone-encrusted lyre lies atop a pedestal, its strings eerily silent. The only sound is the soft hum of magic emanating from the instrument.",
-            "name": "The Silent Melody",
+            "description": "A narrow corridor lined with cobweb-covered portraits of performers from a bygone era. The walls are adorned with the remnants of once-grand tapestries, now faded and frayed. A faint scent of lavender wafts through the air, mingling with the musty smell of aged wood. The only light comes from a series of flickering candles, casting eerie shadows on the walls as they dance to the rhythm of distant music.",
+            "name": "The Forgotten Gallery",
             "properties": [
-                "quiet",
-                "magical"
+                "dark",
+                "fragrant"
             ],
-            "secrets": "As you examine the lyre more closely, you notice that one of its strings is slightly out of tune. If you manage to adjust it correctly, the instrument might awaken and reveal hidden secrets or even conjure a sonic blast.",
+            "secrets": "A hidden compartment within one of the portraits conceals a tiny music box playing an enchanting melody when wound. The tune seems to match the rhythm of distant laughter and applause, hinting at a deeper connection between this room and the heart of the Moonlit Masquerade.",
             "room_id": 2,
             "coordinates": [
                 2,
@@ -45,13 +45,13 @@
             "items_file": "room_items\\room_2_items.json"
         },
         {
-            "description": "You find yourself in a grand, high-ceilinged chamber within The Dreaming Spires. The room is dominated by an enormous, crystal-encrusted chandelier that hangs from the vaulted ceiling like a shard of splintered starlight. The walls are adorned with vibrant, yet faded murals depicting scenes of ancient rituals and mystical events. The air is alive with the whispers of forgotten memories, and the scent of damp earth and blooming reeds wafts through the space like a promise of hidden truths. Ahead of you, a grand staircase curves up into the shadows like a crescent moon, beckoning you towards secrets yet unknown.",
-            "name": "The Celestial Sanctum",
+            "description": "A grand concert hall filled with rows of velvet-draped seats, each one adorned with a delicate mask that seems to have been hand-carved from the finest ebony wood. The air is heavy with the scent of sandalwood and old books, as if the very essence of forgotten performances still lingers within these walls. A grand organ stands at the far end, its pipes reaching towards the moonlit ceiling like skeletal fingers, playing a haunting melody that seems to be woven from the very fabric of dreams.",
+            "name": "The Whispering Auditorium",
             "properties": [
-                "grand",
-                "magical"
+                "illuminated",
+                "acoustic"
             ],
-            "secrets": "As you examine the murals on the wall more closely, you notice that one of them seems to be a hidden key. If you manage to decipher its meaning and press it correctly, the chandelier might reveal a secret compartment or message.",
+            "secrets": "A hidden panel within one of the organ's pipes conceals a small note with a cryptic message that reads: 'Seek out the melody that echoes through dreams, for it is there that you will find the key to unraveling the secrets of the Moonlit Masquerade.'",
             "room_id": 3,
             "coordinates": [
                 2,

@@ -2,9 +2,6 @@ import pygame
 import sys
 from widgets.image import Image
 from widgets.textarea import TextArea
-from widgets.input_text import InputText
-from widgets.button import Button
-import time
 import threading
 from comfy_prompt import run_comfy
 import os
@@ -22,8 +19,7 @@ class LoadingScreen:
             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Terminal',title_color='black')
 
         self.loading_complete= False
-        self.gen_button = Button(pos=(w-325,h-400),text_input='Submit',
-                base_color="black", hovering_color="Green")
+        
         
         self.terminal_text = ''
 
@@ -32,6 +28,9 @@ class LoadingScreen:
         self.dungeon_generator()
         self.char_img_generator()
         self.loading_complete = True
+
+    def run_in_thread(self):
+        threading.Thread(target=self.start_generating).start() 
 
 
     def char_img_generator(self):
@@ -45,7 +44,7 @@ class LoadingScreen:
     def dungeon_generator(self):
         self.terminal_text = self.terminal_text+'generating dungeon json'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)
-        world = GenerateWorld()
+        world = GenerateWorld(save_path=self.char.dungeon_path)
         world.run_dungeon()
         self.dungeon_room_splitter()
  
@@ -65,11 +64,11 @@ class LoadingScreen:
 
     def dungeon_room_splitter(self):
         # Load dungeon JSON from a file
-        with open('dungeon.json', 'r') as dungeon_file:
+        with open(self.char.dungeon_path+'dungeon.json', 'r') as dungeon_file:
             dungeon = json.load(dungeon_file)
             
         # Directory where you want to save the item JSON files
-        output_directory = "room_items"
+        output_directory = self.char.dungeon_path+"room_items/"
 
         # Create directory for room items if it doesn't exist
         if not os.path.exists(output_directory):
@@ -98,7 +97,7 @@ class LoadingScreen:
             del room['items']
 
         # Save the modified dungeon JSON
-        with open('dungeon.json', 'w') as dungeon_file:
+        with open(self.char.dungeon_path+'dungeon.json', 'w') as dungeon_file:
             json.dump(dungeon, dungeon_file, indent=4)
 
         print("Room item files and updated dungeon JSON have been saved.")        
@@ -116,19 +115,12 @@ class LoadingScreen:
             rooms.append(room_data)
         return rooms
 
-
     def handle_event(self,events,mouse_pos):
-        self.gen_button.changeColor(position=mouse_pos)
         for event in events:
             # handles quits 
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.gen_button.checkForInput(mouse_pos):
-                    threading.Thread(target=self.start_generating).start() 
-                    
 
             self.terminal_box.handle_event(event=event)
 
@@ -137,7 +129,7 @@ class LoadingScreen:
         self.handle_event(events=events,mouse_pos=mouse_pos)
         self.bg.draw(screen=screen)
         self.terminal_box.draw(screen=screen)
-        self.gen_button.draw(screen)
+       
 
         if self.loading_complete:
             self.game.game_mode ='dungeon'

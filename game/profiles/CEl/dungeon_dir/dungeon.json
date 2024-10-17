@@ -1,0 +1,73 @@
+{
+    "theme": "Dreaming Library",
+    "description": "The Dreaming Library sprawls across a series of intricately connected, labyrinthine shelves that stretch towards the sky like a maze of gossamer. Soft, ethereal light emanates from luminescent orbs embedded in the walls, casting an otherworldly glow on the dusty tomes and scrolls that line the shelves. The air is heavy with the scent of old parchment and forgotten knowledge, and the whispers of long-forgotten scholars seem to echo through the corridors. Strange symbols etched into the floor pulse with a gentle, blue-green light, as if infused with a soft magic that resonates in harmony with the library's slumbering inhabitants. As adventurers navigate the winding paths between shelves, they begin to feel an unsettling sense of being watched, as if unseen eyes are observing their every move, searching for something hidden within the stacks.",
+    "rooms": [
+        {
+            "description": "The room is a cozy nook nestled between two sprawling shelves, filled with an assortment of leather-bound books adorned with intricate metal clasps. The air is thick with the scent of old parchment and a faint hint of vanilla wafts through the space. A single, flickering candle casts an inviting glow on the scattered notes and quills strewn across the wooden desk.",
+            "name": "The Scribbler's Haven",
+            "properties": [
+                "illuminated",
+                "comforting"
+            ],
+            "secrets": "A hidden compartment within the desk drawer contains a rolled-up parchment with an encrypted message from a legendary author, waiting to be deciphered by those with the keenest of minds.",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "./profiles/CEl/dungeon_dir/room_items/room_1_items.json"
+        },
+        {
+            "description": "A narrow, winding staircase connects two levels of shelves in this cozy alcove. Rows of leather-bound tomes and parchment scrolls stretch toward the ceiling like an ivy-covered trellis, while a soft, golden light emanates from luminescent orbs embedded in the walls. The air is heavy with the scent of old parchment, and whispers from long-forgotten scholars seem to echo through the space.",
+            "name": "The Scholar's Refuge",
+            "properties": [
+                "illuminated",
+                "whispered"
+            ],
+            "secrets": "A hidden panel within the shelves conceals a small, ornate box adorned with an intricate locking mechanism, containing a rolled-up parchment with a cryptic poem from a reclusive poet, waiting to be deciphered by those with the keenest of minds.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    1,
+                    1
+                ],
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/CEl/dungeon_dir/room_items/room_2_items.json"
+        },
+        {
+            "description": "The room is a vast, high-ceilinged chamber filled with towering shelves that stretch towards the sky like a maze of gossamer. Soft, ethereal light emanates from luminescent orbs embedded in the walls, casting an otherworldly glow on the dusty tomes and scrolls that line the shelves. The air is heavy with the scent of old parchment and forgotten knowledge, and the whispers of long-forgotten scholars seem to echo through the corridors. Strange symbols etched into the floor pulse with a gentle, blue-green light, as if infused with a soft magic that resonates in harmony with the library's slumbering inhabitants.",
+            "name": "The Great Vault",
+            "properties": [
+                "illuminated",
+                "magical"
+            ],
+            "secrets": "A hidden compartment within the bookshelves conceals a small, ornate key adorned with an intricate locking mechanism, said to unlock a secret chamber deep within the library's labyrinthine corridors, containing ancient knowledge and forbidden secrets waiting to be uncovered by those brave enough to seek them out.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "./profiles/CEl/dungeon_dir/room_items/room_3_items.json"
+        }
+    ]
+}

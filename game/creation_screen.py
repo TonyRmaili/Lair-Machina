@@ -1,6 +1,7 @@
 import pygame
 import pygame_menu
 import sys
+import os
 from widgets.image import Image
 from widgets.textarea import TextArea
 from widgets.input_text import InputText
@@ -13,14 +14,17 @@ class CreactionScreen:
     This class is responsible for the character creation screen - it allows the player to create a character and saves the data
     """
     def __init__(self,game,w,h):
-        path = './pics/'
-        self.bg = Image(image=path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))
+        self.save_path = './profiles/'
+        os.makedirs(self.save_path, exist_ok=True)
+        pic_path = './pics/'
+        self.bg = Image(image=pic_path+'char_creation_bg.jpg',pos=(0,0),scale=(w,h))
         self.game = game
 
         self.char_menu,self.menu_rect = self.create_char_menu(w,h)
          
         self.char = self.game.char
 
+        # default character config
         self.char.name = 'Traveler'
         self.char.klass = 'Fighter'
         self.char.race = 'Human'
@@ -48,17 +52,29 @@ class CreactionScreen:
         return menu,rect
 
     def start_game(self):
-        print(self.char.name)
-        print(self.char.klass)
-        print(self.char.race)
-
+        self.make_profile_folders()
         self.char.description = self.description_box.format_lines()
-        print(self.char.description)
-        
-        self.game.game_mode ='loading'
-        # self.game.loading_screen.img_generator()
-        # self.game.game_mode = 'map'
 
+        # run the generation processes and switch screen
+        self.game.game_mode ='loading'
+        self.game.loading_screen.run_in_thread()
+        
+
+    def make_profile_folders(self):
+        char_path = self.save_path + self.char.name + '/'
+        self.char.profile_path = char_path
+        os.makedirs(char_path, exist_ok=True)
+
+        # add more when needed
+        sound_folder = char_path+'sound/'
+        dungeon_dir = char_path+'dungeon_dir/'
+
+        self.char.dungeon_path = dungeon_dir
+        self.char.sound_path = sound_folder
+
+        os.makedirs(sound_folder, exist_ok=True)
+        os.makedirs(dungeon_dir, exist_ok=True)
+        
 
 
     def set_name(self,name):
