@@ -9,6 +9,7 @@ import threading
 import json
 sys.path.append('../function_calls/')  # Adjust the path
 from ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
+from ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
 
 
 
@@ -75,6 +76,12 @@ class DungeonScreen:
         
         # the room json path from updated dungeon . json
         self.current_room_items_path = self.dungeon['rooms'][self.current_room_id]['items_file']
+        
+        
+        
+        # THIS VAriable dosnt work? needs fixing? why??
+        # self.current_room_items_path
+
         
         with open(self.current_room_items_path) as f:
             self.current_room_items = json.load(f)
@@ -214,6 +221,12 @@ class DungeonScreen:
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
+        self.DM_box.new_text(text=self.response)
+        
+        
+        ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='../game/inventory_json.json', room_file=self.room_file)
+        self.response = ollama_instance_state.activate_functions()
+
         self.DM_box.new_text(text=self.response)
         self.response = None  # Clear the response after updating the box
 
