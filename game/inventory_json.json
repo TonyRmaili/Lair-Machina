@@ -23,6 +23,10 @@
         {
             "name": "Starlight Droplets",
             "description": "A vial filled with droplets of a substance that looks like liquid starlight. It's said that these droplets can preserve memories and emotions, allowing you to relive moments from your past in vivid detail when you consume them."
+        },
+        {
+            "name": "Moonstone Chalice",
+            "description": "A delicate chalice crafted from a single piece of glowing moonstone. The crystal's facets seem to reflect a kaleidoscope of starlight, as if it were plucked straight from the heavens."
         }
     ]
 }
