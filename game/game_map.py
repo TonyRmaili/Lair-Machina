@@ -287,7 +287,9 @@ class GameMap:
 
         for row_idx, row in enumerate(self.map_grid):
             row_text = ''
+
             for col_idx, cell in enumerate(row):
+                # print(col_idx)
                 # Check if this is the player's position and mark it with 'X'
                 if [col_idx, row_idx] == self.player_position:
                     cell_text = 'X'
