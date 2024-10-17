@@ -23,12 +23,13 @@ class DungeonScreen:
         self.WIDTH = w
         self.HEIGHT = h
         self.char = game.char
-        path = self.char.dungeon_path+'images/'
+        dungeon_img_path = self.char.dungeon_path+'images/'
+        dungeon_path = self.char.dungeon_path
 
+        self.dungeon_room_img = Image(image=dungeon_img_path+'1.png',pos=(0,0),scale=(0.4*w,0.5*h))
 
-        self.dungeon_room_img = Image(image=path+'1.png',pos=(0,0),scale=(0.4*w,0.5*h))
-
-        self.character_image = Image(image=self.char.image,pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
+        self.character_image = Image(image=self.char.profile_path+'profile_img.png',
+                pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
 
         #Text boxes
         self.prompt_box = InputText(x=0,y=0.75*h,width=0.75*w,height=0.25*h,
@@ -62,7 +63,7 @@ class DungeonScreen:
             
         self.inventory = f'{item_names}'
 
-        with open('dungeon.json') as f:
+        with open(dungeon_path+'dungeon.json') as f:
             self.dungeon = json.load(f)
         
         self.current_room_data = self.dungeon['rooms'][self.current_room_id]

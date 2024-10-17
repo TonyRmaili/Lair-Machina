@@ -68,14 +68,15 @@ class CreactionScreen:
         # add more when needed
         sound_folder = char_path+'sound/'
         dungeon_dir = char_path+'dungeon_dir/'
+        dungeon_images = dungeon_dir+'images/'
 
         self.char.dungeon_path = dungeon_dir
         self.char.sound_path = sound_folder
 
         os.makedirs(sound_folder, exist_ok=True)
         os.makedirs(dungeon_dir, exist_ok=True)
+        os.makedirs(dungeon_images, exist_ok=True)
         
-
 
     def set_name(self,name):
         self.char.name = name

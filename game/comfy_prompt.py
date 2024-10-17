@@ -216,11 +216,11 @@ def move_and_rename_img(source_folder,profile_path, file_name, image_type, room_
     if image_type == 'profile':
         destination_file = os.path.join(profile_path, 'profile_img.png')
     elif image_type == 'room' and room_id:
-        destination_folder = os.path.join(profile_path, 'images')
+        destination_folder = os.path.join(profile_path+'dungeon_dir/', 'images')
         destination_file = os.path.join(destination_folder, f'{room_id}.png')
 
     # Create the directory if it doesn't exist
-    os.makedirs(destination_folder, exist_ok=True)
+    # os.makedirs(destination_folder, exist_ok=True)
 
     # Move and rename the file
     shutil.move(source_file, destination_file)
@@ -233,7 +233,7 @@ def queue_prompt(prompt):
     response = request.urlopen(req)
 
 
-def run_comfy(description,profile_path, char_name, time_limit=120,image_type='profile',room_id=None):
+def run_comfy(description,profile_path, time_limit=120,image_type='profile',room_id=None):
     source_path = '/home/student/harry_and_tony_project/ComfyUI/output/'
     current_date = datetime.now()
     # Prepare the prompt and update it with the description

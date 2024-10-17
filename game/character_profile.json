@@ -2,7 +2,10 @@
     "name": "Traveler",
     "klass": "Fighter",
     "race": "Human",
-    "description": "",
-    "image": "./pics/Traveler/profile_img.png",
-    "inventory": []
+    "description": "a zebra",
+    "image": null,
+    "inventory": [],
+    "profile_path": "./profiles/Traveler/",
+    "dungeon_path": "./profiles/Traveler/dungeon_dir/",
+    "sound_path": "./profiles/Traveler/sound/"
 }

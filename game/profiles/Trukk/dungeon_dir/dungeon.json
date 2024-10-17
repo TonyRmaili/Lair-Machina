@@ -1,0 +1,73 @@
+{
+    "theme": "Luminous Labyrinth",
+    "description": "The Luminous Labyrinth is a vast underground network of iridescent tunnels and crystalline chambers. Delicate, ethereal filaments of silver-blue light dance across the ceiling like stars on a clear night, casting an otherworldly glow over the intricate carvings that adorn the walls. As you navigate the twisting passages, the soft luminescence seems to shift and pulse with an ancient, mystical energy. The air is alive with whispers, distant echoes of forgotten conversations that fade into the silence like wisps of cloud on a breezeless day. Every step resonates through the caverns, as if the very stones are attuned to your presence. A delicate mist clings to every surface, imbuing the atmosphere with an aura of mystery and foreboding. The scent of damp earth and moss hangs heavy, but beneath it lies a hint of something sweeter: the essence of moonflowers blooming in a long-forgotten garden. As you delve deeper into the Luminous Labyrinth, the shadows grow longer and darker, as if they themselves are alive, reaching out to snuff out the light and plunge you into an endless night.",
+    "rooms": [
+        {
+            "description": "You find yourself in a small, crystalline chamber deep within the Luminous Labyrinth. The ceiling is lost in a tangle of glittering silver-blue filaments that pulse with an otherworldly energy. The walls are adorned with intricate carvings that seem to dance across the surface as you look at them. A delicate mist clings to every surface, casting a veil of mystery over the space. In the center of the room stands an ancient, crystal pedestal, its facets reflecting the ethereal light in a kaleidoscope of colors.",
+            "name": "The Crystal Sanctum",
+            "properties": [
+                "dark",
+                "cold"
+            ],
+            "secrets": "",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                2
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Trukk/dungeon_dir/room_items/room_1_items.json"
+        },
+        {
+            "description": "You enter a narrow, winding tunnel within the Luminous Labyrinth. The walls are lined with ancient carvings of crescent moons and stars that seem to shimmer in time with the soft luminescence dancing across the ceiling. The air is filled with the sweet scent of moonflowers, and as you walk, your footsteps echo through the passageway, creating a disorienting sense of depth. Ahead of you, the tunnel disappears into darkness, but as your eyes adjust to the dim light, you notice a faint glow emanating from a series of crystal orbs embedded in the walls.",
+            "name": "The Moonlit Passage",
+            "properties": [
+                "dark",
+                "cold"
+            ],
+            "secrets": "The crystals on the walls are actually sensitive to your emotions, changing color and pattern depending on your mood.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                1
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Trukk/dungeon_dir/room_items/room_2_items.json"
+        },
+        {
+            "description": "You find yourself in a large, cavernous space within the Luminous Labyrinth. The ceiling disappears into darkness above you, but the walls are lined with glittering silver-blue filaments that pulse and shimmer like starlight on a clear night. Delicate crystalline formations jut from the walls, casting an otherworldly glow across the room. In the center of the space stands a magnificent crystal monolith, its facets reflecting the labyrinth's energy in a kaleidoscope of colors. As you look around, the whispers of forgotten conversations seem to emanate from every surface, creating a disorienting sense of time and place.",
+            "name": "The Stellar Chamber",
+            "properties": [
+                "dark",
+                "cold"
+            ],
+            "secrets": "The whispers in the room are actually a form of ancient communication, encoded within the crystal formations themselves. If you listen carefully, you can decipher hidden messages and secrets embedded within the labyrinth's own structure.",
+            "room_id": 3,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
+                    1,
+                    2
+                ],
+                [
+                    2,
+                    1
+                ]
+            ],
+            "items_file": "./profiles/Trukk/dungeon_dir/room_items/room_3_items.json"
+        }
+    ]
+}

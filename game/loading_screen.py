@@ -36,9 +36,7 @@ class LoadingScreen:
     def char_img_generator(self):
         self.terminal_text = self.terminal_text+'generating character image'+'\n'
         self.terminal_box.new_text(text=self.terminal_text)
-        # run_comfy(self.char.description, self.char.name)
-        
-        self.char.image = f'./pics/{self.char.name}/profile_img.png'
+        run_comfy(self.char.description, self.char.profile_path)
         
         
     def dungeon_generator(self):
@@ -54,14 +52,12 @@ class LoadingScreen:
         self.terminal_box.new_text(text=self.terminal_text)
         rooms =self.prepare_rooms(rooms_data=dungeon_data['rooms'])
         
-        # for room in rooms:
-        #     description = room['description']
-        #     room_id = room['id']
-        #     run_comfy(description,self.char.name,image_type='room',room_id=room_id)
+        for room in rooms:
+            description = room['description']
+            room_id = room['id']
+            run_comfy(description,self.char.profile_path,image_type='room',room_id=room_id)
 
-        self.char.image = f'./pics/{self.char.name}/profile_img.png'
         
-
     def dungeon_room_splitter(self):
         # Load dungeon JSON from a file
         with open(self.char.dungeon_path+'dungeon.json', 'r') as dungeon_file:
