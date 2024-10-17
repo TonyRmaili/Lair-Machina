@@ -6,6 +6,7 @@ import json
 def load_room_from_file(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
+    
 
 class OllamaToolCall:
     def __init__(self, messages, room_file):
@@ -15,7 +16,7 @@ class OllamaToolCall:
 
         # Load the room JSON from the file
         self.room_json = load_room_from_file(room_file)
-
+    
         # Define the tools available
         self.tools = [
             {

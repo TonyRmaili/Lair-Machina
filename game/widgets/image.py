@@ -11,7 +11,9 @@ class Image():
         self.title = title
         self.font_size = font_size
         self.font_color = font_color
-        
+        self.pos = pos
+        self.anchor = anchor
+        self.scale = scale
         # Load and scale the image if needed
         if scale is not None:
             self.image = pygame.transform.scale(self.image, scale)
@@ -51,9 +53,10 @@ class Image():
                 return True
         return False
 
-    def changeImage(self, new_image, scale=None):
+    def change_image(self, new_image):
         """Change the image being displayed."""
         self.image = pygame.image.load(new_image)
-        if scale is not None:
-            self.image = pygame.transform.scale(self.image, scale)
-        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+        if self.scale is not None:
+            self.image = pygame.transform.scale(self.image, self.scale)
+        self.rect = self.image.get_rect()
+        setattr(self.rect, self.anchor, self.pos)

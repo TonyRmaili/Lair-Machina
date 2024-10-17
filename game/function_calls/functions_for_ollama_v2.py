@@ -1,17 +1,10 @@
 import ollama
-
 from random import randint
 import json
-
 import random
 
 
-
-
-
-
 # > ACTIONS
-
 
 # > loot/leave - funkar - men är för stupid
 # BONUS - gör så att rummen i sig har typ chest/skåp etc som kan ha items i
@@ -30,7 +23,6 @@ import random
 # >>>> prova lager av llama3.2 3B - Tools om blir stökigt med massa Tools för en 3.1 8b
 
 # >>>> prova annan språkigenkänning än whisper
-
 
 
 # need to add current location as arg

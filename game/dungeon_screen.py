@@ -24,11 +24,14 @@ class DungeonScreen:
         self.WIDTH = w
         self.HEIGHT = h
         self.char = game.char
-        dungeon_img_path = self.char.dungeon_path+'images/'
+        self.dungeon_img_path = self.char.dungeon_path+'images/'
         dungeon_path = self.char.dungeon_path
-        
+
+        #set starting- current room
+        self.current_room_id = 0
+
         # Images - dungeon room and character
-        self.dungeon_room_img = Image(image=dungeon_img_path+'1.png',pos=(595,0),scale=(0.35*w,0.45*h))
+        self.dungeon_room_img = Image(image=self.dungeon_img_path+'1.png',pos=(595,0),scale=(0.35*w,0.45*h))
 
         self.character_image = Image(image=self.char.profile_path+'profile_img.png',
                 pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
@@ -54,9 +57,6 @@ class DungeonScreen:
                             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='You are in:',title_color='black')
         
         
-        #set starting- current room
-        self.current_room_id = 0
-
         # set inventory to items
         with open('inventory_json.json') as f:
             self.inventory = json.load(f)
@@ -123,7 +123,7 @@ class DungeonScreen:
 
     def update_current_room_options_box(self):
         self.current_room_options_box.new_text(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}") 
-       
+    
 
     def update_current_room_items_box(self):
         # open the json file with the items in the room
@@ -286,6 +286,10 @@ class DungeonScreen:
                     self.move_to_room('west')
                 elif event.key == pygame.K_RIGHT:
                     self.move_to_room('east')
+                
+                # change room image 
+                room_id_changed = str(self.current_room_id+1) + '.png'
+                self.dungeon_room_img.change_image(new_image=self.dungeon_img_path+room_id_changed)
             
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.prompt_button.checkForInput(mouse_pos) and not self.is_fetching:

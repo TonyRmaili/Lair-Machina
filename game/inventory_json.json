@@ -15,6 +15,14 @@
         {
             "name": "Stellar Lantern",
             "description": "A delicate lantern crafted from a shell that seems to hold within it a piece of captured starlight. Its gentle glow appears to pulse in sync with the whispers carried on the desert breeze."
+        },
+        {
+            "name": "Crystal Focus",
+            "description": "A crystal shard, polished by the shifting sands into a perfect sphere. It reflects an image of the dunes themselves, as if it were a portal looking back at the ever-changing landscape outside."
+        },
+        {
+            "name": "Celestial Chime",
+            "description": "A delicate, crystal wind chime that resonates with the gentle energy of the crystals. Its tinkling melody seems to harmonize with the rhythm of the fountain, creating a symphony that synchronizes the heartbeat of all who listen."
         }
     ]
 }
