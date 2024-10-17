@@ -6,34 +6,24 @@ import json
 import random
 
 
-# DONE:
-# 1 install ComfyUI + flux on server  - WORKS
-# 2 when it works - try to set up api/fetch thing to generate img - WORKS (maybe try websocket later if time)
 
 
-
-
-
-
-# TO DO : 
-
-# > prova ljud generator - antingen jukebox eller midi style
-# >fixa bättre calls för bild och musik > så hamnar i rätt mapp etc (eventuellt funkar bättre med sockets?)
 
 
 # > ACTIONS
-# > loot/leave - funkar - men behöver ta in room_json som argument > BONUS - gör så att rummen i sig har typ chest/skåp etc som kan ha items i
+
+
+# > loot/leave - funkar - men är för stupid
+# BONUS - gör så att rummen i sig har typ chest/skåp etc som kan ha items i
+
+
+
 # > look - funkar? > bonus - gör så att rummen har beskrivningar som kan variera
 # > ask > anpassa? beror på hur genererar lore
 # > skillcheck (behöver göra den som layer) > describe(som slutlayer)
-
 # > talk? > gör sen när har NPCs
 
 
-# Generators/functions to make:
-# >>>>>>> generate dungeon/castle/etc loop 
-# >>>>>>> create character loop/stage
-# >>>>>>> create state/json - time/location/hp/etc
 
 # >>>>>>> combat loop/function + roll initiative call
 
@@ -220,7 +210,7 @@ def loot_item_from_room(item_name: str, room_file: str):
         
 #     return f"{item_name} has been added to the room."
 
-def leave_item_from_inventory_in_room(item_name: str, room_file: str):
+def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
     # Path to the player's inventory file
     inventory_file = 'inventory_json.json'    
     
@@ -264,9 +254,24 @@ def leave_item_from_inventory_in_room(item_name: str, room_file: str):
 
     # Save the updated room JSON back to the room file
     with open(room_file, 'w') as file:
-        json.dump(room_json, file, indent=4)
+        json.dump(room_json, file, indent=4)    
+
+
+    # add context here
+    system_prompt="You are the dungeon master, give a VERY short description of the following player action"
+    user_prompt=f"player action: {player_action}. Item refered to: {item_name} room context/items {room_json}."
+    response = ollama.chat(
+        model="llama3.1", 
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+    )
+    
+    flavor_text = response['message']['content']
         
-    return f"{item_name} has been added to the room."
+    
+    return f"{flavor_text}. {item_name} has been added to the room."
 
 
 def resolve_hard_action(skill: str, dc: int, player_action: str):
@@ -297,7 +302,8 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         roll = random.randint(1, 20)  # Roll a d20
         total = roll + mod    
 
-        system_prompt=f"You are the dungeon master, the player attempted and an action an made a roll, describe the outcome. start with typing out, action: {player_action}, {skill} roll: {total}, vs task DC {dc}. then give the description of the outcome"
+        # add context here
+        system_prompt="You are the dungeon master, the player attempted and an action an made a roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description."
         user_prompt=f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
         response = ollama.chat(
             model="llama3.1", 
@@ -307,7 +313,7 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
             ]
         )
         
-        action_outcome = response['message']['content']
+        action_outcome = f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}. {response['message']['content']}"
         
         # idea: here it could make a toolcall - > with the outcome, what should it do with the room? - remove item/HP other? update something etc
         
@@ -353,7 +359,7 @@ all_functions = {
     
     'resolve_hard_action': resolve_hard_action,
     'loot_item_from_room': loot_item_from_room,
-    'leave_item_from_inventory_in_room': leave_item_from_inventory_in_room,
+    'leave_drop_throw_item': leave_drop_throw_item,
     'look_at_room': look_at_room
 }
 

@@ -1,10 +1,6 @@
 {
     "inventory": [
         {
-            "name": "Ancient Star Chart",
-            "description": "A tattered parchment containing cryptic star maps and celestial navigation charts from a bygone era. The ink appears ancient but still whispers the mysteries of the cosmos to those who listen closely."
-        },
-        {
             "name": "Lunar Essence Fragment",
             "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
         },

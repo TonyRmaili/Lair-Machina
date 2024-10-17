@@ -59,7 +59,7 @@ class OllamaToolCall:
                             },
                             "dc": {
                                 "type": "int",
-                                "description": "the difficulty level of the task between 1-20"
+                                "description": "the difficulty level of the task between 10-20"
                             },
                             "player_action": {
                                 "type": "string",
@@ -94,8 +94,8 @@ class OllamaToolCall:
             {
                 "type": "function",
                 "function": {
-                    "name": 'leave_item_from_inventory_in_room',
-                    "description": 'Removes an item from the player inventory and adds it to the room JSON. USE IF PLAYER WANT TO LEAVE, THROW or DROP something in the room',
+                    "name": 'leave_drop_throw_item',
+                    "description": 'Removes an item from the player inventory and adds it to the room JSON. USE IF PLAYER WANT TO LEAVE, THROW, PUT or DROP something in the room',
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -106,12 +106,16 @@ class OllamaToolCall:
                             "room_file": {
                                 "type": "string",
                                 "description": "The file path to the JSON file that contains the room's inventory."
+                            },
+                            "player_action": {
+                                "type": "string",
+                                "description": "The action the player is atempting"
                             }
                         },
-                        "required": ["item_name", "room_file"]
+                        "required": ["item_name", "room_file", "player_action"]
                     }
                 }
-            },
+            },            
             {
                 "type": "function",
                 "function": {
