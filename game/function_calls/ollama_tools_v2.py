@@ -77,10 +77,11 @@ class OllamaToolCall:
                     "parameters": {
                         "type": "object",
                         "properties": {
+                            "player_request:": {"type": "string", "description": "the player request without the LOOK in caps"},
                             "current_room_description": {"type": "string", "description": "The description of the current room."},
                             "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's items."}
                         },
-                        "required": ["current_room_description", "room_file"]
+                        "required": ["player_request","current_room_description", "room_file"]
                     }
                 }
             }

@@ -31,7 +31,7 @@ from function_calls.ollama_dmg import OllamaDmg
 
 
 # need to add current location as arg
-def look_at_room(current_room_description: str, room_file: str):
+def look_at_room(player_request: str, current_room_description: str, room_file: str):
     #make dynamic  - like = current location instead
     room_file=room_file    
     # Load room from file
@@ -39,8 +39,8 @@ def look_at_room(current_room_description: str, room_file: str):
         room_json = json.load(file)
         
     # make description of the room for the player
-    system_prompt = f"The player is in a room with following items: {room_json}. and following room description: {current_room_description}. Describe what the player sees when they look around as if you were a dungeon master based on the info you have about the room"
-    user_prompt = "Player action: I look around, what do I see?"
+    system_prompt = f"The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
+    user_prompt = player_request
     
     
     # Interacting with the LLaMA 3 model, with a system-level instruction
@@ -57,7 +57,7 @@ def look_at_room(current_room_description: str, room_file: str):
         
 
 # WORKS
-# Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
+# Function to REMOVE/loot an item from the room JSON - say LOOT to trigger 
 def loot_item_from_room(item_name: str, room_file: str):
     # room file with items for current room
     room_file=room_file    
@@ -99,12 +99,13 @@ def loot_item_from_room(item_name: str, room_file: str):
         with open(inventory_file, 'w') as file:
             json.dump(inventory_json, file, indent=4)
 
+        # this needs fixing so not part of prompt but separate message
         user_prompt = f"{looted_item} now in player inventory"
         system_prompt = 'Describe the looted item'
 
         return user_prompt,system_prompt
 
-    # fixed?
+    # error handles so that if item not found it wont do the flavortext outside
     else:
         user_prompt = f"{item_name} not found in the room."
         system_prompt = False
@@ -162,7 +163,7 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
         json.dump(room_json, file, indent=4)    
 
 
-    # add context here
+    # no context here - but returns to LLM outside that uses context
     system_prompt="You are the dungeon master, give a VERY short description of the following player action"
     user_prompt=f"player action: {player_action}. Item refered to: {item_name} room context/items {room_json}."
     

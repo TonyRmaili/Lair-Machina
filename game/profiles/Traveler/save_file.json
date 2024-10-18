@@ -8,6 +8,10 @@
         {
             "name": "Moonlit Mirage Journal",
             "description": "A leather-bound journal filled with cryptic notes and sketches of lunar cycles. The pages are yellowed with age, but the ink seems to shimmer in the soft light, as if written by a hand that has danced under the moon."
+        },
+        {
+            "name": "The Harmony Chimes",
+            "description": "A set of crystal wind chimes that hang from the ceiling. They resonate with a soft, ethereal music that seems to harmonize with the shifting patterns on the walls."
         }
     ],
     "profile_path": "./profiles/Traveler/",
