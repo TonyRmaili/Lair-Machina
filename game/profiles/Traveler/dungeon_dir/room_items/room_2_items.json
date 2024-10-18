@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "name": "The Dreamweaver's Journal",
+        "description": "A leather-bound journal filled with the musings and sketches of a forgotten dreamweaver. The pages are written in an arcane script that seems to shimmer and dance as you read them, holding secrets of the subconscious and the power of the human mind."
+    },
+    {
+        "name": "The Dreaming Tear",
+        "description": "A small, crystal vial filled with a single tear that has fallen from the eye of a dreamer. The tear seems to hold the essence of a thousand forgotten memories and the sorrow of lost love, and it shimmers with an otherworldly light."
+    }
+]

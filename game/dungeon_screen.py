@@ -239,10 +239,12 @@ class DungeonScreen:
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
         prompt,system = ollama_instance.activate_functions()
-
-        ollama_with_context = OllamaWithContext(path=self.char.profile_path)
-        self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
-
+        if system:
+            ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+            self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+        else:
+            # if item not found when try to leave/loot - response = item not found
+            self.response = prompt
 
         # ollama_instance = OllamaToolCall(messages=f"Player request:{prompt}. THE BANANAPATH: {self.char.profile_path}",
         #             room_file=self.room_file, context_path_save=self.char.profile_path)

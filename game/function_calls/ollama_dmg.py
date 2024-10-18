@@ -7,7 +7,7 @@ class OllamaDmg:
 
 
     def will_the_player_take_damage(self, prompt: str):
-        system = 'You must evaluate if the player takes damage from the user prompt. YOU ONLY ANSWER yes OR no'
+        system = 'You must evaluate if the event would cause pain. YOU ONLY ANSWER yes OR no'
         prompt = prompt
 
         resp = ollama.generate(
@@ -21,7 +21,7 @@ class OllamaDmg:
 
 
     def player_takes_damage(self, prompt: str):
-        system = 'You must evaluate how much damgae the player takes from the desciption. ANSWER ONLY with a number 1-20'
+        system = 'You must evaluate how much damage the character takes from the desciption. ANSWER ONLY with a number 1-20'
         prompt = prompt
 
         resp = ollama.generate(

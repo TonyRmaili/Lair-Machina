@@ -104,9 +104,12 @@ def loot_item_from_room(item_name: str, room_file: str):
 
         return user_prompt,system_prompt
 
-    # needs fixing asap
+    # fixed?
     else:
-        return f"{item_name} not found in the room."
+        user_prompt = f"{item_name} not found in the room."
+        system_prompt = False
+
+        return user_prompt,system_prompt
 
 
 def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
@@ -140,7 +143,10 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
         
         print(f"{item_name} has been removed from the inventory.")
     else:
-        return f"{item_name} not found in the inventory."
+        # if item not found - this will error handle
+        user_prompt = f"{item_name} not found in the inventory."
+        system_prompt = False
+        return user_prompt,system_prompt
 
     ### Add the item removed from the inventory into the room JSON ###
     

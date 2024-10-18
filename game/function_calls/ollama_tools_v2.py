@@ -25,7 +25,7 @@ class OllamaToolCall:
                 'type': 'function',
                 'function': {
                     'name': 'resolve_hard_action',
-                    'description': 'Rolls for using a skill and displays the result. Available skills: acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival.',
+                    'description': 'Rolls for using a skill and displays the result. use if player types TRY in caps Available skills: acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival.',
                     'parameters': {
                         'type': 'object',
                         'properties': {
@@ -41,7 +41,7 @@ class OllamaToolCall:
                 "type": "function",
                 "function": {
                     "name": "loot_item_from_room",
-                    "description": "Removes an item from the room and adds it to the player's inventory.",
+                    "description": "Removes an item from the room and adds it to the player's inventory. use if player types LOOT in caps",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -56,7 +56,7 @@ class OllamaToolCall:
                 "type": "function",
                 "function": {
                     "name": 'leave_drop_throw_item',
-                    "description": 'Removes an item from the player’s inventory and adds it to the room JSON. Use if the player wants to leave, throw, put, or drop something in the room.',
+                    "description": 'Removes an item from the player’s inventory and adds it to the room JSON. Use if the player writes DROP in caps.',
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -73,7 +73,7 @@ class OllamaToolCall:
                 "type": "function",
                 "function": {
                     "name": 'look_at_room',
-                    "description": 'Provides a description of the room and its contents. Use when the player asks to look around.',
+                    "description": 'Provides a description of the room and its contents. Use when the player asks to look around or types LOOK in caps.',
                     "parameters": {
                         "type": "object",
                         "properties": {
