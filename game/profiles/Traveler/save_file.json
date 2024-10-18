@@ -4,7 +4,12 @@
     "race": "Human",
     "description": "A traveling merchant",
     "image": null,
-    "inventory": [],
+    "inventory": [
+        {
+            "name": "Moonlit Mirage Journal",
+            "description": "A leather-bound journal filled with cryptic notes and sketches of lunar cycles. The pages are yellowed with age, but the ink seems to shimmer in the soft light, as if written by a hand that has danced under the moon."
+        }
+    ],
     "profile_path": "./profiles/Traveler/",
     "dungeon_path": "./profiles/Traveler/dungeon_dir/",
     "sound_path": "./profiles/Traveler/sound/"

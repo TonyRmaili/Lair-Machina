@@ -9,6 +9,7 @@ import threading
 import json
 from function_calls.ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 from function_calls.ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
+from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
 
@@ -229,12 +230,24 @@ class DungeonScreen:
         
         # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        print(f'from ollama_screen {self.char.inventory}')
+        # print(f'from ollama_screen {self.char.inventory}')
         # print(self.current_room_items)
         
+
+
+
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
-        self.response = ollama_instance.activate_functions()
+        prompt,system = ollama_instance.activate_functions()
+
+        ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+        self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+
+
+        # ollama_instance = OllamaToolCall(messages=f"Player request:{prompt}. THE BANANAPATH: {self.char.profile_path}",
+        #             room_file=self.room_file, context_path_save=self.char.profile_path)
+        # self.response = ollama_instance.activate_functions()
+
         # self.is_fetching = False  # Mark that fetching is done
         
         self.DM_box.new_text(text=self.response)
