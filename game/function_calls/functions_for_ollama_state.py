@@ -5,12 +5,46 @@ import json
 
 import random
 
+#  do action - will the player take damage - yes/no  - how much damage X
 
 
-def will_the_player_take_damage(prompt: str):
-    system = 'You must evaluate if the player takes damage from the user prompt. YOU ONLY ANSWER yes OR no'
+
+
+
+
+
+
+#  make a checker function for 
+# -  will the player take damage - yes/no  - how much damage X
+
+# - does this action need to be resolved with a roll - yes/no 
+# - does this item need to be updated - yes/no - what is the new item name and description 
+
+
+# - will this action result in a change in the room - yes/no - what is the new room description
+# - will this action consume the item - yes/no - what is the new item description
+# 
+
+
+
+# def does_action_need_to_be_resolved_with_a_roll(prompt: str):
+#     system= 'Does this sound hard to do? YOU ONLY ANSWER yes OR no'
+#     prompt = prompt
+    
+#     resp = ollama.generate(
+#         model='llama3.1',
+#         prompt=prompt,
+#         system=system
+
+#     )
+    
+#     return resp['response']
+
+
+def does_this_action_lead_to_adding_a_new_item(prompt: str):
+    system= 'how would you update the room if the player does this action? YOU ONLY ANSWER with ADD_ITEM: item_name, item_description, REMOVE_ITEM: item_name, item_description, CHANGE_ITEM: item_name, item_description, or NO_CHANGE'
     prompt = prompt
-
+    
     resp = ollama.generate(
         model='llama3.1',
         prompt=prompt,
@@ -21,17 +55,33 @@ def will_the_player_take_damage(prompt: str):
     return resp['response']
 
 
-def player_takes_damage(prompt: str):
-    system = 'You must evaluate how much damgae the player takes from the desciption. ANSWER ONLY with a number 1-20'
-    prompt = prompt
 
+def does_this_item_need_to_be_updated(prompt: str):
+    system= 'You must evaluate if the item needs to be updated. YOU ONLY ANSWER yes OR no'
+    prompt = prompt
+    
     resp = ollama.generate(
         model='llama3.1',
         prompt=prompt,
         system=system
 
     )
-    return int(resp['response'])
+    
+    return resp['response']
+
+def update_item_name_and_description(prompt: str):
+    system= 'write a new description/state for the item to match the new state of the item after the event. write the same description if it doesnt change ONLY ANSWER with the new description'
+    prompt = prompt
+    
+    resp = ollama.generate(
+        model='llama3.1',
+        prompt=prompt,
+        system=system
+
+    )
+    
+    return resp['response']
+
 
 
 # 1 player does action
@@ -146,12 +196,22 @@ all_functions = {
 
 
 if __name__=='__main__':
-    prompt= 'the music box explodes upon pickup! sending sparks and flame everywere'
-    resp = will_the_player_take_damage(prompt)
+    # prompt= 'the music box explodes upon pickup! sending sparks and flame everywere'
+    # resp = will_the_player_take_damage(prompt)
 
-    if resp.lower() == 'yes':
-        damamge_resp = player_takes_damage(prompt)
-        print(damamge_resp)
+    # if resp.lower() == 'yes':
+    #     damamge_resp = player_takes_damage(prompt)
+    #     print(damamge_resp)
     
-    else:
-        print('no damage')
+    # else:
+    #     print('no damage')
+    
+    # prompt = 'item: wood sword. description: a wooden sword made out of oak. Event: you hit the wall with the sword but nothing happens'
+    # resp = update_item_name_and_description(prompt)
+    # print(resp)
+    
+    prompt = 'flip the desk over'
+    items = 'music box, star map, mirror, wooden desk'
+    resp = does_this_action_lead_to_adding_a_new_item(prompt=f'action:{prompt}. current items in room: {items}')
+    print(resp)
+    

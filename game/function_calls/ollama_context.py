@@ -5,7 +5,7 @@ import time
 import threading
 import sys
 
-
+from function_calls.ollama_dmg import OllamaDmg
 
 
 
@@ -63,6 +63,14 @@ class OllamaWithContext:
         context = resp['context']
         with open(context_file_path, 'w') as json_file:
             json.dump(context, json_file, indent=4)
+
+
+        instans = OllamaDmg()
+        dmg = instans.damage_check_and_resolve(text)
+        if dmg > 0:
+            text += f" You take {dmg} damage!"
+        else:
+            text += "(You take no damage)"
 
         return text
 

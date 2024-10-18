@@ -4,6 +4,11 @@ import json
 import random
 import ast
 from function_calls.ollama_context import OllamaWithContext
+
+
+from function_calls.ollama_dmg import OllamaDmg
+
+
 # > ACTIONS
 
 # > loot/leave - funkar - men är för stupid
@@ -200,6 +205,7 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         # action_outcome = f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}. {response['message']['content']}"
         
         # idea: here it could make a toolcall - > with the outcome, what should it do with the room? - remove item/HP other? update something etc
+        
         
     return user_prompt,system_prompt
 
