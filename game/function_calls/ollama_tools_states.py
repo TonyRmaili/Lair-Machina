@@ -101,6 +101,59 @@ class OllamaToolCallState:
                         "required": ["old_item_name", "new_item_name", "new_item_description", "event", "inventory_file"]
                     }
                 }
+            },
+            
+            # to do - add more functions here
+            # update room description=
+            # add event to logg? - like a short summary of what happened? > try to add RAG and context also?
+            # add item to room pre function - like a is the player trying to loot or leave something?
+            # 
+            # a function that makes a list of function calls?
+            
+            
+            
+            #1 - player writes prompt
+            # 2 > decide what type of action the player is trying to do - > loot / drop / > other
+            ## 2.1 if loot > decide if just take item or if need to roll/cant take it? > make short flavor description + add to inventory/remove from room
+            ## 2.2 if drop > decide if just drop or if other thing happens? > make short flavor description + add to room/remove from inventory
+            # 3.3 if other > decide if roll - do roll - make short flavor description > resolve effect > (add to logg?)
+            ## effects = update items, room, hp, add items, remove items, add to logg - could be several things so need to chain effects- first try this effect solver see limits?
+            
+            #testa: - kan den klara att kolla på en action/outcome-  
+             
+             
+            {
+                "type": "function",
+                "function": {
+                    "name": "update_que",
+                    "description": "Replaces an item in the inventory with a new version. Removes the old item and inserts the updated item to reflect the new state after the event.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "old_item_name": {
+                                "type": "string",
+                                "description": "The name of the item to remove from the inventory (e.g., 'Shield')."
+                            },
+                            "new_item_name": {
+                                "type": "string",
+                                "description": "The name of the new item to add to the inventory (e.g., 'Broken Shield')."
+                            },
+                            "new_item_description": {
+                                "type": "string",
+                                "description": "A description of the new item to add (e.g., 'A shield that is now melted and unusable')."
+                            },
+                            "event": {
+                                "type": "string",
+                                "description": "The event that caused the item change (e.g., 'the shield got melted by dragon fire')."
+                            },
+                            "inventory_file": {
+                                "type": "string",
+                                "description": "The file path to the JSON file that contains the inventory's items."
+                            }
+                        },
+                        "required": ["old_item_name", "new_item_name", "new_item_description", "event", "inventory_file"]
+                    }
+                }
             }
             ]
 
@@ -129,13 +182,3 @@ class OllamaToolCallState:
                 print(result)
                 return result
 
-if __name__ == '__main__':
-    
-    # load_room_from_file(game/room_items/room_1_items.json')
-    # Ask for player input
-    player_input = input("What would you like to do? ")
-    # Create an instance of OllamaToolCall with the player's input and room JSON file
-    functions = OllamaToolCallState(messages=player_input, room_file='../game/room_items/room_1_items.json', inventory_file='../game/inventory_items.json')
-    # Activate the functions based on the player's input
-    functions.activate_functions()
-         
