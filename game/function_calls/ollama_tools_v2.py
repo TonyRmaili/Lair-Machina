@@ -14,6 +14,7 @@ class OllamaToolCall:
         self.model = 'llama3.1'
         self.messages = [{"role": "user", "content": messages}]
 
+        
         # Load the room JSON from the file
         self.room_json = load_room_from_file(room_file)
     
@@ -44,7 +45,7 @@ class OllamaToolCall:
                         "type": "object",
                         "properties": {
                             "item_name": {"type": "string", "description": "The name of the item the player wants to loot."},
-                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}
+                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}                           
                         },
                         "required": ["item_name", "room_file"]
                     }
@@ -83,6 +84,8 @@ class OllamaToolCall:
             }
         ]
 
+
+        
 
     def call_functions(self):
         # Get the tool calls from the model’s response

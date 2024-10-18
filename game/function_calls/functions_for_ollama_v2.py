@@ -2,7 +2,7 @@ import ollama
 from random import randint
 import json
 import random
-
+import ast
 
 # > ACTIONS
 
@@ -112,18 +112,19 @@ def loot_item_from_room(item_name: str, room_file: str):
         
         print(f"{item_name} has been removed from the room.")
         # NEEDS TO BE DYNAMIC FOR THE ROOM WE ARE IN - SEND IN AS A ARG?
-        inventory_file='inventory_json.json'    
+        inventory_file='inventory.json'    
         # Load room from file
         with open(inventory_file, 'r') as file:
             inventory_json = json.load(file)
         
         # Add the looted item to the inventory
-        inventory_json['inventory'].append(looted_item)
-        
+        inventory_json.append(looted_item)
+
         # Save the updated inventory JSON back to the file
         with open(inventory_file, 'w') as file:
             json.dump(inventory_json, file, indent=4)
 
+        
         return (f"{looted_item} now in player inventory")
         
     else:
@@ -204,7 +205,7 @@ def loot_item_from_room(item_name: str, room_file: str):
 
 def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
     # Path to the player's inventory file
-    inventory_file = 'inventory_json.json'    
+    inventory_file = 'inventory.json'    
     
     # Load the player's inventory from file
     with open(inventory_file, 'r') as file:
@@ -215,7 +216,7 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
     updated_inventory = []
 
     # Search for the item in the player's inventory
-    for item in inventory_json['inventory']:
+    for item in inventory_json:
         if item['name'].lower() == item_name.lower():
             # Set the item player wants to leave to a variable for adding to the room later
             item_to_leave = item
@@ -225,7 +226,7 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
 
     if item_found:
         # Update the player's inventory after removing the item
-        inventory_json['inventory'] = updated_inventory
+        inventory_json = updated_inventory
         
         # Save the updated inventory back to the file
         with open(inventory_file, 'w') as file:

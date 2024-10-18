@@ -4,7 +4,12 @@
     "race": "Human",
     "description": "Male dwarf wizard in heavy armor\nand a buzz haircut and yellow hair",
     "image": null,
-    "inventory": [],
+    "inventory": [
+        {
+            "name": "Lunar Melodies Music Box",
+            "description": "A delicate, crystal music box that plays a haunting melody reminiscent of forgotten moonlit nights. Its lid is etched with the symbols of ancient lunar cycles."
+        }
+    ],
     "profile_path": "./profiles/Garry/",
     "dungeon_path": "./profiles/Garry/dungeon_dir/",
     "sound_path": "./profiles/Garry/sound/"

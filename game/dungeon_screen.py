@@ -10,7 +10,7 @@ import json
 from function_calls.ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 from function_calls.ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
 from debug import debug
-
+import os
 
 class DungeonScreen:
     """
@@ -57,15 +57,28 @@ class DungeonScreen:
                             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='You are in:',title_color='black')
         
         
-        # set inventory to items
-        with open('inventory_json.json') as f:
-            self.inventory = json.load(f)
-        
-        # Extract only the names of the items in the inventory
-        item_names = [item['name'] for item in self.inventory['inventory']]
+    
+        self.inventory_path = './inventory.json'
 
-       
-        self.inventory = f'{item_names}'
+        # Check if the file exists, and if not, create it
+        if not os.path.exists(self.inventory_path):
+            # Create the directories if they don't exist
+            os.makedirs(os.path.dirname(self.inventory_path), exist_ok=True)
+            
+            # Create an empty JSON file or initialize it with default data
+            with open(self.inventory_path, 'w') as f:
+                json.dump([], f)  # Empty dictionary as default content
+
+        
+        with open(self.inventory_path,'w') as f:
+            json.dump(self.char.inventory,f,indent=4)
+
+        self.inventory = self.char.inventory
+
+        # Extract only the names of the items in the inventory
+        self.item_names = ', '.join([item['name'] for item in self.inventory])
+
+        # self.inventory.append(f'{item_names}')
         
         
         # open the dungeon json file and set the current room data to use in the boxes
@@ -124,7 +137,6 @@ class DungeonScreen:
     def update_current_room_options_box(self):
         self.current_room_options_box.new_text(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}") 
     
-
     def update_current_room_items_box(self):
         # open the json file with the items in the room
         with open(self.current_room_items_path) as f:
@@ -139,7 +151,6 @@ class DungeonScreen:
         
         # set box info to list of items in a room
         self.current_room_items_box.new_text(text=self.current_room_items)
-
 
     def get_room_by_coordinates(self, rooms, new_coordinates):
         """Get the room ID based on the coordinates - would be better if id/coordinates were in the top level of the json so we could just use the coordinates as a key, but this works for now, and I guess it would be messy to change the generator function prompts etc"""
@@ -218,10 +229,11 @@ class DungeonScreen:
         
         # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        print(self.inventory)
+        print(f'from ollama_screen {self.char.inventory}')
         # print(self.current_room_items)
         
-        ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.inventory} The room_file: ./{self.room_file}', room_file=self.room_file)
+        ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
+                    room_file=self.room_file)
         self.response = ollama_instance.activate_functions()
         # self.is_fetching = False  # Mark that fetching is done
         
@@ -233,31 +245,24 @@ class DungeonScreen:
 
         # self.DM_box.new_text(text=self.response)
         self.response = None  # Clear the response after updating the box
-
-
-        # This runs in a separate thread, so it won't block the main loop
-        # self.is_fetching = True  # Mark that we are fetching
-        # resp = ollama.generate(
-        #     model='llama3.1',
-        #     prompt=prompt
-        # )
-        # self.response = resp['response']
-        # self.is_fetching = False  # Mark that fetching is done
-        
+      
     def update_inventory_box(self):
-        with open('./inventory_json.json') as f:
+        with open('./inventory.json') as f:
             self.inventory = json.load(f)
         
         # function_calls and inventory needs rework before char.inventory replaces it
         # self.char.inventory = self.inventory['inventory']
         
         # Extract only the names of the items in the inventory
-        item_names = [item['name'] for item in self.inventory['inventory']]
+        self.item_names = ', '.join([item['name'] for item in self.inventory])
             
-        self.inventory = f'{item_names}'
+        # self.inventory.append(f'{item_names}')
 
-        self.inventory_box.new_text(text=self.inventory)
-         
+        
+        self.inventory_box.new_text(text=self.item_names)
+        
+           
+
     def update_response(self):
         # Check if there's a new response and update the response box
         if self.response:
@@ -269,7 +274,8 @@ class DungeonScreen:
         for event in events:
             # handles quits 
             if event.type == pygame.QUIT:
-                # handle character save 
+                # handle character save
+                self.char.inventory = self.inventory
                 self.char.save_profile()
                 pygame.quit()
                 sys.exit()
@@ -277,7 +283,7 @@ class DungeonScreen:
 
             # keys for player navigation
             if event.type == pygame.KEYDOWN:
-                print(self.current_room_items_path)
+                # print(self.current_room_items_path)
                 if event.key == pygame.K_UP:
                     self.move_to_room('north')
                 elif event.key == pygame.K_DOWN:
@@ -287,7 +293,7 @@ class DungeonScreen:
                 elif event.key == pygame.K_RIGHT:
                     self.move_to_room('east')
                 
-                # change room image 
+                # change room image - needs to change later when dungeon gets larger
                 room_id_changed = str(self.current_room_id+1) + '.png'
                 self.dungeon_room_img.change_image(new_image=self.dungeon_img_path+room_id_changed)
             
