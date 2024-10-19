@@ -5,26 +5,19 @@ from widgets.textarea import TextArea
 from widgets.input_text import InputText
 from widgets.button import Button
 from widgets.text_handler import TextHandler
-import ollama
 import threading
 import json
+import ollama
 from function_calls.ollama_tools_v2 import OllamaToolCall  # Import your LLaMA tool function
 from function_calls.ollama_tools_states import OllamaToolCallState  # Import your LLaMA tool function
 from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
 from sound.tts import TTSGame
-import shutil
-
-
-# from pydub import AudioSegment
-
-# # Load audio and adjust speed
-# audio = AudioSegment.from_file("output2.wav")
-# faster_audio = audio.speedup(playback_speed=1.25)
-
-# # Export faster audio
-# faster_audio.export("output_fast2.wav", format="wav")
+import sounddevice as sd
+from scipy.io.wavfile import write
+import queue
+import time
 
 
 class DungeonScreen:
@@ -52,6 +45,7 @@ class DungeonScreen:
                 pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
         
         self.tts = TTSGame()
+       
         #Text boxes
         # prompt box + button
         self.prompt_box = InputText(x=0,y=0.75*h,width=0.75*w,height=0.25*h,
@@ -63,7 +57,7 @@ class DungeonScreen:
         self.sound_button = Button(pos=(0.5*w,0.78*h),text_input='TTS',
                             base_color="black", hovering_color="Green")
         
-        self.sound_playing = False
+        self.sound_playing = True
         
         # prompt response box
         self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
@@ -155,28 +149,82 @@ class DungeonScreen:
         self.response = None  
         self.is_fetching = False  
 
-    
-    def tts_handle(self,text):
-        path = self.char.profile_path+'tts_samples/'
-        os.makedirs(path,exist_ok=True)
+
+        self.queue = queue.Queue()
+
+
+    def tts_save_samples(self, text):
+        sound_path = self.char.profile_path + 'samples/'
+        os.makedirs(sound_path, exist_ok=True)
         text_handler = TextHandler(text=text)
         text_handler.clean_text()
-        sentances = text_handler.split_sentences()
-        counter = 1
-        for sentance in sentances:
-            file_name = str(counter) + '.wav'
-            self.tts.save_wav(sample=sentance,path=path+file_name)
-            
-            counter += 1
+        sentences = text_handler.split_sentences()
+        self.wav_counter = 1
+        for sentence in sentences:
+            name_path = f'{self.wav_counter}.wav'
+            full_path = os.path.join(sound_path, name_path)
+            self.tts.save_wav(sample=sentence, path=full_path)
+            self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
+            self.wav_counter += 1
+
+        self.wav_counter = 1
+
+    def play_samples(self):
+        pygame.mixer.init()
+
+        while self.sound_playing:  # Run this loop while sound_playing is True
+            if not self.queue.empty():
+                wav_path = self.queue.get()  # Get the next wav file from the queue
+                pygame.mixer.music.load(wav_path)
+                pygame.mixer.music.play()
+                while pygame.mixer.music.get_busy():  # Wait until the current audio finishes playing
+                    time.sleep(0.1)
+            else:
+                time.sleep(0.1)  # No audio files in the queue, wait and check again
+
+
+
+    # def tts_save_samples(self,text):
+    #     sound_path = self.char.profile_path + 'samples/'
+    #     os.makedirs(sound_path,exist_ok=True)
+    #     text_handler = TextHandler(text=text)
+    #     text_handler.clean_text()
+    #     sentences = text_handler.split_sentences()
+    #     self.wav_counter = 1
+
+    #     for sentance in sentences:
+    #         name_path = f'{self.wav_counter}.wav'
+    #         self.tts.save_wav(sample=sentance,path=sound_path+name_path)
+    #         self.wav_counter +=1
         
-        print('sound files done') 
-    
-    def play_audio_samples(self):
-        # pygame.mixer.init(frequency=22050, size=-16, channels=2)
-        # pygame.mixer.music.load(path)
-        # pygame.mixer.music.play(loops=1)  
-        # pygame.mixer.music.set_volume(0.5)
-        pass
+    #     self.wav_counter = 1
+
+    # def play_samples(self):
+    #     sound_path = self.char.profile_path + 'samples/'
+    #     pygame.mixer.init()
+    #     for wav in os.listdir(sound_path):
+    #         if self.sound_playing:
+    #             pygame.mixer.music.load(sound_path+wav)
+    #             pygame.mixer.music.play()
+    #         else:
+    #             pygame.mixer.music.stop()
+    #             break
+            
+
+
+    def simple_tts_stream(self, text):
+        text_handler = TextHandler(text=text)
+        text_handler.clean_text()
+        sentences = text_handler.split_sentences()
+        
+        for sentance in sentences:
+            if self.sound_playing:
+                print(sentance)
+                self.tts.play_wav(sample=sentance)
+            else:
+                # not working mid sentance; only breaks after sentance is done, even with sd.stop enabled
+                sd.stop()
+                break
 
     def update_current_room_options_box(self):
         self.current_room_options_box.new_text(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}") 
@@ -279,7 +327,11 @@ class DungeonScreen:
         self.DM_box.new_text(text=self.response)
         
         
-        self.tts_handle(text=self.response)
+       
+        # self.tts_save_samples(text=self.response)
+        # self.play_samples()
+        self.playing_thread1 = threading.Thread(target=self.tts_save_samples,args=(self.response,)).start()
+        self.playing_thread2 = threading.Thread(target=self.play_samples).start()
         self.response = None  # Clear the response after updating the box
       
     def update_inventory_box(self):

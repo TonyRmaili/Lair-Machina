@@ -4,7 +4,12 @@
     "race": "Human",
     "description": "Male dwarf wizard in heavy armor\nand a buzz haircut and yellow hair",
     "image": null,
-    "inventory": [],
+    "inventory": [
+        {
+            "name": "Moonlit Harp",
+            "description": "A delicate harp crafted from a single piece of polished moonstone. Its strings seem to reflect the colors of the desert sunset, and when plucked, they resonate with the very essence of forgotten memories."
+        }
+    ],
     "profile_path": "./profiles/Garry/",
     "dungeon_path": "./profiles/Garry/dungeon_dir/",
     "sound_path": "./profiles/Garry/sound/"
