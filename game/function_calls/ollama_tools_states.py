@@ -1,6 +1,6 @@
 import sys
 import ollama
-from function_calls.functions_for_ollama_v2 import all_functions
+from function_calls.functions_for_ollama_state import all_functions
 import json
 
 # Function to load the room JSON from a file
@@ -9,21 +9,21 @@ def load_room_from_file(file_path):
         return json.load(file)
 
 class OllamaToolCallState:
-    def __init__(self, messages, room_file, inventory_file):
+    def __init__(self, messages):
         # Set model and format
         self.model = 'llama3.1'
         self.messages = [{"role": "user", "content": messages}]
 
-        # Load the room JSON from the file
-        self.room_json = load_room_from_file(room_file)
-        self.inventory_json = load_room_from_file(inventory_file)
+        # # Load the room JSON from the file
+        # self.room_json = load_room_from_file(room_file)
+        # self.inventory_json = load_room_from_file(inventory_file)
 
         # Define the tools available
         self.tools = [
             {
                 "type": "function",
                 "function": {
-                    "name": "update_room_item_description",
+                    "name": "update_item_description",
                     "description": "Updates the description of a item to reflect the new state after the event.",
                     "parameters": {
                         "type": "object",
@@ -43,9 +43,13 @@ class OllamaToolCallState:
                             "room_file": {
                                 "type": "string",
                                 "description": "The file path to the JSON file that contains the room's items."
+                            },
+                            "inventory_file": {
+                                "type": "string",
+                                "description": "The file path to the JSON file that contains the inventory's items."
                             }
                         },
-                        "required": ["item_name", "new_item_description", "event", "room_file"]
+                        "required": ["item_name", "new_item_description", "event", "room_file", "inventory_file"]
                     }
                 }
             }

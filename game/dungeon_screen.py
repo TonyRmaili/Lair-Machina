@@ -268,7 +268,14 @@ class DungeonScreen:
                 # need to implement HP for the player and change it here
             elif dmg == 0:
                 self.response = f'{flavor_text}. (You take no damage)'
-
+            
+            inventory_file = '/home/student/harry_and_tony_project/Lair-Machina/game/inventory.json'
+            # def __init__(self, messages, room_file, inventory_file):
+            instance_state = OllamaToolCallState(messages=f'Player request:{flavor_text}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory}, The inventory_file: {inventory_file}  The room_file: ./{self.room_file}')
+            items_updated = instance_state.activate_functions()
+            print(f"{items_updated}")
+            self.response = f'{items_updated}'
+            # self.current_room_box.new_text(text=f'{items_updated}')
         
         # if used leave/drop item
         elif tool_used == 'leave_drop_throw_item':

@@ -3,9 +3,9 @@ from random import randint
 import json
 import random
 import ast
+
+
 from function_calls.ollama_context import OllamaWithContext
-
-
 from function_calls.ollama_dmg import OllamaDmg
 
 
