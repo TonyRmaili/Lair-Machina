@@ -41,7 +41,7 @@ def look_at_room(player_request: str, current_room_description: str, room_file: 
     # make description of the room for the player
     system_prompt = f"The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
     user_prompt = player_request
-    
+    tool_used = "look_at_room"
     
     # Interacting with the LLaMA 3 model, with a system-level instruction
     # response = ollama.chat(
@@ -53,7 +53,7 @@ def look_at_room(player_request: str, current_room_description: str, room_file: 
     # )
 
     # room_intro = response['message']['content']
-    return user_prompt,system_prompt
+    return user_prompt,system_prompt, tool_used
         
 
 # WORKS
@@ -102,15 +102,17 @@ def loot_item_from_room(item_name: str, room_file: str):
         # this needs fixing so not part of prompt but separate message
         user_prompt = f"{looted_item} now in player inventory"
         system_prompt = 'Describe the looted item'
+        tool_used = "loot_item_from_room"
 
-        return user_prompt,system_prompt
+        return user_prompt,system_prompt, tool_used
 
     # error handles so that if item not found it wont do the flavortext outside
     else:
         user_prompt = f"{item_name} not found in the room."
         system_prompt = False
+        tool_used = "loot_item_from_room"
 
-        return user_prompt,system_prompt
+        return user_prompt,system_prompt, tool_used
 
 
 def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
@@ -166,8 +168,9 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
     # no context here - but returns to LLM outside that uses context
     system_prompt="You are the dungeon master, give a VERY short description of the following player action"
     user_prompt=f"player action: {player_action}. Item refered to: {item_name} room context/items {room_json}."
+    tool_used = "leave_drop_throw_item"
     
-    return user_prompt,system_prompt
+    return user_prompt,system_prompt, tool_used
 
 
 def resolve_hard_action(skill: str, dc: int, player_action: str):
@@ -201,6 +204,7 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         # add context here
         system_prompt="You are the dungeon master, the player attempted and an action an made a roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description."
         user_prompt=f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
+        tool_used = "resolve_hard_action"
         # response = ollama.chat(
         #     model="llama3.1", 
         #     messages=[
@@ -214,7 +218,7 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         # idea: here it could make a toolcall - > with the outcome, what should it do with the room? - remove item/HP other? update something etc
         
         
-    return user_prompt,system_prompt
+    return user_prompt,system_prompt, tool_used
 
 
 # name all functions that the LLM has access to

@@ -13,6 +13,9 @@ from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
 
+
+from function_calls.ollama_dmg import OllamaDmg
+
 class DungeonScreen:
     """
     this is the game mode 
@@ -238,21 +241,58 @@ class DungeonScreen:
 
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
-        prompt,system = ollama_instance.activate_functions()
-        if system:
+        prompt,system,tool_used = ollama_instance.activate_functions()
+
+        # if did roll/action
+        if tool_used == 'resolve_hard_action':
+            #run ollama falvor text with context for the roll/outcome 
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
             self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
-        else:
-            # if item not found when try to leave/loot - response = item not found
-            self.response = prompt
-
-        # ollama_instance = OllamaToolCall(messages=f"Player request:{prompt}. THE BANANAPATH: {self.char.profile_path}",
-        #             room_file=self.room_file, context_path_save=self.char.profile_path)
-        # self.response = ollama_instance.activate_functions()
-
-        # self.is_fetching = False  # Mark that fetching is done
+            
+            # Check if the player took damage using the 
+            instans = OllamaDmg()
+            dmg = instans.damage_check_and_resolve(prompt=self.response)
+            if dmg > 0:
+                prompt += f" You take {dmg} damage!"
+                # need to implement HP for the player and change it here
+            else:
+                prompt += "(You take no damage)"        
         
+        # if used leave/drop item
+        elif tool_used == 'leave_drop_throw_item':
+            
+            # if item found make flavor text with context    
+            if system:
+                ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+                self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            else:
+                # if item not found when try to leave/loot - response = item not found
+                self.response = prompt
+        
+        #if used loot item from room 
+        elif tool_used == 'loot_item_from_room':
+            # if item found make flavor text with context        
+            if system:
+                ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+                self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            else:
+                # if item not found when try to leave/loot - response = item not found
+                self.response = prompt
+        
+        # if used look at room
+        elif tool_used == 'look_at_room':
+            # generate room description with context
+            ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+            self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            
+            
+        # set the response in the DM box
         self.DM_box.new_text(text=self.response)
+        
+        # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM
+        # NEED TO ADD HP FOR THE PLAYER AND UPDATE IT AFTER THE ROLL
+        # NICE IF ALSO PRINTED THE ROLL IN THE DM BOX - AND MADE A FUNCTION TO PRESS FOR THE ROLL
+        
         
         
         # ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='inventory_json.json', room_file=self.room_file)

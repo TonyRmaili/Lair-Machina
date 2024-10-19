@@ -7,7 +7,7 @@ class OllamaDmg:
 
 
     def will_the_player_take_damage(self, prompt: str):
-        system = 'You must evaluate if the event would cause pain. YOU ONLY ANSWER yes OR no'
+        system = 'does text describes feeling pain? ONLY ANSWER yes OR no'
         prompt = prompt
 
         resp = ollama.generate(
