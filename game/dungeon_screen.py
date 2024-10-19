@@ -227,18 +227,16 @@ class DungeonScreen:
     def ask_ollama_tools(self, prompt):
         # not sure if works with threading 
         # self.is_fetching = True  # Mark that we are fetching
-
-        # NOW IT WORKS ATLEAST - but needs to run the "room_fixer" after generation, so that each room is a separate jsonfile, it cant handle all rooms data at the same time
         
-        
-        # give it the current room in the JSON 
+        # give it the current room in the JSON  - used in prompt
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
         # print(f'from ollama_screen {self.char.inventory}')
         # print(self.current_room_items)
         
 
 
-
+        # room_file outside the prompt does nothing here? - remove?
+        # calling the first tools - DROPITEM, TAKEITEM, LOOKATROOM, ROLLACTION
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
         prompt,system,tool_used = ollama_instance.activate_functions()
@@ -293,6 +291,9 @@ class DungeonScreen:
         # NEED TO ADD HP FOR THE PLAYER AND UPDATE IT AFTER THE ROLL
         # NICE IF ALSO PRINTED THE ROLL IN THE DM BOX - AND MADE A FUNCTION TO PRESS FOR THE ROLL
         
+        # ALSO MERGE ITEMS ? - LIKE ADD POISON TO PIE?
+        
+        # HAS NO WAY TO ADD NEW ITEMS TO THE ROOM OR REMOVE THEM - AI TOO STUPID, THINK ABOUT HOW TO DO THIS
         
         
         # ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='inventory_json.json', room_file=self.room_file)
