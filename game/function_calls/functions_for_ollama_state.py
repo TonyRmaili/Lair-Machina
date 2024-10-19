@@ -5,20 +5,29 @@ import json
 
 import random
 
+# TOO STUPID FOR THIS
+# - does this action need to be resolved with a roll - yes/no 
+# - does this item need to be updated - yes/no - what is the new item name and description 
+
+# WORKS SORT OF
 #  do action - will the player take damage - yes/no  - how much damage X
 
 
+# TO DO:
+# UPDATE ROOM DESCRIPTION
+# UPDATE ITEM DESCRIPTION (BOTH INVENTORY AND ROOM)
+
+
+# SOME SORT OF GAME LOGIC, like a locked door, need to find the key? - maybe LLM can have access to make key? tool? too messy? how else?
+# MAYBE TRAPPED items?- so that if take- trigger TRAP?
 
 
 
 
 
 
-#  make a checker function for 
-# -  will the player take damage - yes/no  - how much damage X
 
-# - does this action need to be resolved with a roll - yes/no 
-# - does this item need to be updated - yes/no - what is the new item name and description 
+
 
 
 # - will this action result in a change in the room - yes/no - what is the new room description
@@ -41,35 +50,35 @@ import random
 #     return resp['response']
 
 
-def does_this_action_lead_to_adding_a_new_item(prompt: str):
-    system= 'how would you update the room if the player does this action? YOU ONLY ANSWER with ADD_ITEM: item_name, item_description, REMOVE_ITEM: item_name, item_description, CHANGE_ITEM: item_name, item_description, or NO_CHANGE'
-    prompt = prompt
+# def does_this_action_lead_to_adding_a_new_item(prompt: str):
+#     system= 'how would you update the room if the player does this action? YOU ONLY ANSWER with ADD_ITEM: item_name, item_description, REMOVE_ITEM: item_name, item_description, CHANGE_ITEM: item_name, item_description, or NO_CHANGE'
+#     prompt = prompt
     
-    resp = ollama.generate(
-        model='llama3.1',
-        prompt=prompt,
-        system=system
+#     resp = ollama.generate(
+#         model='llama3.1',
+#         prompt=prompt,
+#         system=system
 
-    )
+#     )
     
-    return resp['response']
+#     return resp['response']
 
 
 
-def does_this_item_need_to_be_updated(prompt: str):
-    system= 'You must evaluate if the item needs to be updated. YOU ONLY ANSWER yes OR no'
-    prompt = prompt
+# def does_this_item_need_to_be_updated(prompt: str):
+#     system= 'You must evaluate if the item needs to be updated. YOU ONLY ANSWER yes OR no'
+#     prompt = prompt
     
-    resp = ollama.generate(
-        model='llama3.1',
-        prompt=prompt,
-        system=system
+#     resp = ollama.generate(
+#         model='llama3.1',
+#         prompt=prompt,
+#         system=system
 
-    )
+#     )
     
-    return resp['response']
+#     return resp['response']
 
-def update_item_name_and_description(prompt: str):
+def update_item_description(prompt: str):
     system= 'write a new description/state for the item to match the new state of the item after the event. write the same description if it doesnt change ONLY ANSWER with the new description'
     prompt = prompt
     
@@ -82,6 +91,37 @@ def update_item_name_and_description(prompt: str):
     
     return resp['response']
 
+
+def update_room_item(item_name: str, new_item_description: str, event: str, room_file: str):
+    # Load the room JSON from the file (which is a list of items)
+    with open(room_file, 'r') as file:
+        room_json = json.load(file)
+
+    item_found = False
+    updated_room = []
+
+    # Search for the item in the room's items list
+    for item in room_json:
+        if item['name'].lower() == old_item_name.lower():
+            # Item found, replace it with the new item
+            print(f"Replacing {old_item_name} with {new_item_name}")
+            updated_room.append({
+                "name": new_item_name,
+                "description": new_item_description
+            })
+            item_found = True
+        else:
+            # Keep other items unchanged
+            updated_room.append(item)
+
+    if item_found:
+        # Save the updated room JSON back to the room file
+        with open(room_file, 'w') as file:
+            json.dump(updated_room, file, indent=4)
+
+        return f"The {old_item_name} has been replaced by a {new_item_name}, {new_item_description} in the room, because {event}."
+    else:
+        return f"{old_item_name} not found in the room."
 
 
 # 1 player does action
@@ -112,40 +152,10 @@ def update_player_hp(player_hp_path: str, hp_change: int, reason: str):
 # Register the function in the all_functions dictionary
 all_functions = {
     # ... (existing functions)
-    'update_player_hp': update_player_hp
+    # 'update_player_hp': update_player_hp
     # add other functions here
 }
 
-# def update_room_item(old_item_name: str, new_item_name: str, new_item_description: str, event: str, room_file: str):
-#     # Load the room JSON from the file (which is a list of items)
-#     with open(room_file, 'r') as file:
-#         room_json = json.load(file)
-
-#     item_found = False
-#     updated_room = []
-
-#     # Search for the item in the room's items list
-#     for item in room_json:
-#         if item['name'].lower() == old_item_name.lower():
-#             # Item found, replace it with the new item
-#             print(f"Replacing {old_item_name} with {new_item_name}")
-#             updated_room.append({
-#                 "name": new_item_name,
-#                 "description": new_item_description
-#             })
-#             item_found = True
-#         else:
-#             # Keep other items unchanged
-#             updated_room.append(item)
-
-#     if item_found:
-#         # Save the updated room JSON back to the room file
-#         with open(room_file, 'w') as file:
-#             json.dump(updated_room, file, indent=4)
-
-#         return f"The {old_item_name} has been replaced by a {new_item_name}, {new_item_description} in the room, because {event}."
-#     else:
-#         return f"{old_item_name} not found in the room."
 
 
 

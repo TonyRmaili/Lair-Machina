@@ -301,12 +301,15 @@ class DungeonScreen:
         # set the response in the DM box
         self.DM_box.new_text(text=self.response)
         
-        # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM
+        # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM - do this after TRY action -> 
+        
+        
         # NEED TO ADD HP FOR THE PLAYER AND UPDATE IT AFTER THE ROLL
-        # NICE IF ALSO PRINTED THE ROLL IN THE DM BOX - AND MADE A FUNCTION TO PRESS FOR THE ROLL
+
         
-        # ALSO MERGE ITEMS ? - LIKE ADD POISON TO PIE?
         
+        
+        # ALSO MERGE ITEMS ? - LIKE ADD POISON TO PIE?        
         # HAS NO WAY TO ADD NEW ITEMS TO THE ROOM OR REMOVE THEM - AI TOO STUPID, THINK ABOUT HOW TO DO THIS
         
         
