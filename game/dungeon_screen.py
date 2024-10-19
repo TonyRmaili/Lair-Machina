@@ -4,6 +4,7 @@ from widgets.image import Image
 from widgets.textarea import TextArea
 from widgets.input_text import InputText
 from widgets.button import Button
+from widgets.text_handler import TextHandler
 import ollama
 import threading
 import json
@@ -12,6 +13,19 @@ from function_calls.ollama_tools_states import OllamaToolCallState  # Import you
 from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
+from sound.tts import TTSGame
+import shutil
+
+
+# from pydub import AudioSegment
+
+# # Load audio and adjust speed
+# audio = AudioSegment.from_file("output2.wav")
+# faster_audio = audio.speedup(playback_speed=1.25)
+
+# # Export faster audio
+# faster_audio.export("output_fast2.wav", format="wav")
+
 
 class DungeonScreen:
     """
@@ -37,13 +51,19 @@ class DungeonScreen:
         self.character_image = Image(image=self.char.profile_path+'profile_img.png',
                 pos=(0.75*w,0.75*h),scale=(0.25*w,0.25*h))
         
-        
+        self.tts = TTSGame()
         #Text boxes
         # prompt box + button
         self.prompt_box = InputText(x=0,y=0.75*h,width=0.75*w,height=0.25*h,
                         title='',bg_color=(69, 69, 69), text_color=(255, 255, 255),font_size=24)
+        
         self.prompt_button = Button(pos=(0.07*w,0.78*h),text_input='Submit',
                             base_color="black", hovering_color="Green") 
+        
+        self.sound_button = Button(pos=(0.5*w,0.78*h),text_input='TTS',
+                            base_color="black", hovering_color="Green")
+        
+        self.sound_playing = False
         
         # prompt response box
         self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
@@ -56,6 +76,7 @@ class DungeonScreen:
         # current room move options box
         self.current_room_options_box = TextArea(text='',WIDTH=0.2*w,HEIGHT=0.25*h,x=0.2*w,y=0.5*h, font_size=20,
                             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='You are in:',title_color='black')
+        
         
         
     
@@ -134,6 +155,28 @@ class DungeonScreen:
         self.response = None  
         self.is_fetching = False  
 
+    
+    def tts_handle(self,text):
+        path = self.char.profile_path+'tts_samples/'
+        os.makedirs(path,exist_ok=True)
+        text_handler = TextHandler(text=text)
+        text_handler.clean_text()
+        sentances = text_handler.split_sentences()
+        counter = 1
+        for sentance in sentances:
+            file_name = str(counter) + '.wav'
+            self.tts.save_wav(sample=sentance,path=path+file_name)
+            
+            counter += 1
+        
+        print('sound files done') 
+    
+    def play_audio_samples(self):
+        # pygame.mixer.init(frequency=22050, size=-16, channels=2)
+        # pygame.mixer.music.load(path)
+        # pygame.mixer.music.play(loops=1)  
+        # pygame.mixer.music.set_volume(0.5)
+        pass
 
     def update_current_room_options_box(self):
         self.current_room_options_box.new_text(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}") 
@@ -222,20 +265,10 @@ class DungeonScreen:
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
     def ask_ollama_tools(self, prompt):
-        # not sure if works with threading 
-        # self.is_fetching = True  # Mark that we are fetching
 
-        # NOW IT WORKS ATLEAST - but needs to run the "room_fixer" after generation, so that each room is a separate jsonfile, it cant handle all rooms data at the same time
-        
-        
         # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        # print(f'from ollama_screen {self.char.inventory}')
-        # print(self.current_room_items)
         
-
-
-
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
         prompt,system = ollama_instance.activate_functions()
@@ -243,20 +276,10 @@ class DungeonScreen:
         ollama_with_context = OllamaWithContext(path=self.char.profile_path)
         self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
 
-
-        # ollama_instance = OllamaToolCall(messages=f"Player request:{prompt}. THE BANANAPATH: {self.char.profile_path}",
-        #             room_file=self.room_file, context_path_save=self.char.profile_path)
-        # self.response = ollama_instance.activate_functions()
-
-        # self.is_fetching = False  # Mark that fetching is done
-        
         self.DM_box.new_text(text=self.response)
         
         
-        # ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='inventory_json.json', room_file=self.room_file)
-        # self.response = ollama_instance_state.activate_functions()
-
-        # self.DM_box.new_text(text=self.response)
+        self.tts_handle(text=self.response)
         self.response = None  # Clear the response after updating the box
       
     def update_inventory_box(self):
@@ -274,8 +297,6 @@ class DungeonScreen:
         
         self.inventory_box.new_text(text=self.item_names)
         
-           
-
     def update_response(self):
         # Check if there's a new response and update the response box
         if self.response:
@@ -284,6 +305,7 @@ class DungeonScreen:
 
     def handle_event(self,events,mouse_pos):
         self.prompt_button.changeColor(position=mouse_pos)
+        self.sound_button.changeColor(position=mouse_pos)
         for event in events:
             # handles quits 
             if event.type == pygame.QUIT:
@@ -293,7 +315,6 @@ class DungeonScreen:
                 pygame.quit()
                 sys.exit()
                 
-
             # keys for player navigation
             if event.type == pygame.KEYDOWN:
                 # print(self.current_room_items_path)
@@ -315,6 +336,13 @@ class DungeonScreen:
                     prompt = self.prompt_box.send_text()
                     # Start a new thread for the LLM request
                     threading.Thread(target=self.ask_ollama_tools, args=(prompt,)).start()
+                if self.sound_button.checkForInput(mouse_pos):
+                    if self.sound_playing:
+                        self.sound_playing = False
+                        print('TTS off')
+                    elif not self.sound_playing:
+                        self.sound_playing = True
+                        print('TTS on')
 
             self.DM_box.handle_event(event=event)
             self.inventory_box.handle_event(event=event)
@@ -330,6 +358,7 @@ class DungeonScreen:
         self.DM_box.draw(screen=screen)
 
         self.prompt_button.draw(screen=screen)
+        self.sound_button.draw(screen=screen)
         
 
         # description of the room
