@@ -202,8 +202,8 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         total = roll + mod    
 
         # add context here
-        system_prompt="You are the dungeon master, the player attempted and an action an made a roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description."
-        user_prompt=f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
+        system_prompt="You are the dungeon master, the given the attempted action and roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description, refer to the player as 'you'."
+        user_prompt=f"action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
         tool_used = "resolve_hard_action"
         # response = ollama.chat(
         #     model="llama3.1", 

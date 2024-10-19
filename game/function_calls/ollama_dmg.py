@@ -6,7 +6,7 @@ class OllamaDmg:
         self.model = 'llama3.1'
 
 
-    def will_the_player_take_damage(self, prompt: str):
+    def will_the_player_take_damage(self, prompt):
         system = 'does text describes feeling pain? ONLY ANSWER yes OR no'
         prompt = prompt
 
@@ -20,7 +20,7 @@ class OllamaDmg:
         return resp['response']
 
 
-    def player_takes_damage(self, prompt: str):
+    def player_takes_damage(self, prompt):
         system = 'You must evaluate how much damage the character takes from the desciption. ANSWER ONLY with a number 1-20'
         prompt = prompt
 
@@ -33,9 +33,9 @@ class OllamaDmg:
         return int(resp['response'])
 
 
-    def damage_check_and_resolve(self, prompt: str):
+    def damage_check_and_resolve(self, prompt):
         # prompt= 'the music box explodes upon pickup! sending sparks and flame everywere'
-        resp = self.will_the_player_take_damage(prompt= prompt)
+        resp = self.will_the_player_take_damage(prompt=prompt)
 
         if resp.lower() == 'yes':
             damage_nmbr = self.player_takes_damage(prompt)

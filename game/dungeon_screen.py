@@ -51,7 +51,9 @@ class DungeonScreen:
         # prompt response box
         self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Dungeon Master',title_color='black')
-
+        #showing rolls and dmg 
+        self.roll_box = TextArea(text='',WIDTH=0.5*w,HEIGHT=0.11*h,x=0.22*h,y=0-1,
+            text_color=(0, 0, 0),bg_color=(69, 69, 69),title='Roll:', font_size=20, title_color='black')
 
         # player inventory box
         self.inventory_box = TextArea(text='',WIDTH=0.2*w,HEIGHT=0.25*h,x=0,y=0.5*h, font_size=20,
@@ -243,18 +245,32 @@ class DungeonScreen:
 
         # if did roll/action
         if tool_used == 'resolve_hard_action':
+            
+            roll_info = prompt
+            # add it to the info box
+            self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
+            text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'{roll_info}', font_size=14, title_color='black')
+
+
+            
             #run ollama falvor text with context for the roll/outcome 
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
-            self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            flavor_text = ollama_with_context.generate_context(prompt=prompt,system=system)
+
+
             
             # Check if the player took damage using the 
-            instans = OllamaDmg()
-            dmg = instans.damage_check_and_resolve(prompt=self.response)
+            ollama_dmg = OllamaDmg()            
+            dmg = ollama_dmg.damage_check_and_resolve(prompt=flavor_text)
             if dmg > 0:
-                prompt += f" You take {dmg} damage!"
+                self.response = f'{flavor_text}. (You take {dmg} damage!)'
                 # need to implement HP for the player and change it here
-            else:
-                prompt += "(You take no damage)"        
+            elif dmg == 0:
+                self.response = f'{flavor_text}. (You take no damage)'
+
+            # Set the initial response with the roll info and context
+            # self.response = f'{context_response} : {roll_info}'
+
         
         # if used leave/drop item
         elif tool_used == 'leave_drop_throw_item':
@@ -390,6 +406,9 @@ class DungeonScreen:
         # items in the room
         self.update_current_room_items_box()
         self.current_room_items_box.draw(screen=screen)
+        
+        #box for rolls
+        self.roll_box.draw(screen=screen)
         
         self.display_map()
 
