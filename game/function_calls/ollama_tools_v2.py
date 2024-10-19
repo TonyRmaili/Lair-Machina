@@ -31,9 +31,11 @@ class OllamaToolCall:
                         'properties': {
                             "skill": {"type": "string", "description": "The name of the skill to use."},
                             "dc": {"type": "int", "description": "The difficulty level of the task (between 10-20)."},
-                            "player_action": {"type": "string", "description": "The action the player is attempting."}
+                            "player_action": {"type": "string", "description": "The action the player is attempting."},
+                            "current_room_description": {"type": "string", "description": "The description of the current room."},
+                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}                         
                         },
-                        'required': ['skill', 'dc', 'player_action']
+                        'required': ['skill', 'dc', 'player_action', 'current_room_description', 'room_file']
                     }
                 }
             },

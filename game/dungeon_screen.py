@@ -255,6 +255,7 @@ class DungeonScreen:
             
             #run ollama falvor text with context for the roll/outcome 
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+            # DONT USE self.response here- has to be flavor_text or messes with order - gotcha thing
             flavor_text = ollama_with_context.generate_context(prompt=prompt,system=system)
 
 
@@ -267,9 +268,6 @@ class DungeonScreen:
                 # need to implement HP for the player and change it here
             elif dmg == 0:
                 self.response = f'{flavor_text}. (You take no damage)'
-
-            # Set the initial response with the roll info and context
-            # self.response = f'{context_response} : {roll_info}'
 
         
         # if used leave/drop item
