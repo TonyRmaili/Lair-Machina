@@ -149,7 +149,9 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
         # if item not found - this will error handle
         user_prompt = f"{item_name} not found in the inventory."
         system_prompt = False
-        return user_prompt,system_prompt
+        
+        tool_used = "leave_drop_throw_item"
+        return user_prompt,system_prompt, tool_used
 
     ### Add the item removed from the inventory into the room JSON ###
     

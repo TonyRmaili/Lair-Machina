@@ -8,6 +8,10 @@
         {
             "name": "Lunar Essence Fragment",
             "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
+        },
+        {
+            "name": "Moonlit Harp",
+            "description": "The Moonlit Harp remains unchanged."
         }
     ],
     "profile_path": "./profiles/Garry/",
