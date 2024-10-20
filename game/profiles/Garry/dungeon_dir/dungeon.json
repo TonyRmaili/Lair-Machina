@@ -3,7 +3,7 @@
     "description": "The Moonlit Mirage is an otherworldly dungeon built within a series of shifting sand dunes, as if the very desert itself had been sculpted into labyrinthine corridors and crystal-filled caverns. The air is alive with the soft whispers of forgotten memories and the faint scent of starlight, carried on the breeze that stirs the constantly rearranging sands. Towering crystal spires jut from the ground like shards of broken moonlight, their facets reflecting a kaleidoscope of colors across the shifting dunes. Flickering lanterns crafted from delicate shells cast an ethereal glow, illuminating the paths through this surreal expanse. As you navigate the ever-changing maze, the whispers grow louder, urging you deeper into the heart of the Mirage.",
     "rooms": [
         {
-            "description": "The calming oasis remains, but the vigorous gurgling sound of the fountain has taken on a rhythmic quality, synchronized with subtle vibrations in the air that seem to emanate from a specific area of the room. Water droplets cling to the intricately carved moonstone stones, reflecting these tiny oscillations and imbuing the space with an otherworldly energy. The air is thick with the metallic scent of ozone, mingling with the fainter aroma of vomit and wet stone that still lingers from your earlier... incident. Your sword's blade glistens with a sticky, oily sheen, while the puddle of vomit on the floor near the fountain seems to be slowly evaporating into the charged atmosphere. The moonstone stones appear to be shifting their arrangement in response to some hidden pattern, as if they're alive and waiting for something to unfold.",
+            "description": "The calming oasis has become a vibrant and chaotic maelstrom, as if the room itself is alive. The walls, now a uniform sea of green, seem to pulse with an otherworldly energy, their glossy finish reflecting the shimmering particles dancing in the air near the moonstone on the floor. The gentle lapping of the emerald liquid against the surfaces creates a soothing melody that's at odds with the swirling chaos around it. The metallic scent of ozone and sweet, floral aroma of the green paint fill the air, as your sword's blade continues to absorb and reflect the colors around it, its iridescent sheen growing more pronounced by the minute.",
             "name": "The Serene Oasis",
             "properties": [
                 "serene",
@@ -24,7 +24,7 @@
             "items_file": "./profiles/Garry/dungeon_dir/room_items/room_1_items.json"
         },
         {
-            "description": "As you venture deeper into The Moonlit Mirage, this room unfolds like a canvas of shifting moonlight. Towering crystal spires pierce the ceiling, their facets reflecting a mesmerizing dance of colors across the walls. Softly glowing lanterns crafted from delicate shells cast an ethereal glow, illuminating pathways through the ever-changing maze. The air is alive with the whispers of forgotten memories, each one echoing off the crystal formations like a whispered secret.",
+            "description": "As you venture deeper into The Moonlit Mirage, this room unfolds like a canvas of shifting moonlight. Towering crystal spires pierce the ceiling, their facets reflecting a mesmerizing dance of colors across the walls, where an emerald green stain now radiates from the floor to the base of one sapphire-hued spire. Softly glowing lanterns crafted from delicate shells cast an ethereal glow, illuminating pathways through the ever-changing maze, but also casting eerie shadows on the newly-greened crystal surfaces. The air is alive with the whispers of forgotten memories, each one echoing off the crystal formations like a whispered secret, now accompanied by the faint scent of something bitter and acrid.",
             "name": "The Luminous Gallery",
             "properties": [
                 "illuminated",
@@ -45,7 +45,7 @@
             "items_file": "./profiles/Garry/dungeon_dir/room_items/room_2_items.json"
         },
         {
-            "description": "As you step into this room, you're enveloped by the haunting melodies of an ancient harp. Its strings seem to vibrate with the very essence of forgotten memories, each note echoing off the crystal spires like a whispered promise. The air is alive with the scent of starlight and the whispers grow louder here, as if the very fabric of time has been woven into the music itself. A delicate harp crafted from a single piece of polished moonstone lies at the room's center, its strings humming softly in anticipation.",
+            "description": "As you step into this room, you're enveloped by the haunting melodies of an ancient harp, still humming softly despite the change in ambiance. Its strings seem to vibrate with a slightly altered essence, as if reflecting the new green hue that now shrouds the crystal spires. The air is alive with the scent of starlight and ozone, the whispers growing louder here amidst the vibrant emerald coloration. A delicate harp crafted from a single piece of polished moonstone lies at the room's center, its strings humming softly in anticipation, surrounded by the uniformly sea of green that now encases the crystal spires.",
             "name": "The Whispered Serenade",
             "properties": [
                 "haunting",

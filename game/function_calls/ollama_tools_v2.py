@@ -22,20 +22,18 @@ class OllamaToolCall:
         # Define the tools available
         self.tools = [
             {
-                'type': 'function',
-                'function': {
-                    'name': 'resolve_hard_action',
-                    'description': 'Rolls for using a skill and displays the result. use if player types TRY in caps Available skills: acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival.',
-                    'parameters': {
-                        'type': 'object',
-                        'properties': {
-                            "skill": {"type": "string", "description": "The name of the skill to use."},
-                            "dc": {"type": "int", "description": "The difficulty level of the task (between 10-20)."},
-                            "player_action": {"type": "string", "description": "The action the player is attempting."},
+                "type": "function",
+                "function": {
+                    "name": 'look_at_room',
+                    "description": 'Provides a description of the room and its contents. Use when the player asks to look around or types LOOK in caps.',
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "player_request:": {"type": "string", "description": "the player request without the LOOK in caps"},
                             "current_room_description": {"type": "string", "description": "The description of the current room."},
-                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}                         
+                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's items."}
                         },
-                        'required': ['skill', 'dc', 'player_action', 'current_room_description', 'room_file']
+                        "required": ["player_request","current_room_description", "room_file"]
                     }
                 }
             },
@@ -72,21 +70,40 @@ class OllamaToolCall:
                 }
             },
             {
-                "type": "function",
-                "function": {
-                    "name": 'look_at_room',
-                    "description": 'Provides a description of the room and its contents. Use when the player asks to look around or types LOOK in caps.',
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "player_request:": {"type": "string", "description": "the player request without the LOOK in caps"},
+                'type': 'function',
+                'function': {
+                    'name': 'resolve_hard_action',
+                    'description': 'Rolls for using a skill and displays the result. use if player types TRY in caps Available skills: acrobatics, animal handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight of hand, stealth, survival.',
+                    'parameters': {
+                        'type': 'object',
+                        'properties': {
+                            "skill": {"type": "string", "description": "The name of the skill to use."},
+                            "dc": {"type": "int", "description": "The difficulty level of the task (between 10-20)."},
+                            "player_action": {"type": "string", "description": "The action the player is attempting."},
                             "current_room_description": {"type": "string", "description": "The description of the current room."},
-                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's items."}
+                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}                         
                         },
-                        "required": ["player_request","current_room_description", "room_file"]
+                        'required': ['skill', 'dc', 'player_action', 'current_room_description', 'room_file']
+                    }
+                }
+            },
+            {
+                'type': 'function',
+                'function': {
+                    'name': 'simple_task',
+                    'description': 'gives a description of the player preforming a task. use if the player types DO in cap.',
+                    'parameters': {
+                        'type': 'object',
+                        'properties': {
+                            "player_action": {"type": "string", "description": "The action the player is doing."},
+                            "current_room_description": {"type": "string", "description": "The description of the current room."},
+                            "room_file": {"type": "string", "description": "The file path to the JSON file that contains the room's inventory."}                         
+                        },
+                        'required': ['player_action', 'current_room_description', 'room_file']
                     }
                 }
             }
+
            
         ]
 

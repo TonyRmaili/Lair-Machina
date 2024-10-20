@@ -230,12 +230,28 @@ def resolve_hard_action(skill: str, dc: int, player_action: str, current_room_de
     return user_prompt,system_prompt, tool_used
 
 
+def simple_task(player_action: str, current_room_description: str, room_file: str):
+    
+    room_file=room_file    
+    # Load room from file
+    with open(room_file, 'r') as file:
+        room_json = json.load(file)
+        
+    # add context here
+    system_prompt=f"You are the dungeon master, describe the player preforming the action and succeeding, make the text short and simple. ONLY ANSWER WITH the description, refer to the player as 'you'. The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
+    user_prompt=f"action: {player_action}"
+    tool_used = "simple_task"
+
+    return user_prompt, system_prompt, tool_used
+
+
 # name all functions that the LLM has access to
 all_functions = {
     
-    'resolve_hard_action': resolve_hard_action,
+    'look_at_room': look_at_room,
     'loot_item_from_room': loot_item_from_room,
     'leave_drop_throw_item': leave_drop_throw_item,
-    'look_at_room': look_at_room
+    'resolve_hard_action': resolve_hard_action,
+    'simple_task': simple_task
     
 }

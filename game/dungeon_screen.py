@@ -247,7 +247,7 @@ class DungeonScreen:
         print(current_room_description)
         
         # Prepare the system message and prompt for the ollama call
-        system = 'Update the room description to reflect the new state after the event. Keep the description mostly the same as previous description, but add or remove the the information needed to reflect the action (example: change clean room to messy room if things are thrown around). Make the description short and concise. ONLY ANSWER with the new room description'
+        system = 'Update the room description to reflect the new state after the event. Keep the description mostly the same as previous description, but add information needed to reflect the action. Make the description short and concise. ONLY ANSWER with the new room description'
         prompt = f'current room description: {current_room_description}, event: {event}.'
         
         # Call ollama to get the updated room description
@@ -292,12 +292,13 @@ class DungeonScreen:
         prompt,system,tool_used = ollama_instance.activate_functions()
 
         # if did roll/action
-        if tool_used == 'resolve_hard_action':
+        if tool_used == 'resolve_hard_action' or 'simple_task':
             
-            roll_info = prompt
-            # add it to the info box
-            self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
-            text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'{roll_info}', font_size=14, title_color='black')
+            if tool_used == 'resolve_har_action':
+                roll_info = prompt
+                # add it to the info box
+                self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
+                text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'{roll_info}', font_size=14, title_color='black')
 
 
             
@@ -324,11 +325,12 @@ class DungeonScreen:
             print(f"{items_updated}")
             
             
-            print(flavor_text)      
+            # print(flavor_text)      
             updated_room_description=self.ollama_update_room_description(event=flavor_text)
             print(updated_room_description)
-                
-
+            
+            if tool_used == 'simple_task':        
+                self.response = flavor_text
             
             # self.response = f'{items_updated}'
             # self.current_room_box.new_text(text=f'{items_updated}')
@@ -361,13 +363,17 @@ class DungeonScreen:
             self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
             
         #################################################
-        self.current_room_data = self.dungeon['rooms'][self.current_room_id]
-        self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
-        self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
-# 
+        # self.current_room_data = self.dungeon['rooms'][self.current_room_id]
+        # self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
+        # self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+         
         # room file need to include the room description 
-        self.ollama_update_room_description(current_room_description=self.current_room_description, event=prompt, room_file=self.room_file)
+        # self.ollama_update_room_description(current_room_description=self.current_room_description, event=prompt, room_file=self.room_file)
             
+        
+        # refresh room description
+        current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+        self.current_room_box.new_text(text=current_room_description)        
         # set the response in the DM box
         self.DM_box.new_text(text=self.response)
         
