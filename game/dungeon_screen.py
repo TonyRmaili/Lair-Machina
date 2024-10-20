@@ -155,6 +155,7 @@ class DungeonScreen:
     def tts_save_samples(self, text):
         # pygame.mixer.init()
         sound_path = self.char.profile_path + 'samples/'
+        self.sound_path = sound_path
         # re-init queue / clears it
         self.queue = queue.Queue()
         if os.path.exists(sound_path):
@@ -166,21 +167,26 @@ class DungeonScreen:
         sentences = text_handler.split_sentences()
         counter = 1
         for sentence in sentences:
-            name_path = f'{counter}.wav'
-            full_path = os.path.join(sound_path, name_path)
-            self.tts.save_wav(sample=sentence, path=full_path)
-            self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
-            counter += 1
+            if not self.is_fetching:
+                name_path = f'{counter}.wav'
+                full_path = os.path.join(sound_path, name_path)
+                self.tts.save_wav(sample=sentence, path=full_path)
+                self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
+                counter += 1
+            else:
+                print('stoped generating wav')
+                self.sound_playing = False
+                break
 
             # self.play_samples()
             # pygame.mixer.music.load(full_path)
             # pygame.mixer.music.play()
 
-
     def play_samples(self):
         while self.sound_playing:  # Run this loop while sound_playing is True
             if not self.queue.empty():
                 pygame.mixer.init()
+                pygame.mixer.music.set_volume(0.3)
                 wav_path = self.queue.get()  # Get the next wav file from the queue
                 pygame.mixer.music.load(wav_path)
                 pygame.mixer.music.play()
@@ -235,7 +241,7 @@ class DungeonScreen:
                 self.tts.play_wav(sample=sentance)
             else:
                 # not working mid sentance; only breaks after sentance is done, even with sd.stop enabled
-                sd.stop()
+                # sd.stop()
                 break
 
     def update_current_room_options_box(self):
@@ -325,7 +331,7 @@ class DungeonScreen:
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
     def ask_ollama_tools(self, prompt):
-
+        self.is_fetching = True
         # give it the current room in the JSON 
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
         
@@ -335,9 +341,9 @@ class DungeonScreen:
 
         ollama_with_context = OllamaWithContext(path=self.char.profile_path)
         self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
-
-        self.DM_box.new_text(text=self.response)
         
+        self.DM_box.new_text(text=self.response)
+        self.is_fetching = False
         
        
         # self.tts_save_samples(text=self.response)
@@ -379,6 +385,10 @@ class DungeonScreen:
                 # handle character save
                 self.char.inventory = self.inventory
                 self.char.save_profile()
+                self.is_fetching = True
+                # Clears the sound samples on quit
+                if os.path.exists(self.sound_path):
+                    shutil.rmtree(self.sound_path)
                 pygame.quit()
                 sys.exit()
                 
@@ -409,7 +419,7 @@ class DungeonScreen:
                     if self.sound_playing:
                         self.sound_playing = False
                         pygame.mixer.music.stop()  # Ensure any playing music is stopped
-                        # pygame.mixer.quit() 
+                        
                         print('TTS off')
                     elif not self.sound_playing:
                         self.sound_playing = True
@@ -432,7 +442,7 @@ class DungeonScreen:
         self.prompt_button.draw(screen=screen)
 
 
-        if os.path.isdir(self.char.profile_path+'samples'):
+        if os.path.isdir(self.char.profile_path + 'samples') and os.listdir(self.char.profile_path + 'samples'):
             self.sound_button.draw(screen=screen)
         
 
