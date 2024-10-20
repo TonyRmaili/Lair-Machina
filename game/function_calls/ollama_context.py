@@ -73,5 +73,5 @@ if __name__=='__main__':
     with_context = OllamaWithContext()
 
     context,text = with_context.generate_context(prompt=prompt)
-    print(text)
+    # print(text)
 

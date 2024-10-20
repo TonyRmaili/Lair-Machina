@@ -43,6 +43,8 @@ def look_at_room(player_request: str, current_room_description: str, room_file: 
     user_prompt = player_request
     tool_used = "look_at_room"
     
+    print("HERE2--------------------------------------")
+    
     # Interacting with the LLaMA 3 model, with a system-level instruction
     # response = ollama.chat(
     #     model="llama3.1", 

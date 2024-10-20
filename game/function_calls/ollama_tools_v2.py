@@ -129,7 +129,7 @@ class OllamaToolCall:
                 print(f'Calling function {name} with args {args}')
                 # Call the function with the room JSON context
                 result = all_functions[name](**args)
-                print(result)
+                # print(result)
                 return result
 
 # if __name__ == '__main__':

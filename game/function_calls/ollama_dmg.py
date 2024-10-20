@@ -39,8 +39,8 @@ class OllamaDmg:
 
         if resp.lower() == 'yes':
             damage_nmbr = self.player_takes_damage(prompt)
-            print(damage_nmbr)
+            # print(damage_nmbr)
             return damage_nmbr
         else:
-            print('no damage')
+            # print('no damage')
             return 0

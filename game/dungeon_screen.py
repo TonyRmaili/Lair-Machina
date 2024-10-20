@@ -244,7 +244,7 @@ class DungeonScreen:
         # Load the current room data
         current_room_description = self.current_room_data['description']
         
-        print(current_room_description)
+        # print(current_room_description)
         
         # Prepare the system message and prompt for the ollama call
         system = 'Update the room description to reflect the new state after the event. Keep the description mostly the same as previous description, but add information needed to reflect the action. Make the description short and concise. ONLY ANSWER with the new room description'
@@ -259,7 +259,7 @@ class DungeonScreen:
         
         # Extract the updated description from the response
         updated_room_description = resp['response']
-        print(updated_room_description)
+        # print(updated_room_description)
         
         # Update the description in the current room data
         self.dungeon['rooms'][self.current_room_id]['description'] = updated_room_description
@@ -275,25 +275,21 @@ class DungeonScreen:
 
 
     def ask_ollama_tools(self, prompt):
-        # not sure if works with threading 
-        # self.is_fetching = True  # Mark that we are fetching
-        
+        tool_used = None
         # give it the current room in the JSON  - used in prompt
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
-        # print(f'from ollama_screen {self.char.inventory}')
-        # print(self.current_room_items)
         
+        
+        print("HERE----------------------------")
 
-
-        # room_file outside the prompt does nothing here? - remove?
-        # calling the first tools - DROPITEM, TAKEITEM, LOOKATROOM, ROLLACTION
+        # calling the first tools - DROPITEM, TAKEITEM, LOOKATROOM, ROLLACTION, DOACTION
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
         prompt,system,tool_used = ollama_instance.activate_functions()
 
+
         # if did roll/action
-        if tool_used == 'resolve_hard_action' or 'simple_task':
-            
+        if tool_used == 'resolve_hard_action' or tool_used == 'simple_task':
             if tool_used == 'resolve_har_action':
                 roll_info = prompt
                 # add it to the info box
@@ -319,22 +315,21 @@ class DungeonScreen:
                 self.response = f'{flavor_text}. (You take no damage)'
             
             inventory_file = '/home/student/harry_and_tony_project/Lair-Machina/game/inventory.json'
-            # def __init__(self, messages, room_file, inventory_file):
-            instance_state = OllamaToolCallState(messages=f'Player request:{flavor_text}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory}, The inventory_file: {inventory_file}  The room_file: ./{self.room_file}')
+            # UPDATE THE INVENTORY OR ROOM ITEM DESCRIPTION
+            instance_state = OllamaToolCallState(messages=f'Player request:{flavor_text}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory}  The room_file: ./{self.room_file}')
             items_updated = instance_state.activate_functions()
-            print(f"{items_updated}")
+            # print(f"{items_updated}")
             
             
             # print(flavor_text)      
             updated_room_description=self.ollama_update_room_description(event=flavor_text)
-            print(updated_room_description)
+            # print(updated_room_description)
             
             if tool_used == 'simple_task':        
                 self.response = flavor_text
             
             # self.response = f'{items_updated}'
             # self.current_room_box.new_text(text=f'{items_updated}')
-        
         # if used leave/drop item
         elif tool_used == 'leave_drop_throw_item':
             
@@ -357,25 +352,21 @@ class DungeonScreen:
                 self.response = prompt
         
         # if used look at room
-        elif tool_used == 'look_at_room':
-            # generate room description with context
+        elif True:
+            # generate room description with context            
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
             self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
             
-        #################################################
-        # self.current_room_data = self.dungeon['rooms'][self.current_room_id]
-        # self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
-        # self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
-         
-        # room file need to include the room description 
-        # self.ollama_update_room_description(current_room_description=self.current_room_description, event=prompt, room_file=self.room_file)
-            
+            # self.response = look_output
+                        
         
         # refresh room description
-        current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
-        self.current_room_box.new_text(text=current_room_description)        
-        # set the response in the DM box
-        self.DM_box.new_text(text=self.response)
+        self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+        self.current_room_box.new_text(text=self.current_room_description)        
+        
+        if self.response:
+            # set the response in the DM box - error fix here!
+            self.DM_box.new_text(text=self.response)
         
         # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM - do this after TRY action -> 
         

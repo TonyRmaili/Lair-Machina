@@ -43,13 +43,9 @@ class OllamaToolCallState:
                             "room_file": {
                                 "type": "string",
                                 "description": "The file path to the JSON file that contains the room's items."
-                            },
-                            "inventory_file": {
-                                "type": "string",
-                                "description": "The file path to the JSON file that contains the inventory's items."
                             }
                         },
-                        "required": ["item_name", "new_item_description", "event", "room_file", "inventory_file"]
+                        "required": ["item_name", "new_item_description", "event", "room_file"]
                     }
                 }
             }
@@ -143,6 +139,6 @@ class OllamaToolCallState:
                 print(f'Calling function {name} with args {args}')
                 # Call the function with the room JSON context
                 result = all_functions[name](**args)
-                print(result)
+                # print(result)
                 return result
 
