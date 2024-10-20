@@ -240,13 +240,14 @@ class DungeonScreen:
     #     )
     #     return resp['response']
 
-    def ollama_update_room_description(self, event: str):
+    def ollama_update_room_description(self, event):
         # Load the current room data
         current_room_description = self.current_room_data['description']
         
+        print(current_room_description)
         
         # Prepare the system message and prompt for the ollama call
-        system = 'Update the room description to reflect the new state after the event. Keep the important parts from previous description. Make the description short and in bullet points. ONLY ANSWER with the new room description'
+        system = 'Update the room description to reflect the new state after the event. Keep the description mostly the same as previous description, but add or remove the the information needed to reflect the action (example: change clean room to messy room if things are thrown around). Make the description short and concise. ONLY ANSWER with the new room description'
         prompt = f'current room description: {current_room_description}, event: {event}.'
         
         # Call ollama to get the updated room description
@@ -258,6 +259,7 @@ class DungeonScreen:
         
         # Extract the updated description from the response
         updated_room_description = resp['response']
+        print(updated_room_description)
         
         # Update the description in the current room data
         self.dungeon['rooms'][self.current_room_id]['description'] = updated_room_description
@@ -322,8 +324,8 @@ class DungeonScreen:
             print(f"{items_updated}")
             
             
-            
-            updated_room_description=self.ollama_update_room_description(self, event=flavor_text)
+            print(flavor_text)      
+            updated_room_description=self.ollama_update_room_description(event=flavor_text)
             print(updated_room_description)
                 
 
