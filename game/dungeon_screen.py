@@ -156,18 +156,17 @@ class DungeonScreen:
         self.is_fetching = False  
         self.queue = queue.Queue()
         self.sound_playing = False
-        
+        self.sound_path = self.char.profile_path + 'samples/'
 
     def tts_save_samples(self, text):
         # pygame.mixer.init()
-        sound_path = self.char.profile_path + 'samples/'
-        self.sound_path = sound_path
+        
         # re-init queue / clears it
         self.queue = queue.Queue()
-        if os.path.exists(sound_path):
-            shutil.rmtree(sound_path)
+        if os.path.exists(self.sound_path):
+            shutil.rmtree(self.sound_path)
         
-        os.makedirs(sound_path, exist_ok=True)
+        os.makedirs(self.sound_path, exist_ok=True)
         text_handler = TextHandler(text=text)
         text_handler.clean_text()
         sentences = text_handler.split_sentences()
@@ -175,7 +174,7 @@ class DungeonScreen:
         for sentence in sentences:
             if not self.is_fetching:
                 name_path = f'{counter}.wav'
-                full_path = os.path.join(sound_path, name_path)
+                full_path = os.path.join(self.sound_path, name_path)
                 self.tts.save_wav(sample=sentence, path=full_path)
                 self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
                 counter += 1
@@ -206,35 +205,6 @@ class DungeonScreen:
             else:
                 
                 time.sleep(0.1)  # No audio files in the queue, wait and check again
-
-
-    # def tts_save_samples(self,text):
-    #     sound_path = self.char.profile_path + 'samples/'
-    #     os.makedirs(sound_path,exist_ok=True)
-    #     text_handler = TextHandler(text=text)
-    #     text_handler.clean_text()
-    #     sentences = text_handler.split_sentences()
-    #     self.wav_counter = 1
-
-    #     for sentance in sentences:
-    #         name_path = f'{self.wav_counter}.wav'
-    #         self.tts.save_wav(sample=sentance,path=sound_path+name_path)
-    #         self.wav_counter +=1
-        
-    #     self.wav_counter = 1
-
-    # def play_samples(self):
-    #     sound_path = self.char.profile_path + 'samples/'
-    #     pygame.mixer.init()
-    #     for wav in os.listdir(sound_path):
-    #         if self.sound_playing:
-    #             pygame.mixer.music.load(sound_path+wav)
-    #             pygame.mixer.music.play()
-    #         else:
-    #             pygame.mixer.music.stop()
-    #             break
-            
-
 
     def simple_tts_stream(self, text):
         text_handler = TextHandler(text=text)
@@ -382,7 +352,6 @@ class DungeonScreen:
         
         return updated_room_description
 
-
     def ask_ollama_tools(self, prompt):
         tool_used = None 
         self.is_fetching = True
@@ -396,8 +365,13 @@ class DungeonScreen:
         prompt,system,tool_used = ollama_instance.activate_functions()
 
 
+        print(f'######################prompt {prompt}')
+        print(f'######################tool_used OUTSIDE {tool_used}')
+        
+
         # if did roll/action
         if tool_used == 'resolve_hard_action' or tool_used == 'simple_task':
+            print(f'######################tool_used INSIDE {tool_used}')
             if tool_used == 'resolve_har_action':
                 roll_info = prompt
                 # add it to the info box
@@ -405,14 +379,12 @@ class DungeonScreen:
                 text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'{roll_info}', font_size=14, title_color='black')
 
 
-            
             #run ollama falvor text with context for the roll/outcome 
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
             # DONT USE self.response here- has to be flavor_text or messes with order - gotcha thing
             flavor_text = ollama_with_context.generate_context(prompt=prompt,system=system)
 
 
-            
             # Check if the player took damage using the 
             ollama_dmg = OllamaDmg()            
             dmg = ollama_dmg.damage_check_and_resolve(prompt=flavor_text)
@@ -474,10 +446,14 @@ class DungeonScreen:
         
         if self.response:
             # set the response in the DM box - error fix here!
+
             self.DM_box.new_text(text=self.response)
             self.is_fetching = False
-            
             self.tts_save_samples(text=self.response)
+        
+        
+        self.is_fetching = False
+        
         
         # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM - do this after TRY action -> 
         
