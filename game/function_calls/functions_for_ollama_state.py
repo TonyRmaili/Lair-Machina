@@ -29,8 +29,6 @@ import random
 
 #             #   "required": ["item_name", "new_item_description", "event", "room_file", "inventory_file"]
 def update_item_description(item_name: str, new_item_description: str, event: str, room_file: str):
-    print("HERE 3------ WHY?")
-
     inventory_file = '/home/student/harry_and_tony_project/Lair-Machina/game/inventory.json'
     prompt=f'current item:{item_name}, new description: {new_item_description}, what happened: {event}'
     

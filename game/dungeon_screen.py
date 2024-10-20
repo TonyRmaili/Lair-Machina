@@ -390,8 +390,6 @@ class DungeonScreen:
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
         
         
-        
-
         # calling the first tools - DROPITEM, TAKEITEM, LOOKATROOM, ROLLACTION, DOACTION
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
@@ -477,6 +475,9 @@ class DungeonScreen:
         if self.response:
             # set the response in the DM box - error fix here!
             self.DM_box.new_text(text=self.response)
+            self.is_fetching = False
+            
+            self.tts_save_samples(text=self.response)
         
         # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM - do this after TRY action -> 
         
