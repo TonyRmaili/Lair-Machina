@@ -1,5 +1,6 @@
+
 from TTS.api import TTS
-import sounddevice as sd
+# import sounddevice as sd
 import torch
 import time
 import sys
@@ -9,20 +10,22 @@ import numpy as np
 class TTSGame:
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        
         self.tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(self.device)
+    
         self.speakers = self.tts.speakers
         self.speaker = self.speakers[0]
 
-    def play_wav(self,sample,emotion=None,rate=22050):
-        rate = 1.2* rate
-        wav = self.tts.tts(text=sample, language="en", speaker=self.speaker,emotion=emotion)
-        sd.play(wav, samplerate=rate)
-        sd.wait()
+    # def play_wav(self,sample,emotion=None,rate=22050):
+    #     rate = 1.2* rate
+    #     wav = self.tts.tts(text=sample, language="en", speaker=self.speaker,emotion=emotion)
+    #     sd.play(wav, samplerate=rate)
+    #     sd.wait()
         
-    def streaming(self,sentances):
-        for sentance in sentances:
-            print(sentance)
-            self.play_wav(sample=sentance)
+    # def streaming(self,sentances):
+    #     for sentance in sentances:
+    #         print(sentance)
+    #         self.play_wav(sample=sentance)
 
     def save_wav(self,sample,path):
         wav = self.tts.tts_to_file(text=sample,speaker=self.speaker,language='en',file_path=path)
@@ -47,9 +50,11 @@ class TTSGame:
 
 if __name__=='__main__':
     tts = TTSGame()
-    sentences = ["This is sentence one.", "Here is sentence two.", "Now comes sentence three."]
+    wav = tts.get_wav(sample='Hello World!')
+    print(wav)
+    # sentences = ["This is sentence one.", "Here is sentence two.", "Now comes sentence three."]
 
-    tts.streaming(sentances=sentences)
+    # tts.streaming(sentances=sentences)
 
 
    

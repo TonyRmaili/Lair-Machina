@@ -14,8 +14,8 @@ from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
 from sound.tts import TTSGame
-import sounddevice as sd
-from scipy.io.wavfile import write
+# import sounddevice as sd
+# from scipy.io.wavfile import write
 import queue
 import time
 import shutil
@@ -57,7 +57,7 @@ class DungeonScreen:
         self.sound_button = Button(pos=(0.5*w,0.78*h),text_input='TTS',
                             base_color="black", hovering_color="Green")
         
-        self.sound_playing = True
+        
         
         # prompt response box
         self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
@@ -149,9 +149,11 @@ class DungeonScreen:
         self.response = None  
         self.is_fetching = False  
         self.queue = queue.Queue()
-
+        self.sound_playing = False
+        
 
     def tts_save_samples(self, text):
+        # pygame.mixer.init()
         sound_path = self.char.profile_path + 'samples/'
         # re-init queue / clears it
         self.queue = queue.Queue()
@@ -170,13 +172,15 @@ class DungeonScreen:
             self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
             counter += 1
 
-       
+            # self.play_samples()
+            # pygame.mixer.music.load(full_path)
+            # pygame.mixer.music.play()
+
 
     def play_samples(self):
-        pygame.mixer.init()
-
         while self.sound_playing:  # Run this loop while sound_playing is True
             if not self.queue.empty():
+                pygame.mixer.init()
                 wav_path = self.queue.get()  # Get the next wav file from the queue
                 pygame.mixer.music.load(wav_path)
                 pygame.mixer.music.play()
@@ -191,8 +195,7 @@ class DungeonScreen:
                 
                 time.sleep(0.1)  # No audio files in the queue, wait and check again
 
-        
-            
+
     # def tts_save_samples(self,text):
     #     sound_path = self.char.profile_path + 'samples/'
     #     os.makedirs(sound_path,exist_ok=True)
@@ -339,9 +342,11 @@ class DungeonScreen:
        
         # self.tts_save_samples(text=self.response)
         # self.play_samples()
-        self.playing_thread1 = threading.Thread(target=self.tts_save_samples,args=(self.response,)).start()
+        # self.playing_thread1 = threading.Thread(target=self.tts_save_samples,args=(self.response,)).start()
 
-        self.playing_thread2 = threading.Thread(target=self.play_samples).start()
+        # self.playing_thread2 = threading.Thread(target=self.play_samples).start()
+
+        self.tts_save_samples(self.response)
         self.response = None  # Clear the response after updating the box
       
     def update_inventory_box(self):
@@ -398,15 +403,17 @@ class DungeonScreen:
                     prompt = self.prompt_box.send_text()
                     # Start a new thread for the LLM request
                     threading.Thread(target=self.ask_ollama_tools, args=(prompt,)).start()
+                
+                # sound play button
                 if self.sound_button.checkForInput(mouse_pos):
                     if self.sound_playing:
                         self.sound_playing = False
                         pygame.mixer.music.stop()  # Ensure any playing music is stopped
-                        pygame.mixer.quit()  # 
+                        # pygame.mixer.quit() 
                         print('TTS off')
                     elif not self.sound_playing:
-                        pygame.mixer.init()
                         self.sound_playing = True
+                        threading.Thread(target=self.play_samples).start()
                         print('TTS on')
 
             self.DM_box.handle_event(event=event)
@@ -423,7 +430,10 @@ class DungeonScreen:
         self.DM_box.draw(screen=screen)
 
         self.prompt_button.draw(screen=screen)
-        self.sound_button.draw(screen=screen)
+
+
+        if os.path.isdir(self.char.profile_path+'samples'):
+            self.sound_button.draw(screen=screen)
         
 
         # description of the room
