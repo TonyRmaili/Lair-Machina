@@ -13,6 +13,9 @@ from function_calls.ollama_tools_states import OllamaToolCallState  # Import you
 from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
+
+
+from function_calls.ollama_dmg import OllamaDmg
 from sound.tts import TTSGame
 # import sounddevice as sd
 # from scipy.io.wavfile import write
@@ -62,7 +65,10 @@ class DungeonScreen:
         # prompt response box
         self.DM_box = TextArea(text='',WIDTH=0.6*w,HEIGHT=0.49*h,x=0*w,y=0,
             text_color=(255, 255, 255),bg_color=(69, 69, 69),title='Dungeon Master',title_color='black')
-
+        
+        #showing rolls and dmg 
+        self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
+            text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'Roll:', font_size=14, title_color='black')
 
         # player inventory box
         self.inventory_box = TextArea(text='',WIDTH=0.2*w,HEIGHT=0.25*h,x=0,y=0.5*h, font_size=20,
@@ -330,29 +336,164 @@ class DungeonScreen:
             text_surface = font.render(row_text, True, (0, 0, 0))
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
+
+    # def ollama_update_room_description(current_room_description: str, event: str, room_file: str):
+    #     system = 'Update the room description to reflect the new state after the event. Keep the important parts from previous description. Make the description short and in bullet points. ONLY ANSWER with the new room description'
+    #     prompt = current_room_description
+
+    #     resp = ollama.generate(
+    #         model=self.model,
+    #         prompt=prompt,
+    #         system=system
+
+    #     )
+    #     return resp['response']
+
+    def ollama_update_room_description(self, event):
+        # Load the current room data
+        current_room_description = self.current_room_data['description']
+        
+        # print(current_room_description)
+        
+        # Prepare the system message and prompt for the ollama call
+        system = 'Update the room description to reflect the new state after the event. Keep the description mostly the same as previous description, but add information needed to reflect the action. Make the description short and concise. ONLY ANSWER with the new room description'
+        prompt = f'current room description: {current_room_description}, event: {event}.'
+        
+        # Call ollama to get the updated room description
+        resp = ollama.generate(
+            model='llama3.1',
+            prompt=prompt,
+            system=system
+        )
+        
+        # Extract the updated description from the response
+        updated_room_description = resp['response']
+        # print(updated_room_description)
+        
+        # Update the description in the current room data
+        self.dungeon['rooms'][self.current_room_id]['description'] = updated_room_description
+        
+        dungeon_rooms_file = self.char.dungeon_path + 'dungeon.json'
+        
+        
+        # Write the updated JSON data back to the file
+        with open(dungeon_rooms_file, 'w') as file:
+            json.dump(self.dungeon, file, indent=4)
+        
+        return updated_room_description
+
+
     def ask_ollama_tools(self, prompt):
+        tool_used = None 
         self.is_fetching = True
-        # give it the current room in the JSON 
+        # give it the current room in the JSON  - used in prompt
         self.room_file= self.dungeon['rooms'][self.current_room_id]['items_file']
         
+        
+        
+
+        # calling the first tools - DROPITEM, TAKEITEM, LOOKATROOM, ROLLACTION, DOACTION
         ollama_instance = OllamaToolCall(messages=f'Player request:{prompt}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory} The room_file: ./{self.room_file}',
                     room_file=self.room_file)
-        prompt,system = ollama_instance.activate_functions()
+        prompt,system,tool_used = ollama_instance.activate_functions()
 
-        ollama_with_context = OllamaWithContext(path=self.char.profile_path)
-        self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+
+        # if did roll/action
+        if tool_used == 'resolve_hard_action' or tool_used == 'simple_task':
+            if tool_used == 'resolve_har_action':
+                roll_info = prompt
+                # add it to the info box
+                self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
+                text_color=(0, 0, 0),bg_color=(69, 69, 69),title=f'{roll_info}', font_size=14, title_color='black')
+
+
+            
+            #run ollama falvor text with context for the roll/outcome 
+            ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+            # DONT USE self.response here- has to be flavor_text or messes with order - gotcha thing
+            flavor_text = ollama_with_context.generate_context(prompt=prompt,system=system)
+
+
+            
+            # Check if the player took damage using the 
+            ollama_dmg = OllamaDmg()            
+            dmg = ollama_dmg.damage_check_and_resolve(prompt=flavor_text)
+            if dmg > 0:
+                self.response = f'{flavor_text}. (You take {dmg} damage!)'
+                # need to implement HP for the player and change it here
+            elif dmg == 0:
+                self.response = f'{flavor_text}. (You take no damage)'
+            
+            inventory_file = '/home/student/harry_and_tony_project/Lair-Machina/game/inventory.json'
+            # UPDATE THE INVENTORY OR ROOM ITEM DESCRIPTION
+            instance_state = OllamaToolCallState(messages=f'Player request:{flavor_text}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory}  The room_file: ./{self.room_file}')
+            items_updated = instance_state.activate_functions()
+            # print(f"{items_updated}")
+            
+            
+            # print(flavor_text)      
+            updated_room_description=self.ollama_update_room_description(event=flavor_text)
+            # print(updated_room_description)
+            
+            if tool_used == 'simple_task':        
+                self.response = flavor_text
+            
+            # self.response = f'{items_updated}'
+            # self.current_room_box.new_text(text=f'{items_updated}')
+        # if used leave/drop item
+        elif tool_used == 'leave_drop_throw_item':
+            
+            # if item found make flavor text with context    
+            if system:
+                ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+                self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            else:
+                # if item not found when try to leave/loot - response = item not found
+                self.response = prompt
         
-        self.DM_box.new_text(text=self.response)
-        self.is_fetching = False
+        #if used loot item from room 
+        elif tool_used == 'loot_item_from_room':
+            # if item found make flavor text with context        
+            if system:
+                ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+                self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            else:
+                # if item not found when try to leave/loot - response = item not found
+                self.response = prompt
         
-       
-        # self.tts_save_samples(text=self.response)
-        # self.play_samples()
-        # self.playing_thread1 = threading.Thread(target=self.tts_save_samples,args=(self.response,)).start()
+        # if used look at room
+        elif True:
+            # generate room description with context            
+            ollama_with_context = OllamaWithContext(path=self.char.profile_path)
+            self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
+            
+            # self.response = look_output
+                        
+        
+        # refresh room description
+        self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+        self.current_room_box.new_text(text=self.current_room_description)        
+        
+        if self.response:
+            # set the response in the DM box - error fix here!
+            self.DM_box.new_text(text=self.response)
+        
+        # STILL NEED TO UPDATE THE DESCRIPTION OF THE ROOM AND THE ITEMS IN THE ROOM - do this after TRY action -> 
+        
+        
+        # NEED TO ADD HP FOR THE PLAYER AND UPDATE IT AFTER THE ROLL
 
-        # self.playing_thread2 = threading.Thread(target=self.play_samples).start()
+        
+        
+        
+        # ALSO MERGE ITEMS ? - LIKE ADD POISON TO PIE?        
+        # HAS NO WAY TO ADD NEW ITEMS TO THE ROOM OR REMOVE THEM - AI TOO STUPID, THINK ABOUT HOW TO DO THIS
+        
+        
+        # ollama_instance_state = OllamaToolCallState(message=self.response, inventory_file='inventory_json.json', room_file=self.room_file)
+        # self.response = ollama_instance_state.activate_functions()
 
-        self.tts_save_samples(self.response)
+        # self.DM_box.new_text(text=self.response)
         self.response = None  # Clear the response after updating the box
       
     def update_inventory_box(self):
@@ -461,6 +602,9 @@ class DungeonScreen:
         # items in the room
         self.update_current_room_items_box()
         self.current_room_items_box.draw(screen=screen)
+        
+        #box for rolls
+        self.roll_box.draw(screen=screen)
         
         self.display_map()
 

@@ -8,7 +8,6 @@ import sys
 
 
 
-
 """
 -generate - kan ta kontext och output text
 -chat - kan använda tools
@@ -74,5 +73,5 @@ if __name__=='__main__':
     with_context = OllamaWithContext()
 
     context,text = with_context.generate_context(prompt=prompt)
-    print(text)
+    # print(text)
 

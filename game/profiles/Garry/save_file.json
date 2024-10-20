@@ -4,7 +4,16 @@
     "race": "Human",
     "description": "Male dwarf wizard in heavy armor\nand a buzz haircut and yellow hair",
     "image": null,
-    "inventory": [],
+    "inventory": [
+        {
+            "name": "Lunar Essence Fragment",
+            "description": "A delicate shard of crystal infused with the essence of moonlight. It glows softly, reflecting hues of lunar cycles and whispering secrets to those attuned to its gentle hum."
+        },
+        {
+            "name": "Moonlit Harp",
+            "description": "The Moonlit Harp still shines softly in the moon's gentle light."
+        }
+    ],
     "profile_path": "./profiles/Garry/",
     "dungeon_path": "./profiles/Garry/dungeon_dir/",
     "sound_path": "./profiles/Garry/sound/"

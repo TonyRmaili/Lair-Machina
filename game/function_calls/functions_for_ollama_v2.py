@@ -3,7 +3,12 @@ from random import randint
 import json
 import random
 import ast
+
+
 from function_calls.ollama_context import OllamaWithContext
+from function_calls.ollama_dmg import OllamaDmg
+
+
 # > ACTIONS
 
 # > loot/leave - funkar - men är för stupid
@@ -26,7 +31,7 @@ from function_calls.ollama_context import OllamaWithContext
 
 
 # need to add current location as arg
-def look_at_room(current_room_description: str, room_file: str):
+def look_at_room(player_request: str, current_room_description: str, room_file: str):
     #make dynamic  - like = current location instead
     room_file=room_file    
     # Load room from file
@@ -34,9 +39,11 @@ def look_at_room(current_room_description: str, room_file: str):
         room_json = json.load(file)
         
     # make description of the room for the player
-    system_prompt = f"The player is in a room with following items: {room_json}. and following room description: {current_room_description}. Describe what the player sees when they look around as if you were a dungeon master based on the info you have about the room"
-    user_prompt = "Player action: I look around, what do I see?"
+    system_prompt = f"The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
+    user_prompt = player_request
+    tool_used = "look_at_room"
     
+    print("HERE2--------------------------------------")
     
     # Interacting with the LLaMA 3 model, with a system-level instruction
     # response = ollama.chat(
@@ -48,11 +55,11 @@ def look_at_room(current_room_description: str, room_file: str):
     # )
 
     # room_intro = response['message']['content']
-    return user_prompt,system_prompt
+    return user_prompt,system_prompt, tool_used
         
 
 # WORKS
-# Function to REMOVE/loot an item from the room JSON - and add it to the player inventory -  ####add , room_json as argument
+# Function to REMOVE/loot an item from the room JSON - say LOOT to trigger 
 def loot_item_from_room(item_name: str, room_file: str):
     # room file with items for current room
     room_file=room_file    
@@ -94,14 +101,20 @@ def loot_item_from_room(item_name: str, room_file: str):
         with open(inventory_file, 'w') as file:
             json.dump(inventory_json, file, indent=4)
 
-        user_prompt = f"{looted_item} now in player inventory"
-        system_prompt = 'Describe the looted item'
+        # this needs fixing so not part of prompt but separate message
+        user_prompt = f"item:{looted_item}"
+        system_prompt = 'Give a VERY short description of the following item being looted, example: you grab the sword and put it in your backpack'
+        tool_used = "loot_item_from_room"
 
-        return user_prompt,system_prompt
+        return user_prompt,system_prompt, tool_used
 
-    # needs fixing asap
+    # error handles so that if item not found it wont do the flavortext outside
     else:
-        return f"{item_name} not found in the room."
+        user_prompt = f"{item_name} not found in the room."
+        system_prompt = False
+        tool_used = "loot_item_from_room"
+
+        return user_prompt,system_prompt, tool_used
 
 
 def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
@@ -135,7 +148,12 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
         
         print(f"{item_name} has been removed from the inventory.")
     else:
-        return f"{item_name} not found in the inventory."
+        # if item not found - this will error handle
+        user_prompt = f"{item_name} not found in the inventory."
+        system_prompt = False
+        
+        tool_used = "leave_drop_throw_item"
+        return user_prompt,system_prompt, tool_used
 
     ### Add the item removed from the inventory into the room JSON ###
     
@@ -151,14 +169,15 @@ def leave_drop_throw_item(item_name: str, room_file: str, player_action: str):
         json.dump(room_json, file, indent=4)    
 
 
-    # add context here
-    system_prompt="You are the dungeon master, give a VERY short description of the following player action"
+    # no context here - but returns to LLM outside that uses context
+    system_prompt="Give a VERY short description of the following player action, example: you gently put the sword on the floor"
     user_prompt=f"player action: {player_action}. Item refered to: {item_name} room context/items {room_json}."
+    tool_used = "leave_drop_throw_item"
     
-    return user_prompt,system_prompt
+    return user_prompt,system_prompt, tool_used
 
 
-def resolve_hard_action(skill: str, dc: int, player_action: str):
+def resolve_hard_action(skill: str, dc: int, player_action: str, current_room_description: str, room_file: str):
     skills = {
         'acrobatics': 2,      # Dexterity
         'animal handling': 1, # Wisdom
@@ -186,9 +205,17 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         roll = random.randint(1, 20)  # Roll a d20
         total = roll + mod    
 
+    
+        #make dynamic  - like = current location instead
+        room_file=room_file    
+        # Load room from file
+        with open(room_file, 'r') as file:
+            room_json = json.load(file)
+            
         # add context here
-        system_prompt="You are the dungeon master, the player attempted and an action an made a roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description."
-        user_prompt=f"player attempted action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
+        system_prompt=f"You are the dungeon master, the given the attempted action and roll, describe the outcome based on the roll and the DC. Do not mention the DC or the roll just give the description, refer to the player as 'you'. The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
+        user_prompt=f"action: {player_action}, {skill} roll: {total}, vs task DC {dc}."
+        tool_used = "resolve_hard_action"
         # response = ollama.chat(
         #     model="llama3.1", 
         #     messages=[
@@ -201,15 +228,32 @@ def resolve_hard_action(skill: str, dc: int, player_action: str):
         
         # idea: here it could make a toolcall - > with the outcome, what should it do with the room? - remove item/HP other? update something etc
         
-    return user_prompt,system_prompt
+        
+    return user_prompt,system_prompt, tool_used
+
+
+def simple_task(player_action: str, current_room_description: str, room_file: str):
+    
+    room_file=room_file    
+    # Load room from file
+    with open(room_file, 'r') as file:
+        room_json = json.load(file)
+        
+    # add context here
+    system_prompt=f"You are the dungeon master, describe the player preforming the action and succeeding, make the text short and simple. ONLY ANSWER WITH the description, refer to the player as 'you'. The player is in a room with following items: {room_json}. and following room description: {current_room_description}. DO NOT DESCRIBE NEW PEOPLE OR ITEMS THAT ARE NOT IN THE INFO"
+    user_prompt=f"action: {player_action}"
+    tool_used = "simple_task"
+
+    return user_prompt, system_prompt, tool_used
 
 
 # name all functions that the LLM has access to
 all_functions = {
     
-    'resolve_hard_action': resolve_hard_action,
+    'look_at_room': look_at_room,
     'loot_item_from_room': loot_item_from_room,
     'leave_drop_throw_item': leave_drop_throw_item,
-    'look_at_room': look_at_room
+    'resolve_hard_action': resolve_hard_action,
+    'simple_task': simple_task
     
 }

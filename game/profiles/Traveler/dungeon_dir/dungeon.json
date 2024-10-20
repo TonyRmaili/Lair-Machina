@@ -1,15 +1,15 @@
 {
-    "theme": "Moonlit Mirage",
-    "description": "The Moonlit Mirage is an ethereal labyrinth of crystalline spires and shimmering silver walls that seem to ripple like a mirage in the desert. The air within is alive with the sweet scent of blooming lunar flowers, their petals reflecting the soft light of luminescent orbs embedded in the ceiling. As players wander through the winding corridors, they are enveloped by an otherworldly silence, punctuated only by the faint whispers of forgotten melodies carried on the breeze. The walls hum softly with a gentle, soothing energy that seems to synchronize the heartbeat of all who enter, drawing them deeper into the mystical heart of the Mirage. Flickering candles cast dancing shadows across the crystal floor, creating an illusion of depth and dimensionality. As night falls outside, the luminescent orbs brighten, casting a soft blue glow over the entire complex, imbuing it with an aura of mysticism and wonder.",
+    "theme": "Dreaming Palace",
+    "description": "The Dreaming Palace appears as a labyrinthine series of shimmering white spires and towers, each one seemingly grown from some organic material - like coral or crystal. As you approach, you notice that the walls are covered in delicate, swirling patterns that evoke the shifting hues of a sunset on a summer evening. The air around the palace is filled with an otherworldly music, like the gentle chime of a thousand tiny bells, and the ground beneath your feet feels spongy and yielding, as if it might give way to some hidden dreamlike realm at any moment. Flickering torches cast flickering shadows on the walls, making it seem as though the very fabric of reality is shifting and rippling around you. The scent of exotic spices and honey wafts through the air, entwining itself with the sweet, heady aroma of blooming flowers. As night begins to fall, the palace comes alive with a soft, ethereal glow, like the gentle luminescence of fireflies on a midsummer night.",
     "rooms": [
         {
-            "description": "This room is a circular chamber with a domed ceiling, its walls lined with a series of luminescent orbs that cast an ethereal glow across the crystal floor. The air is filled with the sweet scent of blooming lunar flowers, their petals reflecting the soft light in a mesmerizing dance. In the center of the room stands an ancient, stone pedestal upon which rests a delicate, crystal music box adorned with intricate carvings of lunar cycles.",
-            "name": "Moonlit Serenade",
+            "description": "This is a grand hall within The Dreaming Palace. A shimmering white dome above you remains unchanged, supported by crystal columns that still refract light into a kaleidoscope of colors. The crystal column where the mural was restored now displays a vibrant scene of intermingled creatures from various realms, their forms blending in harmony as they dance and play under a sky filled with stars and swirling clouds. New growth curls around the edges of the crystal column, its tendrils and wisps of purple paint responding to your presence, shifting subtly like a living thing. The distant music from the Grand Dome above still breaks the silence, its melody soothing and calming as ever.",
+            "name": "The Grand Dome",
             "properties": [
-                "peaceful",
-                "enchanting"
+                "dreamlike",
+                "illuminated"
             ],
-            "secrets": "The music box can be wound using the soft, silvery threads that hang from the luminescent orbs on the ceiling. Once wound, it will play a melody that resonates with the heartbeat of any who listen.",
+            "secrets": "",
             "room_id": 1,
             "coordinates": [
                 1,
@@ -24,13 +24,13 @@
             "items_file": "./profiles/Traveler/dungeon_dir/room_items/room_1_items.json"
         },
         {
-            "description": "A winding corridor with walls that seem to ripple like a mirage in the desert. The air is alive with the sweet scent of blooming lunar flowers, their petals reflecting the soft light of luminescent orbs embedded in the ceiling. Flickering candles cast dancing shadows across the crystal floor, creating an illusion of depth and dimensionality.",
-            "name": "Mirage's Passage",
+            "description": "You find yourself in a garden within The Dreaming Palace, frozen in time like a perpetual snapshot of desolation. The delicate bridge spanning the pond creaks and groans beneath your feet, its carvings smeared with blooming flowers' petals and a few streaks of yellow banana pulp. A faint smudge of banana peel still clings to one edge of the overgrown hedges, its vibrant hue now dulling in the fading light. The Harmony Chimes in the Grand Dome hang silent, their melody disrupted by the discordant note of recent events. The once-manicured hedges overgrow their borders, twisting and turning in every direction as if attempting to reclaim the space that was taken from them. A faintly acrid scent still lingers in the air, a reminder of your desperate attempt to clear the garden of unwanted visitors. The Dreamweaver's Journal lies nearby, its pages stained with banana pulp and fragments of parchment torn off by your rough handling, recording the events that transpired mere moments ago.",
+            "name": "The Serene Garden",
             "properties": [
-                "ethereal",
-                "mysterious"
+                "dreamlike",
+                "illuminated"
             ],
-            "secrets": "A hidden compartment within the wall contains a rolled-up parchment with a cryptic message that reads: 'Where shadows dance, seek the truth in the music of the spheres.' The compartment can be accessed by pressing the correct sequence of luminescent orbs on the ceiling.",
+            "secrets": "A hidden pathway behind the waterfall in the pond leads to a secret room containing ancient artifacts and forbidden knowledge.",
             "room_id": 2,
             "coordinates": [
                 2,
@@ -42,24 +42,24 @@
                     1
                 ],
                 [
-                    3,
-                    1
+                    2,
+                    2
                 ]
             ],
             "items_file": "./profiles/Traveler/dungeon_dir/room_items/room_2_items.json"
         },
         {
-            "description": "A chamber filled with an array of crystal formations that refract and reflect the soft luminescent light of the ceiling. The walls are adorned with delicate, silver filigree that seems to shimmer in harmony with the gentle energy emanating from the crystals. A small, moon-shaped fountain babbles softly in one corner, its waters reflecting the lunar cycles etched into the surrounding filigree.",
-            "name": "Moonlit Harmony",
+            "description": "You enter a vast, open library within The Dreaming Palace. Shelves made of what appears to be polished moonstone stretch towards the ceiling, lined with ancient tomes bound in a leather that seems to shift and change color depending on your perspective. Tomes with covers made of intricate patterns woven from silver thread seem to glow softly in the dim light, casting an ethereal ambiance across the room. As you wander between the shelves, the whispering pages of forgotten books blend with the soft hum of The Dreamweaver's Journal in the Serene Garden, creating a symphony of knowledge and imagination that seems to transport you to realms beyond your wildest dreams.",
+            "name": "The Eternal Archives",
             "properties": [
-                "peaceful",
-                "enchanting"
+                "dreamlike",
+                "illuminated"
             ],
-            "secrets": "The crystal formations on the walls are actually tuned resonators that amplify and manipulate sound waves. The correct sequence of notes played on the wind chime can unlock a hidden room filled with ancient lunar instruments, waiting to be rediscovered.",
+            "secrets": "A hidden bookshelf behind a tapestry on the wall contains a collection of forbidden knowledge and ancient artifacts that hold the power to manipulate reality itself.",
             "room_id": 3,
             "coordinates": [
-                3,
-                1
+                2,
+                2
             ],
             "connections": [
                 [
