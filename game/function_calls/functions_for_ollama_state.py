@@ -150,6 +150,9 @@ def update_item_description(item_name: str, new_item_description: str, event: st
         return f"{item_name} not found in inventory or the room."
 
 
+
+
+
 # 1 player does action
 # 2 generate context blablab det vi har gjort hittills
 # 3 - did it do dmg ? - return yes/no? - and how much

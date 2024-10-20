@@ -227,6 +227,51 @@ class DungeonScreen:
             text_surface = font.render(row_text, True, (0, 0, 0))
             self.game.screen.blit(text_surface, (grid_offset_x, grid_offset_y + row_idx * cell_size))
 
+
+    # def ollama_update_room_description(current_room_description: str, event: str, room_file: str):
+    #     system = 'Update the room description to reflect the new state after the event. Keep the important parts from previous description. Make the description short and in bullet points. ONLY ANSWER with the new room description'
+    #     prompt = current_room_description
+
+    #     resp = ollama.generate(
+    #         model=self.model,
+    #         prompt=prompt,
+    #         system=system
+
+    #     )
+    #     return resp['response']
+
+    def ollama_update_room_description(self, event: str):
+        # Load the current room data
+        current_room_description = self.current_room_data['description']
+        
+        
+        # Prepare the system message and prompt for the ollama call
+        system = 'Update the room description to reflect the new state after the event. Keep the important parts from previous description. Make the description short and in bullet points. ONLY ANSWER with the new room description'
+        prompt = f'current room description: {current_room_description}, event: {event}.'
+        
+        # Call ollama to get the updated room description
+        resp = ollama.generate(
+            model='llama3.1',
+            prompt=prompt,
+            system=system
+        )
+        
+        # Extract the updated description from the response
+        updated_room_description = resp['response']
+        
+        # Update the description in the current room data
+        self.dungeon['rooms'][self.current_room_id]['description'] = updated_room_description
+        
+        dungeon_rooms_file = self.char.dungeon_path + 'dungeon.json'
+        
+        
+        # Write the updated JSON data back to the file
+        with open(dungeon_rooms_file, 'w') as file:
+            json.dump(self.dungeon, file, indent=4)
+        
+        return updated_room_description
+
+
     def ask_ollama_tools(self, prompt):
         # not sure if works with threading 
         # self.is_fetching = True  # Mark that we are fetching
@@ -275,6 +320,14 @@ class DungeonScreen:
             instance_state = OllamaToolCallState(messages=f'Player request:{flavor_text}. Items in the room the player is in: {self.current_room_items}, The room description: {self.current_room_description} The players current inventory: {self.char.inventory}, The inventory_file: {inventory_file}  The room_file: ./{self.room_file}')
             items_updated = instance_state.activate_functions()
             print(f"{items_updated}")
+            
+            
+            
+            updated_room_description=self.ollama_update_room_description(self, event=flavor_text)
+            print(updated_room_description)
+                
+
+            
             # self.response = f'{items_updated}'
             # self.current_room_box.new_text(text=f'{items_updated}')
         
@@ -305,6 +358,13 @@ class DungeonScreen:
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
             self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
             
+        #################################################
+        self.current_room_data = self.dungeon['rooms'][self.current_room_id]
+        self.current_room_name = self.dungeon['rooms'][self.current_room_id]['name']
+        self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
+# 
+        # room file need to include the room description 
+        self.ollama_update_room_description(current_room_description=self.current_room_description, event=prompt, room_file=self.room_file)
             
         # set the response in the DM box
         self.DM_box.new_text(text=self.response)
