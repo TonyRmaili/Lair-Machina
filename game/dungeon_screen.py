@@ -18,7 +18,7 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 import queue
 import time
-
+import shutil
 
 class DungeonScreen:
     """
@@ -148,26 +148,29 @@ class DungeonScreen:
         # threading attributes 
         self.response = None  
         self.is_fetching = False  
-
-
         self.queue = queue.Queue()
 
 
     def tts_save_samples(self, text):
         sound_path = self.char.profile_path + 'samples/'
+        # re-init queue / clears it
+        self.queue = queue.Queue()
+        if os.path.exists(sound_path):
+            shutil.rmtree(sound_path)
+        
         os.makedirs(sound_path, exist_ok=True)
         text_handler = TextHandler(text=text)
         text_handler.clean_text()
         sentences = text_handler.split_sentences()
-        self.wav_counter = 1
+        counter = 1
         for sentence in sentences:
-            name_path = f'{self.wav_counter}.wav'
+            name_path = f'{counter}.wav'
             full_path = os.path.join(sound_path, name_path)
             self.tts.save_wav(sample=sentence, path=full_path)
             self.queue.put(full_path)  # Add the wav file to the queue as soon as it's saved
-            self.wav_counter += 1
+            counter += 1
 
-        self.wav_counter = 1
+       
 
     def play_samples(self):
         pygame.mixer.init()
@@ -179,11 +182,17 @@ class DungeonScreen:
                 pygame.mixer.music.play()
                 while pygame.mixer.music.get_busy():  # Wait until the current audio finishes playing
                     time.sleep(0.1)
+                # Stop the music after the file finishes playing to release the lock on the file
+                pygame.mixer.music.stop()
+
+                # Unload the mixer to release the file lock completely
+                pygame.mixer.music.unload()
             else:
+                
                 time.sleep(0.1)  # No audio files in the queue, wait and check again
 
-
-
+        
+            
     # def tts_save_samples(self,text):
     #     sound_path = self.char.profile_path + 'samples/'
     #     os.makedirs(sound_path,exist_ok=True)
@@ -331,6 +340,7 @@ class DungeonScreen:
         # self.tts_save_samples(text=self.response)
         # self.play_samples()
         self.playing_thread1 = threading.Thread(target=self.tts_save_samples,args=(self.response,)).start()
+
         self.playing_thread2 = threading.Thread(target=self.play_samples).start()
         self.response = None  # Clear the response after updating the box
       
@@ -391,8 +401,11 @@ class DungeonScreen:
                 if self.sound_button.checkForInput(mouse_pos):
                     if self.sound_playing:
                         self.sound_playing = False
+                        pygame.mixer.music.stop()  # Ensure any playing music is stopped
+                        pygame.mixer.quit()  # 
                         print('TTS off')
                     elif not self.sound_playing:
+                        pygame.mixer.init()
                         self.sound_playing = True
                         print('TTS on')
 
