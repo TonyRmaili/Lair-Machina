@@ -1,0 +1,11 @@
+{
+    "name": "Trex",
+    "klass": "Fighter",
+    "race": "Human",
+    "description": "A dinosaur man",
+    "image": null,
+    "inventory": [],
+    "profile_path": "./profiles/Trex/",
+    "dungeon_path": "./profiles/Trex/dungeon_dir/",
+    "sound_path": "./profiles/Trex/sound/"
+}

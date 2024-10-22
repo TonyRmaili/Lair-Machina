@@ -428,14 +428,17 @@ class DungeonScreen:
                 self.response = prompt
         
         # if used look at room
-        elif True:
+        elif tool_used =='look_at_room':
             # generate room description with context            
             ollama_with_context = OllamaWithContext(path=self.char.profile_path)
             self.response = ollama_with_context.generate_context(prompt=prompt,system=system)
             
             # self.response = look_output
                         
-        
+        elif tool_used == 'None':
+            self.respone = 'LLM failed to find a proper tool. try again'
+
+
         # refresh room description
         self.current_room_description = self.dungeon['rooms'][self.current_room_id]['description']
         self.current_room_box.new_text(text=self.current_room_description)        

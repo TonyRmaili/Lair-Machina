@@ -1,0 +1,73 @@
+{
+    "theme": "Forgotten Library of Echoes",
+    "description": "As you step through the grand entrance, a musty scent wafts out, carrying with it whispers of ancient knowledge. The air inside is thick with the weight of forgotten pages and dimly lit by flickering luminescent orbs that seem to be suspended within crystal vials placed strategically along the winding corridors. Shelves stretch towards the vaulted ceiling, laden with dusty leather-bound tomes bound in worn straps. Some volumes lie open, as if left mid-research, while others appear untouched for centuries, their covers adorned with intricate locks and cryptic symbols that hint at the secrets they hold. The soft rustle of pages turning and the faint whispers of forgotten scholars fill your ears, drawing you deeper into this labyrinthine repository of knowledge. A haunting melody seems to emanate from nowhere and everywhere at once, echoing through the halls like a lament for lost understanding.",
+    "rooms": [
+        {
+            "description": "As you stand amidst the shelves, the Whispering Tome's place on the shelf seems slightly askew from where it was before, though its leather-bound cover and intricate lock remain untouched. A fine layer of dust has been disturbed, leaving a faint trail leading up to the spot where you landed. The luminescent orbs continue to flicker, casting an eerie glow over the rows of books, while the whispers of forgotten scholars seem to pause momentarily before resuming their gentle murmur, as if curious about your aerial display.",
+            "name": "The Hall of Forgotten Tomes",
+            "properties": [
+                "dimly lit",
+                "musty scent"
+            ],
+            "secrets": "A hidden compartment within one of the shelves contains a set of ancient scrolls, penned by a long-forgotten sage. The scrolls speak of an ancient prophecy, foretelling the return of a powerful artifact hidden deep within the labyrinthine library.",
+            "room_id": 1,
+            "coordinates": [
+                1,
+                2
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Trex/dungeon_dir/room_items/room_1_items.json"
+        },
+        {
+            "description": "The winding corridors seem to stretch on forever, lined with shelves that whisper secrets to each other in the faint breeze. The air is thick with the scent of old parchment and forgotten knowledge. A faint melody echoes through the halls, drawing you deeper into this labyrinthine repository.",
+            "name": "The Whispering Corridors",
+            "properties": [
+                "winding corridors",
+                "faint breeze"
+            ],
+            "secrets": "A hidden door, cleverly disguised as a bookshelf, leads to a secret chamber deep within the library. The chamber contains an ancient artifact, said to hold the power of forgotten knowledge.",
+            "room_id": 2,
+            "coordinates": [
+                2,
+                2
+            ],
+            "connections": [
+                [
+                    1,
+                    2
+                ],
+                [
+                    3,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Trex/dungeon_dir/room_items/room_2_items.json"
+        },
+        {
+            "description": "As you stand amidst the chaos of the reading nook, the faint sulfurous haze still clings to every surface, but it's now tinged with a metallic undertone that echoes the scent of steel. The wooden desk lies in disarray, its candle holder shattered on the floor beside a sliver of steel that gleams dully, lodged between your teeth as if waiting for...whatever next. The shelves stretch towards the vaulted ceiling with an air of eerie stillness, but the scattered pages from the dusty tomes seem to be drifting lazily towards the center of the room, now scorched and blackened by the intense flames that engulfed the swirling vortex containing the creature born of darkness. A faint char remains on the wooden floorboards, a testament to the fiery blast that was unleashed just moments before.",
+            "name": "The Whispering Nook",
+            "properties": [
+                "dimly lit",
+                "musty scent"
+            ],
+            "secrets": "A hidden compartment within the wooden desk contains a set of ancient manuscript pages, penned by a long-forgotten scribe. The pages speak of an ancient ritual, said to awaken the power of forgotten knowledge within these labyrinthine walls.",
+            "room_id": 3,
+            "coordinates": [
+                3,
+                2
+            ],
+            "connections": [
+                [
+                    2,
+                    2
+                ]
+            ],
+            "items_file": "./profiles/Trex/dungeon_dir/room_items/room_3_items.json"
+        }
+    ]
+}

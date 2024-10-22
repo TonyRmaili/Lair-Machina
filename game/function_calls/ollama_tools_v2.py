@@ -142,6 +142,10 @@ class OllamaToolCall:
 
                 if result is None:
                     print(f"Failed to execute {name} after {retries} attempts.")
-                    # return an error message                 
+                    # return an error message    
+                    user_prompt = 'Failed attempt'
+                    system_prompt = ''
+                    tool_used = 'None'
+                    result = (user_prompt,system_prompt,tool_used)          
                 return result
 
