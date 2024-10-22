@@ -35,15 +35,21 @@ def update_item_description(item_name: str, new_item_description: str, event: st
     # new_item_description=make_item_description(prompt=prompt)
     system= 'write a new description/state for the item to match the new state of the item after the event. write the same description if it doesnt change ONLY ANSWER with the new description'
     prompt = prompt
-    
-    resp = ollama.generate(
-        model='llama3.1',
-        prompt=prompt,
-        system=system
 
-    )
-    
-    new_item_description= resp['response']
+
+    try:    
+        resp = ollama.generate(
+            model='llama3.1',
+            prompt=prompt,
+            system=system
+
+        )
+        new_item_description= resp['response']
+
+    except Exception as e:
+        print(f"Error generating new item description: {e}")
+        return "Failed to generate a new item description."    
+
 
     # Load the room JSON from the file (which is a list of items)
     with open(room_file, 'r') as file:

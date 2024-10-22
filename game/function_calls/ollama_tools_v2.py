@@ -127,17 +127,21 @@ class OllamaToolCall:
 
             if name in all_functions:
                 print(f'Calling function {name} with args {args}')
-                # Call the function with the room JSON context
-                result = all_functions[name](**args)
-                # print(result)
+                                                
+                result = None  # Initialize result to None
+                retries = 3  # Limit the number of retries
+                
+                for attempt in range(retries):
+                    try:
+                        # Call the function with the room JSON context
+                        result = all_functions[name](**args)
+                        break  # If successful, exit the loop
+                    except Exception as e:
+                        print(f"Error calling function {name}: {e}")
+                        result = None  # Reset result on failure
+
+                if result is None:
+                    print(f"Failed to execute {name} after {retries} attempts.")
+                    # return an error message                 
                 return result
 
-# if __name__ == '__main__':
-    
-    # load_room_from_file(game/room_items/room_1_items.json')
-    # Ask for player input
-    # player_input = input("What would you like to do? ")
-    # # Create an instance of OllamaToolCall with the player's input and room JSON file
-    # functions = OllamaToolCall(messages=player_input, room_file='../game/room_items/room_1_items.json')
-    # # Activate the functions based on the player's input
-    # functions.activate_functions()

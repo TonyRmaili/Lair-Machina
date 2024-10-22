@@ -13,8 +13,6 @@ from function_calls.ollama_tools_states import OllamaToolCallState  # Import you
 from function_calls.ollama_context import OllamaWithContext
 from debug import debug
 import os
-
-
 from function_calls.ollama_dmg import OllamaDmg
 from sound.tts import TTSGame
 # import sounddevice as sd
@@ -224,19 +222,23 @@ class DungeonScreen:
         self.current_room_options_box.new_text(text=f"{self.current_room_name}, current position: {self.player_position}, move options:{self.player_move_options}") 
     
     def update_current_room_items_box(self):
-        # open the json file with the items in the room
-        with open(self.current_room_items_path) as f:
-            self.current_room_items = json.load(f)
         
-        # Extract only the names of the items in the inventory
-        # Check if item is a dictionary before trying to access 'name' - because had issues with the JSON file before -dont think it is needed anymore, but more "safe"/error handling
-        room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
+        try:
+            # open the json file with the items in the room
+            with open(self.current_room_items_path) as f:
+                self.current_room_items = json.load(f)
+            
+            # Extract only the names of the items in the inventory
+            # Check if item is a dictionary before trying to access 'name' - because had issues with the JSON file before -dont think it is needed anymore, but more "safe"/error handling
+            room_item_names = [item['name'] for item in self.current_room_items if isinstance(item, dict) and 'name' in item]
 
-        # makes a string of the items in the room
-        self.current_room_items = f'{room_item_names}'
-        
-        # set box info to list of items in a room
-        self.current_room_items_box.new_text(text=self.current_room_items)
+            # makes a string of the items in the room
+            self.current_room_items = f'{room_item_names}'
+            
+            # set box info to list of items in a room
+            self.current_room_items_box.new_text(text=self.current_room_items)
+        except:
+            self.current_room_items_box.new_text(text='update room items error?')
 
     def get_room_by_coordinates(self, rooms, new_coordinates):
         """Get the room ID based on the coordinates - would be better if id/coordinates were in the top level of the json so we could just use the coordinates as a key, but this works for now, and I guess it would be messy to change the generator function prompts etc"""
@@ -364,15 +366,9 @@ class DungeonScreen:
                     room_file=self.room_file)
         prompt,system,tool_used = ollama_instance.activate_functions()
 
-
-        print(f'######################prompt {prompt}')
-        print(f'######################tool_used OUTSIDE {tool_used}')
-        
-
         # if did roll/action
         if tool_used == 'resolve_hard_action' or tool_used == 'simple_task':
-            print(f'######################tool_used INSIDE {tool_used}')
-            if tool_used == 'resolve_har_action':
+            if tool_used == 'resolve_hard_action':
                 roll_info = prompt
                 # add it to the info box
                 self.roll_box = TextArea(text='',WIDTH=0.4*self.WIDTH,HEIGHT=0.05*self.HEIGHT,x=0.22*self.HEIGHT,y=0-0.9,
@@ -460,9 +456,7 @@ class DungeonScreen:
         
         # NEED TO ADD HP FOR THE PLAYER AND UPDATE IT AFTER THE ROLL
 
-        
-        
-        
+    
         # ALSO MERGE ITEMS ? - LIKE ADD POISON TO PIE?        
         # HAS NO WAY TO ADD NEW ITEMS TO THE ROOM OR REMOVE THEM - AI TOO STUPID, THINK ABOUT HOW TO DO THIS
         
@@ -474,19 +468,22 @@ class DungeonScreen:
         self.response = None  # Clear the response after updating the box
       
     def update_inventory_box(self):
-        with open('./inventory.json') as f:
-            self.inventory = json.load(f)
+        try:            
+            with open('./inventory.json') as f:
+                self.inventory = json.load(f)
         
-        # function_calls and inventory needs rework before char.inventory replaces it
-        # self.char.inventory = self.inventory['inventory']
-        
-        # Extract only the names of the items in the inventory
-        self.item_names = ', '.join([item['name'] for item in self.inventory])
+            # function_calls and inventory needs rework before char.inventory replaces it
+            # self.char.inventory = self.inventory['inventory']
             
-        # self.inventory.append(f'{item_names}')
+            # Extract only the names of the items in the inventory
+            self.item_names = ', '.join([item['name'] for item in self.inventory])
+                
+            # self.inventory.append(f'{item_names}')
 
-        
-        self.inventory_box.new_text(text=self.item_names)
+            
+            self.inventory_box.new_text(text=self.item_names)
+        except:
+            print("failed to open inventory and update items")
         
     def update_response(self):
         # Check if there's a new response and update the response box

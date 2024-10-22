@@ -4,12 +4,7 @@
     "race": "Human",
     "description": "a noble hacker knight with a laptop ",
     "image": null,
-    "inventory": [
-        {
-            "name": "Crystal Orb",
-            "description": "A crystal orb whose resonant hum has been jarred, once reflecting a serene lunar cycle, now its latticework of microscopic facets seems to be at odds with itself, as if the cacophony of failed magic within this space has rent its delicate harmony."
-        }
-    ],
+    "inventory": [],
     "profile_path": "./profiles/SirGabriel/",
     "dungeon_path": "./profiles/SirGabriel/dungeon_dir/",
     "sound_path": "./profiles/SirGabriel/sound/"
