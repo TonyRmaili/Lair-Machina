@@ -13,30 +13,36 @@ class VisualAider:
 
 
         self.system_coordinator = '''
-You are a world map analysis assistant capable of identifying and returning locations on a map in response to user requests. Your goal is to accurately analyze the provided map and return the coordinates corresponding to the user's prompt.
-Key Rules:
-    1.Response Format: Only provide NORMALIZED coordinates in the format (x: int, y: int) based on the given map. Do not provide any other type of response or information. for example (0.43,0.21)
-    2.Multiple Coordinates: If the prompt describes multiple locations, you must return several coordinate pairs, each separated by a comma.
-    3.Precision: Ensure that the coordinates are as precise as possible in relation to the user's input.
-    4.Limitations: Do not make any assumptions about the map beyond what is explicitly requested by the user. Only refer to the visible features of the map.
-    5.Assistance: If the prompt is unclear or if no coordinates can be determined, return 'Coordinates not found'.
+            You are a world map analysis assistant capable of identifying and returning locations on a map in response to user requests. Your goal is to accurately analyze the provided map and return the coordinates corresponding to the user's prompt.
+            Key Rules:
+                1.Response Format: Only provide NORMALIZED coordinates in the format (int,int); for example (0.43,0.21) based on the given map. DO NOT provide ANY other type of response or information. 
+                2.Multiple Coordinates: If the prompt describes multiple locations, you must return several coordinate pairs, each separated by a comma.
+                3.Precision: Ensure that the coordinates are as precise as possible in relation to the user's input.
+                4.Limitations: Do not make any assumptions about the map beyond what is explicitly requested by the user. Only refer to the visible features of the map.
+                5.Assistance: If the prompt is unclear or if no coordinates can be determined, return 'Coordinates not found'.
 
-RESPOND using JSON.
-'''
+            RESPOND using JSON.
+            '''
 
+
+        self.prompt = '''Find all the forest regions on the map. try to center the coordinates as close to the middle of the forest as possible. Use this templete [(int,int), ...].
+        Respond using JSON.'''
 
         self.coords = [
-            (0.56,0.29),
-             (0.73,0.41),
-            (0.85,0.65)
+           (0.22, 0.29),  # Large central forest
+            (0.34, 0.42),  # Eastern forest
+            (0.15, 0.13),  # North-western forest
+            (0.39, 0.07),  # North-eastern forest
+            (0.10, 0.49),  # South-western forest
+            (0.44, 0.55)  # South-eastern forest
         ]
         
 
-    def coordinate_finder(self,prompt,images):
+    def coordinate_finder(self,images,model):
         resp = ollama.generate(
-            model=self.llava,
+            model=model,
             system=self.system_coordinator,
-            prompt=prompt,
+            prompt=self.prompt,
             images=images,
             format='json'
             )
@@ -71,15 +77,20 @@ RESPOND using JSON.
         print(f"Map saved with towns placed at {output_path}")
         print(f'image size {image.size}')
 
+
+
+
 if __name__=='__main__':
-    aider = VisualAider()
-    prompt = 'Were are the deserts, anwser with a tuple (x:int,y:int)?'
-    aider.place_circles_on_image(image_name='world_map.jpg',output_name='dots_world_map.jpg',dot_radius=40,dot_color='blue')
-
-    path = aider.images_path + 'world_map.jpg'
-
+    llava = 'llava:7b'
+    llama = 'llama3.1'
+    # aider = VisualAider()
+   
     
+    # path = aider.images_path + 'world_map.jpg'
 
-    # resp = aider.coordinate_finder(prompt=prompt,images=[path])
+    # resp = aider.coordinate_finder(images=[path],model=llava)
     # print(resp)
 
+    # aider.place_circles_on_image(image_name='world_map.jpg',output_name='dots_world_map.jpg',dot_radius=40,dot_color='blue')
+    
+   
